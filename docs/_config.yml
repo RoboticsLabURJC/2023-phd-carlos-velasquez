@@ -19,7 +19,7 @@ locale                   : "en-US"
 title                    : "TFG Carlos Andrés Velásquez Ospina"
 title_separator          : "-"
 subtitle                 : # site tagline that appears below site title in masthead
-name                     : "Carlos Velásquez"
+name                     : "Carlos Andrés Velásquez Ospina"
 description              : "Autonomous Driving"
 url                      : https://roboticslaburjc.github.io
 baseurl                  : # the subpath of your site, e.g. "/blog"
@@ -104,8 +104,8 @@ analytics:
 
 # Site Author
 author:
-  name             : "Carlos Andrés Velásquez Ospina"
-  avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
+  name             : "Carlos Velásquez"
+  avatar           : "/assets/images/me.jpg"
   bio              : "I am an **amazing** person."
   location         : "Medellín"
   email            : "canveo@gmail.com"
