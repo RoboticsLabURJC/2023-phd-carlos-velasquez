@@ -18,7 +18,7 @@ minimal_mistakes_skin    : "air" # "air", "aqua", "contrast", "dark", "dirt", "n
 locale                   : "en-US"
 title                    : "Robotics Lab URJC"
 title_separator          : "-"
-subtitle                 : # site tagline that appears below site title in masthead
+subtitle                 : Programming Robot Intelligence
 name                     : "Carlos Andrés Velásquez Ospina"
 description              : "Autonomous Driving"
 url                      : https://roboticslaburjc.github.io
@@ -106,7 +106,7 @@ analytics:
 author:
   name             : "Carlos Velásquez"
   avatar           : "/assets/images/me.jpg"
-  bio              : "I am an **amazing** person."
+  bio              : "Doctoral thesis blog"
   location         : "Medellín"
   email            : "canveo@gmail.com"
   links:
