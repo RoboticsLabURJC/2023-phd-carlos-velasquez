@@ -1,0 +1,4 @@
+
+/home/canveo/Projects/notebook/wandb_train/wandb_env/lib/python3.10/site-packages/keras/src/layers/reshaping/flatten.py:37: UserWarning: Do not pass an `input_shape`/`input_dim` argument to a layer. When using Sequential models, prefer using an `Input(shape)` object as the first layer in the model instead.
+Epoch 1/8
+[1m47/47[22m [32m━━━━━━━━━━━━━━━━━━━━[39m [1m0s[22m 11ms/step - accuracy: 0.1463 - loss: 2.3477

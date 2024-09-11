@@ -1,0 +1,142 @@
+{
+    "os": "Linux-6.8.0-40-generic-x86_64-with-glibc2.35",
+    "python": "3.10.12",
+    "heartbeatAt": "2024-09-08T16:45:04.840794",
+    "startedAt": "2024-09-08T16:44:57.370260",
+    "docker": null,
+    "cuda": null,
+    "args": [],
+    "state": "running",
+    "program": "test_wandb.ipynb",
+    "codePathLocal": "test_wandb.ipynb",
+    "root": "/home/canveo/Projects/notebook/wandb_train",
+    "host": "Katana-15",
+    "username": "canveo",
+    "executable": "/home/canveo/Projects/notebook/wandb_train/wandb_env/bin/python",
+    "cpu_count": 14,
+    "cpu_count_logical": 20,
+    "cpu_freq": {
+        "current": 2702.6042,
+        "min": 400.0,
+        "max": 4400.0
+    },
+    "cpu_freq_per_core": [
+        {
+            "current": 3164.539,
+            "min": 400.0,
+            "max": 4800.0
+        },
+        {
+            "current": 4790.245,
+            "min": 400.0,
+            "max": 4800.0
+        },
+        {
+            "current": 400.0,
+            "min": 400.0,
+            "max": 4800.0
+        },
+        {
+            "current": 400.0,
+            "min": 400.0,
+            "max": 4800.0
+        },
+        {
+            "current": 400.0,
+            "min": 400.0,
+            "max": 5000.0
+        },
+        {
+            "current": 3261.978,
+            "min": 400.0,
+            "max": 5000.0
+        },
+        {
+            "current": 2878.01,
+            "min": 400.0,
+            "max": 5000.0
+        },
+        {
+            "current": 3220.382,
+            "min": 400.0,
+            "max": 5000.0
+        },
+        {
+            "current": 4800.0,
+            "min": 400.0,
+            "max": 4800.0
+        },
+        {
+            "current": 400.0,
+            "min": 400.0,
+            "max": 4800.0
+        },
+        {
+            "current": 1046.244,
+            "min": 400.0,
+            "max": 4800.0
+        },
+        {
+            "current": 399.779,
+            "min": 400.0,
+            "max": 4800.0
+        },
+        {
+            "current": 1872.064,
+            "min": 400.0,
+            "max": 3700.0
+        },
+        {
+            "current": 1982.247,
+            "min": 400.0,
+            "max": 3700.0
+        },
+        {
+            "current": 1996.365,
+            "min": 400.0,
+            "max": 3700.0
+        },
+        {
+            "current": 1982.142,
+            "min": 400.0,
+            "max": 3700.0
+        },
+        {
+            "current": 1616.389,
+            "min": 400.0,
+            "max": 3700.0
+        },
+        {
+            "current": 3500.065,
+            "min": 400.0,
+            "max": 3700.0
+        },
+        {
+            "current": 3502.412,
+            "min": 400.0,
+            "max": 3700.0
+        },
+        {
+            "current": 3700.911,
+            "min": 400.0,
+            "max": 3700.0
+        }
+    ],
+    "disk": {
+        "/": {
+            "total": 467.8895797729492,
+            "used": 294.9285087585449
+        }
+    },
+    "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+    "gpu_count": 1,
+    "gpu_devices": [
+        {
+            "name": "NVIDIA GeForce RTX 4060 Laptop GPU",
+            "memory_total": 8585740288
+        }
+    ],
+    "memory": {
+        "total": 62.50482940673828
+    }
+}

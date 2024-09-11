@@ -1,0 +1,1 @@
+{"batch_size": 256, "learning_rate": 0.001, "dropout": 0.3, "epochs": 100}

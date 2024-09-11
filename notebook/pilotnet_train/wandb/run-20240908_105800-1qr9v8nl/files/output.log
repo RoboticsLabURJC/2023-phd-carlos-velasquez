@@ -1,0 +1,52 @@
+/home/canveo/Projects/notebook/wandb_train/wandb_env/lib/python3.10/site-packages/keras/src/layers/convolutional/base_conv.py:107: UserWarning: Do not pass an `input_shape`/`input_dim` argument to a layer. When using Sequential models, prefer using an `Input(shape)` object as the first layer in the model instead.
+  super().__init__(activity_regularizer=activity_regularizer, **kwargs)
+Epoch 1/10
+
+
+[1m1775/1875[22m [32m━━━━━━━━━━━━━━━━━━[37m━━[39m [1m0s[22m 795us/step - accuracy: 0.9020 - loss: 0.3230keras                        3.5.0
+Requirement already satisfied: wandb in ./wandb_env/lib/python3.10/site-packages (0.17.7)
+Collecting wandb
+  Downloading wandb-0.17.9-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (9.6 kB)
+Requirement already satisfied: click!=8.0.0,>=7.1 in ./wandb_env/lib/python3.10/site-packages (from wandb) (8.1.7)
+Requirement already satisfied: docker-pycreds>=0.4.0 in ./wandb_env/lib/python3.10/site-packages (from wandb) (0.4.0)
+Requirement already satisfied: gitpython!=3.1.29,>=1.0.0 in ./wandb_env/lib/python3.10/site-packages (from wandb) (3.1.43)
+Requirement already satisfied: platformdirs in ./wandb_env/lib/python3.10/site-packages (from wandb) (4.2.2)
+Requirement already satisfied: protobuf!=4.21.0,<6,>=3.19.0 in ./wandb_env/lib/python3.10/site-packages (from wandb) (4.25.4)
+Requirement already satisfied: psutil>=5.0.0 in ./wandb_env/lib/python3.10/site-packages (from wandb) (6.0.0)
+Requirement already satisfied: pyyaml in ./wandb_env/lib/python3.10/site-packages (from wandb) (6.0.2)
+Requirement already satisfied: requests<3,>=2.0.0 in ./wandb_env/lib/python3.10/site-packages (from wandb) (2.32.3)
+Requirement already satisfied: sentry-sdk>=1.0.0 in ./wandb_env/lib/python3.10/site-packages (from wandb) (2.13.0)
+Requirement already satisfied: setproctitle in ./wandb_env/lib/python3.10/site-packages (from wandb) (1.3.3)
+Requirement already satisfied: setuptools in ./wandb_env/lib/python3.10/site-packages (from wandb) (71.1.0)
+Requirement already satisfied: six>=1.4.0 in ./wandb_env/lib/python3.10/site-packages (from docker-pycreds>=0.4.0->wandb) (1.16.0)
+Requirement already satisfied: gitdb<5,>=4.0.1 in ./wandb_env/lib/python3.10/site-packages (from gitpython!=3.1.29,>=1.0.0->wandb) (4.0.11)
+Requirement already satisfied: charset-normalizer<4,>=2 in ./wandb_env/lib/python3.10/site-packages (from requests<3,>=2.0.0->wandb) (3.3.2)
+Requirement already satisfied: idna<4,>=2.5 in ./wandb_env/lib/python3.10/site-packages (from requests<3,>=2.0.0->wandb) (3.8)
+Requirement already satisfied: urllib3<3,>=1.21.1 in ./wandb_env/lib/python3.10/site-packages (from requests<3,>=2.0.0->wandb) (2.2.2)
+Requirement already satisfied: certifi>=2017.4.17 in ./wandb_env/lib/python3.10/site-packages (from requests<3,>=2.0.0->wandb) (2024.7.4)
+Requirement already satisfied: smmap<6,>=3.0.1 in ./wandb_env/lib/python3.10/site-packages (from gitdb<5,>=4.0.1->gitpython!=3.1.29,>=1.0.0->wandb) (5.0.1)
+Downloading wandb-0.17.9-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (9.4 MB)
+   [38m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[39m [32m9.4/9.4 MB[39m [31m49.1 MB/s[39m eta [36m0:00:00
+[?25hInstalling collected packages: wandb
+  Attempting uninstall: wandb
+    Found existing installation: wandb 0.17.7
+    Uninstalling wandb-0.17.7:
+      Successfully uninstalled wandb-0.17.7
+Successfully installed wandb-0.17.9
+Collecting keras==2.12.0
+  Downloading keras-2.12.0-py2.py3-none-any.whl.metadata (1.4 kB)
+Downloading keras-2.12.0-py2.py3-none-any.whl (1.7 MB)
+   [38m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[39m [32m1.7/1.7 MB[39m [31m19.6 MB/s[39m eta [36m0:00:00
+[?25hInstalling collected packages: keras
+  Attempting uninstall: keras
+    Found existing installation: keras 3.5.0
+    Uninstalling keras-3.5.0:
+      Successfully uninstalled keras-3.5.0
+[31mERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.
+[31mtensorflow 2.17.0 requires keras>=3.2.0, but you have keras 2.12.0 which is incompatible.
+Successfully installed keras-2.12.0
+Epoch 1/10
+[1m1875/1875[22m [32m━━━━━━━━━━━━━━━━━━━━[39m [1m2s[22m 1ms/step - accuracy: 0.9837 - loss: 0.0518 - val_accuracy: 0.9889 - val_loss: 0.0338
+Epoch 2/10
+
+[1m1488/1875[22m [32m━━━━━━━━━━━━━━━[37m━━━━━[39m [1m0s[22m 780us/step - accuracy: 0.9893 - loss: 0.0331

@@ -1,0 +1,34 @@
+2024-09-08 11:21:50,165 INFO    MainThread:8349 [wandb_setup.py:_flush():77] Current SDK version is 0.17.9
+2024-09-08 11:21:50,165 INFO    MainThread:8349 [wandb_setup.py:_flush():77] Configure stats pid to 8349
+2024-09-08 11:21:50,165 INFO    MainThread:8349 [wandb_setup.py:_flush():77] Loading settings from /home/canveo/.config/wandb/settings
+2024-09-08 11:21:50,165 INFO    MainThread:8349 [wandb_setup.py:_flush():77] Loading settings from /home/canveo/Projects/notebook/wandb_train/wandb/settings
+2024-09-08 11:21:50,165 INFO    MainThread:8349 [wandb_setup.py:_flush():77] Loading settings from environment variables: {}
+2024-09-08 11:21:50,165 INFO    MainThread:8349 [wandb_setup.py:_flush():77] Applying setup settings: {'_disable_service': False}
+2024-09-08 11:21:50,165 INFO    MainThread:8349 [wandb_setup.py:_flush():77] Inferring run settings from compute environment: {'program_relpath': 'torch_test.py', 'program_abspath': '/home/canveo/Projects/notebook/wandb_train/torch_test.py', 'program': '/home/canveo/Projects/notebook/wandb_train/torch_test.py'}
+2024-09-08 11:21:50,165 INFO    MainThread:8349 [wandb_setup.py:_flush():77] Applying login settings: {}
+2024-09-08 11:21:50,165 INFO    MainThread:8349 [wandb_init.py:_log_setup():524] Logging user logs to /home/canveo/Projects/notebook/wandb_train/wandb/run-20240908_112150-11shqsnl/logs/debug.log
+2024-09-08 11:21:50,165 INFO    MainThread:8349 [wandb_init.py:_log_setup():525] Logging internal logs to /home/canveo/Projects/notebook/wandb_train/wandb/run-20240908_112150-11shqsnl/logs/debug-internal.log
+2024-09-08 11:21:50,165 INFO    MainThread:8349 [wandb_init.py:init():608] calling init triggers
+2024-09-08 11:21:50,165 INFO    MainThread:8349 [wandb_init.py:init():615] wandb.init called with sweep_config: {}
+config: {'epochs': 5, 'classes': 10, 'kernels': [16, 32], 'batch_size': 128, 'learning_rate': 0.005, 'dataset': 'MNIST', 'architecture': 'CNN'}
+2024-09-08 11:21:50,165 INFO    MainThread:8349 [wandb_init.py:init():658] starting backend
+2024-09-08 11:21:50,165 INFO    MainThread:8349 [wandb_init.py:init():662] setting up manager
+2024-09-08 11:21:50,166 INFO    MainThread:8349 [backend.py:_multiprocessing_setup():105] multiprocessing start_methods=fork,spawn,forkserver, using: spawn
+2024-09-08 11:21:50,166 INFO    MainThread:8349 [wandb_init.py:init():670] backend started and connected
+2024-09-08 11:21:50,167 INFO    MainThread:8349 [wandb_init.py:init():768] updated telemetry
+2024-09-08 11:21:50,167 INFO    MainThread:8349 [wandb_init.py:init():801] communicating run to backend with 90.0 second timeout
+2024-09-08 11:21:50,595 INFO    MainThread:8349 [wandb_init.py:init():852] starting run threads in backend
+2024-09-08 11:21:50,675 INFO    MainThread:8349 [wandb_run.py:_console_start():2465] atexit reg
+2024-09-08 11:21:50,675 INFO    MainThread:8349 [wandb_run.py:_redirect():2311] redirect: wrap_raw
+2024-09-08 11:21:50,675 INFO    MainThread:8349 [wandb_run.py:_redirect():2376] Wrapping output streams.
+2024-09-08 11:21:50,675 INFO    MainThread:8349 [wandb_run.py:_redirect():2401] Redirects installed.
+2024-09-08 11:21:50,675 INFO    MainThread:8349 [wandb_init.py:init():895] run started, returning control to user process
+2024-09-08 11:22:59,387 INFO    MainThread:8349 [wandb_run.py:_finish():2162] finishing run canveo-universidad-rey-juan-carlos/mnist-classification/11shqsnl
+2024-09-08 11:22:59,387 INFO    MainThread:8349 [wandb_run.py:_atexit_cleanup():2426] got exitcode: 0
+2024-09-08 11:22:59,387 INFO    MainThread:8349 [wandb_run.py:_restore():2408] restore
+2024-09-08 11:22:59,388 INFO    MainThread:8349 [wandb_run.py:_restore():2414] restore done
+2024-09-08 11:22:59,388 INFO    MainThread:8349 [wandb_run.py:_on_finish():2679] communicating current version
+2024-09-08 11:22:59,528 INFO    MainThread:8349 [wandb_run.py:_on_finish():2688] got version response 
+2024-09-08 11:23:03,886 INFO    MainThread:8349 [wandb_run.py:_footer_history_summary_info():4088] rendering history
+2024-09-08 11:23:03,886 INFO    MainThread:8349 [wandb_run.py:_footer_history_summary_info():4120] rendering summary
+2024-09-08 11:23:03,888 INFO    MainThread:8349 [wandb_run.py:_footer_sync_info():4047] logging synced files
