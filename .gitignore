@@ -1,6 +1,8 @@
 # Ignorar carpetas de entorno virtual y de configuración de Weights and Biases
 /notebook/train_pilotnet/wandb*
 
+/src/carla_dummy/bk
+
 # ros 2
 build/
 install/
