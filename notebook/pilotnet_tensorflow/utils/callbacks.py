@@ -1,4 +1,4 @@
-
+# utils/callbacks.py
 import matplotlib.pyplot as plt
 from tensorflow.keras.callbacks import Callback
 import numpy as np
@@ -8,7 +8,7 @@ def progressbar(it, prefix="", size=60, out=sys.stdout):
     count = len(it)
     def show(j):
         x = int(size * j / count)
-        print(f"{prefix}[{'
+        print(f"{prefix}[{'#' * x}{'.' * (size - x)}] {j}/{count}", end='\r', file=out, flush=True)
     show(0)
     for i, item in enumerate(it):
         yield item
@@ -26,7 +26,7 @@ class PlotCallback(Callback):
         if isinstance(epoch, int) and epoch % self.plot_frequency == 0: 
             print('Guardando gráficos...')
 
-            
+            # Valores reales y predicciones de `steer`
             x_true, y_predicted = [], []
 
             for i in progressbar(range(0, len(self.annotations_val), 50), "Calculando: ", 40):
@@ -36,9 +36,9 @@ class PlotCallback(Callback):
                 final_image = np.expand_dims(final_image, axis=0)
                 prediction = self.model.predict(final_image)
 
-                y_predicted.append(prediction[0][0])  
+                y_predicted.append(prediction[0][0])  # Asumimos que steer es el primer valor en la salida del modelo
 
-            
+            # Gráfico para `steer`
             plt.figure(figsize=(20, 10))
             plt.plot(x_true, label='Steer Real', color="green")
             plt.plot(y_predicted, label='Steer Predicho', color="red")
