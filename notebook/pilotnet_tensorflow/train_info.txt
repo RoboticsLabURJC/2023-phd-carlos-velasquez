@@ -1,0 +1,7 @@
+train 2 de nov
+--num_epochs 100 \
+--batch_size 512 \
+--learning_rate 0.0001 \
+                
+train 3 de nov
+python3 
