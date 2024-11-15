@@ -1,0 +1,1 @@
+{"batch_size": 32, "learning_rate": 0.0001, "epochs": 100, "img_shape": [66, 200, 3]}
