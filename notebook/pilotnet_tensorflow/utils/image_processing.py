@@ -7,14 +7,22 @@ from albumentations import ReplayCompose, HorizontalFlip, ColorJitter, RandomBri
 from tensorflow.keras.utils import Sequence
 
 
-train_transform = ReplayCompose([
-    HorizontalFlip(p=0.5),
-    ColorJitter(brightness=0.2, contrast=0.3, saturation=0.2, hue=0.1, p=0.4),
-    RandomBrightnessContrast(p=0.4),
-    RandomGamma(gamma_limit=(80, 150), p=0.4),
-    FancyPCA(alpha=0.1, p=0.4),
-    GaussianBlur(blur_limit=(1, 3), p=0.4),
-])
+train_transform = A.ReplayCompose(
+    [
+        A.RandomBrightnessContrast(brightness_limit=0.2, contrast_limit=0.3, p=0.5),
+        A.HueSaturationValue(
+            hue_shift_limit=10, sat_shift_limit=20, val_shift_limit=10, p=0.5
+        ),
+        A.ShiftScaleRotate(shift_limit=0.1, scale_limit=0.2, rotate_limit=10, p=0.5),
+        A.Perspective(scale=(0.05, 0.1), p=0.3),
+        A.GaussNoise(var_limit=(10.0, 50.0), p=0.3),
+        A.MotionBlur(blur_limit=3, p=0.2),
+        A.GaussianBlur(blur_limit=(3, 5), p=0.2),
+        A.RandomResizedCrop(height=66, width=200, scale=(0.8, 1.0), p=0.5),
+        A.RGBShift(r_shift_limit=20, g_shift_limit=20, b_shift_limit=20, p=0.3),
+    ],
+    p=1.0,
+)
 
 val_transform = ReplayCompose([])
 

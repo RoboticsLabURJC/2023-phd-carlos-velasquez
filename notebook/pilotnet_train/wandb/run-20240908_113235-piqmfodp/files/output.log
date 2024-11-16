@@ -1,6 +1,0 @@
-/home/canveo/Projects/notebook/wandb_train/wandb_env/lib/python3.10/site-packages/keras/src/layers/convolutional/base_conv.py:107: UserWarning: Do not pass an `input_shape`/`input_dim` argument to a layer. When using Sequential models, prefer using an `Input(shape)` object as the first layer in the model instead.
-  super().__init__(activity_regularizer=activity_regularizer, **kwargs)
-Traceback (most recent call last):
-  File "/tmp/ipykernel_4665/882772014.py", line 16, in model_pipeline
-    model.fit_generator(train_images, train_labels,
-AttributeError: 'Sequential' object has no attribute 'fit_generator'
