@@ -16,9 +16,9 @@ from datetime import datetime
 MODEL_NAME ="pilotnet"
 # MODEL_PATH = "experiments/resnet18_20250621_1109/trained_models/last_model.pth"
 # MODEL_PATH = "experiments/efficientnet_v2_s_20250621_2002/trained_models/last_model.pth"
-MODEL_PATH = "experiments/pilotnet_dagger_20250628_1625/trained_models/last_model.pth"
+MODEL_PATH = "experiments/pilotnet_control_manual_20250703_1723/trained_models/last_model.pth"
 CSV_PATH = "data/data_test/combined_data.csv"
-BASE_IMG_DIR = "/home/canveo/Projects/pilotnet_torch/data/data_test/"
+BASE_IMG_DIR = "/home/canveo/2023-phd-carlos-velasquez/train_models/pilotnet_torch/data/data_test/"
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 # Crear subcarpeta en results con timestamp
