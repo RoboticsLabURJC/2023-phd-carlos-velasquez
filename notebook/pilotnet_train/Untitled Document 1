@@ -1,6 +1,0 @@
-batch_size 512 dropout 0.5
-batch_size 512 dropout 0.3
-batch_size 512 dropout 0.2
-batch_size 256 droput 0.5
-batch_size 256 dropout 0.3
-batch_size 256 dropout 0.2

@@ -1,0 +1,2 @@
+Promedio error absoluto STEER: 0.01196
+Promedio error absoluto THROTTLE: 0.03161
