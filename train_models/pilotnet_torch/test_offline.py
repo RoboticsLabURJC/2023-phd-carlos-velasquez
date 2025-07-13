@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 from tqdm import tqdm
 from torchvision import transforms
 import cv2
-from sklearn.metrics import mean_squared_error, mean_absolute_error
+from sklearn.metrics import root_mean_squared_error, mean_absolute_error 
 from datetime import datetime
 
 
@@ -92,9 +92,9 @@ df_result = pd.DataFrame({
 })
 df_result.to_csv(os.path.join(OUTPUT_DIR, "offline_predictions.csv"), index=False)
 
-mse_steer = mean_squared_error(y_true[:, 0], y_pred[:, 0])
+mse_steer = root_mean_squared_error(y_true[:, 0], y_pred[:, 0])
 mae_steer = mean_absolute_error(y_true[:, 0], y_pred[:, 0])
-mse_throttle = mean_squared_error(y_true[:, 1], y_pred[:, 1])
+mse_throttle = root_mean_squared_error(y_true[:, 1], y_pred[:, 1])
 mae_throttle = mean_absolute_error(y_true[:, 1], y_pred[:, 1])
 
 with open(os.path.join(OUTPUT_DIR, "metrics.txt"), "w") as f:

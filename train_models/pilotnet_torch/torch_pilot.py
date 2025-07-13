@@ -45,7 +45,8 @@ SELECTED_MODEL = "pilotnet"  # Cambiar a "resnet18" si se desea usar ResNet18
 MODEL_PATHS = {
     "resnet18": "experiments/resnet18_20250621_1109/trained_models/last_model.pth",
     "efficientnet": "experiments/efficientnet_v2_s_20250621_2002/trained_models/efficientnet_v2_s-epoch_67-val_loss-0.0176.pth",
-    "pilotnet": "experiments/pilotnet_dagger_20250628_1625/trained_models/pilotnet_dagger.pth",
+    #"pilotnet": "experiments/pilotnet_dagger_20250628_1625/trained_models/pilotnet_dagger.pth",
+    "pilotnet": "experiments/pilotnet_control_manual_20250703_1723/trained_models/pilotnet_control_manual.pth"
 }
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
