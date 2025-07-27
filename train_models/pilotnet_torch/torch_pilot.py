@@ -21,6 +21,7 @@ from torchvision.models import (
 )
 from utils.pilotnet import PilotNet  
 
+import time
 
 def load_model_by_name(name, device):
     if name == "resnet18":
@@ -167,8 +168,10 @@ class DummyControl(Node):
         self.segmented_image = self.bridge.imgmsg_to_cv2(image, desired_encoding="bgr8")
 
     def control_vehicle(self):
-        # self.set_autopilot()
-        # self.set_control_manual_override()
+        self.set_autopilot()
+        self.set_control_manual_override()
+        
+        tic = time.perf_counter()
 
         # self.get_logger().info("Controlando el vehículo...")
         # self.get_logger().info(f"Imagen de cámara: {self.segmented_image_image.shape if self.segmented_image is not None else 'None'}")
@@ -178,10 +181,12 @@ class DummyControl(Node):
                 model=model, image_seg=self.segmented_image
             )
             brake = 0.0  # Valor fijo de brake
+            
+            dt = (time.perf_counter() - tic) * 1000
 
-            self.get_logger().info(
-                f"Predicciones - Steer: {steer}, Throttle: {throttle}, Brake: {brake}"
-            )
+            # self.get_logger().info(
+            #     f"Predicciones - Steer: {steer}, Throttle: {throttle}, Brake: {brake}"
+            # )
 
             self.control_msg.throttle = float(throttle)
             self.control_msg.steer = float(steer)
@@ -190,6 +195,8 @@ class DummyControl(Node):
             self.control_msg.header.stamp = self.get_clock().now().to_msg()
 
             self.publisher_control.publish(self.control_msg)
+            print(f"Inference time: {dt:.2f} ms")
+
 
     def update_display(self):
         if self.camera_image is not None:
