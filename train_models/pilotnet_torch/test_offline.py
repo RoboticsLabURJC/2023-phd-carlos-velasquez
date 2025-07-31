@@ -6,6 +6,9 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 from tqdm import tqdm
+from rich.console import Console
+from rich.table import Table
+import onnxruntime as ort
 from torchvision import transforms
 import cv2
 from sklearn.metrics import root_mean_squared_error, mean_absolute_error 
@@ -16,7 +19,8 @@ from datetime import datetime
 MODEL_NAME ="pilotnet"
 # MODEL_PATH = "experiments/resnet18_20250621_1109/trained_models/last_model.pth"
 # MODEL_PATH = "experiments/efficientnet_v2_s_20250621_2002/trained_models/last_model.pth"
-MODEL_PATH = "experiments/pilotnet_control_manual_20250703_1723/trained_models/last_model.pth"
+# MODEL_PATH = "experiments/pilotnet_control_manual_20250703_1723/trained_models/last_model.pth"
+MODEL_PATH = "/home/canveo/2023-phd-carlos-velasquez/train_models/pilotnet_torch/model_onnx/pilotnet_control_manual.onnx"  # Ruta al modelo .pth o .onnx
 CSV_PATH = "data/data_test/combined_data.csv"
 BASE_IMG_DIR = "/home/canveo/2023-phd-carlos-velasquez/train_models/pilotnet_torch/data/data_test/"
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -26,26 +30,46 @@ timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
 OUTPUT_DIR = os.path.join("results", f"test_{MODEL_NAME}_{timestamp}")
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
+EXTENSION = os.path.splitext(MODEL_PATH)[1].lower()
 
+# Imprime información del modelo
+console = Console()
+tabla = Table(title="Configuración", show_lines=True)
+tabla.add_column("Campo", style="bold")
+tabla.add_column("Valor")
+tabla.add_row("Modelo", MODEL_NAME)
+tabla.add_row("Ruta", MODEL_PATH)
+# tabla.add_row("Dispositivo", DEVICE)
+console.print(tabla)
 
 def load_model(name, path, device):
-    if name == "resnet18":
-        model = resnet18(weights=ResNet18_Weights.DEFAULT)
-        model.fc = nn.Linear(model.fc.in_features, 2)
-    elif name == "efficientnet":
-        model = efficientnet_v2_s(weights=EfficientNet_V2_S_Weights.DEFAULT)
-        model.classifier[-1] = nn.Linear(model.classifier[-1].in_features, 2)
-    elif name == "pilotnet":
-        from utils.pilotnet import PilotNet
-        model = PilotNet(image_shape=(66,200,3), num_labels=2, dropout_rate=0.3)
-    else:
-        raise ValueError(f"Modelo no reconocido: {name}")
+    if EXTENSION == ".pth":
+        if name == "resnet18":
+            model = resnet18(weights=ResNet18_Weights.DEFAULT)
+            model.fc = nn.Linear(model.fc.in_features, 2)
+        elif name == "efficientnet":
+            model = efficientnet_v2_s(weights=EfficientNet_V2_S_Weights.DEFAULT)
+            model.classifier[-1] = nn.Linear(model.classifier[-1].in_features, 2)
+        elif name == "pilotnet":
+            from utils.pilotnet import PilotNet
+            model = PilotNet(image_shape=(66,200,3), num_labels=2, dropout_rate=0.3)
+        else:
+            raise ValueError(f"Modelo no reconocido: {name}")
 
-    model.load_state_dict(torch.load(path, map_location=device))
-    model.to(device)
-    model.eval()
-    return model
+        model.load_state_dict(torch.load(path, map_location=device))
+        model.to(device)
+        model.eval()
+        return model
+    elif EXTENSION == ".onnx":
+        # Cargar modelo ONNX
+        providers = [('CUDAExecutionProvider', {})] if ort.get_available_providers().__contains__('CUDAExecutionProvider') else ['CPUExecutionProvider']
+        ort_session = ort.InferenceSession(path, providers=providers)
+        
+        # nombre de las entradas y salidas del modelo
+        in_name = ort_session.get_inputs()[0].name
+        out_name = ort_session.get_outputs()[0].name
 
+        return ort_session
 
 def preprocess_image(seg_path):
     full_path = os.path.join(BASE_IMG_DIR, seg_path)
@@ -72,9 +96,14 @@ model = load_model(MODEL_NAME, MODEL_PATH, DEVICE)
 y_true, y_pred = [], []
 
 for _, row in tqdm(df.iterrows(), total=len(df)):
-    image_tensor = preprocess_image(row["seg_path"]).unsqueeze(0).to(DEVICE)
-    with torch.no_grad():
-        prediction = model(image_tensor)[0].cpu().numpy()
+    if EXTENSION == ".pth":
+        image_tensor = preprocess_image(row["seg_path"]).unsqueeze(0).to(DEVICE)
+        with torch.no_grad():
+            prediction = model(image_tensor)[0].cpu().numpy()
+    else:  # ONNX
+        image_tensor = preprocess_image(row["seg_path"]).unsqueeze(0).numpy()
+        ort_inputs = {model.get_inputs()[0].name: image_tensor}
+        prediction = model.run(None, ort_inputs)[0][0]
 
     label = np.array([row["steer"], row["throttle"]])
     y_true.append(label)
