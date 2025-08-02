@@ -1,0 +1,43 @@
+# ─── Python ───────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.so
+*.pyd
+*.pyo
+*.pkl
+*.h5
+#*.pth
+#*.onnx
+*.pt
+
+# ─── Entornos Virtuales ───────────────────────────────
+venv/
+env/
+.venv/
+.dataset/
+.dataset
+
+# ─── Jupyter Notebooks ────────────────────────────────
+.ipynb_checkpoints/
+
+# ─── Datasets ─────────────────────────────────────────
+data/
+datasets/
+*.csv
+
+# ─── Experimentos y Modelos ───────────────────────────
+#experiments/
+logs/
+#results/
+*.log
+
+# ─── Archivos temporales ──────────────────────────────
+*.tmp
+*.swp
+*.bak
+.DS_Store
+Thumbs.db
+
+# ─── VSCode ───────────────────────────────────────────
+.vscode/
+
