@@ -1,0 +1,9 @@
+{
+    "csv_path": "/home/canveo/Projects/efficientnetb0/data/ros2_curvature_dataset/labels.csv",
+    "base_path": "data/ros2_curvature_dataset/imageSEG/",
+    "batch_size": 32,
+    "epochs": 30,
+    "lr": 0.0001,
+    "val_split": 0.2,
+    "patience": 10
+}

@@ -1,0 +1,16 @@
+{
+  "simulation": {
+    "town": "Town07",
+    "spawn_point": "-98.61, 119.96, 1.37, 0.0, 0.0, 0.0"
+  },
+  "output": {
+    "folder_rgb": "data/curvature_value_dataset/imageRGB",
+    "folder_seg": "data/curvature_value_dataset/imageSEG",
+    "labels_file": "data/curvature_value_dataset/labels.csv"
+  },
+  "sync": {
+    "fixed_delta_seconds": 0.05,
+    "threshold": 0.05,
+    "curvature_threshold": 0.015
+  }
+}

@@ -1,0 +1,5 @@
+{
+  "model_path": "experiments/efficientnetb0_20250802_1554/trained_models/best_model.onnx",
+  "csv_path": "data/ros2_curvature_dataset/labels.csv",
+  "base_path": "data/ros2_curvature_dataset"
+}
