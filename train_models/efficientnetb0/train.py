@@ -13,6 +13,12 @@ from datetime import datetime
 from processing import SegmentationCurvatureDataset
 from transforms_config import train_transform, val_transform
 
+import albumentations as A
+from albumentations.pytorch import ToTensorV2
+import cv2
+
+from torch.utils.tensorboard import SummaryWriter
+
 def train(config_path):
     with open(config_path) as f:
         params = json.load(f)
@@ -23,11 +29,14 @@ def train(config_path):
     os.makedirs(experiment_dir, exist_ok=True)
     model_dir = os.path.join(experiment_dir, "trained_models")
     os.makedirs(model_dir, exist_ok=True)
+    
+    logs_dir = os.path.join("logs")
+    os.makedirs(logs_dir, exist_ok=True)
 
     # Guardar copia de configuración
     with open(os.path.join(experiment_dir, "params.json"), "w") as f_out:
         json.dump(params, f_out, indent=4)
-
+ 
     # Dataset
     df = pd.read_csv(params["csv_path"])
     val_size = int(len(df) * params["val_split"])
@@ -48,7 +57,9 @@ def train(config_path):
     model.to(device)
 
     criterion = nn.CrossEntropyLoss()
-    optimizer = optim.Adam(model.parameters(), lr=params["lr"])
+    optimizer = optim.Adam(model.parameters(), lr=params["lr"], weight_decay=1e-4)
+    
+    writer = SummaryWriter(log_dir=logs_dir)
 
     best_val_loss = float("inf")
     patience_counter = 0
@@ -68,6 +79,7 @@ def train(config_path):
             running_loss += loss.item()
 
         avg_train_loss = running_loss / len(train_loader)
+        writer.add_scalar("Loss/Train", avg_train_loss, epoch)
         train_losses.append(avg_train_loss)
 
         model.eval()
@@ -84,6 +96,7 @@ def train(config_path):
                 total += labels.size(0)
 
         avg_val_loss = val_loss / len(val_loader)
+        writer.add_scalar("Loss/Val", avg_val_loss, epoch)
         val_losses.append(avg_val_loss)
         val_acc = correct / total
 

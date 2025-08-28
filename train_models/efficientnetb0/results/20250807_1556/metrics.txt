@@ -1,0 +1,8 @@
+              precision    recall  f1-score   support
+
+       recta       0.90      0.97      0.94      5520
+       curva       0.89      0.69      0.78      1872
+
+    accuracy                           0.90      7392
+   macro avg       0.89      0.83      0.86      7392
+weighted avg       0.90      0.90      0.90      7392

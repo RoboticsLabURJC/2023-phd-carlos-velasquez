@@ -16,7 +16,7 @@ class SegmentationCurvatureDataset(Dataset):
 
     def __getitem__(self, idx):
         row = self.df.iloc[idx]
-        img_path = os.path.join(self.base_path, "imageSEG", row["image_seg_name"])
+        img_path = os.path.join(self.base_path, row["image_seg_name"])
         label = int(row["curvatura"])
 
         img = cv2.imread(img_path)
@@ -24,7 +24,7 @@ class SegmentationCurvatureDataset(Dataset):
             raise FileNotFoundError(f"Imagen no encontrada: {img_path}")
 
         img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-        img = cv2.resize(img, (224, 224))
+        # img = cv2.resize(img, (224, 224))
 
         if self.transform:
             img = self.transform(image=img)["image"]

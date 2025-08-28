@@ -10,6 +10,7 @@ from torch.utils.data import DataLoader
 from processing import SegmentationCurvatureDataset
 from transforms_config import val_transform
 from datetime import datetime
+from tqdm import tqdm
 
 
 def load_model_pth(model_path, device):
@@ -39,7 +40,7 @@ def predict_pth(model, dataloader, device):
 
 def predict_onnx(onnx_model, dataloader):
     y_true, y_pred = [], []
-    for images, labels in dataloader:
+    for images, labels in tqdm(dataloader, desc="Inferencia", unit="batch", colour="green"):
         ort_inputs = {onnx_model.get_inputs()[0].name: images.numpy()}
         ort_outs = onnx_model.run(None, ort_inputs)
         outputs = torch.tensor(ort_outs[0])

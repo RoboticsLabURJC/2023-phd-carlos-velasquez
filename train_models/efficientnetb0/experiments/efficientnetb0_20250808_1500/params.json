@@ -1,0 +1,14 @@
+{
+    "csv_path": "data/combined_data_balanced.csv",
+    "base_path": "data/",
+    "batch_size": 64,
+    "epochs": 60,
+    "lr": 0.0001,
+    "val_split": 0.2,
+    "patience": 10,
+    "num_workers": 4,
+    "image_size": [
+        224,
+        224
+    ]
+}

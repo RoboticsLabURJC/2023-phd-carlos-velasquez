@@ -1,5 +1,6 @@
 {
-  "model_path": "experiments/efficientnetb0_20250802_1554/trained_models/best_model.onnx",
-  "csv_path": "data/ros2_curvature_dataset/labels.csv",
-  "base_path": "data/ros2_curvature_dataset"
+  "model_path": "experiments/efficientnetb0_20250808_1500/trained_models/best_model.onnx",
+  "csv_path": "/home/canveo/2023-phd-carlos-velasquez/train_models/efficientnetb0/dataTest/combined_data.csv",
+  "base_path": "/home/canveo/2023-phd-carlos-velasquez/train_models/efficientnetb0/dataTest"
 }
+
