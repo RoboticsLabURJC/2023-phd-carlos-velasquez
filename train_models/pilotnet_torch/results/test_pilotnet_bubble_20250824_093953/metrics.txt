@@ -1,0 +1,4 @@
+Steer MSE: 0.2487
+Steer MAE: 0.1483
+Throttle MSE: 0.4067
+Throttle MAE: 0.3939

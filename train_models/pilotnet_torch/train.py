@@ -68,7 +68,7 @@ def train_model(csv_path, batch_size, epochs, lr, dropout, val_split, patience, 
     train_df = train_df.reset_index(drop=True)
     val_df = val_df.reset_index(drop=True)
     
-    base_path = "data/control_manual/"  # Cambiar según el dataset utilizado
+    base_path = "data/"  # Cambiar según el dataset utilizado
 
     train_dataset = SegmentedLaneDataset3CH(train_df, transform=train_transform, base_path=base_path)    # dataset_dagger
     val_dataset = SegmentedLaneDataset3CH(val_df, transform=None, base_path=base_path)  # dataset_dagger

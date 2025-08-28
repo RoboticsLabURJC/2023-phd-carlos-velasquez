@@ -18,7 +18,7 @@ net = PilotNet(image_shape=(66,200,3), num_labels=2, dropout_rate=0.3)
 # ────────────────────────────────────────────────────────────
 # 2) Carga el checkpoint
 # ckpt_path = "experiments/efficientnet_v2_s_monolitico_Control_manual_20250704_1453/trained_models/efficientnet_control_manual.pth"
-ckpt_path = "experiments/pilotnet_control_manual_20250703_1723/trained_models/pilotnet_control_manual.pth"
+ckpt_path = "/home/canveo/Projects/ResNet_18/experiments/dagger/pilotnet_dagger.pth"
 net.load_state_dict(torch.load(ckpt_path, map_location="cpu"))
 net.eval()                       # modo inferencia
 
@@ -28,7 +28,7 @@ dummy = torch.zeros(1, 3, 66, 200, dtype=torch.float32)
 
 # ────────────────────────────────────────────────────────────
 # 4) Exporta a ONNX
-onnx_path = "pilotnet_control_manual.onnx"
+onnx_path = "/home/canveo/Projects/ResNet_18/experiments/dagger/pilotnet_dagger.onnx"
 torch.onnx.export(
     net,                    # modelo
     dummy,                  # ejemplo de entrada

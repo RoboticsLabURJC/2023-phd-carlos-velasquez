@@ -20,9 +20,9 @@ MODEL_NAME ="pilotnet"
 # MODEL_PATH = "experiments/resnet18_20250621_1109/trained_models/last_model.pth"
 # MODEL_PATH = "experiments/efficientnet_v2_s_20250621_2002/trained_models/last_model.pth"
 # MODEL_PATH = "experiments/pilotnet_control_manual_20250703_1723/trained_models/last_model.pth"
-MODEL_PATH = "/home/canveo/2023-phd-carlos-velasquez/train_models/pilotnet_torch/model_onnx/pilotnet_control_manual.onnx"  # Ruta al modelo .pth o .onnx
+MODEL_PATH = "/home/canveo/Projects/ResNet_18/experiments/dagger/pilotnet_dagger.onnx"  # Ruta al modelo .pth o .onnx
 CSV_PATH = "data/data_test/combined_data.csv"
-BASE_IMG_DIR = "/home/canveo/2023-phd-carlos-velasquez/train_models/pilotnet_torch/data/data_test/"
+BASE_IMG_DIR = "model_onnx/pilotnet_control_manual.onnx"
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 # Crear subcarpeta en results con timestamp

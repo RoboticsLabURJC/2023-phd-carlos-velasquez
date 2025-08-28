@@ -55,8 +55,8 @@ class SegmentedLaneDataset3CH(Dataset):
                 
             if self.transform:
                 augmented = self.transform(image=rgb_like, mask=image_seg_rgb)
-                image_transfomed = augmented['image']
-                image_tensor = torch.tensor(image_transfomed, dtype=torch.float32).permute(2, 0, 1)
+                image_transformed = augmented['image']
+                image_tensor = torch.tensor(image_transformed, dtype=torch.float32).permute(2, 0, 1)
             else:
                 image_tensor = torch.tensor(rgb_like, dtype=torch.float32).permute(2, 0, 1)
             

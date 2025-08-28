@@ -1,0 +1,181 @@
+{
+    "timestamp": "20250824-103737",
+    "experiment_configuration": {
+        "empty": false,
+        "brain_path": "/home/canveo/Projects/test_ros2/behavior_metrics/brains/CARLA/brain_modifiedDeepestLSTM.py",
+        "environment": null,
+        "robot_type": "CARLA",
+        "pilot_time_cycle": 50,
+        "current_world": "configs/CARLA/CARLA_launch_files/town_01_anticlockwise.launch.py",
+        "task": "follow_lane",
+        "num_routes": 0,
+        "randomize_routes": true,
+        "waypoint_publisher_path": null,
+        "real_time_update_rate": 1000,
+        "async_mode": false,
+        "actuators": {
+            "CARLA_Motors": {
+                "Motors_0": {
+                    "Name": "motors_0",
+                    "Topic": "/carla/ego_vehicle/vehicle_control_cmd",
+                    "MaxV": 3,
+                    "MaxW": 0.3
+                }
+            }
+        },
+        "sensors": {
+            "Cameras": {
+                "Camera_0": {
+                    "Name": "camera_0",
+                    "Topic": "/carla/ego_vehicle/rgb_front/image"
+                },
+                "Camera_1": {
+                    "Name": "camera_1",
+                    "Topic": "/carla/ego_vehicle/rgb_view/image"
+                },
+                "Camera_2": {
+                    "Name": "camera_2",
+                    "Topic": "/carla/ego_vehicle/semantic_segmentation_front/image"
+                }
+            },
+            "Pose3D": {
+                "Pose3D_0": {
+                    "Name": "pose3d_0",
+                    "Topic": "/carla/ego_vehicle/odometry"
+                }
+            },
+            "BirdEyeView": {
+                "BirdEyeView_0": {
+                    "Name": "bird_eye_view_0",
+                    "Topic": ""
+                }
+            },
+            "Speedometer": {
+                "Speedometer_0": {
+                    "Name": "speedometer_0",
+                    "Topic": "/carla/ego_vehicle/speedometer"
+                }
+            }
+        },
+        "layout": {
+            "frame_0": [
+                [
+                    1,
+                    1,
+                    1,
+                    1
+                ],
+                "rgbimage"
+            ],
+            "frame_1": [
+                [
+                    0,
+                    1,
+                    1,
+                    1
+                ],
+                "rgbimage"
+            ],
+            "frame_2": [
+                [
+                    0,
+                    2,
+                    1,
+                    1
+                ],
+                "rgbimage"
+            ],
+            "frame_3": [
+                [
+                    1,
+                    2,
+                    1,
+                    1
+                ],
+                "rgbimage"
+            ]
+        },
+        "dataset_in": "/tmp/my_bag.bag",
+        "dataset_out": "",
+        "stats_out": "./",
+        "stats_perfect_lap": "./perfect_bags/lap-simple-circuit.bag",
+        "brain_kwargs": {
+            "ImageCropped": false,
+            "ImageSize": [
+                200,
+                66
+            ],
+            "ImageNormalized": false,
+            "PredictionsNormalized": false,
+            "GPU": true,
+            "UseOptimized": true,
+            "ImageTranform": ""
+        },
+        "experiment_model": "pilotnet_burbuja.onnx",
+        "experiment_random_spawn_point": false,
+        "spawn_points": [],
+        "number_of_vehicle": 0,
+        "number_of_walker": 0,
+        "percentage_walker_running": 0.0,
+        "percentage_walker_crossing": 0.0
+    },
+    "world_launch_file": "town_01_anticlockwise.launch.py",
+    "brain_file": "brain_modifiedDeepestLSTM.py",
+    "robot_type": "CARLA",
+    "carla_map": "Carla/Maps/Town02",
+    "ego_vehicle": "vehicle.tesla.model3",
+    "vehicles_number": 1,
+    "async_mode": false,
+    "weather": {
+        "cloudiness": 10.0,
+        "precipitation": 0.0,
+        "precipitation_deposits": 0.0,
+        "wind_intensity": 10.0,
+        "sun_azimuth_angle": 250.0,
+        "sun_altitude_angle": 30.0,
+        "fog_density": 10.0,
+        "fog_distance": 60.0,
+        "fog_falloff": 0.8999999761581421,
+        "wetness": 0.0,
+        "scattering_intensity": 1.0,
+        "mie_scattering_scale": 0.029999999329447746,
+        "rayleigh_scattering_scale": 0.03310000151395798
+    },
+    "experiment_model": "pilotnet_burbuja.onnx",
+    "percentage_completed": 0.016989466530750934,
+    "lap_checkpoint": 0,
+    "starting_point": [
+        170.96441650390625,
+        -105.31007385253906
+    ],
+    "completed_distance": 779.0613233023844,
+    "average_speed": 16.936599380593993,
+    "suddenness_distance_speed": 0.19756910226703786,
+    "max_speed": 22.72885208129883,
+    "min_speed": 7.143748712539673,
+    "suddenness_distance_control_commands": 0.1897578638213706,
+    "suddenness_distance_throttle": 0.18293183787451897,
+    "suddenness_distance_steer": 0.020951598174819515,
+    "suddenness_distance_brake_command": 0.0,
+    "collisions": 0,
+    "collision_actor_ids": [],
+    "lane_invasions": 0,
+    "experiment_total_simulated_time": 165,
+    "effective_completed_distance": 277.0,
+    "position_deviation_mean": 1.112896108884121,
+    "position_deviation_total_err": 2462.83908896056,
+    "position_deviation_mean_per_km": 4.017675483336176,
+    "starting_point_map": [
+        15.316494464874268,
+        105.31007385253906
+    ],
+    "collisions_per_km": 0,
+    "lane_invasions_per_km": 0,
+    "suddenness_distance_control_command_per_km": 0.6850464397883415,
+    "suddenness_distance_throttle_per_km": 0.6604037468394186,
+    "suddenness_distance_steer_per_km": 0.07563753853725456,
+    "suddenness_distance_brake_command_per_km": 0.0,
+    "suddenness_distance_speed_per_km": 0.7132458565597034,
+    "completed_laps": 0,
+    "experiment_total_real_time": 320.12036418914795
+}
