@@ -19,7 +19,7 @@ import json
 from utils.processing import SegmentedLaneDataset3CH
 from utils.pilotnet import PilotNet
 # from utils.pilotnet_two_output import PilotNetTwoOutput
-from utils.transforms_config import train_transform
+from utils.transforms_config import train_transform, val_transform
 
 def set_seed(seed=42):
     random.seed(seed)
@@ -68,10 +68,10 @@ def train_model(csv_path, batch_size, epochs, lr, dropout, val_split, patience, 
     train_df = train_df.reset_index(drop=True)
     val_df = val_df.reset_index(drop=True)
     
-    base_path = "data/"  # Cambiar según el dataset utilizado
+    base_path = "data/dataset"  # Cambiar según el dataset utilizado
 
     train_dataset = SegmentedLaneDataset3CH(train_df, transform=train_transform, base_path=base_path)    # dataset_dagger
-    val_dataset = SegmentedLaneDataset3CH(val_df, transform=None, base_path=base_path)  # dataset_dagger
+    val_dataset = SegmentedLaneDataset3CH(val_df, transform=val_transform, base_path=base_path)  # dataset_dagger
 
     train_loader = DataLoader(train_dataset, batch_size=batch_size, num_workers=num_workers, shuffle=True)
     val_loader = DataLoader(val_dataset, batch_size=1, shuffle=False)
@@ -81,7 +81,7 @@ def train_model(csv_path, batch_size, epochs, lr, dropout, val_split, patience, 
     
     sample_image, _ = train_dataset[0]
     # sample_image.shape es (C, H, W)
-    W, C, H = sample_image.shape
+    C, H, W = sample_image.shape
     print(f"Forma de la imagen de entrada: (C={C}, H={H}, W={W})")  
     img_shape = (C, H, W)  
     print(f"Forma de la imagen de entrada: {img_shape}")

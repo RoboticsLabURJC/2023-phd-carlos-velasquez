@@ -1,42 +1,25 @@
 import torch
 import torch.nn as nn
-import pandas as pd
-from torchvision.models import efficientnet_v2_s, resnet18, ResNet18_Weights, EfficientNet_V2_S_Weights
 from pilotnet import PilotNet
 
-# ────────────────────────────────────────────────────────────
-# 1) Construye la red EXACTAMENTE igual a la que usas
-# net = efficientnet_v2_s(weights=None)
-# net.classifier[-1] = nn.Linear(net.classifier[-1].in_features, 2)
+net = PilotNet(image_shape=(3, 66, 200), num_labels=2, dropout_rate=0.3)
 
-
-net = PilotNet(image_shape=(66,200,3), num_labels=2, dropout_rate=0.3)
-
-# (Si tu primera conv se cambió a 1 canal copia los pesos
-#  aquí, tal como vimos antes.)
-
-# ────────────────────────────────────────────────────────────
-# 2) Carga el checkpoint
-# ckpt_path = "experiments/efficientnet_v2_s_monolitico_Control_manual_20250704_1453/trained_models/efficientnet_control_manual.pth"
-ckpt_path = "/home/canveo/Projects/ResNet_18/experiments/dagger/pilotnet_dagger.pth"
+ckpt_path = "experiments/pilotnet_dataset_nuevo/trained_models/last_model.pth"
 net.load_state_dict(torch.load(ckpt_path, map_location="cpu"))
-net.eval()                       # modo inferencia
+net.eval()
 
-# ────────────────────────────────────────────────────────────
-# 3) Prepara un dummy input con la MISMA shape que en producción
-dummy = torch.zeros(1, 3, 66, 200, dtype=torch.float32) 
+dummy = torch.zeros(1, 3, 66, 200, dtype=torch.float32)
 
-# ────────────────────────────────────────────────────────────
-# 4) Exporta a ONNX
-onnx_path = "/home/canveo/Projects/ResNet_18/experiments/dagger/pilotnet_dagger.onnx"
+onnx_path = "experiments/pilotnet_dataset_nuevo/trained_models/pilotnet_dataset_nuevo.onnx"
 torch.onnx.export(
-    net,                    # modelo
-    dummy,                  # ejemplo de entrada
-    onnx_path,              # fichero destino
-    export_params=True,     # guarda los pesos
-    opset_version=17,       # 11 o superior (17 recomendado si usas ORT ≥1.17)
-    input_names=["image"],  # nombres legibles
+    net,
+    dummy,
+    onnx_path,
+    export_params=True,
+    opset_version=17,
+    input_names=["image"],
     output_names=["controls"],
+    dynamic_axes={"image": {0: "batch_size"}, "controls": {0: "batch_size"}},
 )
 
 print(f"Modelo exportado a {onnx_path}")

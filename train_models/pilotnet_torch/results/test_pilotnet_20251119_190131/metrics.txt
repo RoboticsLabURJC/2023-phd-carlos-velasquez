@@ -1,0 +1,4 @@
+Steer RMSE: 0.2760
+Steer MAE: 0.1466
+Throttle RMSE: 0.4226
+Throttle MAE: 0.3857

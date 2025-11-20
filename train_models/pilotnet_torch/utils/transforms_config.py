@@ -21,12 +21,23 @@ train_transform = A.Compose([
         fill=0,
         p=0.4
         ),
-    # A.Normalize(mean=(0.5, 0.5, 0.5), std=(0.5, 0.5, 0.5)),
+    # Normalizar a rango [-1, 1]
+    A.Normalize(
+        mean=(0.5, 0.5, 0.5),
+        std=(0.5, 0.5, 0.5),
+        max_pixel_value=255.0
+    ),
     # ToTensorV2(),
 ])
 
 # val_transform = A.Compose([ToTensorV2()])
-val_transform = A.Compose([])
+val_transform = A.Compose([
+    A.Normalize(
+        mean=(0.5, 0.5, 0.5),
+        std=(0.5, 0.5, 0.5),
+        max_pixel_value=255.0
+    ),
+])
 
 train_transform_desc = (
     "Affine, ColorJitter, Perspective, RandomShadow, RandomRain, "
