@@ -1,0 +1,824 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Week 35 - Prueba del modelo modifiedDeepestLSTM - Robotics Lab URJC</title>
+<meta name="description" content="Este modelo se basa en la arquitectura presentada en el paper “Transferring Vision-Based End-to-End Autonomous Driving Decision-Making from Simulation to Real-World Vehicles”, adaptado para mejorar su capacidad de generalización y robustez.">
+
+
+  <meta name="author" content="Carlos Velásquez">
+  
+  <meta property="article:author" content="Carlos Velásquez">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Robotics Lab URJC">
+<meta property="og:title" content="Week 35 - Prueba del modelo modifiedDeepestLSTM">
+<meta property="og:url" content="http://localhost:4000/weekly%20log/week35/">
+
+
+  <meta property="og:description" content="Este modelo se basa en la arquitectura presentada en el paper “Transferring Vision-Based End-to-End Autonomous Driving Decision-Making from Simulation to Real-World Vehicles”, adaptado para mejorar su capacidad de generalización y robustez.">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2025-02-05T00:00:00-05:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/weekly%20log/week35/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Carlos Andrés Velásquez Ospina",
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Robotics Lab URJC Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/logo.png" alt="Robotics Lab URJC"></a>
+        
+        <a class="site-title" href="/">
+          Robotics Lab URJC
+          <span class="site-subtitle">Programming Robot Intelligence</span>
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="https://mmistakes.github.io/minimal-mistakes/docs/quick-start-guide/">Quick-Start Guide</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+    <div class="author__avatar">
+      <a href="http://localhost:4000/">
+        <img src="/assets/images/me.jpg" alt="Carlos Velásquez" itemprop="image" class="u-photo">
+      </a>
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      <a class="u-url" rel="me" href="http://localhost:4000/" itemprop="url">Carlos Velásquez</a>
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>Doctoral thesis blog</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name" class="p-locality">Medellín</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="mailto:canveo@gmail.com" rel="nofollow noopener noreferrer me"><i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">Email</span></a></li>
+          
+        
+          
+            <li><a href="https://github.com/canveo" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/canveo/" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span class="label">LinkedIn</span></a></li>
+          
+        
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:canveo@gmail.com" rel="me" class="u-email">
+            <meta itemprop="email" content="canveo@gmail.com" />
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">Email</span>
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer me">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Week 35 - Prueba del modelo modifiedDeepestLSTM">
+    <meta itemprop="description" content="Este modelo se basa en la arquitectura presentada en el paper “Transferring Vision-Based End-to-End Autonomous Driving Decision-Making from Simulation to Real-World Vehicles”, adaptado para mejorar su capacidad de generalización y robustez.">
+    <meta itemprop="datePublished" content="2025-02-05T00:00:00-05:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="http://localhost:4000/weekly%20log/week35/" class="u-url" itemprop="url">Week 35 - Prueba del modelo modifiedDeepestLSTM
+</a>
+          </h1>
+          
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          2 minute read
+        
+      </span>
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        <p>Este modelo se basa en la arquitectura presentada en el paper “Transferring Vision-Based End-to-End Autonomous Driving Decision-Making from Simulation to Real-World Vehicles”, adaptado para mejorar su capacidad de generalización y robustez.</p>
+
+<p>Para entrenarlo, se construyó un dataset con 30,000 imágenes, donde se aplicó balanceo de datos en función del valor de steer (dirección) y se utilizaron técnicas de aumento de datos con Albumentations para mejorar la diversidad del conjunto de entrenamiento.</p>
+
+<h3 id="arquitectura-del-modelo">Arquitectura del Modelo</h3>
+<p>El modelo modifiedDeepestLSTM es una red neuronal basada en visión con información auxiliar, diseñada para tareas de control en entornos autónomos. Su arquitectura se basa en:</p>
+
+<p>1️. <strong>Bloque Convolucional Inicial:</strong></p>
+
+<p>Capas Conv2D para extraer características espaciales de las imágenes segmentadas.
+Normalización con BatchNormalization().</p>
+
+<p>2️. <strong>Bloque ConvLSTM:</strong></p>
+
+<p>Uso de ConvLSTM2D para capturar la información temporal en secuencias de imágenes.
+Transformación de la salida convolucional con Lambda() para garantizar compatibilidad con ConvLSTM2D().</p>
+
+<p>3️. <strong>Fusión de Información Auxiliar:</strong></p>
+
+<p>Se combinan las características visuales con entradas adicionales de velocidad y comandos.
+4️.  <strong>Capa Densa:</strong></p>
+
+<p>Capas Fully Connected (Dense) con activaciones ReLU.
+Regularización con Dropout(0.2).</p>
+
+<p>5️. <strong>Salidas del Modelo:</strong></p>
+
+<p>Throttle (aceleración) con activación sigmoid.
+Steering (dirección) con activación tanh.
+Brake (freno) con activación sigmoid.</p>
+
+<h3 id="entradas-inputs-del-modelo">Entradas (Inputs) del Modelo</h3>
+<p>El modelo recibe 4 entradas:</p>
+
+<p>1️. <strong>Imagen Segmentada (input_image)</strong></p>
+
+<p>Dimensión: (224, 224, 3).
+Representa la vista procesada del entorno en escala de grises.</p>
+
+<p>2️. <strong>Velocidad Actual (input_speed)</strong></p>
+
+<p>Dimensión: (1,).
+Indica la velocidad actual del vehículo.
+3️. <strong>Velocidad Máxima Permitida (input_max_speed)</strong></p>
+
+<p>Dimensión: (1,).
+Establece un límite de velocidad que el vehículo no debe superar.
+4️. <strong>Comando de Alto Nivel (input_cmd)</strong></p>
+
+<p>Dimensión: (4,).
+Representa la intención del vehículo en un formato one-hot encoding con 4 posibles comandos (ir recto, girar izquierda, girar derecha, detenerse).</p>
+
+<h3 id="arquitectura-del-modelo-1">Arquitectura del modelo</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Layer (type)</th>
+      <th>Output Shape</th>
+      <th>Param #</th>
+      <th>Connected to</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>input_image</strong> (InputLayer)</td>
+      <td>(None, 224, 224, 3)</td>
+      <td>0</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td><strong>conv2d</strong> (Conv2D)</td>
+      <td>(None, 110, 110, 24)</td>
+      <td>1,824</td>
+      <td>input_image[0][0]</td>
+    </tr>
+    <tr>
+      <td><strong>conv2d_1</strong> (Conv2D)</td>
+      <td>(None, 53, 53, 36)</td>
+      <td>21,636</td>
+      <td>conv2d[0][0]</td>
+    </tr>
+    <tr>
+      <td><strong>conv2d_2</strong> (Conv2D)</td>
+      <td>(None, 25, 25, 48)</td>
+      <td>43,248</td>
+      <td>conv2d_1[0][0]</td>
+    </tr>
+    <tr>
+      <td><strong>batch_normalization</strong> (BatchNormalization)</td>
+      <td>(None, 25, 25, 48)</td>
+      <td>192</td>
+      <td>conv2d_2[0][0]</td>
+    </tr>
+    <tr>
+      <td><strong>lambda</strong> (Lambda)</td>
+      <td>(None, 1, 25, 25, 48)</td>
+      <td>0</td>
+      <td>batch_normalization[0][0]</td>
+    </tr>
+    <tr>
+      <td><strong>conv_lstm2d</strong> (ConvLSTM2D)</td>
+      <td>(None, 1, 25, 25, 64)</td>
+      <td>258,304</td>
+      <td>lambda[0][0]</td>
+    </tr>
+    <tr>
+      <td><strong>conv_lstm2d_1</strong> (ConvLSTM2D)</td>
+      <td>(None, 25, 25, 64)</td>
+      <td>295,168</td>
+      <td>conv_lstm2d[0][0]</td>
+    </tr>
+    <tr>
+      <td><strong>flatten</strong> (Flatten)</td>
+      <td>(None, 40000)</td>
+      <td>0</td>
+      <td>conv_lstm2d_1[0][0]</td>
+    </tr>
+    <tr>
+      <td><strong>input_speed</strong> (InputLayer)</td>
+      <td>(None, 1)</td>
+      <td>0</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td><strong>input_max_speed</strong> (InputLayer)</td>
+      <td>(None, 1)</td>
+      <td>0</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td><strong>input_cmd</strong> (InputLayer)</td>
+      <td>(None, 4)</td>
+      <td>0</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td><strong>concatenate</strong> (Concatenate)</td>
+      <td>(None, 40006)</td>
+      <td>0</td>
+      <td>flatten[0][0], input_speed[0][0], input_max_speed[0][0], input_cmd[0][0]</td>
+    </tr>
+    <tr>
+      <td><strong>dense</strong> (Dense)</td>
+      <td>(None, 100)</td>
+      <td>4,000,700</td>
+      <td>concatenate[0][0]</td>
+    </tr>
+    <tr>
+      <td><strong>dense_1</strong> (Dense)</td>
+      <td>(None, 50)</td>
+      <td>5,050</td>
+      <td>dense[0][0]</td>
+    </tr>
+    <tr>
+      <td><strong>dense_2</strong> (Dense)</td>
+      <td>(None, 10)</td>
+      <td>510</td>
+      <td>dense_1[0][0]</td>
+    </tr>
+    <tr>
+      <td><strong>dropout</strong> (Dropout)</td>
+      <td>(None, 10)</td>
+      <td>0</td>
+      <td>dense_2[0][0]</td>
+    </tr>
+    <tr>
+      <td><strong>throttle</strong> (Dense)</td>
+      <td>(None, 1)</td>
+      <td>11</td>
+      <td>dropout[0][0]</td>
+    </tr>
+    <tr>
+      <td><strong>steering</strong> (Dense)</td>
+      <td>(None, 1)</td>
+      <td>11</td>
+      <td>dropout[0][0]</td>
+    </tr>
+    <tr>
+      <td><strong>brake</strong> (Dense)</td>
+      <td>(None, 1)</td>
+      <td>11</td>
+      <td>dropout[0][0]</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+<p><strong>🔹 Total de parámetros:</strong> <code class="language-plaintext highlighter-rouge">4,626,665</code> (≈17.65 MB)<br />
+<strong>🔹 Parámetros entrenables:</strong> <code class="language-plaintext highlighter-rouge">4,626,569</code><br />
+<strong>🔹 Parámetros no entrenables:</strong> <code class="language-plaintext highlighter-rouge">96</code> (≈384 B)</p>
+
+<h3 id="configuración-del-entrenamiento">Configuración del Entrenamiento</h3>
+<p>El modelo fue compilado con:</p>
+
+<ul>
+  <li>Optimizador:  Adam (learning_rate=0.0001)</li>
+  <li>Pérdida (Loss): MSE (Mean Squared Error) para cada salida.</li>
+  <li>Métricas de Evaluación:
+    <ul>
+      <li>Throttle: MSE, MAE</li>
+      <li>Steering: MSE, MAE</li>
+      <li>Brake: MSE, MAE</li>
+    </ul>
+  </li>
+</ul>
+
+<p>El entrenamiento se realizó en 120 épocas, con un tamaño de batch de 32, utilizando imágenes segmentadas y datos de simulación.</p>
+
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/tags/#carla-simulator" class="page__taxonomy-item p-category" rel="tag">CARLA Simulator</a><span class="sep">, </span>
+    
+      <a href="/tags/#expertos" class="page__taxonomy-item p-category" rel="tag">expertos</a><span class="sep">, </span>
+    
+      <a href="/tags/#lane-detection" class="page__taxonomy-item p-category" rel="tag">Lane Detection</a><span class="sep">, </span>
+    
+      <a href="/tags/#ros-2" class="page__taxonomy-item p-category" rel="tag">ROS 2</a><span class="sep">, </span>
+    
+      <a href="/tags/#tensorflow" class="page__taxonomy-item p-category" rel="tag">TensorFlow</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#weekly-log" class="page__taxonomy-item p-category" rel="tag">weekly Log</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2025-02-05T00:00:00-05:00">February 5, 2025</time></p>
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Week+35+-+Prueba+del+modelo+modifiedDeepestLSTM%20http%3A%2F%2Flocalhost%3A4000%2Fweekly%2520log%2Fweek35%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fweekly%2520log%2Fweek35%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fweekly%2520log%2Fweek35%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/weekly%20log/week34/" class="pagination--pager" title="Week 34 - Escritura del Paper, Integración de ROS 2 en BehaviorMetrics e Investigación de Nuevos Modelos para Conducción Autónoma
+">Previous</a>
+    
+    
+      <a href="/weekly%20log/week36/" class="pagination--pager" title="Week 36 - Entrenamiento del modelo modifiedDeepestLSTM
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h2 class="page__related-title">You may also enjoy</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/weekly%20log/week89/" rel="permalink">Week 89 - Robustez del piloto, Caso Canónico, 15 Casos y Pruebas de Velocidad
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          12 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">En esta entrada reporto los resultados de robustez en CARLA Town02 comparando cinco políticas/datasets bajo el mismo circuito de prueba, con 6 repeticiones p...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/weekly%20log/week88/" rel="permalink">Week 88 - Actualización de métricas en BehaviorMetrics (CARLA), comparación contra ruta ideal
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          2 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Actualización de métricas en BehaviorMetrics (CARLA)
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/weekly%20log/week87/" rel="permalink">Week 87 - Actualización de métricas en CARLA
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          9 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">En esta semana consolidé el reporte comparativo de cinco variantes de entrenamiento (Burbuja, Noise injection, DAgger 16k, DAgger 27.6k y DAgger agresivo) us...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/weekly%20log/week86/" rel="permalink">Week 86 - Actualización de métricas en CARLA
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          2 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Se realizaron mejoras en la forma de reportar el desempeño del vehículo autónomo en simulación, con el objetivo de que las métricas reflejen con mayor fideli...</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2026 Carlos Andrés Velásquez Ospina. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+  </body>
+</html>

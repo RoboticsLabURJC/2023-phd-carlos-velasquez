@@ -1,0 +1,1023 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Week 73 -  Prueba dataset Daniel - Robotics Lab URJC</title>
+<meta name="description" content="Comparación de Métricas: ResNet-18 (30 épocas) vs MobileNet">
+
+
+  <meta name="author" content="Carlos Velásquez">
+  
+  <meta property="article:author" content="Carlos Velásquez">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Robotics Lab URJC">
+<meta property="og:title" content="Week 73 -  Prueba dataset Daniel">
+<meta property="og:url" content="http://localhost:4000/weekly%20log/week73/">
+
+
+  <meta property="og:description" content="Comparación de Métricas: ResNet-18 (30 épocas) vs MobileNet">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2025-11-26T00:00:00-05:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/weekly%20log/week73/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Carlos Andrés Velásquez Ospina",
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Robotics Lab URJC Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/logo.png" alt="Robotics Lab URJC"></a>
+        
+        <a class="site-title" href="/">
+          Robotics Lab URJC
+          <span class="site-subtitle">Programming Robot Intelligence</span>
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="https://mmistakes.github.io/minimal-mistakes/docs/quick-start-guide/">Quick-Start Guide</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+    <div class="author__avatar">
+      <a href="http://localhost:4000/">
+        <img src="/assets/images/me.jpg" alt="Carlos Velásquez" itemprop="image" class="u-photo">
+      </a>
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      <a class="u-url" rel="me" href="http://localhost:4000/" itemprop="url">Carlos Velásquez</a>
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>Doctoral thesis blog</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name" class="p-locality">Medellín</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="mailto:canveo@gmail.com" rel="nofollow noopener noreferrer me"><i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">Email</span></a></li>
+          
+        
+          
+            <li><a href="https://github.com/canveo" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/canveo/" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span class="label">LinkedIn</span></a></li>
+          
+        
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:canveo@gmail.com" rel="me" class="u-email">
+            <meta itemprop="email" content="canveo@gmail.com" />
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">Email</span>
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer me">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Week 73 -  Prueba dataset Daniel">
+    <meta itemprop="description" content="Comparación de Métricas: ResNet-18 (30 épocas) vs MobileNet">
+    <meta itemprop="datePublished" content="2025-11-26T00:00:00-05:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="http://localhost:4000/weekly%20log/week73/" class="u-url" itemprop="url">Week 73 -  Prueba dataset Daniel
+</a>
+          </h1>
+          
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          3 minute read
+        
+      </span>
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        <h3 id="comparación-de-métricas-resnet-18-30-épocas-vs-mobilenet">Comparación de Métricas: ResNet-18 (30 épocas) vs MobileNet</h3>
+
+<p>Se probaron ambos modelos utilizando el dataset de Daniel dentro de mi propio pipeline de entrenamiento.
+Las métricas mejoran de manera significativa respecto a ejecuciones anteriores, lo que indica que el flujo de entrenamiento está funcionando correctamente.</p>
+
+<p>Sin embargo, en pruebas online el comportamiento todavía no es totalmente satisfactorio.
+Esto sugiere que, aunque el modelo generaliza bien offline (métricas bajas).</p>
+
+<p><strong>1. STEER — Comparación</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Métrica</th>
+      <th style="text-align: left">ResNet-18</th>
+      <th style="text-align: left">MobileNet</th>
+      <th style="text-align: left">Diferencia</th>
+      <th style="text-align: left">% Peor MobileNet</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">MSE</td>
+      <td style="text-align: left">0.000448</td>
+      <td style="text-align: left">0.020493</td>
+      <td style="text-align: left">+0.020045</td>
+      <td style="text-align: left">+4473%</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">MAE</td>
+      <td style="text-align: left">0.017188</td>
+      <td style="text-align: left">0.113721</td>
+      <td style="text-align: left">+0.096533</td>
+      <td style="text-align: left">+561%</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">RMSE</td>
+      <td style="text-align: left">0.021163</td>
+      <td style="text-align: left">0.143155</td>
+      <td style="text-align: left">+0.121992</td>
+      <td style="text-align: left">+576%</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
+    </tr>
+  </tbody>
+</table>
+
+<p>MobileNet es entre 5× y 45× peor que ResNet-18 en Steer.</p>
+
+<p><strong>2. THROTTLE — Comparación</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Métrica</th>
+      <th style="text-align: left">ResNet-18</th>
+      <th style="text-align: left">MobileNet</th>
+      <th style="text-align: left">Diferencia</th>
+      <th style="text-align: left">% Peor MobileNet</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">MSE</td>
+      <td style="text-align: left">0.000362</td>
+      <td style="text-align: left">0.027791</td>
+      <td style="text-align: left">+0.027429</td>
+      <td style="text-align: left">+7573%</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">MAE</td>
+      <td style="text-align: left">0.011870</td>
+      <td style="text-align: left">0.130896</td>
+      <td style="text-align: left">+0.119026</td>
+      <td style="text-align: left">+1002%</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">RMSE</td>
+      <td style="text-align: left">0.019034</td>
+      <td style="text-align: left">0.166705</td>
+      <td style="text-align: left">+0.147671</td>
+      <td style="text-align: left">+775%</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>MobileNet rinde ~8–10× peor en Throttle.</p>
+
+<p><strong>3. BRAKE — Comparación</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Métrica</th>
+      <th style="text-align: left">ResNet-18</th>
+      <th style="text-align: left">MobileNet</th>
+      <th style="text-align: left">Diferencia</th>
+      <th style="text-align: left">% Peor MobileNet</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">MSE</td>
+      <td style="text-align: left">0.000080</td>
+      <td style="text-align: left">0.002160</td>
+      <td style="text-align: left">+0.002080</td>
+      <td style="text-align: left">+2600%</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">MAE</td>
+      <td style="text-align: left">0.007482</td>
+      <td style="text-align: left">0.036568</td>
+      <td style="text-align: left">+0.029086</td>
+      <td style="text-align: left">+389%</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">RMSE</td>
+      <td style="text-align: left">0.008952</td>
+      <td style="text-align: left">0.046473</td>
+      <td style="text-align: left">+0.037521</td>
+      <td style="text-align: left">+419%</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>MobileNet también es 4–6× peor en Brake.</p>
+
+<p><strong>4. Global — Comparación</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Métrica</th>
+      <th style="text-align: left">ResNet-18</th>
+      <th style="text-align: left">MobileNet</th>
+      <th style="text-align: left">Diferencia</th>
+      <th style="text-align: left">% Peor MobileNet</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">MSE Global</td>
+      <td style="text-align: left">≈0.000963*</td>
+      <td style="text-align: left">0.016815</td>
+      <td style="text-align: left">+0.015852</td>
+      <td style="text-align: left">+1645%</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">MAE Global</td>
+      <td style="text-align: left">—</td>
+      <td style="text-align: left">0.093728</td>
+      <td style="text-align: left">—</td>
+      <td style="text-align: left">—</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">RMSE Global</td>
+      <td style="text-align: left">—</td>
+      <td style="text-align: left">0.118778</td>
+      <td style="text-align: left">—</td>
+      <td style="text-align: left">—</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li>Promedio simple de los 3 MSE de ResNet.</li>
+</ul>
+
+<p>MobileNet es ~17× peor globalmente.</p>
+
+<hr />
+
+<h3 id="mejora-del--dataset">Mejora del  Dataset</h3>
+
+<p>Durante esta semana se completó un nuevo pipeline de entrenamiento basado en ResNet-18 utilizando únicamente imágenes segmentadas, aplicando una máscara binaria sobre la calzada y replicando la imagen en tres canales (grises) para aprovechar pesos preentrenados tipo ImageNet.</p>
+
+<p>La novedad es que esta vez se usó un dataset balanceado (mezcla del dataset normal + dataset exclusivo de curvas), lo que permitió mejorar la distribución de steer y obtener un modelo más estable en curvas.</p>
+
+<p>Además, se integró un piloto online que reproduce exactamente el mismo pipeline de preprocesamiento usado en entrenamiento (recorte, máscara, resize 66×200, normalización). Esto resolvió los problemas de inconsistencia entre offline y online observados en semanas anteriores.</p>
+
+<p>Como se muestra en el video adjunto, el piloto online funciona perfectamente en Town02, logrando mantener la trayectoria y respondiendo adecuadamente en curvas, incluso en zonas estrechas del mapa.</p>
+
+<iframe width="1381" height="777" src="https://www.youtube.com/embed/Kkk64lqf_8c" title="ResNet18 Driving Test – CARLA Town02" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen=""></iframe>
+
+<h3 id="evaluación-del-entrenamiento">Evaluación del Entrenamiento</h3>
+
+<p>Dataset: combinado + balanceado
+Modelo: ResNet-18 monolítico (steer + throttle)
+Épocas: 30
+Entrada: Segmentación binaria (66×200, 3 canales en gris)
+Salida: Steer, throttle (brake fijo en piloto)</p>
+
+<p>Los resultados muestran una mejora significativa respecto a MobileNet, confirmando que:</p>
+
+<ul>
+  <li>
+    <p>El pipeline de segmentación con ResNet-18 es más robusto.</p>
+  </li>
+  <li>
+    <p>El balanceo estratificado del dataset contribuye a un aprendizaje estable, especialmente en curvas.</p>
+  </li>
+  <li>
+    <p>Las métricas offline son muy bajas y consistentes → ahora sí se refleja apropiadamente en la prueba online.</p>
+  </li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th>Variable</th>
+      <th>MSE</th>
+      <th>RMSE</th>
+      <th>MAE</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>STEER</strong></td>
+      <td>0.058400</td>
+      <td>0.241660</td>
+      <td>0.152389</td>
+    </tr>
+    <tr>
+      <td><strong>THROTTLE</strong></td>
+      <td>0.152795</td>
+      <td>0.390890</td>
+      <td>0.337371</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Comparado con los entrenamientos anteriores:</p>
+
+<ul>
+  <li>
+    <p>El MSE/RMSE de steer y throttle aumentaron.</p>
+  </li>
+  <li>
+    <p>Esto indica que el modelo perdió precisión en la evaluación offline.</p>
+  </li>
+  <li>
+    <p>La causa principal parece ser el nuevo dataset combinado, que aunque balanceado, puede tener más ruido, más variabilidad, y un preprocesamiento distinto al usado previamente.</p>
+  </li>
+</ul>
+
+<hr />
+
+<h3 id="resumen-comparativo-de-modelos--evaluación-offline">Resumen Comparativo de Modelos — Evaluación Offline</h3>
+
+<p>A continuación se presentan las métricas globales de cada modelo usando el mismo pipeline de preprocesado (segmentación binaria).</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Modelo</th>
+      <th style="text-align: left">Steer MSE</th>
+      <th style="text-align: left">Steer RMSE</th>
+      <th style="text-align: left">Steer MAE</th>
+      <th style="text-align: left">Throttle MSE</th>
+      <th style="text-align: left">Throttle RMSE</th>
+      <th style="text-align: left">Throttle MAE</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><strong>ResNet18</strong></td>
+      <td style="text-align: left"><strong>0.008252</strong></td>
+      <td style="text-align: left"><strong>0.090838</strong></td>
+      <td style="text-align: left"><strong>0.066260</strong></td>
+      <td style="text-align: left"><strong>0.009632</strong></td>
+      <td style="text-align: left"><strong>0.098146</strong></td>
+      <td style="text-align: left"><strong>0.070521</strong></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">EfficientNet V2-S</td>
+      <td style="text-align: left">0.104006</td>
+      <td style="text-align: left">0.322500</td>
+      <td style="text-align: left">0.249124</td>
+      <td style="text-align: left">0.152539</td>
+      <td style="text-align: left">0.390563</td>
+      <td style="text-align: left">0.345736</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">MobileNetV3-Small</td>
+      <td style="text-align: left">0.152539</td>
+      <td style="text-align: left">0.390563</td>
+      <td style="text-align: left">0.345736</td>
+      <td style="text-align: left">0.152539</td>
+      <td style="text-align: left">0.390563</td>
+      <td style="text-align: left">0.345736</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">PilotNet</td>
+      <td style="text-align: left">0.074976</td>
+      <td style="text-align: left">0.273818</td>
+      <td style="text-align: left">0.196874</td>
+      <td style="text-align: left">0.161633</td>
+      <td style="text-align: left">0.402036</td>
+      <td style="text-align: left">0.349883</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="test-online">Test Online</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Métrica</th>
+      <th>EfficientNet (pth)</th>
+      <th>MobileNet (pth)</th>
+      <th>ResNet18 (pth)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Distancia completada (m)</strong></td>
+      <td>299.76</td>
+      <td><strong>347.78</strong></td>
+      <td>237.73</td>
+    </tr>
+    <tr>
+      <td><strong>Effective completed distance (m)</strong></td>
+      <td>181.50</td>
+      <td>88.50</td>
+      <td><strong>191.00</strong></td>
+    </tr>
+    <tr>
+      <td><strong>Position deviation mean (m)</strong></td>
+      <td>0.9090</td>
+      <td><strong>1.4182</strong></td>
+      <td><strong>0.6327</strong></td>
+    </tr>
+    <tr>
+      <td><strong>Position deviation / km</strong></td>
+      <td>5.01</td>
+      <td><strong>16.02</strong></td>
+      <td><strong>3.31</strong></td>
+    </tr>
+    <tr>
+      <td><strong>Collisions</strong></td>
+      <td>16</td>
+      <td><strong>48</strong></td>
+      <td>68</td>
+    </tr>
+    <tr>
+      <td><strong>Collisions per km</strong></td>
+      <td><strong>88.15</strong></td>
+      <td>542.37</td>
+      <td>356.02</td>
+    </tr>
+    <tr>
+      <td><strong>Lane invasions</strong></td>
+      <td>760</td>
+      <td><strong>958</strong></td>
+      <td>672</td>
+    </tr>
+    <tr>
+      <td><strong>Lane invasions per km</strong></td>
+      <td>4187.33</td>
+      <td><strong>10824.86</strong></td>
+      <td><strong>3518.32</strong></td>
+    </tr>
+    <tr>
+      <td><strong>Avg speed (km/h)</strong></td>
+      <td>36.74</td>
+      <td><strong>36.92</strong></td>
+      <td><strong>37.91</strong></td>
+    </tr>
+    <tr>
+      <td><strong>Max speed (km/h)</strong></td>
+      <td><strong>57.32</strong></td>
+      <td>56.01</td>
+      <td>51.49</td>
+    </tr>
+    <tr>
+      <td><strong>Suddenness steer per km</strong></td>
+      <td>0.2967</td>
+      <td><strong>0.6016</strong></td>
+      <td><strong>0.2624</strong></td>
+    </tr>
+    <tr>
+      <td><strong>Suddenness throttle per km</strong></td>
+      <td><strong>0.3120</strong></td>
+      <td>0.4480</td>
+      <td><strong>0.2411</strong></td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p>Resumen:</p>
+  <ul>
+    <li>MobileNet → Mayor avance, pero peor estabilidad y precisión.</li>
+    <li>EfficientNet → Buen balance entre avance y seguridad.</li>
+    <li>ResNet18 → Más estable y preciso, pero menos agresivo y avanza menos.</li>
+  </ul>
+</blockquote>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/tags/#carla-simulator" class="page__taxonomy-item p-category" rel="tag">CARLA Simulator</a><span class="sep">, </span>
+    
+      <a href="/tags/#dagger" class="page__taxonomy-item p-category" rel="tag">DAgger</a><span class="sep">, </span>
+    
+      <a href="/tags/#python" class="page__taxonomy-item p-category" rel="tag">Python</a><span class="sep">, </span>
+    
+      <a href="/tags/#teleoperado" class="page__taxonomy-item p-category" rel="tag">Teleoperado</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#weekly-log" class="page__taxonomy-item p-category" rel="tag">weekly Log</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2025-11-26T00:00:00-05:00">November 26, 2025</time></p>
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Week+73+-++Prueba+dataset+Daniel%20http%3A%2F%2Flocalhost%3A4000%2Fweekly%2520log%2Fweek73%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fweekly%2520log%2Fweek73%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fweekly%2520log%2Fweek73%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/weekly%20log/week72/" class="pagination--pager" title="Week 72 - Prueba y entrenamiento dataset (CM-CARLA-SyncDriving-RGB-Dataset)
+">Previous</a>
+    
+    
+      <a href="/weekly%20log/week74/" class="pagination--pager" title="Week 74 -  Balanceo estratificado (train, test offline y online)
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h2 class="page__related-title">You may also enjoy</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/weekly%20log/week89/" rel="permalink">Week 89 - Robustez del piloto, Caso Canónico, 15 Casos y Pruebas de Velocidad
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          12 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">En esta entrada reporto los resultados de robustez en CARLA Town02 comparando cinco políticas/datasets bajo el mismo circuito de prueba, con 6 repeticiones p...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/weekly%20log/week88/" rel="permalink">Week 88 - Actualización de métricas en BehaviorMetrics (CARLA), comparación contra ruta ideal
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          2 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Actualización de métricas en BehaviorMetrics (CARLA)
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/weekly%20log/week87/" rel="permalink">Week 87 - Actualización de métricas en CARLA
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          9 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">En esta semana consolidé el reporte comparativo de cinco variantes de entrenamiento (Burbuja, Noise injection, DAgger 16k, DAgger 27.6k y DAgger agresivo) us...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/weekly%20log/week86/" rel="permalink">Week 86 - Actualización de métricas en CARLA
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          2 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Se realizaron mejoras en la forma de reportar el desempeño del vehículo autónomo en simulación, con el objetivo de que las métricas reflejen con mayor fideli...</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2026 Carlos Andrés Velásquez Ospina. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+  </body>
+</html>

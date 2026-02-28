@@ -1,0 +1,771 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Week 56 - Test offline para modelos conducción manual - Robotics Lab URJC</title>
+<meta name="description" content="Correción Post anterior">
+
+
+  <meta name="author" content="Carlos Velásquez">
+  
+  <meta property="article:author" content="Carlos Velásquez">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Robotics Lab URJC">
+<meta property="og:title" content="Week 56 - Test offline para modelos conducción manual">
+<meta property="og:url" content="http://localhost:4000/weekly%20log/week56/">
+
+
+  <meta property="og:description" content="Correción Post anterior">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2025-07-06T00:00:00-05:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/weekly%20log/week56/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Carlos Andrés Velásquez Ospina",
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Robotics Lab URJC Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/logo.png" alt="Robotics Lab URJC"></a>
+        
+        <a class="site-title" href="/">
+          Robotics Lab URJC
+          <span class="site-subtitle">Programming Robot Intelligence</span>
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="https://mmistakes.github.io/minimal-mistakes/docs/quick-start-guide/">Quick-Start Guide</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+    <div class="author__avatar">
+      <a href="http://localhost:4000/">
+        <img src="/assets/images/me.jpg" alt="Carlos Velásquez" itemprop="image" class="u-photo">
+      </a>
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      <a class="u-url" rel="me" href="http://localhost:4000/" itemprop="url">Carlos Velásquez</a>
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>Doctoral thesis blog</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name" class="p-locality">Medellín</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="mailto:canveo@gmail.com" rel="nofollow noopener noreferrer me"><i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">Email</span></a></li>
+          
+        
+          
+            <li><a href="https://github.com/canveo" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/canveo/" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span class="label">LinkedIn</span></a></li>
+          
+        
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:canveo@gmail.com" rel="me" class="u-email">
+            <meta itemprop="email" content="canveo@gmail.com" />
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">Email</span>
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer me">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Week 56 - Test offline para modelos conducción manual">
+    <meta itemprop="description" content="Correción Post anterior">
+    <meta itemprop="datePublished" content="2025-07-06T00:00:00-05:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="http://localhost:4000/weekly%20log/week56/" class="u-url" itemprop="url">Week 56 - Test offline para modelos conducción manual
+</a>
+          </h1>
+          
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          1 minute read
+        
+      </span>
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        <h2 id="correción-post-anterior">Correción Post anterior</h2>
+
+<p>Para esta segunda ejecución se mantuvieron <strong>idénticas</strong> todas las condiciones de la simulación<br />
+(mapa <em>Town02</em>, clima, vehículo <strong>Tesla Model 3</strong>, punto de partida y modelo DAgger),<br />
+modificando únicamente dos parámetros en el archivo de configuración de <em>Behavior Metrics</em>:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parámetro</th>
+      <th>Valor anterior</th>
+      <th>Nuevo valor</th>
+      <th>Efecto</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">PilotTimeCycle</code></td>
+      <td>40 ms (25 Hz)</td>
+      <td><strong>25 ms (40 Hz)</strong></td>
+      <td>Aumenta la frecuencia de inferencia del “brain”, produciendo comandos de control más frecuentes.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">AsyncMode</code></td>
+      <td><strong>True</strong></td>
+      <td><strong>False</strong></td>
+      <td>Cambia de ejecución asíncrona a síncrona, fijando los ticks y evitando desajustes temporales en la simulación.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="test-offline">Test Offline</h3>
+
+<p>Se realizó una prueba offline para validar los modelos PilotNet, ResNet-18 y EfficientNet-V2 S entrenados exclusivamente con el dataset generado por conducción manual (mandos PlayStation).
+El conjunto de imágenes de Town 02 se inyectó directamente al módulo de predicciones offline de Behavior Metrics, registrando las pérdidas (MSE/MAE) de steer y throttle sin interferir con el simulador en tiempo real.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Modelo</th>
+      <th>Steer MSE</th>
+      <th>Steer MAE</th>
+      <th>Throttle MSE</th>
+      <th>Throttle MAE</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>pilotnet</strong></td>
+      <td>0.1123</td>
+      <td>0.2249</td>
+      <td>0.1588</td>
+      <td>0.3846</td>
+    </tr>
+    <tr>
+      <td><strong>resnet</strong></td>
+      <td>0.0777</td>
+      <td>0.1865</td>
+      <td>0.1859</td>
+      <td>0.3715</td>
+    </tr>
+    <tr>
+      <td><strong>efficientnet</strong></td>
+      <td>0.0854</td>
+      <td>0.1650</td>
+      <td>0.2146</td>
+      <td>0.3936</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<table>
+  <thead>
+    <tr>
+      <th>Modelo</th>
+      <th>Steer MSE</th>
+      <th>Steer RMSE</th>
+      <th>Steer MAE</th>
+      <th>Throttle MSE</th>
+      <th>Throttle RMSE</th>
+      <th>Throttle MAE</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>PilotNet</strong></td>
+      <td>0.1123</td>
+      <td>0.3351</td>
+      <td>0.2249</td>
+      <td>0.1588</td>
+      <td>0.3985</td>
+      <td>0.3846</td>
+    </tr>
+    <tr>
+      <td><strong>ResNet18</strong></td>
+      <td>0.0777</td>
+      <td>0.2788</td>
+      <td>0.1865</td>
+      <td>0.1859</td>
+      <td>0.4311</td>
+      <td>0.3715</td>
+    </tr>
+    <tr>
+      <td><strong>EfficientNet</strong></td>
+      <td>0.0854</td>
+      <td>0.2922</td>
+      <td>0.1650</td>
+      <td>0.2146</td>
+      <td>0.4633</td>
+      <td>0.3936</td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p><strong>Nota:</strong><br />
+Se actualizó la métrica de evaluación del modelo, reemplazando el cálculo de <strong>MSE (Mean Squared Error)</strong> por <strong>RMSE (Root Mean Squared Error)</strong> para reflejar el error en las mismas unidades que la variable objetivo, lo que facilita su interpretación. En la versión instalada de Keras, RMSE está disponible como métrica predefinida. Para mantener consistencia en el pipeline de validación, se modificó la importación de:</p>
+  <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">sklearn.metrics</span> <span class="kn">import</span> <span class="n">mean_squared_error</span>
+</code></pre></div>  </div>
+  <p>a:</p>
+  <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">sklearn.metrics</span> <span class="kn">import</span> <span class="n">root_mean_squared_error</span>
+</code></pre></div>  </div>
+</blockquote>
+
+<hr />
+
+<!----- PILOTNET ----->
+<figure class="half">
+  <img src="http://localhost:4000/assets/images/week56/control_manual/pilotnet/steer_plot.png" alt="PilotNet – Steer MSE/MAE" style="width:90%" />
+  <figcaption>PilotNet – curva de pérdida para <em>steer</em></figcaption>
+</figure>
+
+<figure class="half">
+  <img src="http://localhost:4000/assets/images/week56/control_manual/pilotnet/throttle_plot.png" alt="PilotNet – Throttle MSE/MAE" style="width:90%" />
+  <figcaption>PilotNet – curva de pérdida para <em>throttle</em></figcaption>
+</figure>
+
+<!----- RESNET18 ----->
+<figure class="half">
+  <img src="http://localhost:4000/assets/images/week56/control_manual/resnet18/steer_plot.png" alt="ResNet-18 – Steer MSE/MAE" style="width:90%" />
+  <figcaption>ResNet-18 – curva de pérdida para <em>steer</em></figcaption>
+</figure>
+
+<figure class="half">
+  <img src="http://localhost:4000/assets/images/week56/control_manual/resnet18/throttle_plot.png" alt="ResNet-18 – Throttle MSE/MAE" style="width:90%" />
+  <figcaption>ResNet-18 – curva de pérdida para <em>throttle</em></figcaption>
+</figure>
+
+<!----- EFFICIENTNET  ----->
+<figure class="half">
+  <img src="http://localhost:4000/assets/images/week56/control_manual/efficientnet/steer_plot.png" alt="EfficientNet – Steer MSE/MAE" style="width:90%" />
+  <figcaption>EfficientNet – curva de pérdida para <em>steer</em></figcaption>
+</figure>
+
+<figure class="half">
+  <img src="http://localhost:4000/assets/images/week56/control_manual/efficientnet/throttle_plot.png" alt="EfficientNet – Throttle MSE/MAE" style="width:90%" />
+  <figcaption>EfficientNet – curva de pérdida para <em>throttle</em></figcaption>
+</figure>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/tags/#carla-simulator" class="page__taxonomy-item p-category" rel="tag">CARLA Simulator</a><span class="sep">, </span>
+    
+      <a href="/tags/#python" class="page__taxonomy-item p-category" rel="tag">Python</a><span class="sep">, </span>
+    
+      <a href="/tags/#ros-2" class="page__taxonomy-item p-category" rel="tag">ROS 2</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#weekly-log" class="page__taxonomy-item p-category" rel="tag">weekly Log</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2025-07-06T00:00:00-05:00">July 6, 2025</time></p>
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Week+56+-+Test+offline+para+modelos+conducci%C3%B3n+manual%20http%3A%2F%2Flocalhost%3A4000%2Fweekly%2520log%2Fweek56%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fweekly%2520log%2Fweek56%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fweekly%2520log%2Fweek56%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/weekly%20log/week55/" class="pagination--pager" title="Week 55 - Evaluación de Modelos de Conducción Autónoma en CARLA: Métricas MSE/MAE y Behavior Metrics
+">Previous</a>
+    
+    
+      <a href="/weekly%20log/week57/" class="pagination--pager" title="Week 57 - Análisis Cualitativo de Robustez
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h2 class="page__related-title">You may also enjoy</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/weekly%20log/week89/" rel="permalink">Week 89 - Robustez del piloto, Caso Canónico, 15 Casos y Pruebas de Velocidad
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          12 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">En esta entrada reporto los resultados de robustez en CARLA Town02 comparando cinco políticas/datasets bajo el mismo circuito de prueba, con 6 repeticiones p...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/weekly%20log/week88/" rel="permalink">Week 88 - Actualización de métricas en BehaviorMetrics (CARLA), comparación contra ruta ideal
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          2 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Actualización de métricas en BehaviorMetrics (CARLA)
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/weekly%20log/week87/" rel="permalink">Week 87 - Actualización de métricas en CARLA
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          9 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">En esta semana consolidé el reporte comparativo de cinco variantes de entrenamiento (Burbuja, Noise injection, DAgger 16k, DAgger 27.6k y DAgger agresivo) us...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/weekly%20log/week86/" rel="permalink">Week 86 - Actualización de métricas en CARLA
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          2 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Se realizaron mejoras en la forma de reportar el desempeño del vehículo autónomo en simulación, con el objetivo de que las métricas reflejen con mayor fideli...</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2026 Carlos Andrés Velásquez Ospina. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+  </body>
+</html>

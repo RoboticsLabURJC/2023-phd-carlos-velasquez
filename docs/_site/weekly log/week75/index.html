@@ -1,0 +1,803 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Week 75 -  Burbuja vs DAgger(train, test offline y online) - Robotics Lab URJC</title>
+<meta name="description" content="Tabla resumen – Métricas OFFLINE">
+
+
+  <meta name="author" content="Carlos Velásquez">
+  
+  <meta property="article:author" content="Carlos Velásquez">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Robotics Lab URJC">
+<meta property="og:title" content="Week 75 -  Burbuja vs DAgger(train, test offline y online)">
+<meta property="og:url" content="http://localhost:4000/weekly%20log/week75/">
+
+
+  <meta property="og:description" content="Tabla resumen – Métricas OFFLINE">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2025-12-14T00:00:00-05:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/weekly%20log/week75/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Carlos Andrés Velásquez Ospina",
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Robotics Lab URJC Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/logo.png" alt="Robotics Lab URJC"></a>
+        
+        <a class="site-title" href="/">
+          Robotics Lab URJC
+          <span class="site-subtitle">Programming Robot Intelligence</span>
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="https://mmistakes.github.io/minimal-mistakes/docs/quick-start-guide/">Quick-Start Guide</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+    <div class="author__avatar">
+      <a href="http://localhost:4000/">
+        <img src="/assets/images/me.jpg" alt="Carlos Velásquez" itemprop="image" class="u-photo">
+      </a>
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      <a class="u-url" rel="me" href="http://localhost:4000/" itemprop="url">Carlos Velásquez</a>
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>Doctoral thesis blog</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name" class="p-locality">Medellín</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="mailto:canveo@gmail.com" rel="nofollow noopener noreferrer me"><i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">Email</span></a></li>
+          
+        
+          
+            <li><a href="https://github.com/canveo" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/canveo/" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span class="label">LinkedIn</span></a></li>
+          
+        
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:canveo@gmail.com" rel="me" class="u-email">
+            <meta itemprop="email" content="canveo@gmail.com" />
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">Email</span>
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer me">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Week 75 -  Burbuja vs DAgger(train, test offline y online)">
+    <meta itemprop="description" content="Tabla resumen – Métricas OFFLINE">
+    <meta itemprop="datePublished" content="2025-12-14T00:00:00-05:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="http://localhost:4000/weekly%20log/week75/" class="u-url" itemprop="url">Week 75 -  Burbuja vs DAgger(train, test offline y online)
+</a>
+          </h1>
+          
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          2 minute read
+        
+      </span>
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        <h3 id="tabla-resumen--métricas-offline"><strong>Tabla resumen – Métricas OFFLINE</strong></h3>
+
+<p>Modelos entrenados con volante (teleoperado)
+Comparación DAgger vs Burbuja</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Estrategia</th>
+      <th>Steer MAE</th>
+      <th>Steer RMSE</th>
+      <th>Throttle MAE</th>
+      <th>Throttle RMSE</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>DAgger</strong></td>
+      <td>0.0428</td>
+      <td>0.0883</td>
+      <td>0.0817</td>
+      <td>0.1546</td>
+    </tr>
+    <tr>
+      <td><strong>Burbuja</strong></td>
+      <td><strong>0.0270</strong></td>
+      <td><strong>0.0456</strong></td>
+      <td><strong>0.0741</strong></td>
+      <td><strong>0.1327</strong></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>**
+Resultados preliminares: DAgger vs. Burbuja**</p>
+
+<p>En esta etapa del trabajo se esperaba que la estrategia DAgger superara al enfoque Burbuja, dado que, en teoría, DAgger permite corregir errores del modelo en estados fuera de la distribución original y construir un dataset más informativo. Sin embargo, los resultados obtenidos no reflejan aún esta ventaja esperada.</p>
+
+<p>Una de las principales razones identificadas es la calidad del dataset generado durante la conducción teleoperada, particularmente asociada a la experiencia del conductor humano y al manejo del volante y los pedales (throttle y brake).</p>
+
+<hr />
+
+<h3 id="tamaño-de-los-datasets-utilizados"><strong>Tamaño de los datasets utilizados</strong></h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Estrategia</th>
+      <th style="text-align: left">Train + Val</th>
+      <th style="text-align: left">Test</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">DAgger</td>
+      <td style="text-align: left">31,747</td>
+      <td style="text-align: left">5,603</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Burbuja</td>
+      <td style="text-align: left">58,925</td>
+      <td style="text-align: left">10,399</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Aunque el dataset Burbuja es significativamente más grande, su conducción fue más estable y continua, lo que se refleja en mejores métricas offline y un comportamiento online más suave.</p>
+
+<p>En experimentos anteriores, utilizando configuraciones diferentes de entrenamiento y recolección de datos, se habían obtenido mejores métricas en ambos enfoques, lo que sugiere que los resultados actuales pueden mejorarse significativamente.</p>
+
+<p>Actualmente se está trabajando en:</p>
+
+<ul>
+  <li>Reentrenamiento de modelos con ajustes en hiperparámetros para Burbuja y DAgger.</li>
+  <li>Refinamiento del control humano, buscando:
+    <ul>
+      <li>Acciones más suaves y consistentes.</li>
+      <li>Mejor coordinación entre steer, throttle y brake.</li>
+    </ul>
+  </li>
+  <li>Construcción de datasets de mayor calidad, priorizando:</li>
+  <li>Menor ruido en las etiquetas.</li>
+  <li>Trayectorias más estables.</li>
+  <li>Mejor representación de escenarios críticos.</li>
+</ul>
+
+<p>Se espera que, con una mayor experiencia en la conducción teleoperada y un proceso de recolección más controlado, ambas estrategias puedan recuperar y superar las métricas obtenidas en experimentos previos, permitiendo una comparación más justa y representativa.</p>
+
+<hr />
+
+<h3 id="métricas-offline--evaluación-con-datasets-cruzados">Métricas OFFLINE – Evaluación con datasets cruzados</h3>
+
+<h4 id="evaluación-cruzada"><strong>Evaluación cruzada</strong></h4>
+
+<ul>
+  <li>DAgger → Burbuja: modelo entrenado con DAgger, evaluado con datos Burbuja</li>
+  <li>Burbuja → DAgger: modelo entrenado con Burbuja, evaluado con datos DAgger</li>
+</ul>
+
+<p>Resumen por modelo:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Modelo</th>
+      <th>Entrenado con</th>
+      <th>Dataset de validación</th>
+      <th>Steer MAE</th>
+      <th>Steer RMSE</th>
+      <th>Throttle MAE</th>
+      <th>Throttle RMSE</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>EfficientNet</strong></td>
+      <td>DAgger</td>
+      <td>Burbuja</td>
+      <td><strong>0.147</strong></td>
+      <td><strong>0.207</strong></td>
+      <td><strong>0.278</strong></td>
+      <td><strong>0.353</strong></td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Burbuja</td>
+      <td>DAgger</td>
+      <td>0.201</td>
+      <td>0.288</td>
+      <td>0.358</td>
+      <td>0.422</td>
+    </tr>
+    <tr>
+      <td><strong>MobileNet</strong></td>
+      <td>DAgger</td>
+      <td>Burbuja</td>
+      <td><strong>0.159</strong></td>
+      <td><strong>0.215</strong></td>
+      <td><strong>0.271</strong></td>
+      <td><strong>0.338</strong></td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Burbuja</td>
+      <td>DAgger</td>
+      <td>0.204</td>
+      <td>0.290</td>
+      <td>0.363</td>
+      <td>0.430</td>
+    </tr>
+    <tr>
+      <td><strong>PilotNet</strong></td>
+      <td>DAgger</td>
+      <td>Burbuja</td>
+      <td><strong>0.161</strong></td>
+      <td><strong>0.217</strong></td>
+      <td><strong>0.295</strong></td>
+      <td><strong>0.365</strong></td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Burbuja</td>
+      <td>DAgger</td>
+      <td>0.200</td>
+      <td>0.280</td>
+      <td>0.357</td>
+      <td>0.415</td>
+    </tr>
+    <tr>
+      <td><strong>ResNet18</strong></td>
+      <td>DAgger</td>
+      <td>Burbuja</td>
+      <td><strong>0.159</strong></td>
+      <td><strong>0.213</strong></td>
+      <td><strong>0.279</strong></td>
+      <td><strong>0.344</strong></td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Burbuja</td>
+      <td>DAgger</td>
+      <td>0.205</td>
+      <td>0.290</td>
+      <td>0.362</td>
+      <td>0.425</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Para analizar la capacidad de generalización, se realizó una evaluación cruzada utilizando datasets distintos al de entrenamiento. Los resultados muestran que los modelos entrenados con DAgger generalizan mejor cuando se evalúan sobre datos de Burbuja, mientras que los modelos entrenados con Burbuja presentan un deterioro notable al evaluarse sobre datos de DAgger. Este comportamiento evidencia un fuerte cambio de distribución entre ambos conjuntos y confirma que, aunque Burbuja produce datos más limpios, DAgger ofrece mayor robustez frente a escenarios fuera de distribución.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/tags/#carla-simulator" class="page__taxonomy-item p-category" rel="tag">CARLA Simulator</a><span class="sep">, </span>
+    
+      <a href="/tags/#dagger" class="page__taxonomy-item p-category" rel="tag">DAgger</a><span class="sep">, </span>
+    
+      <a href="/tags/#python" class="page__taxonomy-item p-category" rel="tag">Python</a><span class="sep">, </span>
+    
+      <a href="/tags/#teleoperado" class="page__taxonomy-item p-category" rel="tag">Teleoperado</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#weekly-log" class="page__taxonomy-item p-category" rel="tag">weekly Log</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2025-12-14T00:00:00-05:00">December 14, 2025</time></p>
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Week+75+-++Burbuja+vs+DAgger%28train%2C+test+offline+y+online%29%20http%3A%2F%2Flocalhost%3A4000%2Fweekly%2520log%2Fweek75%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fweekly%2520log%2Fweek75%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fweekly%2520log%2Fweek75%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/weekly%20log/week74/" class="pagination--pager" title="Week 74 -  Balanceo estratificado (train, test offline y online)
+">Previous</a>
+    
+    
+      <a href="/weekly%20log/week76/" class="pagination--pager" title="Week 76 -  Metricas de robustez por casos
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h2 class="page__related-title">You may also enjoy</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/weekly%20log/week89/" rel="permalink">Week 89 - Robustez del piloto, Caso Canónico, 15 Casos y Pruebas de Velocidad
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          12 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">En esta entrada reporto los resultados de robustez en CARLA Town02 comparando cinco políticas/datasets bajo el mismo circuito de prueba, con 6 repeticiones p...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/weekly%20log/week88/" rel="permalink">Week 88 - Actualización de métricas en BehaviorMetrics (CARLA), comparación contra ruta ideal
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          2 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Actualización de métricas en BehaviorMetrics (CARLA)
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/weekly%20log/week87/" rel="permalink">Week 87 - Actualización de métricas en CARLA
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          9 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">En esta semana consolidé el reporte comparativo de cinco variantes de entrenamiento (Burbuja, Noise injection, DAgger 16k, DAgger 27.6k y DAgger agresivo) us...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/weekly%20log/week86/" rel="permalink">Week 86 - Actualización de métricas en CARLA
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          2 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Se realizaron mejoras en la forma de reportar el desempeño del vehículo autónomo en simulación, con el objetivo de que las métricas reflejen con mayor fideli...</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2026 Carlos Andrés Velásquez Ospina. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+  </body>
+</html>

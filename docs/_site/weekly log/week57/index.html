@@ -1,0 +1,803 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Week 57 - Análisis Cualitativo de Robustez - Robotics Lab URJC</title>
+<meta name="description" content="Se utilizó Town02 como modelo entrenado, empleando el dataset obtenido a partir de la conducción manual.">
+
+
+  <meta name="author" content="Carlos Velásquez">
+  
+  <meta property="article:author" content="Carlos Velásquez">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Robotics Lab URJC">
+<meta property="og:title" content="Week 57 - Análisis Cualitativo de Robustez">
+<meta property="og:url" content="http://localhost:4000/weekly%20log/week57/">
+
+
+  <meta property="og:description" content="Se utilizó Town02 como modelo entrenado, empleando el dataset obtenido a partir de la conducción manual.">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2025-07-13T00:00:00-05:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/weekly%20log/week57/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Carlos Andrés Velásquez Ospina",
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Robotics Lab URJC Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/logo.png" alt="Robotics Lab URJC"></a>
+        
+        <a class="site-title" href="/">
+          Robotics Lab URJC
+          <span class="site-subtitle">Programming Robot Intelligence</span>
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="https://mmistakes.github.io/minimal-mistakes/docs/quick-start-guide/">Quick-Start Guide</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+    <div class="author__avatar">
+      <a href="http://localhost:4000/">
+        <img src="/assets/images/me.jpg" alt="Carlos Velásquez" itemprop="image" class="u-photo">
+      </a>
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      <a class="u-url" rel="me" href="http://localhost:4000/" itemprop="url">Carlos Velásquez</a>
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>Doctoral thesis blog</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name" class="p-locality">Medellín</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="mailto:canveo@gmail.com" rel="nofollow noopener noreferrer me"><i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">Email</span></a></li>
+          
+        
+          
+            <li><a href="https://github.com/canveo" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/canveo/" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span class="label">LinkedIn</span></a></li>
+          
+        
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:canveo@gmail.com" rel="me" class="u-email">
+            <meta itemprop="email" content="canveo@gmail.com" />
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">Email</span>
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer me">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Week 57 - Análisis Cualitativo de Robustez">
+    <meta itemprop="description" content="Se utilizó Town02 como modelo entrenado, empleando el dataset obtenido a partir de la conducción manual.">
+    <meta itemprop="datePublished" content="2025-07-13T00:00:00-05:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="http://localhost:4000/weekly%20log/week57/" class="u-url" itemprop="url">Week 57 - Análisis Cualitativo de Robustez
+</a>
+          </h1>
+          
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          2 minute read
+        
+      </span>
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        <p>Se utilizó Town02 como modelo entrenado, empleando el dataset obtenido a partir de la conducción manual.</p>
+
+<p>El modelo autónomo utiliza el piloto automático integrado mediante el ROS bridge. Su comportamiento es considerado ideal, ya que se basa en un controlador de trayectoria PID fundamentado en waypoints, lo cual facilita la recuperación de la trayectoria en cualquiera de los casos propuestos.</p>
+
+<p>EfficientNet_v2_s y ResNet18 presentan comportamientos similares en las pruebas de robustez, mostrando trayectorias más suaves y controladas. En trayectos cortos, ambos se comportan de forma muy similar. PilotNet, en cambio, tiende a ser más brusco al buscar salidas o encontrar el trayecto, aunque finalmente logra salir de las zonas propuestas.</p>
+
+<p>En trayectos más largos, EfficientNet_v2_s demuestra mayor estabilidad y es capaz de alcanzar mayores velocidades. Por su parte, ResNet18 se asemeja más a PilotNet en su estilo de conducción, pero en circuitos largos logra superar a PilotNet en rendimiento.</p>
+
+<p>Cabe destacar que PilotNet es más propenso a realizar giros pronunciados. En el primer giro, tiende a tomar la curva demasiado cerrada, lo que le impide continuar el circuito más amplio de forma eficiente, como sí lo hacen los otros modelos. Además, PilotNet es más propenso a colisiones.</p>
+
+<hr />
+
+<table>
+  <thead>
+    <tr>
+      <th>Escenario / Modelo</th>
+      <th>autonomo</th>
+      <th>efficientnet_v2</th>
+      <th>pilotnet</th>
+      <th>resnet18</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>caso1</strong></td>
+      <td><strong>Bueno.</strong> Su comportamiento se basa en los waypoints y controladores según la posición. Encuentra rápidamente la trayectoria y sigue correctamente las reglas de la simulación.</td>
+      <td><strong>Bueno.</strong> Más suave en su conducción, se integra más rápido a la trayectoria.</td>
+      <td><strong>Regular.</strong> Realiza giros más bruscos y presenta zigzagueos para encontrar la trayectoria, mostrando cierta indecisión.</td>
+      <td><strong>Bueno.</strong> Toma rápidamente el carril y encuentra el trayecto de manera estable.</td>
+    </tr>
+    <tr>
+      <td><strong>caso2</strong></td>
+      <td>Similar al anterior, sin cambios destacables.</td>
+      <td><strong>Bueno.</strong> Encuentra rápido el trayecto, aunque realiza giros ligeramente más bruscos.</td>
+      <td><strong>Bueno.</strong> Encuentra rápido el trayecto, con giros algo más suaves.</td>
+      <td><strong>Bueno.</strong> Encuentra rápido el trayecto, con giros suaves.</td>
+    </tr>
+    <tr>
+      <td><strong>caso3</strong></td>
+      <td>Similar al caso anterior, sin cambios relevantes.</td>
+      <td><strong>Bueno.</strong> Realiza giros más suaves, manteniendo buena estabilidad.</td>
+      <td>Más brusco en sus giros.</td>
+      <td>Presenta giros ligeramente más bruscos, aunque mantiene la trayectoria.</td>
+    </tr>
+    <tr>
+      <td><strong>caso4</strong></td>
+      <td>Comportamiento similar a los anteriores, sin cambios significativos.</td>
+      <td>Se mueve de forma suave para salir de zonas complicadas y reincorporarse al carril.</td>
+      <td>Más brusco al intentar salir de zonas complejas o reincorporarse al carril.</td>
+      <td>Sale de manera más suave del carril, aunque con ligeros movimientos bruscos.</td>
+    </tr>
+    <tr>
+      <td><strong>caso_normal</strong></td>
+      <td>Mantiene un comportamiento constante y estable, similar a los casos anteriores.</td>
+      <td><strong>Bueno.</strong> Conducción más estable, mantiene línea recta y alcanza mayor velocidad (55 km/h), tomando las curvas de forma segura a esa velocidad.</td>
+      <td>Menos estable en la dirección, zigzaguea más y alcanza menor velocidad (45 km/h).</td>
+      <td>Comportamiento similar a PilotNet, con cierto zigzagueo, aunque ligeramente más estable.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="videos">videos</h3>
+
+<h2 id="caso-1">Caso 1</h2>
+
+<table>
+  <tr>
+    <td>
+      <iframe width="320" height="180" src="https://www.youtube.com/embed/-RvkLc2-22g" title="caso1 autonomo" frameborder="0" allowfullscreen=""></iframe>
+      <p align="center">caso1 autonomo</p>
+    </td>
+    <td>
+      <iframe width="320" height="180" src="https://www.youtube.com/embed/Pu4zVeeloZg" title="caso1 efficientnet v2" frameborder="0" allowfullscreen=""></iframe>
+      <p align="center">caso1 efficientnet v2</p>
+    </td>
+    <td>
+      <iframe width="320" height="180" src="https://www.youtube.com/embed/535rsQr_i58" title="caso1 resnet18" frameborder="0" allowfullscreen=""></iframe>
+      <p align="center">caso1 resnet18</p>
+    </td>
+    <td>
+      <iframe width="320" height="180" src="https://www.youtube.com/embed/I0LEGhJ7qAI" title="caso1 pilotnet" frameborder="0" allowfullscreen=""></iframe>
+      <p align="center">caso1 pilotnet</p>
+    </td>
+  </tr>
+</table>
+
+<h2 id="caso-2">Caso 2</h2>
+
+<table>
+  <tr>
+    <td>
+      <iframe width="320" height="180" src="https://www.youtube.com/embed/qGnQmpTd0_s" title="caso2 autonomo" frameborder="0" allowfullscreen=""></iframe>
+      <p align="center">caso2 autonomo</p>
+    </td>
+    <td>
+      <iframe width="320" height="180" src="https://www.youtube.com/embed/VHrR0ynKLnY" title="caso2 efficientnet v2" frameborder="0" allowfullscreen=""></iframe>
+      <p align="center">caso2 efficientnet v2</p>
+    </td>
+    <td>
+      <iframe width="320" height="180" src="https://www.youtube.com/embed/mP8agfwYy68" title="caso2 resnet18" frameborder="0" allowfullscreen=""></iframe>
+      <p align="center">caso2 resnet18</p>
+    </td>
+    <td>
+      <iframe width="320" height="180" src="https://www.youtube.com/embed/CuaY4WgCXt0" title="caso2 pilotnet" frameborder="0" allowfullscreen=""></iframe>
+      <p align="center">caso2 pilotnet</p>
+    </td>
+  </tr>
+</table>
+
+<h2 id="caso-3">Caso 3</h2>
+
+<table>
+  <tr>
+    <td>
+      <iframe width="320" height="180" src="https://www.youtube.com/embed/CRPumrry2Gg" title="caso3 efficientnet v2" frameborder="0" allowfullscreen=""></iframe>
+      <p align="center">caso3 efficientnet v2</p>
+    </td>
+    <td>
+      <iframe width="320" height="180" src="https://www.youtube.com/embed/e0wwak-MfVI" title="caso3 resnet18" frameborder="0" allowfullscreen=""></iframe>
+      <p align="center">caso3 resnet18</p>
+    </td>
+    <td>
+      <iframe width="320" height="180" src="https://www.youtube.com/embed/oju3v-WXZko" title="caso3 pilotnet" frameborder="0" allowfullscreen=""></iframe>
+      <p align="center">caso3 pilotnet</p>
+    </td>
+    <td>
+    <iframe width="320" height="180" src="https://www.youtube.com/embed/lOUD1VHHTUg" title="caso3 autonomo" frameborder="0" allowfullscreen=""></iframe>
+     <p align="center">caso3 autonomo</p>
+    </td>
+  </tr>
+</table>
+
+<h2 id="caso-4">Caso 4</h2>
+
+<table>
+  <tr>
+    <td>
+      <iframe width="320" height="180" src="https://www.youtube.com/embed/gREX0IRjVj8" title="caso4 autonomo" frameborder="0" allowfullscreen=""></iframe>
+      <p align="center">caso4 autonomo</p>
+    </td>
+    <td>
+      <iframe width="320" height="180" src="https://www.youtube.com/embed/HlQQSxcIMHk" title="caso4 efficientnet v2" frameborder="0" allowfullscreen=""></iframe>
+      <p align="center">caso4 efficientnet v2</p>
+    </td>
+    <td>
+      <iframe width="320" height="180" src="https://www.youtube.com/embed/tANupxLY0Ew" title="caso4 resnet18" frameborder="0" allowfullscreen=""></iframe>
+      <p align="center">caso4 resnet18</p>
+    </td>
+    <td>
+      <iframe width="320" height="180" src="https://www.youtube.com/embed/g8rNj4WfO6g" title="caso4 pilotnet" frameborder="0" allowfullscreen=""></iframe>
+      <p align="center">caso4 pilotnet</p>
+    </td>
+  </tr>
+</table>
+
+<!-- <iframe width="1333" height="750" src="https://www.youtube.com/embed/-RvkLc2-22g" title="caso1 autonomo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+<iframe width="1333" height="750" src="https://www.youtube.com/embed/535rsQr_i58" title="caso1 resnet18" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+<iframe width="1333" height="750" src="https://www.youtube.com/embed/I0LEGhJ7qAI" title="caso1 pilotnet" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+<iframe width="1333" height="750" src="https://www.youtube.com/embed/qGnQmpTd0_s" title="caso2 autonomo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+<iframe width="1333" height="750" src="https://www.youtube.com/embed/mP8agfwYy68" title="caso2 resnet18" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+<iframe width="1333" height="750" src="https://www.youtube.com/embed/CuaY4WgCXt0" title="caso2 pilotnet" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+<iframe width="1333" height="750" src="https://www.youtube.com/embed/e0wwak-MfVI" title="caso3 resnet18" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+<iframe width="1333" height="750" src="https://www.youtube.com/embed/CRPumrry2Gg" title="caso3 efficientenet v2" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+<iframe width="1333" height="750" src="https://www.youtube.com/embed/oju3v-WXZko" title="caso3 pilotnet" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+<iframe width="1333" height="750" src="https://www.youtube.com/embed/VHrR0ynKLnY" title="caso2 efficientnet v2" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+<iframe width="1333" height="750" src="https://www.youtube.com/embed/Pu4zVeeloZg" title="caso1 efficientenet v2" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+<iframe width="1333" height="750" src="https://www.youtube.com/embed/HlQQSxcIMHk" title="caso4 efficientnet v2" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+<iframe width="1333" height="750" src="https://www.youtube.com/embed/tANupxLY0Ew" title="caso4 resnet18" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+<iframe width="1333" height="750" src="https://www.youtube.com/embed/g8rNj4WfO6g" title="caso4 pilotnet" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+<iframe width="1333" height="750" src="https://www.youtube.com/embed/gREX0IRjVj8" title="caso4 aautonomo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+<iframe width="1333" height="750" src="https://www.youtube.com/embed/MIk9w9MPI5k" title="caso normal autonomo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+<iframe width="1333" height="750" src="https://www.youtube.com/embed/KZf6ciOqfto" title="caso normal resnet18" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+<iframe width="1333" height="750" src="https://www.youtube.com/embed/CsTJOkFxGek" title="caso normal efficientnet v2" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+<iframe width="1333" height="750" src="https://www.youtube.com/embed/TEoKYUdLHkg" title="caso normal pilotnet" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> -->
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/tags/#carla-simulator" class="page__taxonomy-item p-category" rel="tag">CARLA Simulator</a><span class="sep">, </span>
+    
+      <a href="/tags/#python" class="page__taxonomy-item p-category" rel="tag">Python</a><span class="sep">, </span>
+    
+      <a href="/tags/#ros-2" class="page__taxonomy-item p-category" rel="tag">ROS 2</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#weekly-log" class="page__taxonomy-item p-category" rel="tag">weekly Log</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2025-07-13T00:00:00-05:00">July 13, 2025</time></p>
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Week+57+-+An%C3%A1lisis+Cualitativo+de+Robustez%20http%3A%2F%2Flocalhost%3A4000%2Fweekly%2520log%2Fweek57%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fweekly%2520log%2Fweek57%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fweekly%2520log%2Fweek57%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/weekly%20log/week56/" class="pagination--pager" title="Week 56 - Test offline para modelos conducción manual
+">Previous</a>
+    
+    
+      <a href="/weekly%20log/week58/" class="pagination--pager" title="Week 58 - Sincronización de tópicos
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h2 class="page__related-title">You may also enjoy</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/weekly%20log/week89/" rel="permalink">Week 89 - Robustez del piloto, Caso Canónico, 15 Casos y Pruebas de Velocidad
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          12 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">En esta entrada reporto los resultados de robustez en CARLA Town02 comparando cinco políticas/datasets bajo el mismo circuito de prueba, con 6 repeticiones p...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/weekly%20log/week88/" rel="permalink">Week 88 - Actualización de métricas en BehaviorMetrics (CARLA), comparación contra ruta ideal
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          2 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Actualización de métricas en BehaviorMetrics (CARLA)
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/weekly%20log/week87/" rel="permalink">Week 87 - Actualización de métricas en CARLA
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          9 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">En esta semana consolidé el reporte comparativo de cinco variantes de entrenamiento (Burbuja, Noise injection, DAgger 16k, DAgger 27.6k y DAgger agresivo) us...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/weekly%20log/week86/" rel="permalink">Week 86 - Actualización de métricas en CARLA
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          2 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Se realizaron mejoras en la forma de reportar el desempeño del vehículo autónomo en simulación, con el objetivo de que las métricas reflejen con mayor fideli...</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2026 Carlos Andrés Velásquez Ospina. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+  </body>
+</html>

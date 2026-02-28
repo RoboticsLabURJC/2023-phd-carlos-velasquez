@@ -1,0 +1,1167 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Week 78 - Metricas de robustez por casos (burbuja + DAgger, 68/31) - Robotics Lab URJC</title>
+<meta name="description" content="CASO CANÓNICO">
+
+
+  <meta name="author" content="Carlos Velásquez">
+  
+  <meta property="article:author" content="Carlos Velásquez">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Robotics Lab URJC">
+<meta property="og:title" content="Week 78 - Metricas de robustez por casos (burbuja + DAgger, 68/31)">
+<meta property="og:url" content="http://localhost:4000/weekly%20log/week78/">
+
+
+  <meta property="og:description" content="CASO CANÓNICO">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2026-01-06T00:00:00-05:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/weekly%20log/week78/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Carlos Andrés Velásquez Ospina",
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Robotics Lab URJC Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/logo.png" alt="Robotics Lab URJC"></a>
+        
+        <a class="site-title" href="/">
+          Robotics Lab URJC
+          <span class="site-subtitle">Programming Robot Intelligence</span>
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="https://mmistakes.github.io/minimal-mistakes/docs/quick-start-guide/">Quick-Start Guide</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+    <div class="author__avatar">
+      <a href="http://localhost:4000/">
+        <img src="/assets/images/me.jpg" alt="Carlos Velásquez" itemprop="image" class="u-photo">
+      </a>
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      <a class="u-url" rel="me" href="http://localhost:4000/" itemprop="url">Carlos Velásquez</a>
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>Doctoral thesis blog</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name" class="p-locality">Medellín</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="mailto:canveo@gmail.com" rel="nofollow noopener noreferrer me"><i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">Email</span></a></li>
+          
+        
+          
+            <li><a href="https://github.com/canveo" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/canveo/" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span class="label">LinkedIn</span></a></li>
+          
+        
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:canveo@gmail.com" rel="me" class="u-email">
+            <meta itemprop="email" content="canveo@gmail.com" />
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">Email</span>
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer me">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Week 78 - Metricas de robustez por casos (burbuja + DAgger, 68/31)">
+    <meta itemprop="description" content="CASO CANÓNICO">
+    <meta itemprop="datePublished" content="2026-01-06T00:00:00-05:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="http://localhost:4000/weekly%20log/week78/" class="u-url" itemprop="url">Week 78 - Metricas de robustez por casos (burbuja + DAgger, 68/31)
+</a>
+          </h1>
+          
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          4 minute read
+        
+      </span>
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        <h3 id="caso-canónico">CASO CANÓNICO</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Modelo</th>
+      <th>Completed Distance (m)</th>
+      <th>Collisions</th>
+      <th>Lane Invasions</th>
+      <th>Pos. Dev. Mean (m)</th>
+      <th>Lane Inv./km</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Burbuja + DAgger (45k + 15.6k)</strong></td>
+      <td>753.36</td>
+      <td><strong>0</strong></td>
+      <td><strong>1257</strong></td>
+      <td><strong>0.91</strong></td>
+      <td><strong>3416</strong></td>
+    </tr>
+    <tr>
+      <td><strong>Burbuja 45k</strong></td>
+      <td><strong>755.97</strong></td>
+      <td><strong>0</strong></td>
+      <td>1325</td>
+      <td>1.00</td>
+      <td>4274</td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li>DAgger mejora la estabilidad lateral sin penalizar seguridad ni progreso en trayectos largos y continuos.</li>
+</ul>
+
+<h3 id="posiciones-difíciles">POSICIONES DIFÍCILES</h3>
+
+<p>Caso 1</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Métrica clave</th>
+      <th>Burbuja 45k</th>
+      <th>Burbuja + DAgger</th>
+      <th>Mejor</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Completed Distance (m) ↑</td>
+      <td>126.49</td>
+      <td><strong>132.32</strong></td>
+      <td>DAgger</td>
+    </tr>
+    <tr>
+      <td>Distancia efectiva (m) ↑</td>
+      <td>30.0</td>
+      <td><strong>46.0</strong></td>
+      <td>DAgger</td>
+    </tr>
+    <tr>
+      <td>Pos. Dev. Mean (m) ↓</td>
+      <td>2.12</td>
+      <td><strong>1.78</strong></td>
+      <td>DAgger</td>
+    </tr>
+    <tr>
+      <td>Lane Invasions ↓</td>
+      <td><strong>304</strong></td>
+      <td>382</td>
+      <td>Burbuja</td>
+    </tr>
+    <tr>
+      <td>Lane Inv./km ↓</td>
+      <td>10133</td>
+      <td><strong>8304</strong></td>
+      <td>DAgger</td>
+    </tr>
+    <tr>
+      <td>Collisions ↓</td>
+      <td><strong>0</strong></td>
+      <td><strong>0</strong></td>
+      <td>Empate</td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li>DAgger mejora claramente la reincorporación y reduce el error lateral, a costa de más invasiones absolutas.</li>
+</ul>
+
+<p>Caso 2</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Métrica clave</th>
+      <th>Burbuja 45k</th>
+      <th>Burbuja + DAgger</th>
+      <th>Mejor</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Completed Distance (m) ↑</td>
+      <td>148.09</td>
+      <td><strong>148.54</strong></td>
+      <td>DAgger</td>
+    </tr>
+    <tr>
+      <td>Distancia efectiva (m) ↑</td>
+      <td><strong>55.5</strong></td>
+      <td>54.0</td>
+      <td>Burbuja</td>
+    </tr>
+    <tr>
+      <td>Pos. Dev. Mean (m) ↓</td>
+      <td><strong>1.11</strong></td>
+      <td>1.19</td>
+      <td>Burbuja</td>
+    </tr>
+    <tr>
+      <td>Lane Invasions ↓</td>
+      <td><strong>364</strong></td>
+      <td>366</td>
+      <td>Burbuja</td>
+    </tr>
+    <tr>
+      <td>Lane Inv./km ↓</td>
+      <td><strong>6559</strong></td>
+      <td>6778</td>
+      <td>Burbuja</td>
+    </tr>
+    <tr>
+      <td>Collisions ↓</td>
+      <td><strong>0</strong></td>
+      <td><strong>0</strong></td>
+      <td>Empate</td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li>Burbuja mantiene un control más limpio; DAgger no aporta ventaja clara en este arranque.</li>
+</ul>
+
+<p>Caso 3</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Métrica clave</th>
+      <th>Burbuja 45k</th>
+      <th>Burbuja + DAgger</th>
+      <th>Mejor</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Completed Distance (m) ↑</td>
+      <td>131.04</td>
+      <td><strong>132.17</strong></td>
+      <td>DAgger</td>
+    </tr>
+    <tr>
+      <td>Distancia efectiva (m) ↑</td>
+      <td><strong>47.0</strong></td>
+      <td>24.5</td>
+      <td>Burbuja</td>
+    </tr>
+    <tr>
+      <td>Pos. Dev. Mean (m) ↓</td>
+      <td>1.11</td>
+      <td><strong>1.08</strong></td>
+      <td>DAgger</td>
+    </tr>
+    <tr>
+      <td>Lane Invasions ↓</td>
+      <td>325</td>
+      <td><strong>307</strong></td>
+      <td>DAgger</td>
+    </tr>
+    <tr>
+      <td>Lane Inv./km ↓</td>
+      <td><strong>6915</strong></td>
+      <td>12531</td>
+      <td>Burbuja</td>
+    </tr>
+    <tr>
+      <td>Collisions ↓</td>
+      <td><strong>0</strong></td>
+      <td><strong>0</strong></td>
+      <td>Empate</td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li>DAgger reduce invasiones absolutas y error medio, pero Burbuja avanza mejor y con menor tasa por km.</li>
+</ul>
+
+<p>Caso 4</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Métrica clave</th>
+      <th>Burbuja 45k</th>
+      <th>Burbuja + DAgger</th>
+      <th>Mejor</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Completed Distance (m) ↑</td>
+      <td><strong>181.31</strong></td>
+      <td>180.93</td>
+      <td>Burbuja</td>
+    </tr>
+    <tr>
+      <td>Distancia efectiva (m) ↑</td>
+      <td>34.5</td>
+      <td><strong>64.5</strong></td>
+      <td>DAgger</td>
+    </tr>
+    <tr>
+      <td>Pos. Dev. Mean (m) ↓</td>
+      <td><strong>3.99</strong></td>
+      <td>4.28</td>
+      <td>Burbuja</td>
+    </tr>
+    <tr>
+      <td>Lane Invasions ↓</td>
+      <td>426</td>
+      <td><strong>404</strong></td>
+      <td>DAgger</td>
+    </tr>
+    <tr>
+      <td>Lane Inv./km ↓</td>
+      <td>12348</td>
+      <td><strong>6264</strong></td>
+      <td>DAgger</td>
+    </tr>
+    <tr>
+      <td>Collisions ↓</td>
+      <td><strong>0</strong></td>
+      <td><strong>0</strong></td>
+      <td>Empate</td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li>DAgger mejora claramente la recuperación efectiva y reduce la tasa de invasiones, incluso en el caso más caótico.</li>
+</ul>
+
+<h3 id="comparación-de-puntos-aleatorios">COMPARACIÓN DE PUNTOS ALEATORIOS</h3>
+
+<p>Random 1</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Caso</th>
+      <th>Modelo</th>
+      <th>Completed Distance (m)</th>
+      <th>Collisions</th>
+      <th>Lane Invasions</th>
+      <th>Pos. Dev. Mean (m)</th>
+      <th>Lane Inv./km</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>R1</strong></td>
+      <td><strong>Burbuja + DAgger</strong></td>
+      <td>506.39</td>
+      <td><strong>0</strong></td>
+      <td>1014</td>
+      <td>1.30</td>
+      <td>13255</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td><strong>Burbuja 45k</strong></td>
+      <td><strong>729.33</strong></td>
+      <td><strong>0</strong></td>
+      <td><strong>1376</strong></td>
+      <td><strong>1.17</strong></td>
+      <td><strong>5843</strong></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Random 2</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Caso</th>
+      <th>Modelo</th>
+      <th>Completed Distance (m)</th>
+      <th>Collisions</th>
+      <th>Lane Invasions</th>
+      <th>Pos. Dev. Mean (m)</th>
+      <th>Lane Inv./km</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>R2</strong></td>
+      <td><strong>Burbuja + DAgger</strong></td>
+      <td>270.84</td>
+      <td><strong>0</strong></td>
+      <td><strong>598</strong></td>
+      <td><strong>1.12</strong></td>
+      <td><strong>6133</strong></td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td><strong>Burbuja 45k</strong></td>
+      <td><strong>683.08</strong></td>
+      <td><strong>0</strong></td>
+      <td>1296</td>
+      <td>1.19</td>
+      <td>6562</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Random 3</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Caso</th>
+      <th>Modelo</th>
+      <th>Completed Distance (m)</th>
+      <th>Collisions</th>
+      <th>Lane Invasions</th>
+      <th>Pos. Dev. Mean (m)</th>
+      <th>Lane Inv./km</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>R3</strong></td>
+      <td><strong>Burbuja + DAgger</strong></td>
+      <td>417.68</td>
+      <td><strong>0</strong></td>
+      <td>795</td>
+      <td>1.29</td>
+      <td>10127</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td><strong>Burbuja 45k</strong></td>
+      <td><strong>254.47</strong></td>
+      <td><strong>0</strong></td>
+      <td><strong>448</strong></td>
+      <td><strong>1.12</strong></td>
+      <td><strong>7658</strong></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>promedio sobre las tres ejecuciones</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Modelo</th>
+      <th>Completed Distance (m)</th>
+      <th>Collisions</th>
+      <th>Lane Invasions</th>
+      <th>Pos. Dev. Mean (m)</th>
+      <th>Lane Inv./km</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Burbuja 45k</strong></td>
+      <td><strong>555.63</strong></td>
+      <td><strong>0.0</strong></td>
+      <td><strong>1040</strong></td>
+      <td><strong>1.16</strong></td>
+      <td><strong>6687</strong></td>
+    </tr>
+    <tr>
+      <td><strong>Burbuja + DAgger (45k + 15.6k)</strong></td>
+      <td>398.30</td>
+      <td><strong>0.0</strong></td>
+      <td>802</td>
+      <td>1.23</td>
+      <td>9983</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Burbuja 45k:</strong></p>
+<ul>
+  <li>Recorre mayores distancias en escenarios completamente no vistos.</li>
+  <li>Mantiene menor desviación lateral promedio.</li>
+  <li>Presenta menor tasa de invasiones por km.</li>
+  <li>Indica mejor capacidad de exploración y generalización global.</li>
+</ul>
+
+<p><strong>Burbuja + DAgger:</strong></p>
+<ul>
+  <li>Reduce el número absoluto de invasiones.</li>
+  <li>Mantiene cero colisiones, incluso bajo condiciones aleatorias.</li>
+  <li>Muestra un comportamiento más conservador, sacrificando avance por control.</li>
+</ul>
+
+<p>En escenarios completamente aleatorios, el modelo Burbuja muestra una mejor capacidad de generalización y avance, mientras que el modelo con DAgger adopta una estrategia más restrictiva, priorizando control local sobre progreso global.</p>
+
+<p>Burbuja → generaliza mejor cuando el entorno es desconocido
+DAgger → aporta valor cuando se requiere recuperación dirigida</p>
+
+<h3 id="velocidades-iniciales">Velocidades iniciales</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Velocidad inicial</th>
+      <th>Modelo</th>
+      <th>Completed Distance (m)</th>
+      <th>Collisions</th>
+      <th>Pos. Dev. Mean (m)</th>
+      <th>Lane Inv./km</th>
+      <th>Max Speed (km/h)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>25 km/h</strong></td>
+      <td><strong>Burbuja 45k</strong></td>
+      <td>755.48</td>
+      <td><strong>0</strong></td>
+      <td><strong>1.03</strong></td>
+      <td><strong>4007</strong></td>
+      <td>88</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Burbuja + DAgger</td>
+      <td>754.85</td>
+      <td><strong>0</strong></td>
+      <td>0.96</td>
+      <td>3884</td>
+      <td>78</td>
+    </tr>
+    <tr>
+      <td><strong>50 km/h</strong></td>
+      <td><strong>Burbuja 45k</strong></td>
+      <td>753.35</td>
+      <td><strong>0</strong></td>
+      <td>1.06</td>
+      <td>4360</td>
+      <td>85</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Burbuja + DAgger</td>
+      <td>755.48</td>
+      <td><strong>0</strong></td>
+      <td><strong>0.98</strong></td>
+      <td>4647</td>
+      <td>79</td>
+    </tr>
+    <tr>
+      <td><strong>80 km/h</strong></td>
+      <td><strong>Burbuja 45k</strong></td>
+      <td>754.79</td>
+      <td><strong>0</strong></td>
+      <td>0.97</td>
+      <td>3853</td>
+      <td>95</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td><strong>Burbuja + DAgger</strong></td>
+      <td><strong>757.72</strong></td>
+      <td><strong>0</strong></td>
+      <td><strong>0.88</strong></td>
+      <td><strong>3855</strong></td>
+      <td>95</td>
+    </tr>
+    <tr>
+      <td><strong>90 km/h</strong></td>
+      <td><strong>Burbuja + DAgger</strong></td>
+      <td><strong>757.50</strong></td>
+      <td><strong>0</strong></td>
+      <td><strong>0.89</strong></td>
+      <td><strong>4128</strong></td>
+      <td><strong>105</strong></td>
+    </tr>
+    <tr>
+      <td><strong>100 km/h</strong></td>
+      <td>Burbuja 45k</td>
+      <td>757.40</td>
+      <td><strong>946</strong></td>
+      <td>1.27</td>
+      <td>9150</td>
+      <td><strong>114</strong></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>A bajas y medias velocidades (25–50 km/h), ambos modelos presentan comportamientos similares y estables. A 80 km/h, el modelo entrenado con DAgger comienza a mostrar una ligera ventaja en control lateral y continuidad del trayecto. El resultado más relevante aparece en velocidades altas: mientras el modelo Burbuja colapsa a 100 km/h, el modelo con DAgger permanece estable hasta aproximadamente 90 km/h sin colisiones.</p>
+
+<p>DAgger no convierte al modelo en un controlador de alta velocidad, pero amplía la región operativa segura, permitiendo mantener estabilidad bajo condiciones dinámicas más exigentes.</p>
+
+<hr />
+<p>Los experimentos dejan claro que Burbuja y DAgger se complementan muy bien. El modelo entrenado solo con Burbuja se comporta de forma más estable y fluida cuando todo va “normal”, y generaliza mejor en escenarios nuevos. En cambio, al añadir DAgger de forma controlada, el sistema aprende a reaccionar mejor cuando algo sale mal, por ejemplo al arrancar fuera de la carretera o en situaciones difíciles. Además, DAgger permite aguantar velocidades un poco más altas antes de que el modelo pierda el control. En resumen, DAgger no reemplaza a Burbuja, sino que actúa como un refuerzo para hacer el sistema más robusto sin sacrificar estabilidad.</p>
+
+<h4 id="resumen-de-los-datasets-utilizados">Resumen de los datasets utilizados.</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>Dataset</th>
+      <th style="text-align: right">Nº muestras</th>
+      <th>Composición</th>
+      <th style="text-align: right">Escenarios</th>
+      <th>Tipo de datos</th>
+      <th>Propósito</th>
+      <th> </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Burbuja (baseline)</strong></td>
+      <td style="text-align: right"><strong>49 300</strong></td>
+      <td>100% conducción nominal</td>
+      <td style="text-align: right">6 towns</td>
+      <td>Imágenes segmentadas + <code class="language-plaintext highlighter-rouge">steer</code>, <code class="language-plaintext highlighter-rouge">throttle</code></td>
+      <td>Aprender conducción estable y suave en condiciones normales</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><strong>Burbuja + DAgger (mixto)</strong></td>
+      <td style="text-align: right"><strong>49 300</strong></td>
+      <td>33.7k Burbuja + 15.6k DAgger (≈68/31)</td>
+      <td style="text-align: right">6 towns</td>
+      <td>Imágenes segmentadas + <code class="language-plaintext highlighter-rouge">steer</code>, <code class="language-plaintext highlighter-rouge">throttle</code></td>
+      <td>Aumentar robustez sin degradar estabilidad</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/tags/#behaviormetrics" class="page__taxonomy-item p-category" rel="tag">BehaviorMetrics</a><span class="sep">, </span>
+    
+      <a href="/tags/#dagger" class="page__taxonomy-item p-category" rel="tag">DAgger</a><span class="sep">, </span>
+    
+      <a href="/tags/#metrics-online" class="page__taxonomy-item p-category" rel="tag">Metrics Online</a><span class="sep">, </span>
+    
+      <a href="/tags/#robustez" class="page__taxonomy-item p-category" rel="tag">Robustez</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#weekly-log" class="page__taxonomy-item p-category" rel="tag">weekly Log</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2026-01-06T00:00:00-05:00">January 6, 2026</time></p>
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Week+78+-+Metricas+de+robustez+por+casos+%28burbuja+%2B+DAgger%2C+68%2F31%29%20http%3A%2F%2Flocalhost%3A4000%2Fweekly%2520log%2Fweek78%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fweekly%2520log%2Fweek78%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fweekly%2520log%2Fweek78%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/weekly%20log/week77/" class="pagination--pager" title="Week 77 - Metricas de robustez por casos
+">Previous</a>
+    
+    
+      <a href="/weekly%20log/week80/" class="pagination--pager" title="Week 80 - Metricas de robustez por casos (burbuja + DAgger, 68/32)
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h2 class="page__related-title">You may also enjoy</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/weekly%20log/week89/" rel="permalink">Week 89 - Robustez del piloto, Caso Canónico, 15 Casos y Pruebas de Velocidad
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          12 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">En esta entrada reporto los resultados de robustez en CARLA Town02 comparando cinco políticas/datasets bajo el mismo circuito de prueba, con 6 repeticiones p...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/weekly%20log/week88/" rel="permalink">Week 88 - Actualización de métricas en BehaviorMetrics (CARLA), comparación contra ruta ideal
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          2 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Actualización de métricas en BehaviorMetrics (CARLA)
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/weekly%20log/week87/" rel="permalink">Week 87 - Actualización de métricas en CARLA
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          9 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">En esta semana consolidé el reporte comparativo de cinco variantes de entrenamiento (Burbuja, Noise injection, DAgger 16k, DAgger 27.6k y DAgger agresivo) us...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/weekly%20log/week86/" rel="permalink">Week 86 - Actualización de métricas en CARLA
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          2 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Se realizaron mejoras en la forma de reportar el desempeño del vehículo autónomo en simulación, con el objetivo de que las métricas reflejen con mayor fideli...</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2026 Carlos Andrés Velásquez Ospina. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+  </body>
+</html>

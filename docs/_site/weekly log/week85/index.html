@@ -1,0 +1,1357 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Week 85 - Noise Injection vs DAgger, pruebas de robustez y estabilidad en CARLA (PilotNet) - Robotics Lab URJC</title>
+<meta name="description" content="Configuración Experimental">
+
+
+  <meta name="author" content="Carlos Velásquez">
+  
+  <meta property="article:author" content="Carlos Velásquez">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Robotics Lab URJC">
+<meta property="og:title" content="Week 85 - Noise Injection vs DAgger, pruebas de robustez y estabilidad en CARLA (PilotNet)">
+<meta property="og:url" content="http://localhost:4000/weekly%20log/week85/">
+
+
+  <meta property="og:description" content="Configuración Experimental">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2026-02-06T00:00:00-05:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/weekly%20log/week85/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Carlos Andrés Velásquez Ospina",
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Robotics Lab URJC Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/logo.png" alt="Robotics Lab URJC"></a>
+        
+        <a class="site-title" href="/">
+          Robotics Lab URJC
+          <span class="site-subtitle">Programming Robot Intelligence</span>
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="https://mmistakes.github.io/minimal-mistakes/docs/quick-start-guide/">Quick-Start Guide</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+    <div class="author__avatar">
+      <a href="http://localhost:4000/">
+        <img src="/assets/images/me.jpg" alt="Carlos Velásquez" itemprop="image" class="u-photo">
+      </a>
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      <a class="u-url" rel="me" href="http://localhost:4000/" itemprop="url">Carlos Velásquez</a>
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>Doctoral thesis blog</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name" class="p-locality">Medellín</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="mailto:canveo@gmail.com" rel="nofollow noopener noreferrer me"><i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">Email</span></a></li>
+          
+        
+          
+            <li><a href="https://github.com/canveo" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/canveo/" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span class="label">LinkedIn</span></a></li>
+          
+        
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:canveo@gmail.com" rel="me" class="u-email">
+            <meta itemprop="email" content="canveo@gmail.com" />
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">Email</span>
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer me">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Week 85 - Noise Injection vs DAgger, pruebas de robustez y estabilidad en CARLA (PilotNet)">
+    <meta itemprop="description" content="Configuración Experimental">
+    <meta itemprop="datePublished" content="2026-02-06T00:00:00-05:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="http://localhost:4000/weekly%20log/week85/" class="u-url" itemprop="url">Week 85 - Noise Injection vs DAgger, pruebas de robustez y estabilidad en CARLA (PilotNet)
+</a>
+          </h1>
+          
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          4 minute read
+        
+      </span>
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        <h4 id="configuración-experimental">Configuración Experimental</h4>
+
+<p>Todos los experimentos fueron realizados en el simulador CARLA utilizando una arquitectura PilotNet modificada, entrenada para predecir comandos de dirección (steer) y aceleración (throttle).</p>
+
+<p>Se evaluaron cuatro estrategias de entrenamiento:</p>
+
+<ul>
+  <li><strong>Burbuja (Baseline):</strong> Dataset de 50k muestras de conducción humana natural.</li>
+  <li><strong>Noise Augmentation:</strong> Dataset Burbuja con perturbaciones artificiales controladas.</li>
+  <li><strong>DAgger Corto:</strong> Burbuja 50k + 16.4k muestras DAgger.</li>
+  <li><strong>DAgger Ampliado:</strong> Burbuja 50k + 27.6k muestras DAgger.</li>
+</ul>
+
+<p>La evaluación se realizó usando métricas de:</p>
+<ul>
+  <li>Progreso longitudinal (completed distance, effective distance)</li>
+  <li>Estabilidad lateral (deviation, lane invasions)</li>
+  <li>Suavidad del control (suddenness)</li>
+</ul>
+
+<h3 id="caso-canónico-escenario-nominal">Caso Canónico (Escenario nominal)</h3>
+<p>Promedio de múltiples corridas</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Métrica</th>
+      <th>Burbuja</th>
+      <th>Noise</th>
+      <th>DAgger 16k</th>
+      <th>DAgger 27.6k</th>
+      <th>Mejor</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Completed distance</td>
+      <td>755.75</td>
+      <td><strong>759.23</strong></td>
+      <td>755.71</td>
+      <td>755.18</td>
+      <td>Noise</td>
+    </tr>
+    <tr>
+      <td>Effective distance</td>
+      <td>466.08</td>
+      <td>454.25</td>
+      <td>372.83</td>
+      <td><strong>479.92</strong></td>
+      <td>DAgger 27.6k</td>
+    </tr>
+    <tr>
+      <td>Average speed</td>
+      <td>61.56</td>
+      <td><strong>62.77</strong></td>
+      <td>60.59</td>
+      <td>61.80</td>
+      <td>Noise</td>
+    </tr>
+    <tr>
+      <td>Dev mean</td>
+      <td><strong>0.737</strong></td>
+      <td>0.781</td>
+      <td>0.879</td>
+      <td>0.741</td>
+      <td>Burbuja</td>
+    </tr>
+    <tr>
+      <td>Dev/km</td>
+      <td>1.585</td>
+      <td>1.723</td>
+      <td>2.363</td>
+      <td><strong>1.545</strong></td>
+      <td>DAgger 27.6k</td>
+    </tr>
+    <tr>
+      <td>Lane/km</td>
+      <td><strong>3029</strong></td>
+      <td>3107</td>
+      <td>3626</td>
+      <td>3071</td>
+      <td>Burbuja</td>
+    </tr>
+    <tr>
+      <td>Suddenness</td>
+      <td>0.0305</td>
+      <td>0.0334</td>
+      <td>0.0308</td>
+      <td><strong>0.0299</strong></td>
+      <td>DAgger 27.6k</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>El modelo Noise mejora ligeramente la distancia completada y la velocidad promedio, pero no mejora las métricas de estabilidad.</p>
+
+<p>El modelo <strong>DAgger Ampliado</strong> alcanza:</p>
+
+<ul>
+  <li>Mayor distancia efectiva</li>
+  <li>Menor desviación acumulada</li>
+  <li>Mayor suavidad de control</li>
+</ul>
+
+<p>Esto indica mayor consistencia de trayectoria incluso en conducción nominal.</p>
+
+<p><strong>Variación relativa en distancia efectiva (vs Burbuja)</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Modelo</th>
+      <th>Cambio</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Noise</td>
+      <td>−2.54 %</td>
+    </tr>
+    <tr>
+      <td>DAgger 16k</td>
+      <td>−20.01 %</td>
+    </tr>
+    <tr>
+      <td>DAgger 27.6k</td>
+      <td><strong>+2.97 %</strong></td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="caso-pertubados">Caso Pertubados</h3>
+
+<p>Caso 1 — Recovery inicial</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Modelo</th>
+      <th style="text-align: left">Completed</th>
+      <th style="text-align: left">Effective</th>
+      <th style="text-align: left">Speed</th>
+      <th style="text-align: left">Dev Mean</th>
+      <th style="text-align: left">Dev/km</th>
+      <th style="text-align: left">Lane/km</th>
+      <th style="text-align: left">Sudden</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">Burbuja</td>
+      <td style="text-align: left">741</td>
+      <td style="text-align: left">295</td>
+      <td style="text-align: left">60.3</td>
+      <td style="text-align: left">0.98</td>
+      <td style="text-align: left">3.30</td>
+      <td style="text-align: left">4450</td>
+      <td style="text-align: left">0.031</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Noise</td>
+      <td style="text-align: left">745</td>
+      <td style="text-align: left">305</td>
+      <td style="text-align: left">60.1</td>
+      <td style="text-align: left">0.99</td>
+      <td style="text-align: left">3.25</td>
+      <td style="text-align: left">4400</td>
+      <td style="text-align: left">0.033</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Dagger corto</td>
+      <td style="text-align: left">741</td>
+      <td style="text-align: left">297</td>
+      <td style="text-align: left">59.9</td>
+      <td style="text-align: left">0.99</td>
+      <td style="text-align: left">3.30</td>
+      <td style="text-align: left">4500</td>
+      <td style="text-align: left">0.032</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Dagger grande</td>
+      <td style="text-align: left">742</td>
+      <td style="text-align: left">358</td>
+      <td style="text-align: left">59.6</td>
+      <td style="text-align: left">1.01*</td>
+      <td style="text-align: left">2.82</td>
+      <td style="text-align: left">4180</td>
+      <td style="text-align: left">0.034</td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li>Dev mean peor pero compensado por estabilidad global.</li>
+</ul>
+
+<p>Caso 2 — Perturbación moderada</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Modelo</th>
+      <th style="text-align: left">Completed</th>
+      <th style="text-align: left">Effective</th>
+      <th style="text-align: left">Speed</th>
+      <th style="text-align: left">Dev Mean</th>
+      <th style="text-align: left">Dev/km</th>
+      <th style="text-align: left">Lane/km</th>
+      <th style="text-align: left">Sudden</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">Burbuja</td>
+      <td style="text-align: left">757</td>
+      <td style="text-align: left">405</td>
+      <td style="text-align: left">60.7</td>
+      <td style="text-align: left">0.82</td>
+      <td style="text-align: left">1.95</td>
+      <td style="text-align: left">3200</td>
+      <td style="text-align: left">0.032</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Noise</td>
+      <td style="text-align: left">760</td>
+      <td style="text-align: left">420</td>
+      <td style="text-align: left">60.4</td>
+      <td style="text-align: left">0.81</td>
+      <td style="text-align: left">1.90</td>
+      <td style="text-align: left">3100</td>
+      <td style="text-align: left">0.033</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Dagger corto</td>
+      <td style="text-align: left">757</td>
+      <td style="text-align: left">420</td>
+      <td style="text-align: left">60.5</td>
+      <td style="text-align: left">0.81</td>
+      <td style="text-align: left">1.90</td>
+      <td style="text-align: left">3100</td>
+      <td style="text-align: left">0.033</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Dagger grande</td>
+      <td style="text-align: left">757</td>
+      <td style="text-align: left">525</td>
+      <td style="text-align: left">58.7</td>
+      <td style="text-align: left">0.64</td>
+      <td style="text-align: left">1.25</td>
+      <td style="text-align: left">2950</td>
+      <td style="text-align: left">0.038</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Caso 3 — Dentro del basin</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Modelo</th>
+      <th style="text-align: left">Completed</th>
+      <th style="text-align: left">Effective</th>
+      <th style="text-align: left">Speed</th>
+      <th style="text-align: left">Dev Mean</th>
+      <th style="text-align: left">Dev/km</th>
+      <th style="text-align: left">Lane/km</th>
+      <th style="text-align: left">Sudden</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">Burbuja</td>
+      <td style="text-align: left">758</td>
+      <td style="text-align: left">330</td>
+      <td style="text-align: left">60.3</td>
+      <td style="text-align: left">0.90</td>
+      <td style="text-align: left">2.40</td>
+      <td style="text-align: left">3600</td>
+      <td style="text-align: left">0.033</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Noise</td>
+      <td style="text-align: left">760</td>
+      <td style="text-align: left">350</td>
+      <td style="text-align: left">61.0</td>
+      <td style="text-align: left">0.88</td>
+      <td style="text-align: left">2.30</td>
+      <td style="text-align: left">3500</td>
+      <td style="text-align: left">0.034</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Dagger corto</td>
+      <td style="text-align: left">759</td>
+      <td style="text-align: left">390</td>
+      <td style="text-align: left">60.0</td>
+      <td style="text-align: left">0.82</td>
+      <td style="text-align: left">2.00</td>
+      <td style="text-align: left">3300</td>
+      <td style="text-align: left">0.032</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Dagger grande</td>
+      <td style="text-align: left">758</td>
+      <td style="text-align: left">560</td>
+      <td style="text-align: left">59.2</td>
+      <td style="text-align: left">0.60</td>
+      <td style="text-align: left">1.20</td>
+      <td style="text-align: left">2800</td>
+      <td style="text-align: left">0.036</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Caso 4 — Borde región nominal</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Modelo</th>
+      <th style="text-align: left">Completed</th>
+      <th style="text-align: left">Effective</th>
+      <th style="text-align: left">Speed</th>
+      <th style="text-align: left">Dev Mean</th>
+      <th style="text-align: left">Dev/km</th>
+      <th style="text-align: left">Lane/km</th>
+      <th style="text-align: left">Sudden</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">Burbuja</td>
+      <td style="text-align: left">757</td>
+      <td style="text-align: left">310</td>
+      <td style="text-align: left">60.1</td>
+      <td style="text-align: left">1.00</td>
+      <td style="text-align: left">3.40</td>
+      <td style="text-align: left">4400</td>
+      <td style="text-align: left">0.034</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Noise</td>
+      <td style="text-align: left">760</td>
+      <td style="text-align: left">330</td>
+      <td style="text-align: left">61.5</td>
+      <td style="text-align: left">0.98</td>
+      <td style="text-align: left">3.20</td>
+      <td style="text-align: left">4300</td>
+      <td style="text-align: left">0.035</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Dagger corto</td>
+      <td style="text-align: left">759</td>
+      <td style="text-align: left">400</td>
+      <td style="text-align: left">60.0</td>
+      <td style="text-align: left">0.85</td>
+      <td style="text-align: left">2.40</td>
+      <td style="text-align: left">3500</td>
+      <td style="text-align: left">0.032</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Dagger grande</td>
+      <td style="text-align: left">758</td>
+      <td style="text-align: left">580</td>
+      <td style="text-align: left">59.3</td>
+      <td style="text-align: left">0.55</td>
+      <td style="text-align: left">1.00</td>
+      <td style="text-align: left">2600</td>
+      <td style="text-align: left">0.036</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Caso 5 — OOD fuerte</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Modelo</th>
+      <th style="text-align: left">Completed</th>
+      <th style="text-align: left">Effective</th>
+      <th style="text-align: left">Speed</th>
+      <th style="text-align: left">Dev Mean</th>
+      <th style="text-align: left">Dev/km</th>
+      <th style="text-align: left">Lane/km</th>
+      <th style="text-align: left">Sudden</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">Burbuja</td>
+      <td style="text-align: left">757</td>
+      <td style="text-align: left">301</td>
+      <td style="text-align: left">60.2</td>
+      <td style="text-align: left">1.01</td>
+      <td style="text-align: left">3.36</td>
+      <td style="text-align: left">4418</td>
+      <td style="text-align: left">0.034</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Noise</td>
+      <td style="text-align: left">761</td>
+      <td style="text-align: left">316</td>
+      <td style="text-align: left">62.1</td>
+      <td style="text-align: left">1.02</td>
+      <td style="text-align: left">3.22</td>
+      <td style="text-align: left">4333</td>
+      <td style="text-align: left">0.036</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Dagger corto</td>
+      <td style="text-align: left">760</td>
+      <td style="text-align: left">388</td>
+      <td style="text-align: left">59.9</td>
+      <td style="text-align: left">0.85</td>
+      <td style="text-align: left">2.20</td>
+      <td style="text-align: left">3500</td>
+      <td style="text-align: left">0.031</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Dagger grande</td>
+      <td style="text-align: left">758</td>
+      <td style="text-align: left">589</td>
+      <td style="text-align: left">59.3</td>
+      <td style="text-align: left">0.52</td>
+      <td style="text-align: left">0.88</td>
+      <td style="text-align: left">2550</td>
+      <td style="text-align: left">0.035</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Resultados generales:</p>
+
+<p>Noise Augmentation:</p>
+
+<ul>
+  <li>Mejora recuperación temprana</li>
+  <li>No cambia la política estructural</li>
+</ul>
+
+<p>DAgger Corto:</p>
+
+<ul>
+  <li>Mejora suavidad del control</li>
+  <li>Mejora estabilidad local</li>
+</ul>
+
+<p>DAgger Ampliado:</p>
+
+<ul>
+  <li>Mejora recuperación global</li>
+  <li>Mejora persistencia de trayectoria</li>
+  <li>Mejora estabilidad en OOD</li>
+</ul>
+
+<h3 id="velocidad-30-kmh">Velocidad 30 km/h</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Métrica</th>
+      <th>Burbuja</th>
+      <th>Noise</th>
+      <th>DAgger 16k</th>
+      <th>DAgger 27.6k</th>
+      <th>Mejor</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Completed</td>
+      <td>756.07</td>
+      <td><strong>760.50</strong></td>
+      <td>755.39</td>
+      <td>756.40</td>
+      <td>Noise</td>
+    </tr>
+    <tr>
+      <td>Effective</td>
+      <td>443.17</td>
+      <td>416.50</td>
+      <td>378.17</td>
+      <td><strong>449.60</strong></td>
+      <td>DAgger 27.6k</td>
+    </tr>
+    <tr>
+      <td>Speed</td>
+      <td>62.79</td>
+      <td><strong>64.15</strong></td>
+      <td>61.57</td>
+      <td>61.59</td>
+      <td>Noise</td>
+    </tr>
+    <tr>
+      <td>Dev mean</td>
+      <td><strong>0.716</strong></td>
+      <td>0.768</td>
+      <td>0.864</td>
+      <td>0.742</td>
+      <td>Burbuja</td>
+    </tr>
+    <tr>
+      <td>Lane/km</td>
+      <td><strong>2923</strong></td>
+      <td>2996</td>
+      <td>3544</td>
+      <td>3126</td>
+      <td>Burbuja</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>A bajas velocidades:</p>
+
+<ul>
+  <li>DAgger Ampliado obtiene mayor distancia efectiva.</li>
+  <li>Noise mejora velocidad pero reduce estabilidad lateral.</li>
+  <li>Burbuja mantiene la mejor precisión nominal.</li>
+</ul>
+
+<h3 id="velocidad-50-kmh">Velocidad 50 km/h</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Métrica</th>
+      <th>Burbuja</th>
+      <th>Noise</th>
+      <th>DAgger 16k</th>
+      <th>DAgger 27.6k</th>
+      <th>Mejor</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Completed</td>
+      <td>756.12</td>
+      <td><strong>759.87</strong></td>
+      <td>756.37</td>
+      <td>756.39</td>
+      <td>Noise</td>
+    </tr>
+    <tr>
+      <td>Effective</td>
+      <td>437.33</td>
+      <td><strong>444.17</strong></td>
+      <td>415.08</td>
+      <td>431.75</td>
+      <td>Noise</td>
+    </tr>
+    <tr>
+      <td>Speed</td>
+      <td>63.85</td>
+      <td><strong>64.90</strong></td>
+      <td>62.97</td>
+      <td>61.79</td>
+      <td>Noise</td>
+    </tr>
+    <tr>
+      <td>Dev mean</td>
+      <td><strong>0.695</strong></td>
+      <td>0.726</td>
+      <td>0.794</td>
+      <td>0.724</td>
+      <td>Burbuja</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Noise comienza a dominar métricas de progreso:</p>
+
+<ul>
+  <li>Mayor distancia completada</li>
+  <li>Mayor distancia efectiva</li>
+</ul>
+
+<p>Sin embargo:</p>
+
+<ul>
+  <li>Burbuja mantiene mejor control lateral fino</li>
+  <li>DAgger Corto mantiene mejor suavidad de control</li>
+</ul>
+
+<h3 id="velocidad-80-kmh">velocidad 80 km/h</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Métrica</th>
+      <th>Burbuja</th>
+      <th>Noise</th>
+      <th>DAgger 16k</th>
+      <th>DAgger 27.6k</th>
+      <th>Mejor</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Completed</td>
+      <td>419</td>
+      <td><strong>761</strong></td>
+      <td>757</td>
+      <td>759</td>
+      <td>Noise</td>
+    </tr>
+    <tr>
+      <td>Effective</td>
+      <td>252</td>
+      <td><strong>479</strong></td>
+      <td>477</td>
+      <td>438</td>
+      <td>Noise</td>
+    </tr>
+    <tr>
+      <td>Speed</td>
+      <td>25</td>
+      <td><strong>68</strong></td>
+      <td>65</td>
+      <td>66</td>
+      <td>Noise</td>
+    </tr>
+    <tr>
+      <td>Dev mean</td>
+      <td>1.92</td>
+      <td>0.66</td>
+      <td>0.69</td>
+      <td><strong>0.65</strong></td>
+      <td>DAgger 27.6k</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>A 80 km/h ocurre un cambio de régimen dinámico:</p>
+
+<p>El modelo Burbuja pierde estabilidad estructural.</p>
+
+<p>Noise y DAgger mantienen conducción estable.</p>
+
+<p>Noise domina progreso longitudinal.
+DAgger mejora estabilidad lateral y control de invasiones.</p>
+
+<h3 id="velocidad-100-kmh">velocidad 100 km/h</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Métrica</th>
+      <th>Burbuja</th>
+      <th>Noise</th>
+      <th>DAgger 16k</th>
+      <th>DAgger 27.6k</th>
+      <th>Mejor</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Completed</td>
+      <td>758</td>
+      <td>762</td>
+      <td>760</td>
+      <td><strong>762</strong></td>
+      <td>DAgger 27.6k</td>
+    </tr>
+    <tr>
+      <td>Effective</td>
+      <td>457</td>
+      <td>475</td>
+      <td>438</td>
+      <td><strong>517</strong></td>
+      <td>DAgger 27.6k</td>
+    </tr>
+    <tr>
+      <td>Dev mean</td>
+      <td>0.608</td>
+      <td>0.623</td>
+      <td>0.765</td>
+      <td><strong>0.452</strong></td>
+      <td>DAgger 27.6k</td>
+    </tr>
+    <tr>
+      <td>Lane/km</td>
+      <td>2576</td>
+      <td>2478</td>
+      <td>2770</td>
+      <td><strong>2326</strong></td>
+      <td>DAgger 27.6k</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>A 100 km/h el modelo DAgger Ampliado domina métricas estructurales:</p>
+
+<ul>
+  <li>Menor desviación lateral</li>
+  <li>Menor desviación acumulada</li>
+  <li>Menor invasión de carril</li>
+  <li>Cero colisiones en las corridas evaluadas</li>
+</ul>
+
+<p>Noise mantiene mayor velocidad promedio, pero con menor estabilidad.</p>
+
+<p>DAgger Corto presenta inestabilidad en algunas corridas.</p>
+
+<h3 id="ranking-global-de-modelos">Ranking Global de Modelos</h3>
+
+<p>Basado en todos los escenarios:</p>
+
+<ol>
+  <li>
+    <p>DAgger Ampliado
+Mayor robustez estructural y estabilidad global.</p>
+  </li>
+  <li>
+    <p>DAgger Corto
+Buen equilibrio entre suavidad y estabilidad.</p>
+  </li>
+  <li>
+    <p>Noise Augmentation
+Mejora recuperación, pero no robustez estructural.</p>
+  </li>
+  <li>
+    <p>Burbuja
+Excelente precisión nominal, baja robustez fuera de distribución.</p>
+  </li>
+</ol>
+
+<h4 id="observaciones">Observaciones</h4>
+
+<p>Las mejoras en robustez no provienen principalmente de la augmentación de datos con ruido.</p>
+
+<p>El aprendizaje de correcciones humanas mediante DAgger modifica la política de control aprendida, permitiendo:</p>
+
+<ul>
+  <li>Mayor región de estabilidad</li>
+  <li>Mejor recuperación</li>
+  <li>Mejor desempeño en escenarios extremos</li>
+</ul>
+
+<p>Para conducción nominal:
+Burbuja o Noise pueden ser suficientes.</p>
+
+<p>Para conducción robusta o alta velocidad:
+Es necesario incorporar DAgger.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/tags/#behaviormetrics" class="page__taxonomy-item p-category" rel="tag">BehaviorMetrics</a><span class="sep">, </span>
+    
+      <a href="/tags/#dagger" class="page__taxonomy-item p-category" rel="tag">DAgger</a><span class="sep">, </span>
+    
+      <a href="/tags/#metrics-online" class="page__taxonomy-item p-category" rel="tag">Metrics Online</a><span class="sep">, </span>
+    
+      <a href="/tags/#robustez" class="page__taxonomy-item p-category" rel="tag">Robustez</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#weekly-log" class="page__taxonomy-item p-category" rel="tag">weekly Log</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2026-02-06T00:00:00-05:00">February 6, 2026</time></p>
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Week+85+-+Noise+Injection+vs+DAgger%2C+pruebas+de+robustez+y+estabilidad+en+CARLA+%28PilotNet%29%20http%3A%2F%2Flocalhost%3A4000%2Fweekly%2520log%2Fweek85%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fweekly%2520log%2Fweek85%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fweekly%2520log%2Fweek85%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/weekly%20log/keek84/" class="pagination--pager" title="Week 84 - Noise Injection - Pruebas robustez
+">Previous</a>
+    
+    
+      <a href="/weekly%20log/week86/" class="pagination--pager" title="Week 86 - Actualización de métricas en CARLA
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h2 class="page__related-title">You may also enjoy</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/weekly%20log/week89/" rel="permalink">Week 89 - Robustez del piloto, Caso Canónico, 15 Casos y Pruebas de Velocidad
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          12 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">En esta entrada reporto los resultados de robustez en CARLA Town02 comparando cinco políticas/datasets bajo el mismo circuito de prueba, con 6 repeticiones p...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/weekly%20log/week88/" rel="permalink">Week 88 - Actualización de métricas en BehaviorMetrics (CARLA), comparación contra ruta ideal
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          2 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Actualización de métricas en BehaviorMetrics (CARLA)
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/weekly%20log/week87/" rel="permalink">Week 87 - Actualización de métricas en CARLA
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          9 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">En esta semana consolidé el reporte comparativo de cinco variantes de entrenamiento (Burbuja, Noise injection, DAgger 16k, DAgger 27.6k y DAgger agresivo) us...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/weekly%20log/week86/" rel="permalink">Week 86 - Actualización de métricas en CARLA
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          2 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Se realizaron mejoras en la forma de reportar el desempeño del vehículo autónomo en simulación, con el objetivo de que las métricas reflejen con mayor fideli...</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2026 Carlos Andrés Velásquez Ospina. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+  </body>
+</html>

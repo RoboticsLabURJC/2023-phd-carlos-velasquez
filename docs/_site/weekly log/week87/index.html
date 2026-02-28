@@ -1,0 +1,1490 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Week 87 - Actualización de métricas en CARLA - Robotics Lab URJC</title>
+<meta name="description" content="En esta semana consolidé el reporte comparativo de cinco variantes de entrenamiento (Burbuja, Noise injection, DAgger 16k, DAgger 27.6k y DAgger agresivo) usando las tablas resumen por escenario. El objetivo fue contrastar desempeño nominal y robustez bajo escenarios de perturbación y, adicionalmente, evaluar estabilidad al variar la velocidad objetivo.">
+
+
+  <meta name="author" content="Carlos Velásquez">
+  
+  <meta property="article:author" content="Carlos Velásquez">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Robotics Lab URJC">
+<meta property="og:title" content="Week 87 - Actualización de métricas en CARLA">
+<meta property="og:url" content="http://localhost:4000/weekly%20log/week87/">
+
+
+  <meta property="og:description" content="En esta semana consolidé el reporte comparativo de cinco variantes de entrenamiento (Burbuja, Noise injection, DAgger 16k, DAgger 27.6k y DAgger agresivo) usando las tablas resumen por escenario. El objetivo fue contrastar desempeño nominal y robustez bajo escenarios de perturbación y, adicionalmente, evaluar estabilidad al variar la velocidad objetivo.">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2026-02-15T00:00:00-05:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/weekly%20log/week87/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Carlos Andrés Velásquez Ospina",
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Robotics Lab URJC Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/logo.png" alt="Robotics Lab URJC"></a>
+        
+        <a class="site-title" href="/">
+          Robotics Lab URJC
+          <span class="site-subtitle">Programming Robot Intelligence</span>
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="https://mmistakes.github.io/minimal-mistakes/docs/quick-start-guide/">Quick-Start Guide</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+    <div class="author__avatar">
+      <a href="http://localhost:4000/">
+        <img src="/assets/images/me.jpg" alt="Carlos Velásquez" itemprop="image" class="u-photo">
+      </a>
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      <a class="u-url" rel="me" href="http://localhost:4000/" itemprop="url">Carlos Velásquez</a>
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>Doctoral thesis blog</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name" class="p-locality">Medellín</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="mailto:canveo@gmail.com" rel="nofollow noopener noreferrer me"><i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">Email</span></a></li>
+          
+        
+          
+            <li><a href="https://github.com/canveo" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/canveo/" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span class="label">LinkedIn</span></a></li>
+          
+        
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:canveo@gmail.com" rel="me" class="u-email">
+            <meta itemprop="email" content="canveo@gmail.com" />
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">Email</span>
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer me">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Week 87 - Actualización de métricas en CARLA">
+    <meta itemprop="description" content="En esta semana consolidé el reporte comparativo de cinco variantes de entrenamiento (Burbuja, Noise injection, DAgger 16k, DAgger 27.6k y DAgger agresivo) usando las tablas resumen por escenario.El objetivo fue contrastar desempeño nominal y robustez bajo escenarios de perturbación y, adicionalmente, evaluar estabilidad al variar la velocidad objetivo.">
+    <meta itemprop="datePublished" content="2026-02-15T00:00:00-05:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="http://localhost:4000/weekly%20log/week87/" class="u-url" itemprop="url">Week 87 - Actualización de métricas en CARLA
+</a>
+          </h1>
+          
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          6 minute read
+        
+      </span>
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        <p>En esta semana consolidé el reporte comparativo de cinco variantes de entrenamiento (Burbuja, Noise injection, DAgger 16k, DAgger 27.6k y DAgger agresivo) usando las tablas resumen por escenario.<br />
+El objetivo fue contrastar desempeño nominal y robustez bajo escenarios de perturbación y, adicionalmente, evaluar estabilidad al variar la velocidad objetivo.</p>
+
+<p>Notas de lectura de métricas (criterio general):</p>
+<ul>
+  <li><strong>Route completed (%)</strong>: mayor es mejor.</li>
+  <li><strong>Dev/km</strong> y <strong>Lane invasions</strong>: menor es mejor (más centrado y con menos cruces de línea).</li>
+  <li><strong>Suddenness (control)</strong>: menor es mejor (control más suave).</li>
+  <li><strong>Collisions</strong>: menor es mejor.</li>
+</ul>
+
+<hr />
+
+<h2 id="caso-canónico">Caso canónico</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Métrica</th>
+      <th style="text-align: right">Burbuja</th>
+      <th style="text-align: right">Noise</th>
+      <th style="text-align: right">DAgger 16k</th>
+      <th style="text-align: right">DAgger 27.6k</th>
+      <th style="text-align: right">DAgger agresivo</th>
+      <th>Mejor</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Route completed (%)</td>
+      <td style="text-align: right"><strong>79.99</strong></td>
+      <td style="text-align: right">78.36</td>
+      <td style="text-align: right">65.74</td>
+      <td style="text-align: right">74.45</td>
+      <td style="text-align: right">78.44</td>
+      <td>Burbuja</td>
+    </tr>
+    <tr>
+      <td>Average speed (km/h)</td>
+      <td style="text-align: right">60.04</td>
+      <td style="text-align: right"><strong>63.07</strong></td>
+      <td style="text-align: right">60.81</td>
+      <td style="text-align: right">60.53</td>
+      <td style="text-align: right">59.99</td>
+      <td>Noise</td>
+    </tr>
+    <tr>
+      <td>Dev mean (m)</td>
+      <td style="text-align: right">0.465</td>
+      <td style="text-align: right">0.493</td>
+      <td style="text-align: right">0.756</td>
+      <td style="text-align: right">0.464</td>
+      <td style="text-align: right"><strong>0.461</strong></td>
+      <td>DAgger agresivo</td>
+    </tr>
+    <tr>
+      <td>Dev/km (m/km)</td>
+      <td style="text-align: right"><strong>0.769</strong></td>
+      <td style="text-align: right">0.828</td>
+      <td style="text-align: right">1.524</td>
+      <td style="text-align: right">0.823</td>
+      <td style="text-align: right">0.776</td>
+      <td>Burbuja</td>
+    </tr>
+    <tr>
+      <td>Lane invasions (eventos)</td>
+      <td style="text-align: right">2.17</td>
+      <td style="text-align: right">2.33</td>
+      <td style="text-align: right">5.50</td>
+      <td style="text-align: right"><strong>1.50</strong></td>
+      <td style="text-align: right">1.83</td>
+      <td>DAgger 27.6k</td>
+    </tr>
+    <tr>
+      <td>Collisions (eventos)</td>
+      <td style="text-align: right">0.0</td>
+      <td style="text-align: right">0.0</td>
+      <td style="text-align: right">0.0</td>
+      <td style="text-align: right">0.0</td>
+      <td style="text-align: right">0.0</td>
+      <td>Empate</td>
+    </tr>
+    <tr>
+      <td>Suddenness (control)</td>
+      <td style="text-align: right">0.0253</td>
+      <td style="text-align: right">0.0254</td>
+      <td style="text-align: right"><strong>0.0226</strong></td>
+      <td style="text-align: right">0.0273</td>
+      <td style="text-align: right">0.0259</td>
+      <td>DAgger 16k</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Síntesis (canónico):</p>
+<ul>
+  <li><strong>Burbuja</strong> se mantiene como referencia nominal: mejor progreso en ruta y buen centrado (Dev/km).</li>
+  <li><strong>Noise</strong> incrementa la velocidad promedio sin mejorar el centrado frente a Burbuja.</li>
+  <li><strong>DAgger 27.6k</strong> reduce invasiones de carril (mejor de todos), aunque no lidera en progreso total.</li>
+  <li><strong>DAgger agresivo</strong> queda más centrado en promedio (Dev mean más bajo).</li>
+  <li><strong>DAgger 16k</strong> es el más suave (menor suddenness), pero sacrifica progreso en este escenario.</li>
+</ul>
+
+<hr />
+
+<h1 id="casos-pertubados">Casos Pertubados</h1>
+
+<figure class="half">
+  <img src="http://localhost:4000/assets/images/week86/town02_cases.gif" alt="Town02 cases GIF" style="width:100%" />
+  <figcaption>Posiciones iniciales y ángulo respecto al carril</figcaption>
+</figure>
+
+<h2 id="caso-1">Caso 1</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Métrica</th>
+      <th style="text-align: right">Burbuja</th>
+      <th style="text-align: right">Noise</th>
+      <th style="text-align: right">DAgger 16k</th>
+      <th style="text-align: right">DAgger 27.6k</th>
+      <th style="text-align: right">DAgger agresivo</th>
+      <th>Mejor</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Route completed (%)</td>
+      <td style="text-align: right">41.58</td>
+      <td style="text-align: right"><strong>45.80</strong></td>
+      <td style="text-align: right">41.91</td>
+      <td style="text-align: right">44.99</td>
+      <td style="text-align: right">44.88</td>
+      <td>Noise</td>
+    </tr>
+    <tr>
+      <td>Average speed (km/h)</td>
+      <td style="text-align: right">60.98</td>
+      <td style="text-align: right"><strong>62.81</strong></td>
+      <td style="text-align: right">59.93</td>
+      <td style="text-align: right">59.43</td>
+      <td style="text-align: right">61.35</td>
+      <td>Noise</td>
+    </tr>
+    <tr>
+      <td>Dev/km</td>
+      <td style="text-align: right">3.19</td>
+      <td style="text-align: right"><strong>2.87</strong></td>
+      <td style="text-align: right">3.19</td>
+      <td style="text-align: right">3.04</td>
+      <td style="text-align: right">2.96</td>
+      <td>Noise</td>
+    </tr>
+    <tr>
+      <td>Lane invasions</td>
+      <td style="text-align: right">2.50</td>
+      <td style="text-align: right"><strong>2.17</strong></td>
+      <td style="text-align: right">4.50</td>
+      <td style="text-align: right">3.00</td>
+      <td style="text-align: right">2.67</td>
+      <td>Noise</td>
+    </tr>
+    <tr>
+      <td>Collisions</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">0</td>
+      <td>Empate</td>
+    </tr>
+    <tr>
+      <td>Suddenness control</td>
+      <td style="text-align: right">0.0249</td>
+      <td style="text-align: right">0.0254</td>
+      <td style="text-align: right"><strong>0.0230</strong></td>
+      <td style="text-align: right">0.0270</td>
+      <td style="text-align: right">0.0271</td>
+      <td>DAgger 16k</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Síntesis (caso 1):</p>
+<ul>
+  <li><strong>Noise</strong> domina el caso (mayor progreso, mayor velocidad, menor Dev/km y menos invasiones).</li>
+  <li><strong>DAgger 16k</strong> sigue siendo el más suave (mejor suddenness), con perfil conservador.</li>
+  <li><strong>DAgger 27.6k y agresivo</strong> son competitivos en progreso, pero aquí no superan el paquete global de Noise.</li>
+</ul>
+
+<hr />
+
+<h2 id="caso-2">Caso 2</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Métrica</th>
+      <th style="text-align: right">Burbuja</th>
+      <th style="text-align: right">Noise</th>
+      <th style="text-align: right">DAgger 16k</th>
+      <th style="text-align: right">DAgger 27.6k</th>
+      <th style="text-align: right">DAgger agresivo</th>
+      <th>Mejor</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Route completed (%)</td>
+      <td style="text-align: right"><strong>72.57</strong></td>
+      <td style="text-align: right">70.95</td>
+      <td style="text-align: right">58.63</td>
+      <td style="text-align: right">69.93</td>
+      <td style="text-align: right">72.62</td>
+      <td>Burbuja</td>
+    </tr>
+    <tr>
+      <td>Average speed (km/h)</td>
+      <td style="text-align: right">61.76</td>
+      <td style="text-align: right"><strong>62.48</strong></td>
+      <td style="text-align: right">60.46</td>
+      <td style="text-align: right">60.12</td>
+      <td style="text-align: right">59.69</td>
+      <td>Noise</td>
+    </tr>
+    <tr>
+      <td>Dev/km</td>
+      <td style="text-align: right"><strong>0.95</strong></td>
+      <td style="text-align: right">1.09</td>
+      <td style="text-align: right">1.84</td>
+      <td style="text-align: right">1.07</td>
+      <td style="text-align: right">1.00</td>
+      <td>Burbuja</td>
+    </tr>
+    <tr>
+      <td>Lane invasions</td>
+      <td style="text-align: right"><strong>1.67</strong></td>
+      <td style="text-align: right">2.17</td>
+      <td style="text-align: right">5.00</td>
+      <td style="text-align: right">3.17</td>
+      <td style="text-align: right">2.17</td>
+      <td>Burbuja</td>
+    </tr>
+    <tr>
+      <td>Collisions</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">0</td>
+      <td>Empate</td>
+    </tr>
+    <tr>
+      <td>Suddenness control</td>
+      <td style="text-align: right">0.0249</td>
+      <td style="text-align: right">0.0275</td>
+      <td style="text-align: right"><strong>0.0239</strong></td>
+      <td style="text-align: right">0.0287</td>
+      <td style="text-align: right">0.0280</td>
+      <td>DAgger 16k</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Síntesis (caso 2):</p>
+<ul>
+  <li><strong>Burbuja</strong> domina el régimen nominal: mejor progreso, mejor Dev/km y menos invasiones.</li>
+  <li><strong>Noise</strong> sube la velocidad, pero no mejora estabilidad fina (Dev/km e invasiones).</li>
+  <li><strong>DAgger 16k</strong> conserva la suavidad (suddenness), pero pierde progreso y estabilidad en este caso.</li>
+</ul>
+
+<hr />
+
+<h2 id="caso-3">Caso 3</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Métrica</th>
+      <th style="text-align: right">Burbuja</th>
+      <th style="text-align: right">Noise</th>
+      <th style="text-align: right">DAgger 16k</th>
+      <th style="text-align: right">DAgger 27.6k</th>
+      <th style="text-align: right">DAgger agresivo</th>
+      <th>Mejor</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Route completed (%)</td>
+      <td style="text-align: right">71.58</td>
+      <td style="text-align: right"><strong>76.84</strong></td>
+      <td style="text-align: right">57.62</td>
+      <td style="text-align: right">75.44</td>
+      <td style="text-align: right">74.46</td>
+      <td>Noise</td>
+    </tr>
+    <tr>
+      <td>Average speed (km/h)</td>
+      <td style="text-align: right">60.28</td>
+      <td style="text-align: right"><strong>62.85</strong></td>
+      <td style="text-align: right">60.50</td>
+      <td style="text-align: right">60.70</td>
+      <td style="text-align: right">59.26</td>
+      <td>Noise</td>
+    </tr>
+    <tr>
+      <td>Dev/km</td>
+      <td style="text-align: right">0.93</td>
+      <td style="text-align: right"><strong>0.92</strong></td>
+      <td style="text-align: right">1.88</td>
+      <td style="text-align: right">0.94</td>
+      <td style="text-align: right">0.96</td>
+      <td>Noise</td>
+    </tr>
+    <tr>
+      <td>Lane invasions</td>
+      <td style="text-align: right">2.67</td>
+      <td style="text-align: right"><strong>2.00</strong></td>
+      <td style="text-align: right">5.50</td>
+      <td style="text-align: right">3.50</td>
+      <td style="text-align: right">2.83</td>
+      <td>Noise</td>
+    </tr>
+    <tr>
+      <td>Collisions</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">0</td>
+      <td>Empate</td>
+    </tr>
+    <tr>
+      <td>Suddenness control</td>
+      <td style="text-align: right">0.0249</td>
+      <td style="text-align: right">0.0267</td>
+      <td style="text-align: right"><strong>0.0242</strong></td>
+      <td style="text-align: right">0.0264</td>
+      <td style="text-align: right">0.0273</td>
+      <td>DAgger 16k</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Síntesis (caso 3):</p>
+<ul>
+  <li><strong>Noise</strong> domina: mayor progreso, mayor velocidad, mejor Dev/km y menos invasiones.</li>
+  <li><strong>DAgger 27.6k</strong> queda muy cerca en progreso, pero con más invasiones y control más energético.</li>
+  <li><strong>DAgger 16k</strong> mantiene el patrón: más suave, pero conservador en progreso.</li>
+</ul>
+
+<hr />
+
+<h2 id="caso-4">Caso 4</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Métrica</th>
+      <th style="text-align: right">Burbuja</th>
+      <th style="text-align: right">Noise</th>
+      <th style="text-align: right">DAgger 16k</th>
+      <th style="text-align: right">DAgger 27.6k</th>
+      <th style="text-align: right">DAgger agresivo</th>
+      <th>Mejor</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Route completed (%)</td>
+      <td style="text-align: right">70.83</td>
+      <td style="text-align: right">74.70</td>
+      <td style="text-align: right">61.99</td>
+      <td style="text-align: right">74.52</td>
+      <td style="text-align: right"><strong>75.86</strong></td>
+      <td>DAgger agresivo</td>
+    </tr>
+    <tr>
+      <td>Average speed (km/h)</td>
+      <td style="text-align: right">60.51</td>
+      <td style="text-align: right"><strong>60.77</strong></td>
+      <td style="text-align: right">58.52</td>
+      <td style="text-align: right">59.22</td>
+      <td style="text-align: right">58.89</td>
+      <td>Noise</td>
+    </tr>
+    <tr>
+      <td>Dev/km</td>
+      <td style="text-align: right">0.97</td>
+      <td style="text-align: right">1.02</td>
+      <td style="text-align: right">1.70</td>
+      <td style="text-align: right"><strong>0.91</strong></td>
+      <td style="text-align: right">0.94</td>
+      <td>DAgger 27.6k</td>
+    </tr>
+    <tr>
+      <td>Lane invasions</td>
+      <td style="text-align: right"><strong>2.50</strong></td>
+      <td style="text-align: right">2.83</td>
+      <td style="text-align: right">4.67</td>
+      <td style="text-align: right">3.33</td>
+      <td style="text-align: right">2.00</td>
+      <td>DAgger agresivo</td>
+    </tr>
+    <tr>
+      <td>Collisions</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">0</td>
+      <td>Empate</td>
+    </tr>
+    <tr>
+      <td>Suddenness control</td>
+      <td style="text-align: right">0.0251</td>
+      <td style="text-align: right">0.0264</td>
+      <td style="text-align: right"><strong>0.0237</strong></td>
+      <td style="text-align: right">0.0279</td>
+      <td style="text-align: right">0.0274</td>
+      <td>DAgger 16k</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Síntesis (caso 4):</p>
+<ul>
+  <li><strong>DAgger agresivo</strong> lidera progreso y reduce invasiones; robusto cuando el escenario se degrada.</li>
+  <li><strong>DAgger 27.6k</strong> logra el mejor centrado (Dev/km) con progreso alto.</li>
+  <li><strong>Noise</strong> es competitivo en progreso/velocidad, pero pierde centrado frente a DAgger agresivo.</li>
+</ul>
+
+<hr />
+
+<h2 id="caso-5">Caso 5</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Métrica</th>
+      <th style="text-align: right">Burbuja</th>
+      <th style="text-align: right">Noise</th>
+      <th style="text-align: right">DAgger 16k</th>
+      <th style="text-align: right">DAgger 27.6k</th>
+      <th style="text-align: right">DAgger agresivo</th>
+      <th>Mejor</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Route completed (%)</td>
+      <td style="text-align: right">64.19</td>
+      <td style="text-align: right">64.50</td>
+      <td style="text-align: right">52.63</td>
+      <td style="text-align: right"><strong>67.26</strong></td>
+      <td style="text-align: right">65.17</td>
+      <td>DAgger 27.6k</td>
+    </tr>
+    <tr>
+      <td>Average speed (km/h)</td>
+      <td style="text-align: right">60.53</td>
+      <td style="text-align: right"><strong>62.06</strong></td>
+      <td style="text-align: right">59.88</td>
+      <td style="text-align: right">59.15</td>
+      <td style="text-align: right">59.48</td>
+      <td>Noise</td>
+    </tr>
+    <tr>
+      <td>Dev/km</td>
+      <td style="text-align: right">1.31</td>
+      <td style="text-align: right">1.35</td>
+      <td style="text-align: right">2.11</td>
+      <td style="text-align: right"><strong>1.25</strong></td>
+      <td style="text-align: right">1.34</td>
+      <td>DAgger 27.6k</td>
+    </tr>
+    <tr>
+      <td>Lane invasions</td>
+      <td style="text-align: right"><strong>2.00</strong></td>
+      <td style="text-align: right">3.17</td>
+      <td style="text-align: right">6.00</td>
+      <td style="text-align: right">3.17</td>
+      <td style="text-align: right">2.83</td>
+      <td>Burbuja</td>
+    </tr>
+    <tr>
+      <td>Collisions</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">0.83</td>
+      <td style="text-align: right">0</td>
+      <td>Burbuja / Noise</td>
+    </tr>
+    <tr>
+      <td>Suddenness control</td>
+      <td style="text-align: right">0.0249</td>
+      <td style="text-align: right">0.0259</td>
+      <td style="text-align: right"><strong>0.0243</strong></td>
+      <td style="text-align: right">0.0281</td>
+      <td style="text-align: right">0.0273</td>
+      <td>DAgger 16k</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Síntesis (caso 5):</p>
+<ul>
+  <li><strong>DAgger 27.6k</strong> domina el escenario hostil en progreso y centrado (Dev/km), pero aparecen colisiones.</li>
+  <li><strong>DAgger agresivo</strong> mantiene buen progreso sin colisiones, con balance práctico.</li>
+  <li><strong>Noise</strong> gana en velocidad, pero empeora estabilidad fina.</li>
+  <li><strong>Burbuja</strong> es el baseline más limpio, pero pierde capacidad de recuperación/progreso.</li>
+</ul>
+
+<hr />
+
+<h2 id="resumen-por-casos">Resumen por casos</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Caso</th>
+      <th>Escenario</th>
+      <th>Ganador</th>
+      <th>Segundo</th>
+      <th>Tercero</th>
+      <th>Motivo principal</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Caso 1</td>
+      <td>Recovery inicial</td>
+      <td>Noise</td>
+      <td>DAgger agresivo</td>
+      <td>DAgger 27.6k</td>
+      <td>Recupera antes y mantiene velocidad con buena estabilidad</td>
+    </tr>
+    <tr>
+      <td>Caso 2</td>
+      <td>Perturbación moderada</td>
+      <td>Burbuja</td>
+      <td>DAgger agresivo</td>
+      <td>Noise</td>
+      <td>Régimen nominal: centrado e invasiones dominan</td>
+    </tr>
+    <tr>
+      <td>Caso 3</td>
+      <td>Zona intermedia</td>
+      <td>Noise</td>
+      <td>DAgger 27.6k</td>
+      <td>DAgger agresivo</td>
+      <td>Máximo progreso con estabilidad comparable</td>
+    </tr>
+    <tr>
+      <td>Caso 4</td>
+      <td>Borde región nominal</td>
+      <td>DAgger agresivo</td>
+      <td>DAgger 27.6k</td>
+      <td>Noise</td>
+      <td>Robustez con buen progreso e invasiones bajas</td>
+    </tr>
+    <tr>
+      <td>Caso 5</td>
+      <td>OOD fuerte</td>
+      <td>DAgger 27.6k</td>
+      <td>DAgger agresivo</td>
+      <td>Noise</td>
+      <td>Mantiene progreso estructural en OOD</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h2 id="resumen-por-velocidades">Resumen por velocidades</h2>
+
+<p>Se reporta <strong>Route completed (%)</strong> como métrica principal de progreso, junto con estabilidad (Dev/km), invasiones y suavidad.</p>
+
+<h3 id="30-kmh">30 km/h</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Métrica</th>
+      <th style="text-align: right">Burbuja</th>
+      <th style="text-align: right">Noise</th>
+      <th style="text-align: right">DAgger 16k</th>
+      <th style="text-align: right">DAgger 27.6k</th>
+      <th style="text-align: right">DAgger agresivo</th>
+      <th>Mejor</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Route completed (%)</td>
+      <td style="text-align: right">70.22</td>
+      <td style="text-align: right">76.72</td>
+      <td style="text-align: right">67.31</td>
+      <td style="text-align: right">76.09</td>
+      <td style="text-align: right"><strong>80.20</strong></td>
+      <td>DAgger agresivo</td>
+    </tr>
+    <tr>
+      <td>Average speed (km/h)</td>
+      <td style="text-align: right">62.88</td>
+      <td style="text-align: right"><strong>64.32</strong></td>
+      <td style="text-align: right">61.88</td>
+      <td style="text-align: right">61.90</td>
+      <td style="text-align: right">61.39</td>
+      <td>Noise</td>
+    </tr>
+    <tr>
+      <td>Dev/km</td>
+      <td style="text-align: right">0.80</td>
+      <td style="text-align: right">0.86</td>
+      <td style="text-align: right">1.50</td>
+      <td style="text-align: right">0.84</td>
+      <td style="text-align: right"><strong>0.77</strong></td>
+      <td>DAgger agresivo</td>
+    </tr>
+    <tr>
+      <td>Lane invasions</td>
+      <td style="text-align: right"><strong>1.67</strong></td>
+      <td style="text-align: right">2.50</td>
+      <td style="text-align: right">5.00</td>
+      <td style="text-align: right">2.17</td>
+      <td style="text-align: right">2.17</td>
+      <td>Burbuja</td>
+    </tr>
+    <tr>
+      <td>Collisions</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">0</td>
+      <td>Empate</td>
+    </tr>
+    <tr>
+      <td>Suddenness (control)</td>
+      <td style="text-align: right">0.0251</td>
+      <td style="text-align: right">0.0253</td>
+      <td style="text-align: right"><strong>0.0224</strong></td>
+      <td style="text-align: right">0.0266</td>
+      <td style="text-align: right">0.0253</td>
+      <td>DAgger 16k</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="50-kmh">50 km/h</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Métrica</th>
+      <th style="text-align: right">Burbuja</th>
+      <th style="text-align: right">Noise</th>
+      <th style="text-align: right">DAgger 16k</th>
+      <th style="text-align: right">DAgger 27.6k</th>
+      <th style="text-align: right">DAgger agresivo</th>
+      <th>Mejor</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Route completed (%)</td>
+      <td style="text-align: right">72.02</td>
+      <td style="text-align: right">74.09</td>
+      <td style="text-align: right">67.39</td>
+      <td style="text-align: right">74.00</td>
+      <td style="text-align: right"><strong>77.89</strong></td>
+      <td>DAgger agresivo</td>
+    </tr>
+    <tr>
+      <td>Average speed (km/h)</td>
+      <td style="text-align: right">64.23</td>
+      <td style="text-align: right"><strong>65.25</strong></td>
+      <td style="text-align: right">63.09</td>
+      <td style="text-align: right">62.69</td>
+      <td style="text-align: right">62.72</td>
+      <td>Noise</td>
+    </tr>
+    <tr>
+      <td>Dev/km</td>
+      <td style="text-align: right"><strong>0.78</strong></td>
+      <td style="text-align: right">0.87</td>
+      <td style="text-align: right">1.45</td>
+      <td style="text-align: right">0.88</td>
+      <td style="text-align: right">0.78</td>
+      <td>Burbuja</td>
+    </tr>
+    <tr>
+      <td>Lane invasions</td>
+      <td style="text-align: right"><strong>2.00</strong></td>
+      <td style="text-align: right">2.33</td>
+      <td style="text-align: right">5.00</td>
+      <td style="text-align: right">2.00</td>
+      <td style="text-align: right">2.33</td>
+      <td>Burbuja / DAgger 27.6k</td>
+    </tr>
+    <tr>
+      <td>Collisions</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">0</td>
+      <td>Empate</td>
+    </tr>
+    <tr>
+      <td>Suddenness (control)</td>
+      <td style="text-align: right">0.0242</td>
+      <td style="text-align: right">0.0263</td>
+      <td style="text-align: right"><strong>0.0225</strong></td>
+      <td style="text-align: right">0.0270</td>
+      <td style="text-align: right">0.0254</td>
+      <td>DAgger 16k</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="80-kmh">80 km/h</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Métrica</th>
+      <th style="text-align: right">Burbuja</th>
+      <th style="text-align: right">Noise</th>
+      <th style="text-align: right">DAgger 16k</th>
+      <th style="text-align: right">DAgger 27.6k</th>
+      <th style="text-align: right">DAgger agresivo</th>
+      <th>Mejor</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Route completed (%)</td>
+      <td style="text-align: right">71.67</td>
+      <td style="text-align: right">69.22</td>
+      <td style="text-align: right">65.74</td>
+      <td style="text-align: right">72.44</td>
+      <td style="text-align: right"><strong>77.43</strong></td>
+      <td>DAgger agresivo</td>
+    </tr>
+    <tr>
+      <td>Average speed (km/h)</td>
+      <td style="text-align: right">66.58</td>
+      <td style="text-align: right"><strong>68.34</strong></td>
+      <td style="text-align: right">65.75</td>
+      <td style="text-align: right">65.97</td>
+      <td style="text-align: right">65.51</td>
+      <td>Noise</td>
+    </tr>
+    <tr>
+      <td>Dev/km</td>
+      <td style="text-align: right">0.77</td>
+      <td style="text-align: right">0.94</td>
+      <td style="text-align: right">1.39</td>
+      <td style="text-align: right">0.78</td>
+      <td style="text-align: right"><strong>0.75</strong></td>
+      <td>DAgger agresivo</td>
+    </tr>
+    <tr>
+      <td>Lane invasions</td>
+      <td style="text-align: right"><strong>1.50</strong></td>
+      <td style="text-align: right">1.83</td>
+      <td style="text-align: right">4.33</td>
+      <td style="text-align: right">2.50</td>
+      <td style="text-align: right">1.67</td>
+      <td>Burbuja</td>
+    </tr>
+    <tr>
+      <td>Collisions</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">0</td>
+      <td>Empate</td>
+    </tr>
+    <tr>
+      <td>Suddenness (control)</td>
+      <td style="text-align: right">0.0246</td>
+      <td style="text-align: right">0.0275</td>
+      <td style="text-align: right"><strong>0.0225</strong></td>
+      <td style="text-align: right">0.0267</td>
+      <td style="text-align: right">0.0256</td>
+      <td>DAgger 16k</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="100-kmh">100 km/h</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Métrica</th>
+      <th style="text-align: right">Burbuja</th>
+      <th style="text-align: right">Noise</th>
+      <th style="text-align: right">DAgger 16k</th>
+      <th style="text-align: right">DAgger 27.6k</th>
+      <th style="text-align: right">DAgger agresivo</th>
+      <th>Mejor</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Route completed (%)</td>
+      <td style="text-align: right">69.54</td>
+      <td style="text-align: right">59.94</td>
+      <td style="text-align: right">59.57</td>
+      <td style="text-align: right">68.81</td>
+      <td style="text-align: right"><strong>71.62</strong></td>
+      <td>DAgger agresivo</td>
+    </tr>
+    <tr>
+      <td>Average speed (km/h)</td>
+      <td style="text-align: right">66.59</td>
+      <td style="text-align: right">15.81</td>
+      <td style="text-align: right">66.28</td>
+      <td style="text-align: right"><strong>67.13</strong></td>
+      <td style="text-align: right">64.86</td>
+      <td>DAgger 27.6k</td>
+    </tr>
+    <tr>
+      <td>Dev/km</td>
+      <td style="text-align: right"><strong>0.88</strong></td>
+      <td style="text-align: right">36.07</td>
+      <td style="text-align: right">1.66</td>
+      <td style="text-align: right">0.87</td>
+      <td style="text-align: right">0.92</td>
+      <td>DAgger 27.6k</td>
+    </tr>
+    <tr>
+      <td>Lane invasions</td>
+      <td style="text-align: right">3.33</td>
+      <td style="text-align: right"><strong>1.33</strong></td>
+      <td style="text-align: right">4.67</td>
+      <td style="text-align: right">2.67</td>
+      <td style="text-align: right">2.67</td>
+      <td>Noise</td>
+    </tr>
+    <tr>
+      <td>Collisions</td>
+      <td style="text-align: right">0.50</td>
+      <td style="text-align: right">1.00</td>
+      <td style="text-align: right">1.00</td>
+      <td style="text-align: right"><strong>0.17</strong></td>
+      <td style="text-align: right">0.50</td>
+      <td>DAgger 27.6k</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Observación importante:</p>
+<ul>
+  <li>A 100 km/h se ve un <strong>colapso claro en Noise</strong> (velocidad y Dev/km fuera de escala). Esto sugiere episodios prolongados fuera de calzada o pérdida de control.</li>
+</ul>
+
+<hr />
+
+<h2 id="conclusiones">Conclusiones</h2>
+
+<ol>
+  <li><strong>Nominal</strong>: Burbuja sigue siendo la referencia de centrado y conducción limpia.</li>
+  <li><strong>Dinámica</strong>: Noise tiende a maximizar velocidad y puede ganar en escenarios intermedios, pero no sostiene el régimen extremo (100 km/h).</li>
+  <li><strong>Robustez</strong>: DAgger agresivo es el más consistente al escalar velocidad y en casos difíciles, manteniendo progreso alto.</li>
+  <li><strong>DAgger 27.6k</strong> destaca en OOD fuerte por progreso y centrado, pero conviene revisar las corridas donde aparecen colisiones.</li>
+</ol>
+
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/tags/#behaviormetrics" class="page__taxonomy-item p-category" rel="tag">BehaviorMetrics</a><span class="sep">, </span>
+    
+      <a href="/tags/#dagger" class="page__taxonomy-item p-category" rel="tag">DAgger</a><span class="sep">, </span>
+    
+      <a href="/tags/#metrics-online" class="page__taxonomy-item p-category" rel="tag">Metrics Online</a><span class="sep">, </span>
+    
+      <a href="/tags/#robustez" class="page__taxonomy-item p-category" rel="tag">Robustez</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#weekly-log" class="page__taxonomy-item p-category" rel="tag">weekly Log</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2026-02-15T00:00:00-05:00">February 15, 2026</time></p>
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Week+87+-+Actualizaci%C3%B3n+de+m%C3%A9tricas+en+CARLA%20http%3A%2F%2Flocalhost%3A4000%2Fweekly%2520log%2Fweek87%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fweekly%2520log%2Fweek87%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fweekly%2520log%2Fweek87%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/weekly%20log/week86/" class="pagination--pager" title="Week 86 - Actualización de métricas en CARLA
+">Previous</a>
+    
+    
+      <a href="/weekly%20log/week88/" class="pagination--pager" title="Week 88 - Actualización de métricas en BehaviorMetrics (CARLA), comparación contra ruta ideal
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h2 class="page__related-title">You may also enjoy</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/weekly%20log/week89/" rel="permalink">Week 89 - Robustez del piloto, Caso Canónico, 15 Casos y Pruebas de Velocidad
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          12 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">En esta entrada reporto los resultados de robustez en CARLA Town02 comparando cinco políticas/datasets bajo el mismo circuito de prueba, con 6 repeticiones p...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/weekly%20log/week88/" rel="permalink">Week 88 - Actualización de métricas en BehaviorMetrics (CARLA), comparación contra ruta ideal
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          2 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Actualización de métricas en BehaviorMetrics (CARLA)
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/weekly%20log/week86/" rel="permalink">Week 86 - Actualización de métricas en CARLA
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          2 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Se realizaron mejoras en la forma de reportar el desempeño del vehículo autónomo en simulación, con el objetivo de que las métricas reflejen con mayor fideli...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/weekly%20log/week85/" rel="permalink">Week 85 - Noise Injection vs DAgger, pruebas de robustez y estabilidad en CARLA (PilotNet)
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          4 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Configuración Experimental
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2026 Carlos Andrés Velásquez Ospina. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+  </body>
+</html>

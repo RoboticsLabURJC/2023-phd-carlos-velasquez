@@ -1,0 +1,1312 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Week 60 - PilotNet, MoE y Monolítico (CARLA) - Robotics Lab URJC</title>
+<meta name="description" content="Resultados de comparación: Burbuja (autopiloto) vs Control Manual (teleoperado) usando modelo PilotNet">
+
+
+  <meta name="author" content="Carlos Velásquez">
+  
+  <meta property="article:author" content="Carlos Velásquez">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Robotics Lab URJC">
+<meta property="og:title" content="Week 60 - PilotNet, MoE y Monolítico (CARLA)">
+<meta property="og:url" content="http://localhost:4000/weekly%20log/week60/">
+
+
+  <meta property="og:description" content="Resultados de comparación: Burbuja (autopiloto) vs Control Manual (teleoperado) usando modelo PilotNet">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2025-08-31T00:00:00-05:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/weekly%20log/week60/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Carlos Andrés Velásquez Ospina",
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Robotics Lab URJC Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/logo.png" alt="Robotics Lab URJC"></a>
+        
+        <a class="site-title" href="/">
+          Robotics Lab URJC
+          <span class="site-subtitle">Programming Robot Intelligence</span>
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="https://mmistakes.github.io/minimal-mistakes/docs/quick-start-guide/">Quick-Start Guide</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+    <div class="author__avatar">
+      <a href="http://localhost:4000/">
+        <img src="/assets/images/me.jpg" alt="Carlos Velásquez" itemprop="image" class="u-photo">
+      </a>
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      <a class="u-url" rel="me" href="http://localhost:4000/" itemprop="url">Carlos Velásquez</a>
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>Doctoral thesis blog</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name" class="p-locality">Medellín</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="mailto:canveo@gmail.com" rel="nofollow noopener noreferrer me"><i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">Email</span></a></li>
+          
+        
+          
+            <li><a href="https://github.com/canveo" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/canveo/" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span class="label">LinkedIn</span></a></li>
+          
+        
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:canveo@gmail.com" rel="me" class="u-email">
+            <meta itemprop="email" content="canveo@gmail.com" />
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">Email</span>
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer me">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Week 60 - PilotNet, MoE y Monolítico (CARLA)">
+    <meta itemprop="description" content="Resultados de comparación: Burbuja (autopiloto) vs Control Manual (teleoperado) usando modelo PilotNet">
+    <meta itemprop="datePublished" content="2025-08-31T00:00:00-05:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="http://localhost:4000/weekly%20log/week60/" class="u-url" itemprop="url">Week 60 - PilotNet, MoE y Monolítico (CARLA)
+</a>
+          </h1>
+          
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          4 minute read
+        
+      </span>
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        <h1 id="resultados-de-comparación-burbuja-autopiloto-vs-control-manual-teleoperado-usando-modelo-pilotnet">Resultados de comparación: Burbuja (autopiloto) vs Control Manual (teleoperado) usando modelo PilotNet</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Métrica</th>
+      <th style="text-align: right">Burbuja (Autopiloto)</th>
+      <th style="text-align: right">Control Manual (Humano)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Distancia completada (m)</td>
+      <td style="text-align: right">779.06</td>
+      <td style="text-align: right">616.84</td>
+    </tr>
+    <tr>
+      <td>Distancia efectiva (m)</td>
+      <td style="text-align: right">277.00</td>
+      <td style="text-align: right">373.00</td>
+    </tr>
+    <tr>
+      <td>Velocidad promedio (km/h)</td>
+      <td style="text-align: right">16.94</td>
+      <td style="text-align: right">29.95</td>
+    </tr>
+    <tr>
+      <td>Velocidad máxima (km/h)</td>
+      <td style="text-align: right">22.73</td>
+      <td style="text-align: right">38.49</td>
+    </tr>
+    <tr>
+      <td>Velocidad mínima (km/h)</td>
+      <td style="text-align: right">7.14</td>
+      <td style="text-align: right">-0.72</td>
+    </tr>
+    <tr>
+      <td>Desviación posición media (m)</td>
+      <td style="text-align: right">1.11</td>
+      <td style="text-align: right">0.87</td>
+    </tr>
+    <tr>
+      <td>Desviación media por km (m/km)</td>
+      <td style="text-align: right">4.02</td>
+      <td style="text-align: right">2.32</td>
+    </tr>
+    <tr>
+      <td>Errores de posición total (m)</td>
+      <td style="text-align: right">2462.84</td>
+      <td style="text-align: right">856.69</td>
+    </tr>
+    <tr>
+      <td>Colisiones</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">0</td>
+    </tr>
+    <tr>
+      <td>Invasiones de carril</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">0</td>
+    </tr>
+    <tr>
+      <td>Suddenness velocidad (∑ dist)</td>
+      <td style="text-align: right">0.198</td>
+      <td style="text-align: right">0.274</td>
+    </tr>
+    <tr>
+      <td>Suddenness comandos (∑ dist)</td>
+      <td style="text-align: right">0.190</td>
+      <td style="text-align: right">0.087</td>
+    </tr>
+    <tr>
+      <td>Suddenness por km – velocidad</td>
+      <td style="text-align: right">0.713</td>
+      <td style="text-align: right">0.735</td>
+    </tr>
+    <tr>
+      <td>Suddenness por km – control</td>
+      <td style="text-align: right">0.685</td>
+      <td style="text-align: right">0.235</td>
+    </tr>
+    <tr>
+      <td>Suddenness por km – throttle</td>
+      <td style="text-align: right">0.660</td>
+      <td style="text-align: right">0.111</td>
+    </tr>
+    <tr>
+      <td>Suddenness por km – steer</td>
+      <td style="text-align: right">0.076</td>
+      <td style="text-align: right">0.157</td>
+    </tr>
+    <tr>
+      <td>Tiempo simulado total (s)</td>
+      <td style="text-align: right">165</td>
+      <td style="text-align: right">73</td>
+    </tr>
+    <tr>
+      <td>Tiempo real total (s)</td>
+      <td style="text-align: right">320.12</td>
+      <td style="text-align: right">159.16</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+<h1 id="comparación-de-métricas-offline-pilotnet-entrenado-con-datasets-diferentes">Comparación de métricas offline: PilotNet entrenado con datasets diferentes</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Dataset / Modelo</th>
+      <th style="text-align: right">Steer MSE</th>
+      <th style="text-align: right">Steer RMSE</th>
+      <th style="text-align: right">Steer MAE</th>
+      <th style="text-align: right">Throttle MSE</th>
+      <th style="text-align: right">Throttle RMSE</th>
+      <th style="text-align: right">Throttle MAE</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Control manual</strong></td>
+      <td style="text-align: right">0.1123</td>
+      <td style="text-align: right">0.3351</td>
+      <td style="text-align: right">0.2249</td>
+      <td style="text-align: right">0.1588</td>
+      <td style="text-align: right">0.3985</td>
+      <td style="text-align: right">0.3846</td>
+    </tr>
+    <tr>
+      <td><strong>Burbuja (autopiloto)</strong></td>
+      <td style="text-align: right">0.2487</td>
+      <td style="text-align: right">0.4987</td>
+      <td style="text-align: right">0.1483</td>
+      <td style="text-align: right">0.4067</td>
+      <td style="text-align: right">0.6375</td>
+      <td style="text-align: right">0.3939</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h1 id="moe-desempeño-al-lanzar-el-modelo-a-distintas-velocidades-objetivo">MoE: desempeño al lanzar el modelo a distintas velocidades objetivo</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: right">Vel. de lanzamiento (km/h)</th>
+      <th style="text-align: right">Vel. prom. (km/h)</th>
+      <th style="text-align: right">Vel. máx. (km/h)</th>
+      <th style="text-align: right">Dist. completada (m)</th>
+      <th style="text-align: right">Dist. efectiva (m)</th>
+      <th style="text-align: right">Desv. pos. media (m)</th>
+      <th style="text-align: right">Desv. por km (m/km)</th>
+      <th style="text-align: right">Suddenness/km velocidad</th>
+      <th style="text-align: right">Suddenness/km control</th>
+      <th style="text-align: right">Suddenness/km steer</th>
+      <th style="text-align: right">Colisiones</th>
+      <th style="text-align: right">Invasiones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: right">15</td>
+      <td style="text-align: right">45.998</td>
+      <td style="text-align: right">70.359</td>
+      <td style="text-align: right">381.133</td>
+      <td style="text-align: right">84.5</td>
+      <td style="text-align: right">1.066</td>
+      <td style="text-align: right">12.621</td>
+      <td style="text-align: right">10.552</td>
+      <td style="text-align: right">2.425</td>
+      <td style="text-align: right">0.382</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">0</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">30</td>
+      <td style="text-align: right">31.754</td>
+      <td style="text-align: right">60.282</td>
+      <td style="text-align: right">536.225</td>
+      <td style="text-align: right">126.0</td>
+      <td style="text-align: right">1.213</td>
+      <td style="text-align: right">9.630</td>
+      <td style="text-align: right">4.835</td>
+      <td style="text-align: right">1.874</td>
+      <td style="text-align: right">0.311</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">0</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">45</td>
+      <td style="text-align: right">39.786</td>
+      <td style="text-align: right">67.051</td>
+      <td style="text-align: right">672.597</td>
+      <td style="text-align: right">158.0</td>
+      <td style="text-align: right">1.843</td>
+      <td style="text-align: right">11.664</td>
+      <td style="text-align: right">3.790</td>
+      <td style="text-align: right">1.801</td>
+      <td style="text-align: right">0.261</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">0</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">60</td>
+      <td style="text-align: right">46.651</td>
+      <td style="text-align: right">71.873</td>
+      <td style="text-align: right">344.088</td>
+      <td style="text-align: right">53.0</td>
+      <td style="text-align: right">1.391</td>
+      <td style="text-align: right">26.248</td>
+      <td style="text-align: right">19.315</td>
+      <td style="text-align: right">3.974</td>
+      <td style="text-align: right">0.875</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">0</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">80</td>
+      <td style="text-align: right">30.309</td>
+      <td style="text-align: right">77.341</td>
+      <td style="text-align: right">680.149</td>
+      <td style="text-align: right">192.5</td>
+      <td style="text-align: right">1.128</td>
+      <td style="text-align: right">5.860</td>
+      <td style="text-align: right">3.118</td>
+      <td style="text-align: right">1.467</td>
+      <td style="text-align: right">0.262</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">0</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">100</td>
+      <td style="text-align: right">27.730</td>
+      <td style="text-align: right">90.706</td>
+      <td style="text-align: right">497.626</td>
+      <td style="text-align: right">109.0</td>
+      <td style="text-align: right">1.304</td>
+      <td style="text-align: right">11.960</td>
+      <td style="text-align: right">6.005</td>
+      <td style="text-align: right">2.304</td>
+      <td style="text-align: right">0.536</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">0</td>
+    </tr>
+  </tbody>
+</table>
+
+<h1 id="modelo-monolítico-desempeño-a-diferentes-velocidades-de-lanzamiento">Modelo Monolítico: desempeño a diferentes velocidades de lanzamiento</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: right">Vel. lanzamiento (km/h)</th>
+      <th style="text-align: right">Vel. prom. (km/h)</th>
+      <th style="text-align: right">Vel. máx. (km/h)</th>
+      <th style="text-align: right">Desv. pos./km (m/km)</th>
+      <th style="text-align: right">Suddenness vel./km</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: right"><strong>15</strong></td>
+      <td style="text-align: right">19.36</td>
+      <td style="text-align: right">36.67</td>
+      <td style="text-align: right">3.18</td>
+      <td style="text-align: right">0.93</td>
+    </tr>
+    <tr>
+      <td style="text-align: right"><strong>30</strong></td>
+      <td style="text-align: right">45.28</td>
+      <td style="text-align: right">63.07</td>
+      <td style="text-align: right">6.71</td>
+      <td style="text-align: right">2.63</td>
+    </tr>
+    <tr>
+      <td style="text-align: right"><strong>45</strong></td>
+      <td style="text-align: right">19.92</td>
+      <td style="text-align: right">51.65</td>
+      <td style="text-align: right">3.30</td>
+      <td style="text-align: right">0.91</td>
+    </tr>
+    <tr>
+      <td style="text-align: right"><strong>60</strong></td>
+      <td style="text-align: right">35.21</td>
+      <td style="text-align: right">60.66</td>
+      <td style="text-align: right">2.35</td>
+      <td style="text-align: right">1.30</td>
+    </tr>
+    <tr>
+      <td style="text-align: right"><strong>80</strong></td>
+      <td style="text-align: right">46.10</td>
+      <td style="text-align: right">81.12</td>
+      <td style="text-align: right">4.45</td>
+      <td style="text-align: right">2.16</td>
+    </tr>
+    <tr>
+      <td style="text-align: right"><strong>100</strong></td>
+      <td style="text-align: right">45.32</td>
+      <td style="text-align: right">105.13</td>
+      <td style="text-align: right">3.24</td>
+      <td style="text-align: right">2.07</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h1 id="comparación-moe-vs-monolítico-a-diferentes-velocidades-de-lanzamiento">Comparación MoE vs Monolítico a diferentes velocidades de lanzamiento</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: right">Vel. lanzamiento (km/h)</th>
+      <th style="text-align: right">Desv./km MoE</th>
+      <th style="text-align: right">Suddenness/km MoE</th>
+      <th style="text-align: right">Desv./km Monolítico</th>
+      <th style="text-align: right">Suddenness/km Monolítico</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: right"><strong>15</strong></td>
+      <td style="text-align: right">12.62</td>
+      <td style="text-align: right">10.55</td>
+      <td style="text-align: right">3.18</td>
+      <td style="text-align: right">0.93</td>
+    </tr>
+    <tr>
+      <td style="text-align: right"><strong>30</strong></td>
+      <td style="text-align: right">9.63</td>
+      <td style="text-align: right">4.83</td>
+      <td style="text-align: right">6.71</td>
+      <td style="text-align: right">2.63</td>
+    </tr>
+    <tr>
+      <td style="text-align: right"><strong>45</strong></td>
+      <td style="text-align: right">11.66</td>
+      <td style="text-align: right">3.79</td>
+      <td style="text-align: right">3.30</td>
+      <td style="text-align: right">0.91</td>
+    </tr>
+    <tr>
+      <td style="text-align: right"><strong>60</strong></td>
+      <td style="text-align: right">26.25</td>
+      <td style="text-align: right">19.31</td>
+      <td style="text-align: right">2.35</td>
+      <td style="text-align: right">1.30</td>
+    </tr>
+    <tr>
+      <td style="text-align: right"><strong>80</strong></td>
+      <td style="text-align: right">5.86</td>
+      <td style="text-align: right">3.12</td>
+      <td style="text-align: right">4.45</td>
+      <td style="text-align: right">2.16</td>
+    </tr>
+    <tr>
+      <td style="text-align: right"><strong>100</strong></td>
+      <td style="text-align: right">11.96</td>
+      <td style="text-align: right">6.00</td>
+      <td style="text-align: right">3.24</td>
+      <td style="text-align: right">2.07</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+<h1 id="resultados-de-comparación-monolítico-vs-moe-efficientnetv2-s-dataset-teleoperado">Resultados de comparación: Monolítico vs MoE (EfficientNetV2-S, dataset teleoperado)</h1>
+<ol>
+  <li>Evaluación Offline (Dataset teleoperado)</li>
+</ol>
+
+<table>
+  <thead>
+    <tr>
+      <th>Modelo</th>
+      <th style="text-align: right">Steer MSE</th>
+      <th style="text-align: right">Steer RMSE</th>
+      <th style="text-align: right">Steer MAE</th>
+      <th style="text-align: right">Throttle MSE</th>
+      <th style="text-align: right">Throttle RMSE</th>
+      <th style="text-align: right">Throttle MAE</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Monolítico</strong></td>
+      <td style="text-align: right">0.0854</td>
+      <td style="text-align: right">0.2922</td>
+      <td style="text-align: right">0.1650</td>
+      <td style="text-align: right">0.2146</td>
+      <td style="text-align: right">0.4632</td>
+      <td style="text-align: right">0.3936</td>
+    </tr>
+    <tr>
+      <td><strong>Experto – Curva</strong></td>
+      <td style="text-align: right">0.2213</td>
+      <td style="text-align: right">0.4704</td>
+      <td style="text-align: right">0.1085</td>
+      <td style="text-align: right">0.5097</td>
+      <td style="text-align: right">0.7139</td>
+      <td style="text-align: right">0.3952</td>
+    </tr>
+    <tr>
+      <td><strong>Experto – Recta</strong></td>
+      <td style="text-align: right">0.2592</td>
+      <td style="text-align: right">0.5091</td>
+      <td style="text-align: right">0.1214</td>
+      <td style="text-align: right">0.4886</td>
+      <td style="text-align: right">0.6990</td>
+      <td style="text-align: right">0.3802</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<ol>
+  <li>Evaluación Online (Simulación con Behavior Metrics)</li>
+</ol>
+
+<table>
+  <thead>
+    <tr>
+      <th>Métrica</th>
+      <th style="text-align: right">Monolítico (EfficientNetV2-S)</th>
+      <th style="text-align: right">MoE (EfficientNetV2-S)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Distancia completada (m)</td>
+      <td style="text-align: right">780.14</td>
+      <td style="text-align: right">788.81</td>
+    </tr>
+    <tr>
+      <td>Distancia efectiva (m)</td>
+      <td style="text-align: right">256.00</td>
+      <td style="text-align: right">141.50</td>
+    </tr>
+    <tr>
+      <td>% completado</td>
+      <td style="text-align: right">0.0169</td>
+      <td style="text-align: right">0.0169</td>
+    </tr>
+    <tr>
+      <td>Velocidad promedio (km/h)</td>
+      <td style="text-align: right">44.87</td>
+      <td style="text-align: right">53.34</td>
+    </tr>
+    <tr>
+      <td>Velocidad máxima (km/h)</td>
+      <td style="text-align: right">66.77</td>
+      <td style="text-align: right">77.77</td>
+    </tr>
+    <tr>
+      <td>Velocidad mínima (km/h)</td>
+      <td style="text-align: right">25.19</td>
+      <td style="text-align: right">16.69</td>
+    </tr>
+    <tr>
+      <td>Desviación posición media (m)</td>
+      <td style="text-align: right">0.873</td>
+      <td style="text-align: right">1.103</td>
+    </tr>
+    <tr>
+      <td>Desviación media por km (m/km)</td>
+      <td style="text-align: right">3.41</td>
+      <td style="text-align: right">7.79</td>
+    </tr>
+    <tr>
+      <td>Errores de posición total (m)</td>
+      <td style="text-align: right">733.55</td>
+      <td style="text-align: right">787.34</td>
+    </tr>
+    <tr>
+      <td>Colisiones</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">0</td>
+    </tr>
+    <tr>
+      <td>Invasiones de carril</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">0</td>
+    </tr>
+    <tr>
+      <td>Suddenness velocidad (∑ dist)</td>
+      <td style="text-align: right">0.489</td>
+      <td style="text-align: right">0.748</td>
+    </tr>
+    <tr>
+      <td>Suddenness comandos (∑ dist)</td>
+      <td style="text-align: right">0.139</td>
+      <td style="text-align: right">0.181</td>
+    </tr>
+    <tr>
+      <td>Suddenness por km – velocidad</td>
+      <td style="text-align: right">1.91</td>
+      <td style="text-align: right">5.28</td>
+    </tr>
+    <tr>
+      <td>Suddenness por km – control</td>
+      <td style="text-align: right">0.543</td>
+      <td style="text-align: right">1.28</td>
+    </tr>
+    <tr>
+      <td>Suddenness por km – throttle</td>
+      <td style="text-align: right">0.450</td>
+      <td style="text-align: right">1.18</td>
+    </tr>
+    <tr>
+      <td>Suddenness por km – steer</td>
+      <td style="text-align: right">0.200</td>
+      <td style="text-align: right">0.212</td>
+    </tr>
+    <tr>
+      <td>Tiempo simulado total (s)</td>
+      <td style="text-align: right">63</td>
+      <td style="text-align: right">53</td>
+    </tr>
+    <tr>
+      <td>Tiempo real total (s)</td>
+      <td style="text-align: right">273.67</td>
+      <td style="text-align: right">122.06</td>
+    </tr>
+  </tbody>
+</table>
+
+<h1 id="pruebas-de-robustez-moe">Pruebas de robustez (MoE)</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: right">Caso</th>
+      <th style="text-align: right">Dist. completada (m)</th>
+      <th style="text-align: right">Dist. efectiva (m)</th>
+      <th style="text-align: right">Vel. prom. (km/h)</th>
+      <th style="text-align: right">Vel. máx. (km/h)</th>
+      <th style="text-align: right">Desv./km (m/km)</th>
+      <th style="text-align: right">Suddenness/km (vel.)</th>
+      <th style="text-align: right">Suddenness/km (control)</th>
+      <th style="text-align: right">Suddenness/km (steer)</th>
+      <th style="text-align: right">Colisiones</th>
+      <th style="text-align: right">Invasiones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: right"><strong>1</strong></td>
+      <td style="text-align: right">192.07</td>
+      <td style="text-align: right">41.0</td>
+      <td style="text-align: right">21.81</td>
+      <td style="text-align: right">40.14</td>
+      <td style="text-align: right">34.13</td>
+      <td style="text-align: right">10.06</td>
+      <td style="text-align: right">6.55</td>
+      <td style="text-align: right">1.47</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">0</td>
+    </tr>
+    <tr>
+      <td style="text-align: right"><strong>2</strong></td>
+      <td style="text-align: right">238.35</td>
+      <td style="text-align: right">56.0</td>
+      <td style="text-align: right">21.74</td>
+      <td style="text-align: right">52.79</td>
+      <td style="text-align: right">50.42</td>
+      <td style="text-align: right">7.87</td>
+      <td style="text-align: right">3.65</td>
+      <td style="text-align: right">1.41</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">0</td>
+    </tr>
+    <tr>
+      <td style="text-align: right"><strong>3</strong></td>
+      <td style="text-align: right">222.06</td>
+      <td style="text-align: right">115.5</td>
+      <td style="text-align: right">12.47</td>
+      <td style="text-align: right">24.43</td>
+      <td style="text-align: right">25.25</td>
+      <td style="text-align: right">2.17</td>
+      <td style="text-align: right">2.77</td>
+      <td style="text-align: right">0.75</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">0</td>
+    </tr>
+    <tr>
+      <td style="text-align: right"><strong>4</strong></td>
+      <td style="text-align: right">188.99</td>
+      <td style="text-align: right">46.5</td>
+      <td style="text-align: right">29.89</td>
+      <td style="text-align: right">55.62</td>
+      <td style="text-align: right">41.43</td>
+      <td style="text-align: right">11.16</td>
+      <td style="text-align: right">5.81</td>
+      <td style="text-align: right">1.71</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">0</td>
+    </tr>
+  </tbody>
+</table>
+
+<h1 id="pruebas-de-robustez-monolítico">Pruebas de robustez (Monolítico)</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: right">Caso</th>
+      <th style="text-align: right">Dist. completada (m)</th>
+      <th style="text-align: right">Dist. efectiva (m)</th>
+      <th style="text-align: right">Vel. prom. (km/h)</th>
+      <th style="text-align: right">Vel. máx. (km/h)</th>
+      <th style="text-align: right">Desv./km (m/km)</th>
+      <th style="text-align: right">Suddenness/km (vel.)</th>
+      <th style="text-align: right">Suddenness/km (control)</th>
+      <th style="text-align: right">Suddenness/km (steer)</th>
+      <th style="text-align: right">Colisiones</th>
+      <th style="text-align: right">Invasiones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: right"><strong>1</strong></td>
+      <td style="text-align: right">89.58</td>
+      <td style="text-align: right">38.5</td>
+      <td style="text-align: right">13.56</td>
+      <td style="text-align: right">35.02</td>
+      <td style="text-align: right">50.24</td>
+      <td style="text-align: right">6.75</td>
+      <td style="text-align: right">6.21</td>
+      <td style="text-align: right">3.17</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">0</td>
+    </tr>
+    <tr>
+      <td style="text-align: right"><strong>2</strong></td>
+      <td style="text-align: right">71.94</td>
+      <td style="text-align: right">22.5</td>
+      <td style="text-align: right">12.67</td>
+      <td style="text-align: right">19.15</td>
+      <td style="text-align: right">107.66</td>
+      <td style="text-align: right">13.75</td>
+      <td style="text-align: right">9.46</td>
+      <td style="text-align: right">4.46</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">0</td>
+    </tr>
+    <tr>
+      <td style="text-align: right"><strong>3</strong></td>
+      <td style="text-align: right">63.06</td>
+      <td style="text-align: right">6.0</td>
+      <td style="text-align: right">10.95</td>
+      <td style="text-align: right">34.02</td>
+      <td style="text-align: right">1587.68</td>
+      <td style="text-align: right">46.37</td>
+      <td style="text-align: right">31.71</td>
+      <td style="text-align: right">17.44</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">0</td>
+    </tr>
+    <tr>
+      <td style="text-align: right"><strong>4</strong></td>
+      <td style="text-align: right">71.19</td>
+      <td style="text-align: right">17.0</td>
+      <td style="text-align: right">18.28</td>
+      <td style="text-align: right">27.13</td>
+      <td style="text-align: right">162.82</td>
+      <td style="text-align: right">25.82</td>
+      <td style="text-align: right">14.40</td>
+      <td style="text-align: right">6.83</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">0</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h2 id="resumen-de-resultados">Resumen de resultados</h2>
+
+<ul>
+  <li>
+    <p><strong>PilotNet (dataset):</strong> control manual con menor desviación media, menor error por km y mayor suavidad; la burbuja recorre más distancia pero a menor velocidad y con mayor error.</p>
+  </li>
+  <li>
+    <p><strong>PilotNet (offline):</strong> el dataset teleoperado mejora throttle y steer en MSE/RMSE; la burbuja obtiene menor Steer MAE.</p>
+  </li>
+  <li>
+    <p><strong>MoE vs Monolítico (lanzamiento por velocidad):</strong> el monolítico presenta menores desviaciones y suddenness en la mayoría de velocidades; el MoE es más variable (peor a 60 km/h, mejor a 80 km/h).</p>
+  </li>
+  <li>
+    <p><strong>EfficientNetV2-S (online):</strong> el monolítico muestra menor desviación media (0.873 m vs. 1.103 m) y menor error por km (3.41 vs. 7.79); el MoE alcanza mayores velocidades.</p>
+  </li>
+  <li>
+    <p><strong>Robustez:</strong> el MoE logra recuperaciones aceptables en algunos casos pero con alta variabilidad; el monolítico exhibe desviaciones extremas en ciertos escenarios adversos.</p>
+  </li>
+</ul>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/tags/#behaviormetrics" class="page__taxonomy-item p-category" rel="tag">BehaviorMetrics</a><span class="sep">, </span>
+    
+      <a href="/tags/#carla-simulator" class="page__taxonomy-item p-category" rel="tag">CARLA Simulator</a><span class="sep">, </span>
+    
+      <a href="/tags/#python" class="page__taxonomy-item p-category" rel="tag">Python</a><span class="sep">, </span>
+    
+      <a href="/tags/#ros-2" class="page__taxonomy-item p-category" rel="tag">ROS 2</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#weekly-log" class="page__taxonomy-item p-category" rel="tag">weekly Log</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2025-08-31T00:00:00-05:00">August 31, 2025</time></p>
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Week+60+-+PilotNet%2C+MoE+y+Monol%C3%ADtico+%28CARLA%29%20http%3A%2F%2Flocalhost%3A4000%2Fweekly%2520log%2Fweek60%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fweekly%2520log%2Fweek60%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fweekly%2520log%2Fweek60%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/weekly%20log/week59/" class="pagination--pager" title="Week 59 - Comparativa de modelos para conducción autónoma en CARLA
+">Previous</a>
+    
+    
+      <a href="/weekly%20log/week61/" class="pagination--pager" title="Week 61 - Dataset, Autopilot vs. Teleoperado
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h2 class="page__related-title">You may also enjoy</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/weekly%20log/week89/" rel="permalink">Week 89 - Robustez del piloto, Caso Canónico, 15 Casos y Pruebas de Velocidad
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          12 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">En esta entrada reporto los resultados de robustez en CARLA Town02 comparando cinco políticas/datasets bajo el mismo circuito de prueba, con 6 repeticiones p...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/weekly%20log/week88/" rel="permalink">Week 88 - Actualización de métricas en BehaviorMetrics (CARLA), comparación contra ruta ideal
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          2 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Actualización de métricas en BehaviorMetrics (CARLA)
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/weekly%20log/week87/" rel="permalink">Week 87 - Actualización de métricas en CARLA
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          9 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">En esta semana consolidé el reporte comparativo de cinco variantes de entrenamiento (Burbuja, Noise injection, DAgger 16k, DAgger 27.6k y DAgger agresivo) us...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/weekly%20log/week86/" rel="permalink">Week 86 - Actualización de métricas en CARLA
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          2 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Se realizaron mejoras en la forma de reportar el desempeño del vehículo autónomo en simulación, con el objetivo de que las métricas reflejen con mayor fideli...</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2026 Carlos Andrés Velásquez Ospina. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+  </body>
+</html>

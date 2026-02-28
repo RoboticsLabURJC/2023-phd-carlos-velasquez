@@ -1,0 +1,883 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Week 66 - Dataset DAgger Teleoperado con estrategia agresiva - Robotics Lab URJC</title>
+<meta name="description" content="Dataset DAgger + Teleoperado(Estrategia agresiva)">
+
+
+  <meta name="author" content="Carlos Velásquez">
+  
+  <meta property="article:author" content="Carlos Velásquez">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Robotics Lab URJC">
+<meta property="og:title" content="Week 66 - Dataset DAgger Teleoperado con estrategia agresiva">
+<meta property="og:url" content="http://localhost:4000/weekly%20log/week66/">
+
+
+  <meta property="og:description" content="Dataset DAgger + Teleoperado(Estrategia agresiva)">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2025-10-05T00:00:00-05:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/weekly%20log/week66/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Carlos Andrés Velásquez Ospina",
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Robotics Lab URJC Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/logo.png" alt="Robotics Lab URJC"></a>
+        
+        <a class="site-title" href="/">
+          Robotics Lab URJC
+          <span class="site-subtitle">Programming Robot Intelligence</span>
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="https://mmistakes.github.io/minimal-mistakes/docs/quick-start-guide/">Quick-Start Guide</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+    <div class="author__avatar">
+      <a href="http://localhost:4000/">
+        <img src="/assets/images/me.jpg" alt="Carlos Velásquez" itemprop="image" class="u-photo">
+      </a>
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      <a class="u-url" rel="me" href="http://localhost:4000/" itemprop="url">Carlos Velásquez</a>
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>Doctoral thesis blog</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name" class="p-locality">Medellín</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="mailto:canveo@gmail.com" rel="nofollow noopener noreferrer me"><i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">Email</span></a></li>
+          
+        
+          
+            <li><a href="https://github.com/canveo" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/canveo/" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span class="label">LinkedIn</span></a></li>
+          
+        
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:canveo@gmail.com" rel="me" class="u-email">
+            <meta itemprop="email" content="canveo@gmail.com" />
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">Email</span>
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer me">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Week 66 - Dataset DAgger Teleoperado con estrategia agresiva">
+    <meta itemprop="description" content="Dataset DAgger + Teleoperado(Estrategia agresiva)">
+    <meta itemprop="datePublished" content="2025-10-05T00:00:00-05:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="http://localhost:4000/weekly%20log/week66/" class="u-url" itemprop="url">Week 66 - Dataset DAgger Teleoperado con estrategia agresiva
+</a>
+          </h1>
+          
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          1 minute read
+        
+      </span>
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        <h3 id="dataset-dagger--teleoperadoestrategia-agresiva">Dataset DAgger + Teleoperado(Estrategia agresiva)</h3>
+
+<p>Se generó un nuevo dataset con la técnica DAgger + teleoperación, esta vez con una agresividad mayor en la aceleración durante las curvas: se entra a una velocidad suficientemente alta y se mantiene o incrementa el throttle mientras se ejecuta la maniobra. Durante la corrección con DAgger, se prioriza acelerar o sostener la velocidad para recuperar el control sin perder ritmo. Esta estrategia, en ocasiones, puede provocar derrapes o choques en curvas muy exigentes.</p>
+
+<p>Dataset balanceado: 120 000 imágenes.</p>
+
+<h4 id="test-offline">Test Offline</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>Modelo</th>
+      <th style="text-align: right">Steer MSE ↓</th>
+      <th style="text-align: right">Steer MAE ↓</th>
+      <th style="text-align: right">Throttle MSE ↓</th>
+      <th style="text-align: right">Throttle MAE ↓</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>DAgger agresivo</strong></td>
+      <td style="text-align: right">0.3391</td>
+      <td style="text-align: right">0.2049</td>
+      <td style="text-align: right">0.3997</td>
+      <td style="text-align: right"><strong>0.3301</strong></td>
+    </tr>
+    <tr>
+      <td><strong>DAgger suave</strong></td>
+      <td style="text-align: right">0.2910</td>
+      <td style="text-align: right">0.1995</td>
+      <td style="text-align: right">0.4920</td>
+      <td style="text-align: right">0.4778</td>
+    </tr>
+    <tr>
+      <td><strong>Control manual (sin DAgger)</strong></td>
+      <td style="text-align: right"><strong>0.0854</strong></td>
+      <td style="text-align: right"><strong>0.1650</strong></td>
+      <td style="text-align: right"><strong>0.2146</strong></td>
+      <td style="text-align: right">0.3936</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="test-online">Test Online</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>Métrica</th>
+      <th style="text-align: right">DAgger <strong>agresivo</strong> (<code class="language-plaintext highlighter-rouge">efficientnet_MC_DAgger_agresivo.onnx</code>)</th>
+      <th style="text-align: right">DAgger <strong>suave</strong> (<code class="language-plaintext highlighter-rouge">efficientnet_CM_dagger.onnx</code>)</th>
+      <th style="text-align: right"><strong>Control manual</strong> sin DAgger (<code class="language-plaintext highlighter-rouge">efficientnet_control_manual.onnx</code>)</th>
+      <th> </th>
+      <th> </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>completed_distance (m)</td>
+      <td style="text-align: right"><strong>779.2342409198</strong></td>
+      <td style="text-align: right">760.3469321578</td>
+      <td style="text-align: right">754.6531586489</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>effective_completed_distance (m)</td>
+      <td style="text-align: right">142.5</td>
+      <td style="text-align: right">90.0</td>
+      <td style="text-align: right"><strong>295.5</strong></td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>average_speed (m/s)</td>
+      <td style="text-align: right"><strong>56.3152300875</strong></td>
+      <td style="text-align: right">41.9236515462</td>
+      <td style="text-align: right">48.8766093160</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>max_speed (m/s)</td>
+      <td style="text-align: right"><strong>92.6306144714</strong></td>
+      <td style="text-align: right">54.1024612427</td>
+      <td style="text-align: right">73.6216300964</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>min_speed (m/s)</td>
+      <td style="text-align: right">-20.4941625595</td>
+      <td style="text-align: right"><strong>-6.2457731786e-08</strong></td>
+      <td style="text-align: right">-6.5125012583e-08</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>suddenness_distance_speed (Σdist) ↓</td>
+      <td style="text-align: right">0.6794104288</td>
+      <td style="text-align: right">0.2989997684</td>
+      <td style="text-align: right"><strong>0.2760263849</strong></td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>suddenness_distance_control_commands (Σdist) ↓</td>
+      <td style="text-align: right">0.1591011617</td>
+      <td style="text-align: right">0.1430958504</td>
+      <td style="text-align: right"><strong>0.1369605696</strong></td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>suddenness_distance_throttle (Σdist) ↓</td>
+      <td style="text-align: right"><strong>0.1005882070</strong></td>
+      <td style="text-align: right">0.1113228841</td>
+      <td style="text-align: right">0.1042573977</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>suddenness_distance_steer (Σdist) ↓</td>
+      <td style="text-align: right">0.0982481461</td>
+      <td style="text-align: right">0.0638630983</td>
+      <td style="text-align: right"><strong>0.0611808752</strong></td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>suddenness_distance_brake_command (Σdist) ↓</td>
+      <td style="text-align: right"><strong>0.0</strong></td>
+      <td style="text-align: right"><strong>0.0</strong></td>
+      <td style="text-align: right"><strong>0.0</strong></td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>collisions ↓</td>
+      <td style="text-align: right"><strong>0</strong></td>
+      <td style="text-align: right"><strong>0</strong></td>
+      <td style="text-align: right"><strong>0</strong></td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>lane_invasions ↓</td>
+      <td style="text-align: right"><strong>0</strong></td>
+      <td style="text-align: right"><strong>0</strong></td>
+      <td style="text-align: right"><strong>0</strong></td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>experiment_total_simulated_time (s) ↓</td>
+      <td style="text-align: right"><strong>49</strong></td>
+      <td style="text-align: right">65</td>
+      <td style="text-align: right">56</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>experiment_total_real_time (s) ↓</td>
+      <td style="text-align: right"><strong>107.8681654930</strong></td>
+      <td style="text-align: right">128.3368601799</td>
+      <td style="text-align: right">124.5458168983</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>position_deviation_mean (m) ↓</td>
+      <td style="text-align: right">1.2231295873</td>
+      <td style="text-align: right">1.4993750120</td>
+      <td style="text-align: right"><strong>0.8921543397</strong></td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>position_deviation_mean_per_km (m/km) ↓</td>
+      <td style="text-align: right">8.5833655249</td>
+      <td style="text-align: right">16.6597223551</td>
+      <td style="text-align: right"><strong>3.0191348214</strong></td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>suddenness_distance_control_command_per_km ↓</td>
+      <td style="text-align: right">1.1164993803</td>
+      <td style="text-align: right">1.5899538928</td>
+      <td style="text-align: right"><strong>0.4634875453</strong></td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>suddenness_distance_throttle_per_km ↓</td>
+      <td style="text-align: right">0.7058821547</td>
+      <td style="text-align: right">1.2369209349</td>
+      <td style="text-align: right"><strong>0.3528169127</strong></td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>suddenness_distance_steer_per_km ↓</td>
+      <td style="text-align: right">0.6894606747</td>
+      <td style="text-align: right">0.7095899812</td>
+      <td style="text-align: right"><strong>0.2070418788</strong></td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>suddenness_distance_speed_per_km ↓</td>
+      <td style="text-align: right">4.7677924827</td>
+      <td style="text-align: right">3.3222196484</td>
+      <td style="text-align: right"><strong>0.9340994412</strong></td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>percentage_completed</td>
+      <td style="text-align: right"><strong>0.0169894665</strong></td>
+      <td style="text-align: right"><strong>0.0169894665</strong></td>
+      <td style="text-align: right"><strong>0.0169894665</strong></td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>completed_laps</td>
+      <td style="text-align: right"><strong>0</strong></td>
+      <td style="text-align: right"><strong>0</strong></td>
+      <td style="text-align: right"><strong>0</strong></td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>experiment_timeout (s)</td>
+      <td style="text-align: right"><strong>700</strong></td>
+      <td style="text-align: right"><strong>700</strong></td>
+      <td style="text-align: right"><strong>700</strong></td>
+      <td> </td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Resultados</strong></p>
+
+<ul>
+  <li>
+    <p>Control manual (sin DAgger): mejor seguimiento y confort. Error de posición 3.02 m/km (el más bajo), suddenness por km mínima y mayor distancia efectiva: 295.5 m. Cero colisiones/invasiones.</p>
+  </li>
+  <li>
+    <p>DAgger agresivo: el más rápido (mayor velocidad media y menor tiempo simulado: 49 s), pero con oscilaciones de velocidad más altas y un pico de velocidad mínima negativa (breve reversa/outlier).</p>
+  </li>
+  <li>
+    <p>DAgger suave: peor tracking (16.66 m/km) y menor avance útil (90 m), con suavidad de control inferior al resto.</p>
+  </li>
+</ul>
+
+<figure class="half">
+  <img src="http://localhost:4000/assets/images/week66/MC_DAgger_agresivo.png" alt="trayectoria online" style="width:90%" />
+  <figcaption>Métricas Modelo Teleoperado + DAgger (agresivo)</figcaption>
+</figure>
+
+<figure class="half">
+  <img src="http://localhost:4000/assets/images/week66/efficientnet_control_manual.png" alt="trayectoria online" style="width:90%" />
+  <figcaption>Métricas Modelo Teleoperado + DAgger (suave)</figcaption>
+</figure>
+
+<figure class="half">
+  <img src="http://localhost:4000/assets/images/week66/efficientnet_control_manual.png" alt="trayectoria online" style="width:90%" />
+  <figcaption>Métricas Modelo Teleoperado</figcaption>
+</figure>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/tags/#carla-simulator" class="page__taxonomy-item p-category" rel="tag">CARLA Simulator</a><span class="sep">, </span>
+    
+      <a href="/tags/#python" class="page__taxonomy-item p-category" rel="tag">Python</a><span class="sep">, </span>
+    
+      <a href="/tags/#ros-2" class="page__taxonomy-item p-category" rel="tag">ROS 2</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#weekly-log" class="page__taxonomy-item p-category" rel="tag">weekly Log</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2025-10-05T00:00:00-05:00">October 5, 2025</time></p>
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Week+66+-+Dataset+DAgger+Teleoperado+con+estrategia+agresiva%20http%3A%2F%2Flocalhost%3A4000%2Fweekly%2520log%2Fweek66%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fweekly%2520log%2Fweek66%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fweekly%2520log%2Fweek66%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/weekly%20log/week65/" class="pagination--pager" title="Week 65 - Corrección del problemas en la obtención de métricas
+">Previous</a>
+    
+    
+      <a href="/weekly%20log/week67/" class="pagination--pager" title="Week 67 - Monolítico vs expertos dataset teleoperado burbuja
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h2 class="page__related-title">You may also enjoy</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/weekly%20log/week89/" rel="permalink">Week 89 - Robustez del piloto, Caso Canónico, 15 Casos y Pruebas de Velocidad
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          12 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">En esta entrada reporto los resultados de robustez en CARLA Town02 comparando cinco políticas/datasets bajo el mismo circuito de prueba, con 6 repeticiones p...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/weekly%20log/week88/" rel="permalink">Week 88 - Actualización de métricas en BehaviorMetrics (CARLA), comparación contra ruta ideal
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          2 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Actualización de métricas en BehaviorMetrics (CARLA)
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/weekly%20log/week87/" rel="permalink">Week 87 - Actualización de métricas en CARLA
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          9 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">En esta semana consolidé el reporte comparativo de cinco variantes de entrenamiento (Burbuja, Noise injection, DAgger 16k, DAgger 27.6k y DAgger agresivo) us...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/weekly%20log/week86/" rel="permalink">Week 86 - Actualización de métricas en CARLA
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          2 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Se realizaron mejoras en la forma de reportar el desempeño del vehículo autónomo en simulación, con el objetivo de que las métricas reflejen con mayor fideli...</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2026 Carlos Andrés Velásquez Ospina. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+  </body>
+</html>

@@ -1,0 +1,1547 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Week 80 - Metricas de robustez por casos (burbuja + DAgger, 68/32) - Robotics Lab URJC</title>
+<meta name="description" content="Caso canónico — Comparación Burbuja vs DAgger (burbuja 68% + 32% DAgger puro)">
+
+
+  <meta name="author" content="Carlos Velásquez">
+  
+  <meta property="article:author" content="Carlos Velásquez">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Robotics Lab URJC">
+<meta property="og:title" content="Week 80 - Metricas de robustez por casos (burbuja + DAgger, 68/32)">
+<meta property="og:url" content="http://localhost:4000/weekly%20log/week80/">
+
+
+  <meta property="og:description" content="Caso canónico — Comparación Burbuja vs DAgger (burbuja 68% + 32% DAgger puro)">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2026-01-09T00:00:00-05:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/weekly%20log/week80/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Carlos Andrés Velásquez Ospina",
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Robotics Lab URJC Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/logo.png" alt="Robotics Lab URJC"></a>
+        
+        <a class="site-title" href="/">
+          Robotics Lab URJC
+          <span class="site-subtitle">Programming Robot Intelligence</span>
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="https://mmistakes.github.io/minimal-mistakes/docs/quick-start-guide/">Quick-Start Guide</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+    <div class="author__avatar">
+      <a href="http://localhost:4000/">
+        <img src="/assets/images/me.jpg" alt="Carlos Velásquez" itemprop="image" class="u-photo">
+      </a>
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      <a class="u-url" rel="me" href="http://localhost:4000/" itemprop="url">Carlos Velásquez</a>
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>Doctoral thesis blog</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name" class="p-locality">Medellín</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="mailto:canveo@gmail.com" rel="nofollow noopener noreferrer me"><i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">Email</span></a></li>
+          
+        
+          
+            <li><a href="https://github.com/canveo" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/canveo/" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span class="label">LinkedIn</span></a></li>
+          
+        
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:canveo@gmail.com" rel="me" class="u-email">
+            <meta itemprop="email" content="canveo@gmail.com" />
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">Email</span>
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer me">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Week 80 - Metricas de robustez por casos (burbuja + DAgger, 68/32)">
+    <meta itemprop="description" content="Caso canónico — Comparación Burbuja vs DAgger (burbuja 68% + 32% DAgger puro)">
+    <meta itemprop="datePublished" content="2026-01-09T00:00:00-05:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="http://localhost:4000/weekly%20log/week80/" class="u-url" itemprop="url">Week 80 - Metricas de robustez por casos (burbuja + DAgger, 68/32)
+</a>
+          </h1>
+          
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          9 minute read
+        
+      </span>
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        <h3 id="caso-canónico--comparación-burbuja-vs-dagger-burbuja-68--32-dagger-puro">Caso canónico — Comparación Burbuja vs DAgger (burbuja 68% + 32% DAgger puro)</h3>
+
+<h4 id="condiciones-de-la-prueba">Condiciones de la prueba</h4>
+
+<p>Comparación de robustez entre modelos Burbuja y DAgger (EfficientNet-V2-S)</p>
+
+<ul>
+  <li>Mismo mapa: Town02</li>
+  <li>Mismo punto inicial y final</li>
+  <li>Circuito largo</li>
+  <li>Condiciones equivalentes de simulación e inferencia</li>
+</ul>
+
+<h4 id="tabla-resumen-de-métricas-caso-canónico">Tabla resumen de métricas (Caso canónico)</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>Métrica</th>
+      <th style="text-align: right">Burbuja</th>
+      <th style="text-align: right">DAgger</th>
+      <th style="text-align: left">Mejor desempeño</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Completed distance (m)</strong> ↑</td>
+      <td style="text-align: right"><strong>760.83</strong></td>
+      <td style="text-align: right">758.91</td>
+      <td style="text-align: left">Burbuja</td>
+    </tr>
+    <tr>
+      <td><strong>Effective completed distance (m)</strong> ↑</td>
+      <td style="text-align: right">302.0</td>
+      <td style="text-align: right"><strong>309.5</strong></td>
+      <td style="text-align: left">DAgger</td>
+    </tr>
+    <tr>
+      <td><strong>Average speed (km/h)</strong></td>
+      <td style="text-align: right"><strong>63.85</strong></td>
+      <td style="text-align: right">59.80</td>
+      <td style="text-align: left">Burbuja</td>
+    </tr>
+    <tr>
+      <td><strong>Position deviation mean (m)</strong> ↓</td>
+      <td style="text-align: right">1.015</td>
+      <td style="text-align: right"><strong>0.996</strong></td>
+      <td style="text-align: left">DAgger</td>
+    </tr>
+    <tr>
+      <td><strong>Position deviation / km</strong> ↓</td>
+      <td style="text-align: right">3.360</td>
+      <td style="text-align: right"><strong>3.217</strong></td>
+      <td style="text-align: left">DAgger</td>
+    </tr>
+    <tr>
+      <td><strong>Lane invasions</strong> ↓</td>
+      <td style="text-align: right">1338</td>
+      <td style="text-align: right"><strong>1329</strong></td>
+      <td style="text-align: left">DAgger</td>
+    </tr>
+    <tr>
+      <td><strong>Lane invasions / km</strong> ↓</td>
+      <td style="text-align: right">4430</td>
+      <td style="text-align: right"><strong>4294</strong></td>
+      <td style="text-align: left">DAgger</td>
+    </tr>
+    <tr>
+      <td><strong>Collisions</strong> ↓</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: left">Empate</td>
+    </tr>
+    <tr>
+      <td><strong>Suddenness (control) / km</strong> ↓</td>
+      <td style="text-align: right"><strong>0.130</strong></td>
+      <td style="text-align: right">0.155</td>
+      <td style="text-align: left">Burbuja</td>
+    </tr>
+    <tr>
+      <td><strong>Suddenness (throttle) / km</strong> ↓</td>
+      <td style="text-align: right"><strong>0.317</strong></td>
+      <td style="text-align: right">0.369</td>
+      <td style="text-align: left">Burbuja</td>
+    </tr>
+    <tr>
+      <td><strong>Suddenness (steer) / km</strong> ↓</td>
+      <td style="text-align: right">0.036</td>
+      <td style="text-align: right"><strong>0.035</strong></td>
+      <td style="text-align: left">DAgger</td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li><strong>DAgger:</strong>
+    <ul>
+      <li>Presenta mejor estabilidad lateral.</li>
+      <li>Reduce ligeramente la acumulación de error y las invasiones de carril.</li>
+      <li>Mantiene mayor distancia efectiva útil.</li>
+    </ul>
+  </li>
+  <li><strong>Burbuja:</strong>
+    <ul>
+      <li>Conserva una conducción más suave, especialmente en aceleración.</li>
+      <li>Mantiene una velocidad media ligeramente superior.</li>
+    </ul>
+  </li>
+</ul>
+
+<p><strong>Interpretación clave:</strong></p>
+
+<p>En el caso canónico, DAgger no degrada el desempeño base y aporta mejoras medibles en estabilidad, a costa de una conducción algo menos suave. Esto indica que la exposición a estados no ideales no penaliza el comportamiento nominal y puede incluso mejorar el control lateral sostenido.</p>
+
+<p>Esta prueba establece que DAgger es al menos tan competente como Burbuja en condiciones ideales, habilitando el análisis posterior en escenarios perturbados y no vistos, donde su diseño debería mostrar ventajas más claras.</p>
+
+<h3 id="posiciones-iniciales-difíciles-variación-de-pose">Posiciones iniciales difíciles (variación de pose)</h3>
+
+<h4 id="descripción-de-la-prueba">Descripción de la prueba</h4>
+
+<ul>
+  <li>Mismo punto inicial y punto final para todos los casos.</li>
+  <li>Se modifica únicamente la pose inicial:
+    <ul>
+      <li>pequeños desplazamientos en posición,</li>
+      <li>variaciones en el ángulo de yaw.</li>
+    </ul>
+  </li>
+  <li>Todas las poses permanecen sobre la calzada.</li>
+  <li>Objetivo: evaluar capacidad de corrección inicial y estabilización temprana</li>
+</ul>
+
+<h4 id="tabla-resumen-promedios-sobre-los-5-casos">Tabla resumen (promedios sobre los 5 casos)</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>Métrica</th>
+      <th style="text-align: right">Burbuja (avg)</th>
+      <th style="text-align: right">DAgger (avg)</th>
+      <th style="text-align: left">Mejor desempeño</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Completed distance (m)</strong> ↑</td>
+      <td style="text-align: right"><strong>754.59</strong></td>
+      <td style="text-align: right">756.84</td>
+      <td style="text-align: left">≈ Empate</td>
+    </tr>
+    <tr>
+      <td><strong>Effective completed distance (m)</strong> ↑</td>
+      <td style="text-align: right"><strong>242.6</strong></td>
+      <td style="text-align: right">221.6</td>
+      <td style="text-align: left">Burbuja</td>
+    </tr>
+    <tr>
+      <td><strong>Average speed (km/h)</strong></td>
+      <td style="text-align: right"><strong>61.9</strong></td>
+      <td style="text-align: right">62.8</td>
+      <td style="text-align: left">DAgger</td>
+    </tr>
+    <tr>
+      <td><strong>Position deviation mean (m)</strong> ↓</td>
+      <td style="text-align: right"><strong>1.14</strong></td>
+      <td style="text-align: right">1.16</td>
+      <td style="text-align: left">Burbuja</td>
+    </tr>
+    <tr>
+      <td><strong>Position deviation / km</strong> ↓</td>
+      <td style="text-align: right"><strong>5.56</strong></td>
+      <td style="text-align: right">4.92</td>
+      <td style="text-align: left">DAgger</td>
+    </tr>
+    <tr>
+      <td><strong>Lane invasions / km</strong> ↓</td>
+      <td style="text-align: right"><strong>6 ,792</strong></td>
+      <td style="text-align: right">5 ,553</td>
+      <td style="text-align: left">DAgger</td>
+    </tr>
+    <tr>
+      <td><strong>Suddenness (control) / km</strong> ↓</td>
+      <td style="text-align: right"><strong>0.135</strong></td>
+      <td style="text-align: right">0.156</td>
+      <td style="text-align: left">Burbuja</td>
+    </tr>
+    <tr>
+      <td><strong>Collisions</strong> ↓</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: left">Empate</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Los resultados muestran que:</p>
+
+<p><strong>Burbuja:</strong></p>
+<ul>
+  <li>corrige más rápido perturbaciones leves de pose,
+    <ul>
+      <li>alcanza antes un régimen de conducción efectiva,</li>
+      <li>mantiene mayor suavidad en el control.
+<strong>DAgger:</strong></li>
+      <li>mantiene mejor estabilidad lateral a lo largo del episodio,</li>
+      <li>reduce la acumulación de error e invasiones de carril,</li>
+      <li>no degrada la seguridad ni el progreso total.</li>
+    </ul>
+  </li>
+</ul>
+
+<p>En perturbaciones leves y sobre la calzada, DAgger no ofrece una ventaja clara en recuperación inmediata, pero sí mejora la estabilidad sostenida tras la corrección. Esto sugiere que su fortaleza no está en “volver rápido”, sino en mantener el control una vez recuperado.</p>
+
+<p>Esta prueba refuerza la idea de que DAgger no sustituye la conducción suave del baseline, sino que introduce un control más reactivo y robusto a largo plazo, cuya ventaja debería manifestarse con mayor claridad en escenarios más alejados de la distribución Burbuja (puntos iniciales distintos y aleatorios).</p>
+
+<h3 id="posiciones-iniciales-difíciles-puntos-iniciales-distintos">Posiciones iniciales difíciles (puntos iniciales distintos)</h3>
+
+<h4 id="descripción-de-la-prueba-1">Descripción de la prueba</h4>
+
+<ul>
+  <li>Se definen cuatro puntos iniciales diferentes sobre el mapa Town02.</li>
+  <li>En todos los casos:
+    <ul>
+      <li>el punto final es el mismo,</li>
+      <li>la orientación inicial (yaw) obliga al vehículo a realizar un giro inicial para tomar el rumbo + correcto.</li>
+    </ul>
+  </li>
+  <li>Estas configuraciones representan estados no vistos respecto al entrenamiento Burbuja nominal.</li>
+</ul>
+
+<h4 id="tabla-resumen-promedios-sobre-los-4-casos">Tabla resumen (promedios sobre los 4 casos)</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>Métrica</th>
+      <th style="text-align: right">Burbuja (avg)</th>
+      <th style="text-align: right">DAgger (avg)</th>
+      <th style="text-align: left">Mejor desempeño</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Completed distance (m)</strong> ↑</td>
+      <td style="text-align: right"><strong>189.83</strong></td>
+      <td style="text-align: right">178.64</td>
+      <td style="text-align: left">Burbuja</td>
+    </tr>
+    <tr>
+      <td><strong>Effective completed distance (m)</strong> ↑</td>
+      <td style="text-align: right"><strong>76.63</strong></td>
+      <td style="text-align: right">64.88</td>
+      <td style="text-align: left">Burbuja</td>
+    </tr>
+    <tr>
+      <td><strong>Average speed (km/h)</strong></td>
+      <td style="text-align: right">42.80</td>
+      <td style="text-align: right"><strong>43.18</strong></td>
+      <td style="text-align: left">≈ Empate</td>
+    </tr>
+    <tr>
+      <td><strong>Position deviation mean (m)</strong> ↓</td>
+      <td style="text-align: right"><strong>1.01</strong></td>
+      <td style="text-align: right">1.00</td>
+      <td style="text-align: left">≈ Empate</td>
+    </tr>
+    <tr>
+      <td><strong>Position deviation / km</strong> ↓</td>
+      <td style="text-align: right">14.70</td>
+      <td style="text-align: right"><strong>13.44</strong></td>
+      <td style="text-align: left">DAgger</td>
+    </tr>
+    <tr>
+      <td><strong>Lane invasions / km</strong> ↓</td>
+      <td style="text-align: right">6,445</td>
+      <td style="text-align: right"><strong>6,062</strong></td>
+      <td style="text-align: left">DAgger</td>
+    </tr>
+    <tr>
+      <td><strong>Suddenness (control) / km</strong> ↓</td>
+      <td style="text-align: right"><strong>0.556</strong></td>
+      <td style="text-align: right">0.635</td>
+      <td style="text-align: left">Burbuja</td>
+    </tr>
+    <tr>
+      <td><strong>Collisions</strong> ↓</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: left">Empate</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Los resultados muestran que:</p>
+
+<ul>
+  <li><strong>Burbuja:</strong>
+    <ul>
+      <li>se adapta más rápidamente a nuevas configuraciones iniciales,</li>
+      <li>logra mayor progreso efectivo hacia el destino,</li>
+      <li>mantiene una conducción más suave durante la fase crítica inicial.</li>
+    </ul>
+  </li>
+  <li><strong>DAgger:</strong>
+    <ul>
+      <li>reduce la acumulación de error lateral una vez estabilizado,</li>
+      <li>disminuye la frecuencia de invasiones de carril,</li>
+      <li>no compromete la seguridad.</li>
+    </ul>
+  </li>
+</ul>
+
+<p>En escenarios con geometría inicial distinta pero no extrema, la ventaja principal de DAgger no está en la corrección inicial, sino en la estabilidad sostenida posterior. Burbuja, en cambio, conserva una mayor eficiencia inmediata para reconducir la tarea.</p>
+
+<p>Esta prueba refuerza la conclusión emergente de los análisis previos:
+DAgger aporta estabilidad acumulada en escenarios fuera de distribución, pero no supera sistemáticamente al baseline Burbuja en rapidez de recuperación ni en progreso efectivo, al menos en configuraciones moderadamente perturbadas.</p>
+
+<h3 id="comparación-con-puntos-aleatorios">Comparación con puntos aleatorios</h3>
+
+<h4 id="descripción-de-la-prueba-2">Descripción de la prueba</h4>
+
+<ul>
+  <li>En cada ejecución:
+    <ul>
+      <li>el punto inicial y el punto final se seleccionan de forma aleatoria.</li>
+    </ul>
+  </li>
+  <li>Para garantizar equidad:
+    <ul>
+      <li>los mismos pares (inicio, fin) se reutilizan para Burbuja y DAgger.</li>
+    </ul>
+  </li>
+  <li>Representa escenarios no vistos durante el entrenamiento.</li>
+</ul>
+
+<h4 id="tabla-resumen-promedios-sobre-los-3-episodios">Tabla resumen (promedios sobre los 3 episodios)</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>Episodio</th>
+      <th style="text-align: right">Completed Distance (m) ↑</th>
+      <th style="text-align: right">Effective Distance (m) ↑</th>
+      <th style="text-align: right">Pos. Dev. / km ↓</th>
+      <th style="text-align: right">Lane Invasions / km ↓</th>
+      <th style="text-align: right">Suddenness / km ↓</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td> </td>
+      <td style="text-align: right"><strong>Burbuja</strong> / DAgger</td>
+      <td style="text-align: right"><strong>Burbuja</strong> / DAgger</td>
+      <td style="text-align: right"><strong>Burbuja</strong> / DAgger</td>
+      <td style="text-align: right"><strong>Burbuja</strong> / DAgger</td>
+      <td style="text-align: right"><strong>Burbuja</strong> / DAgger</td>
+    </tr>
+    <tr>
+      <td><strong>Random 1</strong></td>
+      <td style="text-align: right">619.08 / <strong>621.09</strong></td>
+      <td style="text-align: right"><strong>208.5</strong> / 182.5</td>
+      <td style="text-align: right"><strong>5.27</strong> / 6.27</td>
+      <td style="text-align: right"><strong>5434</strong> / 5803</td>
+      <td style="text-align: right"><strong>0.155</strong> / 0.182</td>
+    </tr>
+    <tr>
+      <td><strong>Random 2</strong></td>
+      <td style="text-align: right"><strong>593.60</strong> / 276.24</td>
+      <td style="text-align: right"><strong>146.0</strong> / 97.0</td>
+      <td style="text-align: right"><strong>8.22</strong> / 11.46</td>
+      <td style="text-align: right">8068 / <strong>5289</strong></td>
+      <td style="text-align: right"><strong>0.161</strong> / 0.351</td>
+    </tr>
+    <tr>
+      <td><strong>Random 3</strong></td>
+      <td style="text-align: right">320.42 / <strong>322.51</strong></td>
+      <td style="text-align: right"><strong>124.0</strong> / 70.0</td>
+      <td style="text-align: right"><strong>7.91</strong> / 17.29</td>
+      <td style="text-align: right"><strong>4645</strong> / 8543</td>
+      <td style="text-align: right"><strong>0.313</strong> / 0.322</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>En la prueba de puntos aleatorios, el análisis episodio a episodio muestra que el modelo entrenado con el dataset Burbuja mantiene de forma consistente mayor distancia efectiva, menor error lateral acumulado y una conducción más suave que el modelo entrenado con DAgger.</p>
+
+<p>Aunque DAgger logra completar trayectorias similares en algunos episodios, su comportamiento presenta mayor variabilidad, mayor brusquedad y una pérdida más temprana del estado funcional, lo que indica una menor robustez global en trayectorias completamente no vistas.</p>
+
+<h3 id="velocidades-iniciales-distintas">Velocidades iniciales distintas</h3>
+
+<p>Mismo punto inicial y final – misma ruta – distinta velocidad inicial</p>
+
+<h4 id="tabla-comparativa-con-valores-numéricos">Tabla comparativa con valores numéricos</h4>
+
+<h4 id="25-kmh">25 km/h</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>Métrica</th>
+      <th style="text-align: right">Burbuja</th>
+      <th style="text-align: right">DAgger</th>
+      <th style="text-align: left">Mejor</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Completed distance (m) ↑</td>
+      <td style="text-align: right">760.95</td>
+      <td style="text-align: right"><strong>762.14</strong></td>
+      <td style="text-align: left">DAgger</td>
+    </tr>
+    <tr>
+      <td>Effective distance (m) ↑</td>
+      <td style="text-align: right"><strong>344.5</strong></td>
+      <td style="text-align: right">250.0</td>
+      <td style="text-align: left">Burbuja</td>
+    </tr>
+    <tr>
+      <td>Pos. dev / km ↓</td>
+      <td style="text-align: right"><strong>2.64</strong></td>
+      <td style="text-align: right">4.01</td>
+      <td style="text-align: left">Burbuja</td>
+    </tr>
+    <tr>
+      <td>Lane invasions / km ↓</td>
+      <td style="text-align: right"><strong>3561.68</strong></td>
+      <td style="text-align: right">4996.00</td>
+      <td style="text-align: left">Burbuja</td>
+    </tr>
+    <tr>
+      <td>Suddenness / km ↓</td>
+      <td style="text-align: right"><strong>0.135</strong></td>
+      <td style="text-align: right">0.158</td>
+      <td style="text-align: left">Burbuja</td>
+    </tr>
+    <tr>
+      <td>Collisions ↓</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: left">Empate</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="50-kmh">50 km/h</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>Métrica</th>
+      <th style="text-align: right">Burbuja</th>
+      <th style="text-align: right">DAgger</th>
+      <th style="text-align: left">Mejor</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Completed distance (m) ↑</td>
+      <td style="text-align: right">758.48</td>
+      <td style="text-align: right"><strong>758.10</strong></td>
+      <td style="text-align: left">≈ Empate</td>
+    </tr>
+    <tr>
+      <td>Effective distance (m) ↑</td>
+      <td style="text-align: right">246.5</td>
+      <td style="text-align: right"><strong>317.0</strong></td>
+      <td style="text-align: left">DAgger</td>
+    </tr>
+    <tr>
+      <td>Pos. dev / km ↓</td>
+      <td style="text-align: right">4.48</td>
+      <td style="text-align: right"><strong>3.02</strong></td>
+      <td style="text-align: left">DAgger</td>
+    </tr>
+    <tr>
+      <td>Lane invasions / km ↓</td>
+      <td style="text-align: right">4843.81</td>
+      <td style="text-align: right"><strong>3962.15</strong></td>
+      <td style="text-align: left">DAgger</td>
+    </tr>
+    <tr>
+      <td>Suddenness / km ↓</td>
+      <td style="text-align: right"><strong>0.135</strong></td>
+      <td style="text-align: right">0.162</td>
+      <td style="text-align: left">Burbuja</td>
+    </tr>
+    <tr>
+      <td>Collisions ↓</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: left">Empate</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="80-kmh">80 km/h</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>Métrica</th>
+      <th style="text-align: right">Burbuja</th>
+      <th style="text-align: right">DAgger</th>
+      <th style="text-align: left">Mejor</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Completed distance (m) ↑</td>
+      <td style="text-align: right">758.00</td>
+      <td style="text-align: right"><strong>762.02</strong></td>
+      <td style="text-align: left">DAgger</td>
+    </tr>
+    <tr>
+      <td>Effective distance (m) ↑</td>
+      <td style="text-align: right"><strong>362.0</strong></td>
+      <td style="text-align: right">283.5</td>
+      <td style="text-align: left">Burbuja</td>
+    </tr>
+    <tr>
+      <td>Pos. dev / km ↓</td>
+      <td style="text-align: right"><strong>2.48</strong></td>
+      <td style="text-align: right">3.59</td>
+      <td style="text-align: left">Burbuja</td>
+    </tr>
+    <tr>
+      <td>Lane invasions / km ↓</td>
+      <td style="text-align: right"><strong>3226.52</strong></td>
+      <td style="text-align: right">4126.98</td>
+      <td style="text-align: left">Burbuja</td>
+    </tr>
+    <tr>
+      <td>Suddenness / km ↓</td>
+      <td style="text-align: right"><strong>0.128</strong></td>
+      <td style="text-align: right">0.145</td>
+      <td style="text-align: left">Burbuja</td>
+    </tr>
+    <tr>
+      <td>Collisions ↓</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: left">Empate</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="110-kmh">110 km/h</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>Métrica</th>
+      <th style="text-align: right">Burbuja</th>
+      <th style="text-align: right">DAgger</th>
+      <th style="text-align: left">Mejor</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Completed distance (m) ↑</td>
+      <td style="text-align: right"><strong>762.85</strong></td>
+      <td style="text-align: right">764.04</td>
+      <td style="text-align: left">≈ Empate</td>
+    </tr>
+    <tr>
+      <td>Effective distance (m) ↑</td>
+      <td style="text-align: right">196.0</td>
+      <td style="text-align: right"><strong>294.5</strong></td>
+      <td style="text-align: left">DAgger</td>
+    </tr>
+    <tr>
+      <td>Pos. dev / km ↓</td>
+      <td style="text-align: right">5.51</td>
+      <td style="text-align: right"><strong>3.25</strong></td>
+      <td style="text-align: left">DAgger</td>
+    </tr>
+    <tr>
+      <td>Lane invasions / km ↓</td>
+      <td style="text-align: right">5831.63</td>
+      <td style="text-align: right"><strong>3921.90</strong></td>
+      <td style="text-align: left">DAgger</td>
+    </tr>
+    <tr>
+      <td>Suddenness / km ↓</td>
+      <td style="text-align: right"><strong>0.136</strong></td>
+      <td style="text-align: right">0.152</td>
+      <td style="text-align: left">Burbuja</td>
+    </tr>
+    <tr>
+      <td>Collisions ↓</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: left">Empate</td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li><strong>Velocidades bajas (25 km/h)</strong>
+    <ul>
+      <li>Burbuja domina en estabilidad, suavidad y distancia efectiva.</li>
+    </ul>
+  </li>
+  <li><strong>Velocidad media (50 km/h)</strong>
+    <ul>
+      <li>DAgger mejora claramente la estabilidad lateral, aunque con control más brusco.</li>
+    </ul>
+  </li>
+  <li><strong>Velocidad alta (80 km/h)</strong>
+    <ul>
+      <li>Burbuja vuelve a ser más estable, con menor desviación e invasiones.</li>
+    </ul>
+  </li>
+  <li><strong>Velocidad muy alta (110 km/h)</strong>
+    <ul>
+      <li>DAgger:
+        <ul>
+          <li>más distancia efectiva,</li>
+          <li>menor desviación lateral,</li>
+          <li>menos invasiones de carril.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<p>#### Conclusión</p>
+
+<p>En este estudio se comparó qué tan “robuzto” y confiables son dos modelos de conducción autónoma basados en EfficientNet-V2-S, entrenados de formas distintas. Por un lado, usamos un dataset de conducción humana natural (Burbuja), y por el otro, un dataset enriquecido con DAgger (Dataset Aggregation). Ambos modelos pasaron por las mismas pruebas, bajo las mismas condiciones, para ver cómo se comportaban frente a perturbaciones, situaciones raras y escenarios que nunca habían visto antes.</p>
+
+<p>DAgger no mejora la robustez en todos los casos. En situaciones normales o con pequeñas perturbaciones, el modelo entrenado con datos Burbuja se destaca más: conduce de forma más suave, arranca con mayor estabilidad y se desempeña mejor cuando las trayectorias son completamente aleatorias. Básicamente, lo que aprende de la conducción humana natural generaliza mejor y de manera más consistente en estos escenarios.</p>
+
+<p>DAgger también se destaca cuando las condiciones se ponen más complejas, por ejemplo, arrancar a velocidades altas o en dinámicas más exigentes, el modelo entrenado con DAgger responde mejor. En estos casos logra recorrer más distancia, se desvía menos lateralmente y reduce la cantidad de invasiones de carril. Esto sugiere que, una vez que el sistema se sale de lo “normal”, DAgger ayuda a mantener el control durante más tiempo.</p>
+
+<p>En resumen, DAgger aporta una robustez más “situacional”: es especialmente útil cuando el estado inicial o la dinámica del sistema se alejan bastante de lo que se ve en la conducción natural. Sin embargo, no reemplaza al dataset Burbuja como base principal para una buena generalización global. Más bien, funciona como un complemento cuyo impacto depende mucho del tipo de perturbación y del escenario evaluado.</p>
+
+<hr />
+<hr />
+
+<h1 id="resumen-de-métricas-numéricas">Resumen de métricas numéricas</h1>
+
+<h2 id="casos-de-robustez--poses-iniciales-difíciles">Casos de robustez — Poses iniciales difíciles</h2>
+
+<h3 id="caso-1">Caso 1</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Métrica</th>
+      <th style="text-align: right">Burbuja</th>
+      <th style="text-align: right">DAgger</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">Completed distance (m)</td>
+      <td style="text-align: right">760.22</td>
+      <td style="text-align: right">762.62</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Effective completed distance (m)</td>
+      <td style="text-align: right">424</td>
+      <td style="text-align: right">283.5</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Position deviation / km</td>
+      <td style="text-align: right">2</td>
+      <td style="text-align: right">3.74</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Lane invasions / km</td>
+      <td style="text-align: right">3113.21</td>
+      <td style="text-align: right">4352.73</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="caso-2">Caso 2</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Métrica</th>
+      <th style="text-align: right">Burbuja</th>
+      <th style="text-align: right">DAgger</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">Completed distance (m)</td>
+      <td style="text-align: right">761.78</td>
+      <td style="text-align: right">763.65</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Effective completed distance (m)</td>
+      <td style="text-align: right">191.5</td>
+      <td style="text-align: right">125.5</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Position deviation / km</td>
+      <td style="text-align: right">6.49</td>
+      <td style="text-align: right">9.94</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Lane invasions / km</td>
+      <td style="text-align: right">6558.75</td>
+      <td style="text-align: right">10342.6</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="caso-3">Caso 3</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Métrica</th>
+      <th style="text-align: right">Burbuja</th>
+      <th style="text-align: right">DAgger</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">Completed distance (m)</td>
+      <td style="text-align: right">741.3</td>
+      <td style="text-align: right">742.96</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Effective completed distance (m)</td>
+      <td style="text-align: right">142.5</td>
+      <td style="text-align: right">158.5</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Position deviation / km</td>
+      <td style="text-align: right">9.36</td>
+      <td style="text-align: right">7.92</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Lane invasions / km</td>
+      <td style="text-align: right">8743.86</td>
+      <td style="text-align: right">8315.46</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="caso-4">Caso 4</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Métrica</th>
+      <th style="text-align: right">Burbuja</th>
+      <th style="text-align: right">DAgger</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">Completed distance (m)</td>
+      <td style="text-align: right">760.33</td>
+      <td style="text-align: right">760.39</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Effective completed distance (m)</td>
+      <td style="text-align: right">143</td>
+      <td style="text-align: right">220.5</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Position deviation / km</td>
+      <td style="text-align: right">8.72</td>
+      <td style="text-align: right">5.5</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Lane invasions / km</td>
+      <td style="text-align: right">9342.66</td>
+      <td style="text-align: right">6317.46</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="caso-5">Caso 5</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Métrica</th>
+      <th style="text-align: right">Burbuja</th>
+      <th style="text-align: right">DAgger</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">Completed distance (m)</td>
+      <td style="text-align: right">749.32</td>
+      <td style="text-align: right">752.58</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Effective completed distance (m)</td>
+      <td style="text-align: right">312</td>
+      <td style="text-align: right">320</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Position deviation / km</td>
+      <td style="text-align: right">3.24</td>
+      <td style="text-align: right">3.21</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Lane invasions / km</td>
+      <td style="text-align: right">4217.95</td>
+      <td style="text-align: right">4434.38</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="puntos-aleatorios--comparación-episodio-a-episodio">Puntos aleatorios — Comparación episodio a episodio</h2>
+
+<h3 id="random-1">Random 1</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Métrica</th>
+      <th style="text-align: right">Burbuja</th>
+      <th style="text-align: right">DAgger</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">Completed distance (m)</td>
+      <td style="text-align: right">320.39</td>
+      <td style="text-align: right">77.97</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Effective completed distance (m)</td>
+      <td style="text-align: right">186.5</td>
+      <td style="text-align: right">21.5</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Position deviation / km</td>
+      <td style="text-align: right">3.99</td>
+      <td style="text-align: right">56.43</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Lane invasions / km</td>
+      <td style="text-align: right">3437</td>
+      <td style="text-align: right">9953.49</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Suddenness / km</td>
+      <td style="text-align: right">0.247</td>
+      <td style="text-align: right">2.281</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="random-2">Random 2</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Métrica</th>
+      <th style="text-align: right">Burbuja</th>
+      <th style="text-align: right">DAgger</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">Completed distance (m)</td>
+      <td style="text-align: right">363.88</td>
+      <td style="text-align: right">503.84</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Effective completed distance (m)</td>
+      <td style="text-align: right">241.5</td>
+      <td style="text-align: right">108</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Position deviation / km</td>
+      <td style="text-align: right">3.1</td>
+      <td style="text-align: right">12.14</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Lane invasions / km</td>
+      <td style="text-align: right">3478.26</td>
+      <td style="text-align: right">7546.3</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Suddenness / km</td>
+      <td style="text-align: right">0.152</td>
+      <td style="text-align: right">0.333</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="random-3">Random 3</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Métrica</th>
+      <th style="text-align: right">Burbuja</th>
+      <th style="text-align: right">DAgger</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">Completed distance (m)</td>
+      <td style="text-align: right">534.56</td>
+      <td style="text-align: right">186.27</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Effective completed distance (m)</td>
+      <td style="text-align: right">225.5</td>
+      <td style="text-align: right">60</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Position deviation / km</td>
+      <td style="text-align: right">3.85</td>
+      <td style="text-align: right">14.99</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Lane invasions / km</td>
+      <td style="text-align: right">3760.53</td>
+      <td style="text-align: right">5450</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Suddenness / km</td>
+      <td style="text-align: right">0.157</td>
+      <td style="text-align: right">0.86</td>
+    </tr>
+  </tbody>
+</table>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/tags/#behaviormetrics" class="page__taxonomy-item p-category" rel="tag">BehaviorMetrics</a><span class="sep">, </span>
+    
+      <a href="/tags/#dagger" class="page__taxonomy-item p-category" rel="tag">DAgger</a><span class="sep">, </span>
+    
+      <a href="/tags/#metrics-online" class="page__taxonomy-item p-category" rel="tag">Metrics Online</a><span class="sep">, </span>
+    
+      <a href="/tags/#robustez" class="page__taxonomy-item p-category" rel="tag">Robustez</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#weekly-log" class="page__taxonomy-item p-category" rel="tag">weekly Log</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2026-01-09T00:00:00-05:00">January 9, 2026</time></p>
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Week+80+-+Metricas+de+robustez+por+casos+%28burbuja+%2B+DAgger%2C+68%2F32%29%20http%3A%2F%2Flocalhost%3A4000%2Fweekly%2520log%2Fweek80%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fweekly%2520log%2Fweek80%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fweekly%2520log%2Fweek80%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/weekly%20log/week78/" class="pagination--pager" title="Week 78 - Metricas de robustez por casos (burbuja + DAgger, 68/31)
+">Previous</a>
+    
+    
+      <a href="/weekly%20log/week81/" class="pagination--pager" title="Week 81 - Métrica reward (centrado a la calzada)
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h2 class="page__related-title">You may also enjoy</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/weekly%20log/week89/" rel="permalink">Week 89 - Robustez del piloto, Caso Canónico, 15 Casos y Pruebas de Velocidad
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          12 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">En esta entrada reporto los resultados de robustez en CARLA Town02 comparando cinco políticas/datasets bajo el mismo circuito de prueba, con 6 repeticiones p...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/weekly%20log/week88/" rel="permalink">Week 88 - Actualización de métricas en BehaviorMetrics (CARLA), comparación contra ruta ideal
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          2 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Actualización de métricas en BehaviorMetrics (CARLA)
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/weekly%20log/week87/" rel="permalink">Week 87 - Actualización de métricas en CARLA
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          9 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">En esta semana consolidé el reporte comparativo de cinco variantes de entrenamiento (Burbuja, Noise injection, DAgger 16k, DAgger 27.6k y DAgger agresivo) us...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/weekly%20log/week86/" rel="permalink">Week 86 - Actualización de métricas en CARLA
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          2 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Se realizaron mejoras en la forma de reportar el desempeño del vehículo autónomo en simulación, con el objetivo de que las métricas reflejen con mayor fideli...</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2026 Carlos Andrés Velásquez Ospina. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+  </body>
+</html>

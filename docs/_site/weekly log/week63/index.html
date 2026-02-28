@@ -1,0 +1,772 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Week 63 - Test offline, MoE (teleoperado) vs Moe (teleoperado + DAgger) - Robotics Lab URJC</title>
+<meta name="description" content="Métrica       Dagger (Teleoperado + DAgger)       MC (Solo teleoperado)       Δ (MC − Dagger)       Δ% vs MC                       RMSE Steer       0.275       0.521       0.246       47.24%                 MAE Steer       0.163       0.477       0.314       65.77%                 RMSE Throttle       0.575       0.492       −0.084       −17.06%                 MAE Throttle       0.510       0.481       −0.029       −6.10%">
+
+
+  <meta name="author" content="Carlos Velásquez">
+  
+  <meta property="article:author" content="Carlos Velásquez">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Robotics Lab URJC">
+<meta property="og:title" content="Week 63 - Test offline, MoE (teleoperado) vs Moe (teleoperado + DAgger)">
+<meta property="og:url" content="http://localhost:4000/weekly%20log/week63/">
+
+
+  <meta property="og:description" content="Métrica       Dagger (Teleoperado + DAgger)       MC (Solo teleoperado)       Δ (MC − Dagger)       Δ% vs MC                       RMSE Steer       0.275       0.521       0.246       47.24%                 MAE Steer       0.163       0.477       0.314       65.77%                 RMSE Throttle       0.575       0.492       −0.084       −17.06%                 MAE Throttle       0.510       0.481       −0.029       −6.10%">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2025-09-13T00:00:00-05:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/weekly%20log/week63/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Carlos Andrés Velásquez Ospina",
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Robotics Lab URJC Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/logo.png" alt="Robotics Lab URJC"></a>
+        
+        <a class="site-title" href="/">
+          Robotics Lab URJC
+          <span class="site-subtitle">Programming Robot Intelligence</span>
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="https://mmistakes.github.io/minimal-mistakes/docs/quick-start-guide/">Quick-Start Guide</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+    <div class="author__avatar">
+      <a href="http://localhost:4000/">
+        <img src="/assets/images/me.jpg" alt="Carlos Velásquez" itemprop="image" class="u-photo">
+      </a>
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      <a class="u-url" rel="me" href="http://localhost:4000/" itemprop="url">Carlos Velásquez</a>
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>Doctoral thesis blog</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name" class="p-locality">Medellín</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="mailto:canveo@gmail.com" rel="nofollow noopener noreferrer me"><i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">Email</span></a></li>
+          
+        
+          
+            <li><a href="https://github.com/canveo" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/canveo/" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span class="label">LinkedIn</span></a></li>
+          
+        
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:canveo@gmail.com" rel="me" class="u-email">
+            <meta itemprop="email" content="canveo@gmail.com" />
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">Email</span>
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer me">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Week 63 - Test offline, MoE (teleoperado) vs Moe (teleoperado + DAgger)">
+    <meta itemprop="description" content="            Métrica      Dagger (Teleoperado + DAgger)      MC (Solo teleoperado)      Δ (MC − Dagger)      Δ% vs MC                  RMSE Steer      0.275      0.521      0.246      47.24%              MAE Steer      0.163      0.477      0.314      65.77%              RMSE Throttle      0.575      0.492      −0.084      −17.06%              MAE Throttle      0.510      0.481      −0.029      −6.10%      ">
+    <meta itemprop="datePublished" content="2025-09-13T00:00:00-05:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="http://localhost:4000/weekly%20log/week63/" class="u-url" itemprop="url">Week 63 - Test offline, MoE (teleoperado) vs Moe (teleoperado + DAgger)
+</a>
+          </h1>
+          
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          1 minute read
+        
+      </span>
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        <table>
+  <thead>
+    <tr>
+      <th>Métrica</th>
+      <th style="text-align: center">Dagger (Teleoperado + DAgger)</th>
+      <th style="text-align: center">MC (Solo teleoperado)</th>
+      <th style="text-align: center">Δ (MC − Dagger)</th>
+      <th style="text-align: center">Δ% vs MC</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>RMSE Steer</td>
+      <td style="text-align: center">0.275</td>
+      <td style="text-align: center">0.521</td>
+      <td style="text-align: center">0.246</td>
+      <td style="text-align: center">47.24%</td>
+    </tr>
+    <tr>
+      <td>MAE Steer</td>
+      <td style="text-align: center">0.163</td>
+      <td style="text-align: center">0.477</td>
+      <td style="text-align: center">0.314</td>
+      <td style="text-align: center">65.77%</td>
+    </tr>
+    <tr>
+      <td>RMSE Throttle</td>
+      <td style="text-align: center">0.575</td>
+      <td style="text-align: center">0.492</td>
+      <td style="text-align: center">−0.084</td>
+      <td style="text-align: center">−17.06%</td>
+    </tr>
+    <tr>
+      <td>MAE Throttle</td>
+      <td style="text-align: center">0.510</td>
+      <td style="text-align: center">0.481</td>
+      <td style="text-align: center">−0.029</td>
+      <td style="text-align: center">−6.10%</td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p>Nota (fórmulas) <br />
+<strong>Col. 4 — Δ (MC − Dagger):</strong> Δ = MC − Dagger <br />
+<strong>Col. 5 — Δ% vs MC:</strong> Δ% = ((MC − Dagger) / MC) × 100 <br />
+<strong>Interpretación:</strong> Δ &gt; 0 y Δ% &gt; 0 ⇒ Dagger reduce el error; Δ &lt; 0 y Δ% &lt; 0 ⇒ Dagger empeora. Si MC = 0, Δ% no está definida.</p>
+</blockquote>
+
+<p>En la evaluación offline (mezcla de expertos curva/recta), Dagger (teleoperado + DAgger) reduce de forma marcada los errores de dirección frente a MC (solo teleoperado), especialmente en tramos rectos, mientras que en aceleración empeora globalmente (con ligera mejora en curvas). En síntesis: DAgger fortalece el control lateral, pero el control longitudinal requiere ajuste (normalización, balance de datos o calibración de la salida).</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Segmento</th>
+      <th>Métrica</th>
+      <th style="text-align: right">Dagger</th>
+      <th style="text-align: right">MC</th>
+      <th style="text-align: right">Δ (MC − Dagger)</th>
+      <th style="text-align: right">Δ% vs MC</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>GLOBAL</td>
+      <td>RMSE Steer</td>
+      <td style="text-align: right"><strong>0.274848</strong></td>
+      <td style="text-align: right">0.520959</td>
+      <td style="text-align: right"><strong>0.246111</strong></td>
+      <td style="text-align: right"><strong>47.241955%</strong></td>
+    </tr>
+    <tr>
+      <td>GLOBAL</td>
+      <td>MAE Steer</td>
+      <td style="text-align: right"><strong>0.163238</strong></td>
+      <td style="text-align: right">0.476945</td>
+      <td style="text-align: right"><strong>0.313708</strong></td>
+      <td style="text-align: right"><strong>65.774348%</strong></td>
+    </tr>
+    <tr>
+      <td>GLOBAL</td>
+      <td>RMSE Throttle</td>
+      <td style="text-align: right">0.575458</td>
+      <td style="text-align: right"><strong>0.491596</strong></td>
+      <td style="text-align: right">−0.083862</td>
+      <td style="text-align: right">−17.059209%</td>
+    </tr>
+    <tr>
+      <td>GLOBAL</td>
+      <td>MAE Throttle</td>
+      <td style="text-align: right">0.509839</td>
+      <td style="text-align: right"><strong>0.480524</strong></td>
+      <td style="text-align: right">−0.029315</td>
+      <td style="text-align: right">−6.100561%</td>
+    </tr>
+    <tr>
+      <td>RECTA</td>
+      <td>RMSE Steer</td>
+      <td style="text-align: right"><strong>0.176157</strong></td>
+      <td style="text-align: right">0.560013</td>
+      <td style="text-align: right"><strong>0.383856</strong></td>
+      <td style="text-align: right"><strong>68.544117%</strong></td>
+    </tr>
+    <tr>
+      <td>RECTA</td>
+      <td>MAE Steer</td>
+      <td style="text-align: right"><strong>0.087130</strong></td>
+      <td style="text-align: right">0.538385</td>
+      <td style="text-align: right"><strong>0.451256</strong></td>
+      <td style="text-align: right"><strong>83.816492%</strong></td>
+    </tr>
+    <tr>
+      <td>RECTA</td>
+      <td>RMSE Throttle</td>
+      <td style="text-align: right">0.625331</td>
+      <td style="text-align: right"><strong>0.483878</strong></td>
+      <td style="text-align: right">−0.141453</td>
+      <td style="text-align: right">−29.233242%</td>
+    </tr>
+    <tr>
+      <td>RECTA</td>
+      <td>MAE Throttle</td>
+      <td style="text-align: right">0.540846</td>
+      <td style="text-align: right"><strong>0.474337</strong></td>
+      <td style="text-align: right">−0.066509</td>
+      <td style="text-align: right">−14.021432%</td>
+    </tr>
+    <tr>
+      <td>CURVA</td>
+      <td>RMSE Steer</td>
+      <td style="text-align: right"><strong>0.386433</strong></td>
+      <td style="text-align: right">0.448789</td>
+      <td style="text-align: right"><strong>0.062356</strong></td>
+      <td style="text-align: right"><strong>13.894328%</strong></td>
+    </tr>
+    <tr>
+      <td>CURVA</td>
+      <td>MAE Steer</td>
+      <td style="text-align: right"><strong>0.289410</strong></td>
+      <td style="text-align: right">0.375090</td>
+      <td style="text-align: right"><strong>0.085680</strong></td>
+      <td style="text-align: right"><strong>22.842493%</strong></td>
+    </tr>
+    <tr>
+      <td>CURVA</td>
+      <td>RMSE Throttle</td>
+      <td style="text-align: right"><strong>0.481530</strong></td>
+      <td style="text-align: right">0.504131</td>
+      <td style="text-align: right"><strong>0.022600</strong></td>
+      <td style="text-align: right"><strong>4.482999%</strong></td>
+    </tr>
+    <tr>
+      <td>CURVA</td>
+      <td>MAE Throttle</td>
+      <td style="text-align: right"><strong>0.458433</strong></td>
+      <td style="text-align: right">0.490780</td>
+      <td style="text-align: right"><strong>0.032346</strong></td>
+      <td style="text-align: right"><strong>6.590778%</strong></td>
+    </tr>
+  </tbody>
+</table>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/tags/#carla-simulator" class="page__taxonomy-item p-category" rel="tag">CARLA Simulator</a><span class="sep">, </span>
+    
+      <a href="/tags/#python" class="page__taxonomy-item p-category" rel="tag">Python</a><span class="sep">, </span>
+    
+      <a href="/tags/#ros-2" class="page__taxonomy-item p-category" rel="tag">ROS 2</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#weekly-log" class="page__taxonomy-item p-category" rel="tag">weekly Log</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2025-09-13T00:00:00-05:00">September 13, 2025</time></p>
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Week+63+-+Test+offline%2C+MoE+%28teleoperado%29+vs+Moe+%28teleoperado+%2B+DAgger%29%20http%3A%2F%2Flocalhost%3A4000%2Fweekly%2520log%2Fweek63%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fweekly%2520log%2Fweek63%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fweekly%2520log%2Fweek63%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/weekly%20log/week62/" class="pagination--pager" title="Week 62 - Dataset teleoperado + DAgger
+">Previous</a>
+    
+    
+      <a href="/weekly%20log/week64/" class="pagination--pager" title="Week 64 - Problemas en la obtención de métricas
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h2 class="page__related-title">You may also enjoy</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/weekly%20log/week89/" rel="permalink">Week 89 - Robustez del piloto, Caso Canónico, 15 Casos y Pruebas de Velocidad
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          12 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">En esta entrada reporto los resultados de robustez en CARLA Town02 comparando cinco políticas/datasets bajo el mismo circuito de prueba, con 6 repeticiones p...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/weekly%20log/week88/" rel="permalink">Week 88 - Actualización de métricas en BehaviorMetrics (CARLA), comparación contra ruta ideal
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          2 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Actualización de métricas en BehaviorMetrics (CARLA)
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/weekly%20log/week87/" rel="permalink">Week 87 - Actualización de métricas en CARLA
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          9 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">En esta semana consolidé el reporte comparativo de cinco variantes de entrenamiento (Burbuja, Noise injection, DAgger 16k, DAgger 27.6k y DAgger agresivo) us...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/weekly%20log/week86/" rel="permalink">Week 86 - Actualización de métricas en CARLA
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          2 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Se realizaron mejoras en la forma de reportar el desempeño del vehículo autónomo en simulación, con el objetivo de que las métricas reflejen con mayor fideli...</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2026 Carlos Andrés Velásquez Ospina. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+  </body>
+</html>

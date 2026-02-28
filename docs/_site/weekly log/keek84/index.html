@@ -1,0 +1,1152 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Week 84 - Noise Injection - Pruebas robustez - Robotics Lab URJC</title>
+<meta name="description" content="Robustez en Conducción Autónoma Comparación: Dataset Burbuja vs Noise Injection">
+
+
+  <meta name="author" content="Carlos Velásquez">
+  
+  <meta property="article:author" content="Carlos Velásquez">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Robotics Lab URJC">
+<meta property="og:title" content="Week 84 - Noise Injection - Pruebas robustez">
+<meta property="og:url" content="http://localhost:4000/weekly%20log/keek84/">
+
+
+  <meta property="og:description" content="Robustez en Conducción Autónoma Comparación: Dataset Burbuja vs Noise Injection">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2026-02-02T00:00:00-05:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/weekly%20log/keek84/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Carlos Andrés Velásquez Ospina",
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Robotics Lab URJC Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/logo.png" alt="Robotics Lab URJC"></a>
+        
+        <a class="site-title" href="/">
+          Robotics Lab URJC
+          <span class="site-subtitle">Programming Robot Intelligence</span>
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="https://mmistakes.github.io/minimal-mistakes/docs/quick-start-guide/">Quick-Start Guide</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+    <div class="author__avatar">
+      <a href="http://localhost:4000/">
+        <img src="/assets/images/me.jpg" alt="Carlos Velásquez" itemprop="image" class="u-photo">
+      </a>
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      <a class="u-url" rel="me" href="http://localhost:4000/" itemprop="url">Carlos Velásquez</a>
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>Doctoral thesis blog</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name" class="p-locality">Medellín</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="mailto:canveo@gmail.com" rel="nofollow noopener noreferrer me"><i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">Email</span></a></li>
+          
+        
+          
+            <li><a href="https://github.com/canveo" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/canveo/" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span class="label">LinkedIn</span></a></li>
+          
+        
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:canveo@gmail.com" rel="me" class="u-email">
+            <meta itemprop="email" content="canveo@gmail.com" />
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">Email</span>
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer me">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Week 84 - Noise Injection - Pruebas robustez">
+    <meta itemprop="description" content="Robustez en Conducción AutónomaComparación: Dataset Burbuja vs Noise Injection">
+    <meta itemprop="datePublished" content="2026-02-02T00:00:00-05:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="http://localhost:4000/weekly%20log/keek84/" class="u-url" itemprop="url">Week 84 - Noise Injection - Pruebas robustez
+</a>
+          </h1>
+          
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          3 minute read
+        
+      </span>
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        <h1 id="robustez-en-conducción-autónoma">Robustez en Conducción Autónoma</h1>
+<h2 id="comparación-dataset-burbuja-vs-noise-injection">Comparación: Dataset Burbuja vs Noise Injection</h2>
+
+<hr />
+
+<h2 id="contexto">Contexto</h2>
+
+<p>Este estudio evalúa el impacto de incorporar <strong>Noise Injection</strong> en el dataset de entrenamiento de un modelo end-to-end de conducción autónoma en CARLA.</p>
+
+<p>Se analiza:</p>
+
+<ul>
+  <li>Comportamiento nominal</li>
+  <li>Capacidad de recuperación</li>
+  <li>Robustez fuera de distribución</li>
+  <li>Estabilidad dinámica a diferentes velocidades</li>
+</ul>
+
+<hr />
+
+<h2 id="datasets-usados">Datasets usados</h2>
+
+<h3 id="dataset-burbuja">Dataset Burbuja</h3>
+<ul>
+  <li>Conducción humana natural (sin perturbaciones artificiales)</li>
+  <li>Representa la política nominal estable</li>
+  <li>Tamaño aproximado: <strong>50k muestras</strong></li>
+</ul>
+
+<h3 id="dataset-noise-injection">Dataset Noise Injection</h3>
+<ul>
+  <li>Perturbaciones controladas para forzar recuperación (heading/lateral)</li>
+  <li>Busca expandir la región de estabilidad del controlador aprendido</li>
+  <li>Tamaño aproximado: <strong>12.5k muestras</strong></li>
+</ul>
+
+<figure class="half">
+  <img src="http://localhost:4000/assets/images/week84/diagram.png" alt="" style="width:150%" />
+  <figcaption>noise-injection</figcaption>
+</figure>
+
+<h3 id="dataset-final-de-entrenamiento">Dataset final de entrenamiento</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Burbuja: 50k
+Noise:   12.5k
+Total:   62.5k
+</code></pre></div></div>
+
+<p>Objetivo: mantener la distribución nominal dominante, añadiendo soporte fuera de distribución.</p>
+
+<hr />
+
+<h2 id="modelo-entrenado">Modelo entrenado</h2>
+
+<ul>
+  <li>Arquitectura: <strong>PilotNet (variante 2 outputs)</strong></li>
+  <li>Entrada: imagen segmentada → RGB-like (3 canales)</li>
+  <li>Salidas: <strong>steer</strong>, <strong>throttle</strong></li>
+  <li>Loss: <strong>MSE</strong></li>
+  <li>Framework: <strong>PyTorch</strong></li>
+  <li>Entorno: <strong>CARLA Town02</strong></li>
+</ul>
+
+<hr />
+
+<h1 id="resultados">Resultados</h1>
+
+<hr />
+
+<h1 id="caso-canónico">CASO CANÓNICO</h1>
+
+<h2 id="comparación-directa">Comparación directa</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Métrica</th>
+      <th style="text-align: right">Burbuja</th>
+      <th style="text-align: right">Noise</th>
+      <th>Mejor</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Completed distance</td>
+      <td style="text-align: right">755.75</td>
+      <td style="text-align: right"><strong>759.23</strong></td>
+      <td>Noise</td>
+    </tr>
+    <tr>
+      <td>Effective distance</td>
+      <td style="text-align: right"><strong>466.08</strong></td>
+      <td style="text-align: right">454.25</td>
+      <td>Burbuja</td>
+    </tr>
+    <tr>
+      <td>Average speed</td>
+      <td style="text-align: right">61.56</td>
+      <td style="text-align: right"><strong>62.77</strong></td>
+      <td>Noise</td>
+    </tr>
+    <tr>
+      <td>Position deviation mean</td>
+      <td style="text-align: right"><strong>0.737</strong></td>
+      <td style="text-align: right">0.781</td>
+      <td>Burbuja</td>
+    </tr>
+    <tr>
+      <td>Position deviation / km</td>
+      <td style="text-align: right"><strong>1.585</strong></td>
+      <td style="text-align: right">1.723</td>
+      <td>Burbuja</td>
+    </tr>
+    <tr>
+      <td>Lane invasions / km</td>
+      <td style="text-align: right"><strong>3029</strong></td>
+      <td style="text-align: right">3107</td>
+      <td>Burbuja</td>
+    </tr>
+    <tr>
+      <td>Suddenness control</td>
+      <td style="text-align: right"><strong>0.0305</strong></td>
+      <td style="text-align: right">0.0334</td>
+      <td>Burbuja</td>
+    </tr>
+    <tr>
+      <td>Collisions</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">0</td>
+      <td>Empate</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="interpretación-breve">Interpretación breve</h3>
+<ul>
+  <li><strong>Noise</strong> mejora progreso bruto y velocidad (política más reactiva).</li>
+  <li><strong>Burbuja</strong> mantiene mejor control lateral fino, eficiencia geométrica y suavidad.</li>
+</ul>
+
+<hr />
+
+<h1 id="casos-perturbados-resumen">CASOS PERTURBADOS (resumen)</h1>
+
+<ul>
+  <li><strong>Caso 1:</strong> Noise mejora recuperación temprana (effective distance, speed, dev/km).</li>
+  <li><strong>Caso 2:</strong> Noise mantiene desempeño nominal sin degradación clara.</li>
+  <li><strong>Caso 3:</strong> Noise mejora eficiencia (effective) manteniendo estabilidad comparable.</li>
+  <li><strong>Caso 4:</strong> Noise gana en persistencia/progreso; Burbuja en precisión lateral.</li>
+  <li><strong>Caso 5:</strong> Noise domina en supervivencia y progreso, con tradeoff de suavidad.</li>
+</ul>
+
+<hr />
+
+<h2 id="tabla-global-casos-15">Tabla global (casos 1–5)</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Caso</th>
+      <th>Modelo</th>
+      <th style="text-align: right">Completed</th>
+      <th style="text-align: right">Effective</th>
+      <th style="text-align: right">Speed</th>
+      <th style="text-align: right">Dev Mean</th>
+      <th style="text-align: right">Dev/km</th>
+      <th style="text-align: right">Lane/km</th>
+      <th style="text-align: right">Sudden Ctrl</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Caso 1</strong></td>
+      <td>Burbuja</td>
+      <td style="text-align: right">741.4</td>
+      <td style="text-align: right">315.4</td>
+      <td style="text-align: right">60.7</td>
+      <td style="text-align: right">0.99</td>
+      <td style="text-align: right">3.13</td>
+      <td style="text-align: right">4161</td>
+      <td style="text-align: right"><strong>0.033</strong></td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Noise</td>
+      <td style="text-align: right"><strong>745.2</strong></td>
+      <td style="text-align: right"><strong>338.3</strong></td>
+      <td style="text-align: right"><strong>62.8</strong></td>
+      <td style="text-align: right"><strong>0.97</strong></td>
+      <td style="text-align: right"><strong>2.87</strong></td>
+      <td style="text-align: right"><strong>3943</strong></td>
+      <td style="text-align: right">0.035</td>
+    </tr>
+    <tr>
+      <td><strong>Caso 2</strong></td>
+      <td>Burbuja</td>
+      <td style="text-align: right">756.8</td>
+      <td style="text-align: right">554.7</td>
+      <td style="text-align: right">61.7</td>
+      <td style="text-align: right"><strong>0.52</strong></td>
+      <td style="text-align: right"><strong>0.94</strong></td>
+      <td style="text-align: right"><strong>2422</strong></td>
+      <td style="text-align: right"><strong>0.033</strong></td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Noise</td>
+      <td style="text-align: right"><strong>760.8</strong></td>
+      <td style="text-align: right">≈555.4</td>
+      <td style="text-align: right"><strong>62.3</strong></td>
+      <td style="text-align: right">0.58</td>
+      <td style="text-align: right">1.05</td>
+      <td style="text-align: right">2445</td>
+      <td style="text-align: right">0.035</td>
+    </tr>
+    <tr>
+      <td><strong>Caso 3</strong></td>
+      <td>Burbuja</td>
+      <td style="text-align: right">741.7</td>
+      <td style="text-align: right">561.3</td>
+      <td style="text-align: right">60.4</td>
+      <td style="text-align: right"><strong>0.50</strong></td>
+      <td style="text-align: right"><strong>0.89</strong></td>
+      <td style="text-align: right">2387</td>
+      <td style="text-align: right"><strong>0.032</strong></td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Noise</td>
+      <td style="text-align: right"><strong>745.7</strong></td>
+      <td style="text-align: right"><strong>592.6</strong></td>
+      <td style="text-align: right"><strong>62.9</strong></td>
+      <td style="text-align: right">0.53</td>
+      <td style="text-align: right">≈0.89</td>
+      <td style="text-align: right"><strong>2332</strong></td>
+      <td style="text-align: right">0.034</td>
+    </tr>
+    <tr>
+      <td><strong>Caso 4</strong></td>
+      <td>Burbuja</td>
+      <td style="text-align: right">756.7</td>
+      <td style="text-align: right">544.2</td>
+      <td style="text-align: right">60.3</td>
+      <td style="text-align: right"><strong>0.53</strong></td>
+      <td style="text-align: right"><strong>0.97</strong></td>
+      <td style="text-align: right"><strong>2453</strong></td>
+      <td style="text-align: right"><strong>0.033</strong></td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Noise</td>
+      <td style="text-align: right"><strong>761.6</strong></td>
+      <td style="text-align: right"><strong>570.6</strong></td>
+      <td style="text-align: right"><strong>60.7</strong></td>
+      <td style="text-align: right">0.58</td>
+      <td style="text-align: right">1.02</td>
+      <td style="text-align: right">≈2466</td>
+      <td style="text-align: right">0.035</td>
+    </tr>
+    <tr>
+      <td><strong>Caso 5</strong></td>
+      <td>Burbuja</td>
+      <td style="text-align: right">757.3</td>
+      <td style="text-align: right">301.1</td>
+      <td style="text-align: right">60.2</td>
+      <td style="text-align: right"><strong>1.01</strong></td>
+      <td style="text-align: right">3.36</td>
+      <td style="text-align: right">4418</td>
+      <td style="text-align: right"><strong>0.034</strong></td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Noise</td>
+      <td style="text-align: right"><strong>761.0</strong></td>
+      <td style="text-align: right"><strong>315.8</strong></td>
+      <td style="text-align: right"><strong>62.1</strong></td>
+      <td style="text-align: right">≈1.02</td>
+      <td style="text-align: right"><strong>3.22</strong></td>
+      <td style="text-align: right"><strong>4333</strong></td>
+      <td style="text-align: right">0.036</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h1 id="resultados-por-velocidad">Resultados por velocidad</h1>
+
+<h2 id="30-kmh">30 km/h</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Métrica</th>
+      <th style="text-align: right">Burbuja avg</th>
+      <th style="text-align: right">Noise (esta prueba)</th>
+      <th>Mejor</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Completed distance</td>
+      <td style="text-align: right">756.07</td>
+      <td style="text-align: right"><strong>760.50</strong></td>
+      <td>Noise</td>
+    </tr>
+    <tr>
+      <td>Effective distance</td>
+      <td style="text-align: right"><strong>443.17</strong></td>
+      <td style="text-align: right">416.50</td>
+      <td>Burbuja</td>
+    </tr>
+    <tr>
+      <td>Average speed</td>
+      <td style="text-align: right">62.79</td>
+      <td style="text-align: right"><strong>64.15</strong></td>
+      <td>Noise</td>
+    </tr>
+    <tr>
+      <td>Dev mean</td>
+      <td style="text-align: right"><strong>0.716</strong></td>
+      <td style="text-align: right">0.768</td>
+      <td>Burbuja</td>
+    </tr>
+    <tr>
+      <td>Dev/km</td>
+      <td style="text-align: right"><strong>1.62</strong></td>
+      <td style="text-align: right">1.84</td>
+      <td>Burbuja</td>
+    </tr>
+    <tr>
+      <td>Lane invasions/km</td>
+      <td style="text-align: right"><strong>2923</strong></td>
+      <td style="text-align: right">2996</td>
+      <td>Burbuja</td>
+    </tr>
+    <tr>
+      <td>Suddenness control</td>
+      <td style="text-align: right"><strong>0.0318</strong></td>
+      <td style="text-align: right">0.0355</td>
+      <td>Burbuja</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Interpretación: Burbuja domina el control fino; Noise aumenta avance/velocidad con más reactividad.</p>
+
+<hr />
+
+<h2 id="50-kmh">50 km/h</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Métrica</th>
+      <th style="text-align: right">Burbuja</th>
+      <th style="text-align: right">Noise</th>
+      <th>Mejor</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Completed distance</td>
+      <td style="text-align: right">756.12</td>
+      <td style="text-align: right"><strong>759.87</strong></td>
+      <td>Noise</td>
+    </tr>
+    <tr>
+      <td>Effective distance</td>
+      <td style="text-align: right">437.33</td>
+      <td style="text-align: right"><strong>444.17</strong></td>
+      <td>Noise</td>
+    </tr>
+    <tr>
+      <td>Average speed</td>
+      <td style="text-align: right">63.85</td>
+      <td style="text-align: right"><strong>64.90</strong></td>
+      <td>Noise</td>
+    </tr>
+    <tr>
+      <td>Dev mean</td>
+      <td style="text-align: right"><strong>0.695</strong></td>
+      <td style="text-align: right">0.726</td>
+      <td>Burbuja</td>
+    </tr>
+    <tr>
+      <td>Dev/km</td>
+      <td style="text-align: right"><strong>1.589</strong></td>
+      <td style="text-align: right">1.639</td>
+      <td>Burbuja</td>
+    </tr>
+    <tr>
+      <td>Lane invasions/km</td>
+      <td style="text-align: right">2873</td>
+      <td style="text-align: right"><strong>2853</strong></td>
+      <td>Noise (leve)</td>
+    </tr>
+    <tr>
+      <td>Suddenness control</td>
+      <td style="text-align: right"><strong>0.0324</strong></td>
+      <td style="text-align: right">0.0350</td>
+      <td>Burbuja</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Interpretación: en régimen dinámico medio, Noise ya domina progreso/velocidad; Burbuja conserva fine tracking y suavidad.</p>
+
+<hr />
+
+<h2 id="80-kmh">80 km/h</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Métrica</th>
+      <th style="text-align: right">Burbuja</th>
+      <th style="text-align: right">Noise</th>
+      <th>Mejor</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Completed distance</td>
+      <td style="text-align: right">419.16</td>
+      <td style="text-align: right"><strong>761.70</strong></td>
+      <td>Noise</td>
+    </tr>
+    <tr>
+      <td>Effective distance</td>
+      <td style="text-align: right">252.83</td>
+      <td style="text-align: right"><strong>479.83</strong></td>
+      <td>Noise</td>
+    </tr>
+    <tr>
+      <td>Average speed</td>
+      <td style="text-align: right">25.84</td>
+      <td style="text-align: right"><strong>68.20</strong></td>
+      <td>Noise</td>
+    </tr>
+    <tr>
+      <td>Dev mean</td>
+      <td style="text-align: right">1.923</td>
+      <td style="text-align: right"><strong>0.659</strong></td>
+      <td>Noise</td>
+    </tr>
+    <tr>
+      <td>Dev/km</td>
+      <td style="text-align: right">7.75</td>
+      <td style="text-align: right"><strong>1.37</strong></td>
+      <td>Noise</td>
+    </tr>
+    <tr>
+      <td>Lane invasions/km</td>
+      <td style="text-align: right">11028</td>
+      <td style="text-align: right"><strong>2598</strong></td>
+      <td>Noise</td>
+    </tr>
+    <tr>
+      <td>Suddenness control</td>
+      <td style="text-align: right">0.0539</td>
+      <td style="text-align: right"><strong>0.0349</strong></td>
+      <td>Noise</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Interpretación: cambio de régimen completo — Burbuja pierde estabilidad; Noise mantiene control estable.</p>
+
+<hr />
+
+<h2 id="100-kmh">100 km/h</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Métrica</th>
+      <th style="text-align: right">Burbuja</th>
+      <th style="text-align: right">Noise</th>
+      <th>Mejor</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Completed distance</td>
+      <td style="text-align: right">758.98</td>
+      <td style="text-align: right"><strong>762.49</strong></td>
+      <td>Noise</td>
+    </tr>
+    <tr>
+      <td>Effective distance</td>
+      <td style="text-align: right">457.67</td>
+      <td style="text-align: right"><strong>475.50</strong></td>
+      <td>Noise</td>
+    </tr>
+    <tr>
+      <td>Average speed</td>
+      <td style="text-align: right">68.44</td>
+      <td style="text-align: right"><strong>69.50</strong></td>
+      <td>Noise</td>
+    </tr>
+    <tr>
+      <td>Dev mean</td>
+      <td style="text-align: right"><strong>0.608</strong></td>
+      <td style="text-align: right">0.623</td>
+      <td>Burbuja</td>
+    </tr>
+    <tr>
+      <td>Dev/km</td>
+      <td style="text-align: right">1.33</td>
+      <td style="text-align: right"><strong>1.32</strong></td>
+      <td>≈ Empate</td>
+    </tr>
+    <tr>
+      <td>Lane invasions/km</td>
+      <td style="text-align: right">2576</td>
+      <td style="text-align: right"><strong>2478</strong></td>
+      <td>Noise</td>
+    </tr>
+    <tr>
+      <td>Suddenness control</td>
+      <td style="text-align: right"><strong>0.0331</strong></td>
+      <td style="text-align: right">0.0351</td>
+      <td>Burbuja</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Lectura rápida: Noise gana en robustez/progreso; Burbuja conserva precisión fina y suavidad.</p>
+
+<hr />
+
+<h1 id="conclusión">Conclusión</h1>
+
+<p>El entrenamiento con perturbaciones controladas (Noise/Recovery) no solo mejora escenarios de recuperación: <strong>modifica el régimen dinámico</strong> del controlador aprendido.</p>
+
+<ul>
+  <li><strong>Burbuja</strong> optimiza precisión nominal, suavidad y control lateral fino.</li>
+  <li><strong>Noise Injection</strong> amplía la región operativa y mantiene estabilidad en regímenes exigentes (≥ 80 km/h), evitando degradación catastrófica.</li>
+</ul>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/tags/#behaviormetrics" class="page__taxonomy-item p-category" rel="tag">BehaviorMetrics</a><span class="sep">, </span>
+    
+      <a href="/tags/#dagger" class="page__taxonomy-item p-category" rel="tag">DAgger</a><span class="sep">, </span>
+    
+      <a href="/tags/#metrics-online" class="page__taxonomy-item p-category" rel="tag">Metrics Online</a><span class="sep">, </span>
+    
+      <a href="/tags/#robustez" class="page__taxonomy-item p-category" rel="tag">Robustez</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#weekly-log" class="page__taxonomy-item p-category" rel="tag">weekly Log</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2026-02-02T00:00:00-05:00">February 2, 2026</time></p>
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Week+84+-+Noise+Injection+-+Pruebas+robustez%20http%3A%2F%2Flocalhost%3A4000%2Fweekly%2520log%2Fkeek84%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fweekly%2520log%2Fkeek84%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fweekly%2520log%2Fkeek84%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/weekly%20log/week83/" class="pagination--pager" title="Week 83 - Actualización Dataset Burbuja + DAgger
+">Previous</a>
+    
+    
+      <a href="/weekly%20log/week85/" class="pagination--pager" title="Week 85 - Noise Injection vs DAgger, pruebas de robustez y estabilidad en CARLA (PilotNet)
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h2 class="page__related-title">You may also enjoy</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/weekly%20log/week89/" rel="permalink">Week 89 - Robustez del piloto, Caso Canónico, 15 Casos y Pruebas de Velocidad
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          12 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">En esta entrada reporto los resultados de robustez en CARLA Town02 comparando cinco políticas/datasets bajo el mismo circuito de prueba, con 6 repeticiones p...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/weekly%20log/week88/" rel="permalink">Week 88 - Actualización de métricas en BehaviorMetrics (CARLA), comparación contra ruta ideal
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          2 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Actualización de métricas en BehaviorMetrics (CARLA)
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/weekly%20log/week87/" rel="permalink">Week 87 - Actualización de métricas en CARLA
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          9 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">En esta semana consolidé el reporte comparativo de cinco variantes de entrenamiento (Burbuja, Noise injection, DAgger 16k, DAgger 27.6k y DAgger agresivo) us...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/weekly%20log/week86/" rel="permalink">Week 86 - Actualización de métricas en CARLA
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          2 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Se realizaron mejoras en la forma de reportar el desempeño del vehículo autónomo en simulación, con el objetivo de que las métricas reflejen con mayor fideli...</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2026 Carlos Andrés Velásquez Ospina. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+  </body>
+</html>

@@ -1,0 +1,806 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Week 59 - Comparativa de modelos para conducción autónoma en CARLA - Robotics Lab URJC</title>
+<meta name="description" content="Tiempo de inferencia promedio (usando API Python CARLA) Tiempo de inferencia promedio (usando API Python CARLA) Este indicador refleja el tiempo que tarda cada modelo en realizar una inferencia (predicción) sobre una imagen. Se evaluó directamente sobre la API de CARLA con los modelos torch *.pth para dataset teleoperado.">
+
+
+  <meta name="author" content="Carlos Velásquez">
+  
+  <meta property="article:author" content="Carlos Velásquez">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Robotics Lab URJC">
+<meta property="og:title" content="Week 59 - Comparativa de modelos para conducción autónoma en CARLA">
+<meta property="og:url" content="http://localhost:4000/weekly%20log/week59/">
+
+
+  <meta property="og:description" content="Tiempo de inferencia promedio (usando API Python CARLA) Tiempo de inferencia promedio (usando API Python CARLA) Este indicador refleja el tiempo que tarda cada modelo en realizar una inferencia (predicción) sobre una imagen. Se evaluó directamente sobre la API de CARLA con los modelos torch *.pth para dataset teleoperado.">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2025-07-27T00:00:00-05:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/weekly%20log/week59/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Carlos Andrés Velásquez Ospina",
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Robotics Lab URJC Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/logo.png" alt="Robotics Lab URJC"></a>
+        
+        <a class="site-title" href="/">
+          Robotics Lab URJC
+          <span class="site-subtitle">Programming Robot Intelligence</span>
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="https://mmistakes.github.io/minimal-mistakes/docs/quick-start-guide/">Quick-Start Guide</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+    <div class="author__avatar">
+      <a href="http://localhost:4000/">
+        <img src="/assets/images/me.jpg" alt="Carlos Velásquez" itemprop="image" class="u-photo">
+      </a>
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      <a class="u-url" rel="me" href="http://localhost:4000/" itemprop="url">Carlos Velásquez</a>
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>Doctoral thesis blog</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name" class="p-locality">Medellín</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="mailto:canveo@gmail.com" rel="nofollow noopener noreferrer me"><i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">Email</span></a></li>
+          
+        
+          
+            <li><a href="https://github.com/canveo" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/canveo/" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span class="label">LinkedIn</span></a></li>
+          
+        
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:canveo@gmail.com" rel="me" class="u-email">
+            <meta itemprop="email" content="canveo@gmail.com" />
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">Email</span>
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer me">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Week 59 - Comparativa de modelos para conducción autónoma en CARLA">
+    <meta itemprop="description" content="Tiempo de inferencia promedio (usando API Python CARLA)Tiempo de inferencia promedio (usando API Python CARLA)Este indicador refleja el tiempo que tarda cada modelo en realizar una inferencia (predicción) sobre una imagen. Se evaluó directamente sobre la API de CARLA con los modelos torch *.pth para dataset teleoperado.">
+    <meta itemprop="datePublished" content="2025-07-27T00:00:00-05:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="http://localhost:4000/weekly%20log/week59/" class="u-url" itemprop="url">Week 59 - Comparativa de modelos para conducción autónoma en CARLA
+</a>
+          </h1>
+          
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          1 minute read
+        
+      </span>
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        <h3 id="tiempo-de-inferencia-promedio-usando-api-python-carla"><strong>Tiempo de inferencia promedio (usando API Python CARLA)</strong></h3>
+<p>Tiempo de inferencia promedio (usando API Python CARLA)
+Este indicador refleja el tiempo que tarda cada modelo en realizar una inferencia (predicción) sobre una imagen. Se evaluó directamente sobre la API de CARLA con los modelos torch *.pth para dataset teleoperado.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Modelo</th>
+      <th>Promedio (ms)</th>
+      <th>Mínimo (ms)</th>
+      <th>Máximo (ms)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>PilotNet</td>
+      <td>5.10</td>
+      <td>4.13</td>
+      <td>6.66</td>
+    </tr>
+    <tr>
+      <td>EfficientNetV2-S</td>
+      <td>9.53</td>
+      <td>9.39</td>
+      <td>9.66</td>
+    </tr>
+    <tr>
+      <td>ResNet18</td>
+      <td>5.06</td>
+      <td>5.00</td>
+      <td>5.12</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="tiempo-total-para-completar-el-circuito-medido-en-la-simulación"><strong>Tiempo total para completar el circuito (medido en la simulación)</strong></h3>
+<p>Esta tabla muestra cuánto tardó cada modelo en recorrer una trayectoria definida en CARLA, lo cual depende tanto del modelo como del comportamiento de conducción aprendido.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Modelo</th>
+      <th>Tiempo (hh:mm:ss)</th>
+      <th>Tiempo (segundos)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>EfficientNet</td>
+      <td>00:01:17</td>
+      <td>77</td>
+    </tr>
+    <tr>
+      <td>ResNet18</td>
+      <td>00:01:26</td>
+      <td>86</td>
+    </tr>
+    <tr>
+      <td>PilotNet</td>
+      <td>00:01:37</td>
+      <td>97</td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p>Aunque EfficientNet es más lento en inferencia, su capacidad de conducción es más eficiente en tiempo total de recorrido.</p>
+</blockquote>
+
+<h3 id="métricas-de-desempeño-en-conducción-behaviormetrics"><strong>Métricas de desempeño en conducción (BehaviorMetrics)</strong></h3>
+
+<p>Se usó la herramienta BehaviorMetrics para analizar el comportamiento de conducción. Se destacan la velocidad promedio, la desviación de posición respecto al carril y las infracciones. Se uso modelos convertidos a ONNX (dataset teleoperado).</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Modelo</th>
+      <th>Distancia (m)</th>
+      <th>Tiempo (s)</th>
+      <th>Vel. Mín (m/s)</th>
+      <th>Vel. Prom (m/s)</th>
+      <th>Vel. Máx (m/s)</th>
+      <th>Pos. Desv. (m)</th>
+      <th>Colisiones</th>
+      <th>Inv. Carril</th>
+      <th>Inv. Aceras</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>EfficientNetV2-S</td>
+      <td>264.68</td>
+      <td>77.0</td>
+      <td>2.52</td>
+      <td>3.44</td>
+      <td>4.27</td>
+      <td>0.22</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>ResNet18</td>
+      <td>264.68</td>
+      <td>86.0</td>
+      <td>1.99</td>
+      <td>3.07</td>
+      <td>4.04</td>
+      <td>0.30</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>PilotNet</td>
+      <td>264.68</td>
+      <td>97.0</td>
+      <td>1.71</td>
+      <td>2.73</td>
+      <td>3.96</td>
+      <td>0.45</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p>EfficientNetV2-S no solo completó el trayecto más rápido, sino que lo hizo con menor desviación del carril y sin colisiones o infracciones.</p>
+</blockquote>
+
+<blockquote>
+  <p>PilotNet: Aunque es el más rápido en inferencia, muestra el peor desempeño de conducción en cuanto a desviación y tiempo.</p>
+</blockquote>
+
+<blockquote>
+  <p>EfficientNetV2-S: A pesar de ser más pesado computacionalmente, obtuvo los mejores resultados en conducción segura y eficiente.</p>
+</blockquote>
+
+<blockquote>
+  <p>ResNet18: Logra un balance entre rendimiento computacional y buena conducción.</p>
+</blockquote>
+
+<h3 id="test-offline"><strong>Test Offline</strong></h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Modelo</th>
+      <th>Steer MSE</th>
+      <th>Steer MAE</th>
+      <th>Throttle MSE</th>
+      <th>Throttle MAE</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>pilotnet</td>
+      <td>0.3351</td>
+      <td>0.2249</td>
+      <td>0.3985</td>
+      <td>0.3846</td>
+    </tr>
+    <tr>
+      <td>resnet18</td>
+      <td>0.2788</td>
+      <td>0.1865</td>
+      <td>0.4311</td>
+      <td>0.3715</td>
+    </tr>
+    <tr>
+      <td>efficentenet_v2_s</td>
+      <td>0.2922</td>
+      <td>0.1650</td>
+      <td>0.4633</td>
+      <td>0.3936</td>
+    </tr>
+  </tbody>
+</table>
+
+<figure class="half">
+  <img src="http://localhost:4000/assets/images/week59/efficientnet.png" alt="EfficientNetV2-S – trayectoria con BehaviorMetrics" style="width:90%" />
+  <figcaption>EfficientNetV2-S – trayectoria generada por <em>BehaviorMetrics</em></figcaption>
+</figure>
+
+<figure class="half">
+  <img src="http://localhost:4000/assets/images/week59/resnet18_bm.png" alt="ResNet18 – trayectoria con BehaviorMetrics" style="width:90%" />
+  <figcaption>ResNet18 – trayectoria generada por <em>BehaviorMetrics</em></figcaption>
+</figure>
+
+<figure class="half">
+  <img src="http://localhost:4000/assets/images/week59/pilotnet_bm.png" alt="PilotNet – trayectoria con BehaviorMetrics" style="width:90%" />
+  <figcaption>PilotNet – trayectoria generada por <em>BehaviorMetrics</em></figcaption>
+</figure>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/tags/#carla-simulator" class="page__taxonomy-item p-category" rel="tag">CARLA Simulator</a><span class="sep">, </span>
+    
+      <a href="/tags/#python" class="page__taxonomy-item p-category" rel="tag">Python</a><span class="sep">, </span>
+    
+      <a href="/tags/#ros-2" class="page__taxonomy-item p-category" rel="tag">ROS 2</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#weekly-log" class="page__taxonomy-item p-category" rel="tag">weekly Log</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2025-07-27T00:00:00-05:00">July 27, 2025</time></p>
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Week+59+-+Comparativa+de+modelos+para+conducci%C3%B3n+aut%C3%B3noma+en+CARLA%20http%3A%2F%2Flocalhost%3A4000%2Fweekly%2520log%2Fweek59%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fweekly%2520log%2Fweek59%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fweekly%2520log%2Fweek59%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/weekly%20log/week58/" class="pagination--pager" title="Week 58 - Sincronización de tópicos
+">Previous</a>
+    
+    
+      <a href="/weekly%20log/week60/" class="pagination--pager" title="Week 60 - PilotNet, MoE y Monolítico (CARLA)
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h2 class="page__related-title">You may also enjoy</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/weekly%20log/week89/" rel="permalink">Week 89 - Robustez del piloto, Caso Canónico, 15 Casos y Pruebas de Velocidad
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          12 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">En esta entrada reporto los resultados de robustez en CARLA Town02 comparando cinco políticas/datasets bajo el mismo circuito de prueba, con 6 repeticiones p...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/weekly%20log/week88/" rel="permalink">Week 88 - Actualización de métricas en BehaviorMetrics (CARLA), comparación contra ruta ideal
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          2 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Actualización de métricas en BehaviorMetrics (CARLA)
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/weekly%20log/week87/" rel="permalink">Week 87 - Actualización de métricas en CARLA
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          9 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">En esta semana consolidé el reporte comparativo de cinco variantes de entrenamiento (Burbuja, Noise injection, DAgger 16k, DAgger 27.6k y DAgger agresivo) us...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/weekly%20log/week86/" rel="permalink">Week 86 - Actualización de métricas en CARLA
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          2 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Se realizaron mejoras en la forma de reportar el desempeño del vehículo autónomo en simulación, con el objetivo de que las métricas reflejen con mayor fideli...</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2026 Carlos Andrés Velásquez Ospina. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+  </body>
+</html>
