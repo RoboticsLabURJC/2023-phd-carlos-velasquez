@@ -1,0 +1,987 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Week 97 - Busqueda de la proporcion optima, mezcla Burbuja–DAgger vs Burbuja–Noise en conduccion autonoma - Robotics Lab URJC</title>
+<meta name="description" content="">
+
+
+  <meta name="author" content="Carlos Velásquez">
+  
+  <meta property="article:author" content="Carlos Velásquez">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Robotics Lab URJC">
+<meta property="og:title" content="Week 97 - Busqueda de la proporcion optima, mezcla Burbuja–DAgger vs Burbuja–Noise en conduccion autonoma">
+<meta property="og:url" content="http://localhost:4000/weekly%20log/week97/">
+
+
+  <meta property="og:description" content="">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2026-04-26T00:00:00-05:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/weekly%20log/week97/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Carlos Andrés Velásquez Ospina",
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Robotics Lab URJC Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/logo.png" alt="Robotics Lab URJC"></a>
+        
+        <a class="site-title" href="/">
+          Robotics Lab URJC
+          <span class="site-subtitle">Programming Robot Intelligence</span>
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="https://mmistakes.github.io/minimal-mistakes/docs/quick-start-guide/">Quick-Start Guide</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+    <div class="author__avatar">
+      <a href="http://localhost:4000/">
+        <img src="/assets/images/me.jpg" alt="Carlos Velásquez" itemprop="image" class="u-photo">
+      </a>
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      <a class="u-url" rel="me" href="http://localhost:4000/" itemprop="url">Carlos Velásquez</a>
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>Doctoral thesis blog</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name" class="p-locality">Medellín</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="mailto:canveo@gmail.com" rel="nofollow noopener noreferrer me"><i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">Email</span></a></li>
+          
+        
+          
+            <li><a href="https://github.com/canveo" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/canveo/" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span class="label">LinkedIn</span></a></li>
+          
+        
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:canveo@gmail.com" rel="me" class="u-email">
+            <meta itemprop="email" content="canveo@gmail.com" />
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">Email</span>
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer me">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Week 97 - Busqueda de la proporcion optima, mezcla Burbuja–DAgger vs Burbuja–Noise en conduccion autonoma">
+    <meta itemprop="description" content="">
+    <meta itemprop="datePublished" content="2026-04-26T00:00:00-05:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="http://localhost:4000/weekly%20log/week97/" class="u-url" itemprop="url">Week 97 - Busqueda de la proporcion optima, mezcla Burbuja–DAgger vs Burbuja–Noise en conduccion autonoma
+</a>
+          </h1>
+          
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          3 minute read
+        
+      </span>
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        <hr />
+
+<h2 id="análisis-de-mezclas-burbuja--dagger">Análisis de mezclas Burbuja + DAgger</h2>
+
+<h3 id="tabla-resumen--dagger">Tabla resumen – DAgger</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Métrica</th>
+      <th style="text-align: right">DAgger 5%</th>
+      <th style="text-align: right">DAgger 15%</th>
+      <th style="text-align: right">DAgger 30%</th>
+      <th style="text-align: right">DAgger 50%</th>
+      <th style="text-align: left">Mejor</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">Route completed (%)</td>
+      <td style="text-align: right">97.600</td>
+      <td style="text-align: right">98.900</td>
+      <td style="text-align: right">99.200</td>
+      <td style="text-align: right"><strong>99.400</strong></td>
+      <td style="text-align: left">DAgger 50%</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Average speed (km/h)</td>
+      <td style="text-align: right">53.800</td>
+      <td style="text-align: right">59.900</td>
+      <td style="text-align: right">62.800</td>
+      <td style="text-align: right"><strong>64.100</strong></td>
+      <td style="text-align: left">DAgger 50%</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Dev mean (m)</td>
+      <td style="text-align: right"><strong>0.620</strong></td>
+      <td style="text-align: right">0.640</td>
+      <td style="text-align: right">0.655</td>
+      <td style="text-align: right">0.670</td>
+      <td style="text-align: left">DAgger 5%</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Lane invasions (eventos)</td>
+      <td style="text-align: right">8.100</td>
+      <td style="text-align: right">7.200</td>
+      <td style="text-align: right">6.900</td>
+      <td style="text-align: right"><strong>6.700</strong></td>
+      <td style="text-align: left">DAgger 50%</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Collisions (eventos)</td>
+      <td style="text-align: right"><strong>0.050</strong></td>
+      <td style="text-align: right">0.110</td>
+      <td style="text-align: right">0.160</td>
+      <td style="text-align: right">0.210</td>
+      <td style="text-align: left">DAgger 5%</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Suddenness throttle (1/s)</td>
+      <td style="text-align: right">0.0165</td>
+      <td style="text-align: right">0.0150</td>
+      <td style="text-align: right">0.0142</td>
+      <td style="text-align: right"><strong>0.0136</strong></td>
+      <td style="text-align: left">DAgger 50%</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Suddenness steer (1/s)</td>
+      <td style="text-align: right"><strong>0.0054</strong></td>
+      <td style="text-align: right">0.0063</td>
+      <td style="text-align: right">0.0069</td>
+      <td style="text-align: right">0.0075</td>
+      <td style="text-align: left">DAgger 5%</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h2 id="análisis-de-mezclas-burbuja--noise">Análisis de mezclas Burbuja + Noise</h2>
+
+<h3 id="tabla-resumen--noise">Tabla resumen – Noise</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Métrica</th>
+      <th style="text-align: right">Noise 5%</th>
+      <th style="text-align: right">Noise 15%</th>
+      <th style="text-align: right">Noise 30%</th>
+      <th style="text-align: right">Noise 50%</th>
+      <th style="text-align: left">Mejor</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">Route completed (%)</td>
+      <td style="text-align: right">97.800</td>
+      <td style="text-align: right">98.100</td>
+      <td style="text-align: right">98.300</td>
+      <td style="text-align: right"><strong>98.500</strong></td>
+      <td style="text-align: left">Noise 50%</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Average speed (km/h)</td>
+      <td style="text-align: right">54.500</td>
+      <td style="text-align: right">55.200</td>
+      <td style="text-align: right">56.000</td>
+      <td style="text-align: right"><strong>56.800</strong></td>
+      <td style="text-align: left">Noise 50%</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Dev mean (m)</td>
+      <td style="text-align: right"><strong>0.790</strong></td>
+      <td style="text-align: right">0.805</td>
+      <td style="text-align: right">0.820</td>
+      <td style="text-align: right">0.840</td>
+      <td style="text-align: left">Noise 5%</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Lane invasions (eventos)</td>
+      <td style="text-align: right">8.300</td>
+      <td style="text-align: right">8.100</td>
+      <td style="text-align: right">7.900</td>
+      <td style="text-align: right"><strong>7.800</strong></td>
+      <td style="text-align: left">Noise 50%</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Collisions (eventos)</td>
+      <td style="text-align: right"><strong>0.050</strong></td>
+      <td style="text-align: right">0.070</td>
+      <td style="text-align: right">0.090</td>
+      <td style="text-align: right">0.120</td>
+      <td style="text-align: left">Noise 5%</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Suddenness throttle (1/s)</td>
+      <td style="text-align: right">0.0185</td>
+      <td style="text-align: right">0.0180</td>
+      <td style="text-align: right">0.0175</td>
+      <td style="text-align: right"><strong>0.0170</strong></td>
+      <td style="text-align: left">Noise 50%</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Suddenness steer (1/s)</td>
+      <td style="text-align: right"><strong>0.0055</strong></td>
+      <td style="text-align: right">0.0058</td>
+      <td style="text-align: right">0.0062</td>
+      <td style="text-align: right">0.0066</td>
+      <td style="text-align: left">Noise 5%</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h2 id="comparación-directa--dagger-vs-noise">Comparación directa – DAgger vs Noise</h2>
+
+<h3 id="tabla-comparativa-final">Tabla comparativa final</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Métrica</th>
+      <th style="text-align: right">DAgger 5%</th>
+      <th style="text-align: right">DAgger 15%</th>
+      <th style="text-align: right">DAgger 30%</th>
+      <th style="text-align: right">DAgger 50%</th>
+      <th style="text-align: right">Noise 5%</th>
+      <th style="text-align: right">Noise 15%</th>
+      <th style="text-align: right">Noise 30%</th>
+      <th style="text-align: right">Noise 50%</th>
+      <th style="text-align: left">Mejor global</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">Route completed (%)</td>
+      <td style="text-align: right">97.600</td>
+      <td style="text-align: right">98.900</td>
+      <td style="text-align: right">99.200</td>
+      <td style="text-align: right"><strong>99.400</strong></td>
+      <td style="text-align: right">97.800</td>
+      <td style="text-align: right">98.100</td>
+      <td style="text-align: right">98.300</td>
+      <td style="text-align: right">98.500</td>
+      <td style="text-align: left">DAgger</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Average speed (km/h)</td>
+      <td style="text-align: right">53.800</td>
+      <td style="text-align: right">59.900</td>
+      <td style="text-align: right">62.800</td>
+      <td style="text-align: right"><strong>64.100</strong></td>
+      <td style="text-align: right">54.500</td>
+      <td style="text-align: right">55.200</td>
+      <td style="text-align: right">56.000</td>
+      <td style="text-align: right">56.800</td>
+      <td style="text-align: left">DAgger</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Dev mean (m)</td>
+      <td style="text-align: right"><strong>0.620</strong></td>
+      <td style="text-align: right">0.640</td>
+      <td style="text-align: right">0.655</td>
+      <td style="text-align: right">0.670</td>
+      <td style="text-align: right">0.790</td>
+      <td style="text-align: right">0.805</td>
+      <td style="text-align: right">0.820</td>
+      <td style="text-align: right">0.840</td>
+      <td style="text-align: left">DAgger</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Lane invasions (eventos)</td>
+      <td style="text-align: right">8.100</td>
+      <td style="text-align: right">7.200</td>
+      <td style="text-align: right">6.900</td>
+      <td style="text-align: right"><strong>6.700</strong></td>
+      <td style="text-align: right">8.300</td>
+      <td style="text-align: right">8.100</td>
+      <td style="text-align: right">7.900</td>
+      <td style="text-align: right">7.800</td>
+      <td style="text-align: left">DAgger</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Collisions (eventos)</td>
+      <td style="text-align: right"><strong>0.050</strong></td>
+      <td style="text-align: right">0.110</td>
+      <td style="text-align: right">0.160</td>
+      <td style="text-align: right">0.210</td>
+      <td style="text-align: right"><strong>0.050</strong></td>
+      <td style="text-align: right">0.070</td>
+      <td style="text-align: right">0.090</td>
+      <td style="text-align: right">0.120</td>
+      <td style="text-align: left">Empate</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Suddenness throttle (1/s)</td>
+      <td style="text-align: right">0.0165</td>
+      <td style="text-align: right">0.0150</td>
+      <td style="text-align: right">0.0142</td>
+      <td style="text-align: right"><strong>0.0136</strong></td>
+      <td style="text-align: right">0.0185</td>
+      <td style="text-align: right">0.0180</td>
+      <td style="text-align: right">0.0175</td>
+      <td style="text-align: right">0.0170</td>
+      <td style="text-align: left">DAgger</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Suddenness steer (1/s)</td>
+      <td style="text-align: right"><strong>0.0054</strong></td>
+      <td style="text-align: right">0.0063</td>
+      <td style="text-align: right">0.0069</td>
+      <td style="text-align: right">0.0075</td>
+      <td style="text-align: right"><strong>0.0055</strong></td>
+      <td style="text-align: right">0.0058</td>
+      <td style="text-align: right">0.0062</td>
+      <td style="text-align: right">0.0066</td>
+      <td style="text-align: left">Bajo %</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h2 id="gráficas-comparativas">Gráficas comparativas</h2>
+
+<p>A continuación se muestran las curvas de comportamiento en función del porcentaje de augmentación:</p>
+
+<figure class="half">
+  <img src="http://localhost:4000/assets/images/week97/curve_route.png" style="width:50%" />
+  <img src="http://localhost:4000/assets/images/week97/curve_collisions.png" style="width:50%" />
+  <figcaption>Robustez y colisiones vs % de augmentación</figcaption>
+</figure>
+
+<figure class="half">
+  <img src="http://localhost:4000/assets/images/week97/curve_dev.png" style="width:50%" />
+  <figcaption>Control lateral vs % de augmentación</figcaption>
+</figure>
+
+<hr />
+
+<hr />
+
+<h2 id="gráfico-de-burbujas-robustez-colisiones-y-velocidad">Gráfico de burbujas: robustez, colisiones y velocidad</h2>
+
+<p>Además de las curvas individuales, se construyó un gráfico de burbujas para visualizar simultáneamente tres dimensiones del comportamiento de los modelos:</p>
+
+<ul>
+  <li><strong>Eje X:</strong> colisiones promedio.</li>
+  <li><strong>Eje Y:</strong> porcentaje de ruta completada.</li>
+  <li><strong>Tamaño de burbuja:</strong> velocidad promedio del modelo.</li>
+</ul>
+
+<figure class="half">
+  <img src="http://localhost:4000/assets/images/week97/output.png" alt="DAgger vs Noise: robustez, colisiones y velocidad" style="width:50%" />
+  <figcaption>DAgger vs Noise: robustez, colisiones y velocidad promedio.</figcaption>
+</figure>
+
+<p>La lectura ideal de esta gráfica está en la zona <strong>superior izquierda</strong>: alto porcentaje de ruta completada y bajo número de colisiones. En este sentido, las configuraciones con <strong>DAgger</strong> tienden a ubicarse más arriba que las configuraciones con <strong>Noise</strong>, lo que indica una mayor capacidad de completado.</p>
+
+<p>Sin embargo, también se observa un costo: al aumentar la proporción de DAgger, los puntos se desplazan hacia la derecha, indicando un incremento en eventos de colisión. Esto confirma el trade-off observado en las tablas: <strong>más DAgger mejora la robustez y la velocidad, pero puede aumentar los contactos con el entorno</strong>.</p>
+
+<p>El caso más interesante es <strong>DAgger 15%</strong>, porque logra un aumento importante en completado respecto a DAgger 5%, sin llegar todavía al incremento de colisiones observado en DAgger 30% y DAgger 50%. Por eso, en este avance parcial, el rango <strong>15–30% DAgger</strong> aparece como el compromiso más prometedor entre robustez y seguridad.</p>
+
+<p>En contraste, Noise muestra una mejora más gradual y limitada. Aunque sus colisiones crecen menos, también alcanza menores valores de completado y velocidad. Esto sugiere que Noise introduce variabilidad en el dataset, pero no genera una mejora estructural tan clara en recuperación como DAgger.</p>
+
+<hr />
+
+<h2 id="interpretación">Interpretación</h2>
+
+<p>Las curvas muestran un patrón claro:</p>
+
+<ul>
+  <li><strong>DAgger</strong> mejora de forma consistente el completado, la velocidad y la reducción de invasiones de carril.</li>
+  <li><strong>Noise</strong> introduce mejoras marginales pero no cambia el comportamiento estructural del modelo.</li>
+  <li>A mayor proporción de DAgger:
+    <ul>
+      <li>↑ robustez</li>
+      <li>↑ velocidad</li>
+      <li>↓ invasiones</li>
+      <li>↑ colisiones</li>
+      <li>↑ variabilidad en steering</li>
+    </ul>
+  </li>
+</ul>
+
+<p>Esto evidencia un <strong>trade-off entre estabilidad nominal y capacidad de recuperación</strong>.</p>
+
+<hr />
+
+<h2 id="nota-importante-estado-del-trabajo">Nota importante (estado del trabajo)</h2>
+
+<p><strong>Este análisis es parcial y forma parte de un proceso en desarrollo.</strong></p>
+
+<p>Actualmente:</p>
+
+<ul>
+  <li>Solo se han evaluado mezclas de datasets (Burbuja + DAgger y Burbuja + Noise).</li>
+  <li>Las pruebas completas aún están en proceso, incluyendo:
+    <ul>
+      <li>Caso canónico</li>
+      <li>Casos aleatorios</li>
+      <li>Diferentes velocidades iniciales</li>
+      <li>Evaluación con perturbaciones DAgger en inferencia</li>
+      <li>Análisis más profundo de métricas de estabilidad</li>
+    </ul>
+  </li>
+</ul>
+
+<p>Debido a que:</p>
+
+<ul>
+  <li>El entrenamiento de modelos es costoso en tiempo</li>
+  <li>La recolección y procesamiento de métricas es extensa</li>
+</ul>
+
+<p>este bloque se presenta como un <strong>avance preliminar</strong> del comportamiento de los modelos.</p>
+
+<hr />
+
+<h2 id="conclusión-preliminar">Conclusión preliminar</h2>
+
+<p>Los resultados iniciales indican que:</p>
+
+<ul>
+  <li><strong>DAgger es la estrategia más efectiva para mejorar robustez</strong></li>
+  <li><strong>Noise no es suficiente a bajas proporciones</strong></li>
+  <li>Existe un punto óptimo intermedio (~15–30% DAgger)</li>
+</ul>
+
+<p>Este análisis continuará ampliándose con evaluaciones más completas en próximas iteraciones.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/tags/#burbuja" class="page__taxonomy-item p-category" rel="tag">Burbuja</a><span class="sep">, </span>
+    
+      <a href="/tags/#carla-simulator" class="page__taxonomy-item p-category" rel="tag">CARLA Simulator</a><span class="sep">, </span>
+    
+      <a href="/tags/#dagger" class="page__taxonomy-item p-category" rel="tag">DAgger</a><span class="sep">, </span>
+    
+      <a href="/tags/#noise-injection" class="page__taxonomy-item p-category" rel="tag">Noise Injection</a><span class="sep">, </span>
+    
+      <a href="/tags/#robustez" class="page__taxonomy-item p-category" rel="tag">Robustez</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#weekly-log" class="page__taxonomy-item p-category" rel="tag">weekly Log</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2026-04-26T00:00:00-05:00">April 26, 2026</time></p>
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Week+97+-+Busqueda+de+la+proporcion+optima%2C+mezcla+Burbuja%E2%80%93DAgger+vs+Burbuja%E2%80%93Noise+en+conduccion+autonoma%20http%3A%2F%2Flocalhost%3A4000%2Fweekly%2520log%2Fweek97%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fweekly%2520log%2Fweek97%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fweekly%2520log%2Fweek97%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/weekly%20log/week96/" class="pagination--pager" title="Week 96 - Robustez del piloto, Caso Canónico, 15 Casos y Pruebas de Velocidad
+">Previous</a>
+    
+    
+      <a href="/weekly%20log/week98/" class="pagination--pager" title="Week 98 - (Actualización) Búsqueda de la proporción óptima, mezcla A’–B’ vs A’–C’ en conducción autónoma
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h2 class="page__related-title">You may also enjoy</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/weekly%20log/week98/" rel="permalink">Week 98 - (Actualización) Búsqueda de la proporción óptima, mezcla A’–B’ vs A’–C’ en conducción autónoma
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          12 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Actualización de Week 97 incorporando los resultados extendidos hasta 75% y 100% de proporción de augmentación para ambas estrategias, además de la comparaci...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/weekly%20log/week96/" rel="permalink">Week 96 - Robustez del piloto, Caso Canónico, 15 Casos y Pruebas de Velocidad
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          19 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">En esta entrada reporto los resultados de robustez en CARLA Town02 comparando tres variantes del mismo dataset base bajo el mismo circuito de prueba, con 6 r...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/weekly%20log/week95/" rel="permalink">Week 95 - Robustez del piloto, Caso Canónico, 15 Casos y Pruebas de Velocidad
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          11 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">En esta entrada reporto los resultados de robustez en CARLA Town02 comparando tres políticas/datasets bajo el mismo circuito de prueba, con 6 repeticiones po...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/weekly%20log/week94/" rel="permalink">Week 94 - Construcción de datasets Noise Injection y DAgger
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          1 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Avances en construcción de dataset y entrenamiento PilotNet
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2026 Carlos Andrés Velásquez Ospina. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+  </body>
+</html>

@@ -1,0 +1,863 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Week 91 - Entrenamiento en caliente - Robotics Lab URJC</title>
+<meta name="description" content="Estratificación del dataset">
+
+
+  <meta name="author" content="Carlos Velásquez">
+  
+  <meta property="article:author" content="Carlos Velásquez">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Robotics Lab URJC">
+<meta property="og:title" content="Week 91 - Entrenamiento en caliente">
+<meta property="og:url" content="http://localhost:4000/weekly%20log/week91/">
+
+
+  <meta property="og:description" content="Estratificación del dataset">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2026-03-15T00:00:00-05:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/weekly%20log/week91/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Carlos Andrés Velásquez Ospina",
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Robotics Lab URJC Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/logo.png" alt="Robotics Lab URJC"></a>
+        
+        <a class="site-title" href="/">
+          Robotics Lab URJC
+          <span class="site-subtitle">Programming Robot Intelligence</span>
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="https://mmistakes.github.io/minimal-mistakes/docs/quick-start-guide/">Quick-Start Guide</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+    <div class="author__avatar">
+      <a href="http://localhost:4000/">
+        <img src="/assets/images/me.jpg" alt="Carlos Velásquez" itemprop="image" class="u-photo">
+      </a>
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      <a class="u-url" rel="me" href="http://localhost:4000/" itemprop="url">Carlos Velásquez</a>
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>Doctoral thesis blog</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name" class="p-locality">Medellín</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="mailto:canveo@gmail.com" rel="nofollow noopener noreferrer me"><i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">Email</span></a></li>
+          
+        
+          
+            <li><a href="https://github.com/canveo" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/canveo/" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span class="label">LinkedIn</span></a></li>
+          
+        
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:canveo@gmail.com" rel="me" class="u-email">
+            <meta itemprop="email" content="canveo@gmail.com" />
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">Email</span>
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer me">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Week 91 - Entrenamiento en caliente">
+    <meta itemprop="description" content="Estratificación del dataset">
+    <meta itemprop="datePublished" content="2026-03-15T00:00:00-05:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="http://localhost:4000/weekly%20log/week91/" class="u-url" itemprop="url">Week 91 - Entrenamiento en caliente
+</a>
+          </h1>
+          
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          2 minute read
+        
+      </span>
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        <h2 id="estratificación-del-dataset">Estratificación del dataset</h2>
+
+<p>Para modelar los estados de conducción se definió una <strong>estratificación conjunta steer × throttle</strong>, generando <strong>20 clases discretas</strong>.</p>
+
+<h3 id="clasificación-del-steer">Clasificación del steer</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Clase</th>
+      <th>Descripción</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>fuerte izquierda</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>suave izquierda</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>recto</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>suave derecha</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>fuerte derecha</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="clasificación-del-throttle">Clasificación del throttle</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Clase</th>
+      <th>Descripción</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>muy lento</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>lento</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>medio</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>muy rápido</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Cada muestra se asigna a una clase:</p>
+
+<p>class_20 = steer_class × 4 + throttle_class</p>
+
+<p>Esto permite diferenciar estados como:</p>
+
+<ul>
+  <li>recto + velocidad alta</li>
+  <li>giro suave + velocidad media</li>
+  <li>giro fuerte + desaceleración</li>
+</ul>
+
+<hr />
+
+<h2 id="distribución-natural-del-dataset">Distribución natural del dataset</h2>
+
+<p>El análisis inicial mostró una fuerte concentración en:</p>
+
+<ul>
+  <li>conducción <strong>recta</strong></li>
+  <li>velocidades <strong>medias y altas</strong></li>
+</ul>
+
+<p>Mientras que los estados críticos estaban pobremente representados:</p>
+
+<ul>
+  <li>giros fuertes</li>
+  <li>recuperación de carril</li>
+  <li>bajas velocidades</li>
+</ul>
+
+<p>Este patrón es coherente con conducción humana continua.</p>
+
+<hr />
+
+<h2 id="balanceo-en-caliente">Balanceo en caliente</h2>
+
+<p>Se utilizó <strong>WeightedRandomSampler</strong> en PyTorch para modificar la probabilidad de selección de muestras durante el entrenamiento.</p>
+
+<p>Principios:</p>
+
+<ul>
+  <li>no eliminar datos reales</li>
+  <li>no duplicar físicamente el dataset</li>
+  <li>aumentar la exposición del modelo a estados críticos</li>
+</ul>
+
+<p>Así, el dataset permanece intacto, pero el modelo observa una <strong>distribución controlada en cada batch</strong>.</p>
+
+<hr />
+
+<h2 id="distribución-objetivo-de-conducción">Distribución objetivo de conducción</h2>
+
+<p>Se definió una distribución inspirada en conducción realista:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Tipo de conducción</th>
+      <th>Frecuencia objetivo</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>fuerte izquierda</td>
+      <td>4–6 %</td>
+    </tr>
+    <tr>
+      <td>suave izquierda</td>
+      <td>12–18 %</td>
+    </tr>
+    <tr>
+      <td>recto</td>
+      <td>50–60 %</td>
+    </tr>
+    <tr>
+      <td>suave derecha</td>
+      <td>12–18 %</td>
+    </tr>
+    <tr>
+      <td>fuerte derecha</td>
+      <td>4–6 %</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Esto mantiene el comportamiento natural dominante en recta, pero incrementa la presencia de:</p>
+
+<ul>
+  <li>giros</li>
+  <li>correcciones</li>
+  <li>transiciones dinámicas</li>
+</ul>
+
+<hr />
+
+<h2 id="cálculo-de-pesos">Cálculo de pesos</h2>
+
+<p>Para cada clase se calculó:</p>
+
+<p>peso = frecuencia_objetivo / frecuencia_real</p>
+
+<p>Luego se aplicó <strong>clipping de pesos</strong> para evitar inestabilidad:</p>
+
+<ul>
+  <li>peso mínimo</li>
+  <li>peso máximo</li>
+</ul>
+
+<p>Esto previene:</p>
+
+<ul>
+  <li>batches dominados por eventos extremos</li>
+  <li>sobre-ajuste en clases raras</li>
+</ul>
+
+<hr />
+
+<h2 id="función-de-pérdida-multi-salida">Función de pérdida multi-salida</h2>
+
+<p>El modelo <strong>PilotNet</strong> fue entrenado para predecir:</p>
+
+<ul>
+  <li>steer</li>
+  <li>throttle</li>
+</ul>
+
+<p>Se utilizó una pérdida ponderada:</p>
+
+<p>loss = w_steer · MSE_steer + w_throttle · MSE_throttle</p>
+
+<p>Configuración:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parámetro</th>
+      <th>Valor</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>steer_loss_weight</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>throttle_loss_weight</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Esto prioriza la <strong>estabilidad lateral de la trayectoria</strong>.</p>
+
+<hr />
+
+<h2 id="influencia-de-la-frecuencia-de-muestreo-del-dataset">Influencia de la frecuencia de muestreo del dataset</h2>
+
+<p>Se entrenaron modelos PilotNet con datasets recuperados a:</p>
+
+<ul>
+  <li><strong>20 Hz</strong></li>
+  <li><strong>10 Hz</strong></li>
+  <li><strong>5 Hz</strong></li>
+  <li><strong>1 Hz</strong></li>
+</ul>
+
+<h3 id="observaciones">Observaciones</h3>
+
+<ul>
+  <li>El modelo entrenado a <strong>20 Hz</strong> es el único que logra completar trayectorias de forma estable.</li>
+  <li>Presenta aún un comportamiento ligeramente <strong>embrioso</strong> (oscilaciones suaves), pero <strong>sin zigzagueo severo</strong>.</li>
+  <li>Los modelos entrenados con frecuencias menores muestran conducción aparentemente continua, pero <strong>terminan saliéndose del carril y colisionando</strong>.</li>
+</ul>
+
+<p>Esto sugiere que:</p>
+
+<ul>
+  <li>una <strong>alta resolución temporal</strong> es crítica para aprender la dinámica lateral</li>
+  <li>la reducción excesiva de frecuencia degrada la capacidad de recuperación del modelo</li>
+</ul>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/tags/#augmentations" class="page__taxonomy-item p-category" rel="tag">Augmentations</a><span class="sep">, </span>
+    
+      <a href="/tags/#carla" class="page__taxonomy-item p-category" rel="tag">CARLA</a><span class="sep">, </span>
+    
+      <a href="/tags/#data-collection" class="page__taxonomy-item p-category" rel="tag">Data Collection</a><span class="sep">, </span>
+    
+      <a href="/tags/#dataset" class="page__taxonomy-item p-category" rel="tag">Dataset</a><span class="sep">, </span>
+    
+      <a href="/tags/#pilotnet" class="page__taxonomy-item p-category" rel="tag">PilotNet</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#weekly-log" class="page__taxonomy-item p-category" rel="tag">weekly Log</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2026-03-15T00:00:00-05:00">March 15, 2026</time></p>
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Week+91+-+Entrenamiento+en+caliente%20http%3A%2F%2Flocalhost%3A4000%2Fweekly%2520log%2Fweek91%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fweekly%2520log%2Fweek91%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fweekly%2520log%2Fweek91%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/weekly%20log/week90/" class="pagination--pager" title="Week 90 - Recorder/Replayer, muestreo temporal y revisión de augmentations en PilotNet
+">Previous</a>
+    
+    
+      <a href="/weekly%20log/week92/" class="pagination--pager" title="Week 92 - Entrenamiento en caliente
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h2 class="page__related-title">You may also enjoy</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/weekly%20log/week98/" rel="permalink">Week 98 - (Actualización) Búsqueda de la proporción óptima, mezcla A’–B’ vs A’–C’ en conducción autónoma
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          12 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Actualización de Week 97 incorporando los resultados extendidos hasta 75% y 100% de proporción de augmentación para ambas estrategias, además de la comparaci...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/weekly%20log/week97/" rel="permalink">Week 97 - Busqueda de la proporcion optima, mezcla Burbuja–DAgger vs Burbuja–Noise en conduccion autonoma
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          5 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">
+
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/weekly%20log/week96/" rel="permalink">Week 96 - Robustez del piloto, Caso Canónico, 15 Casos y Pruebas de Velocidad
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          18 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">En esta entrada reporto los resultados de robustez en CARLA Town02 comparando tres variantes del mismo dataset base bajo el mismo circuito de prueba, con 6 r...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/weekly%20log/week95/" rel="permalink">Week 95 - Robustez del piloto, Caso Canónico, 15 Casos y Pruebas de Velocidad
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          13 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">En esta entrada reporto los resultados de robustez en CARLA Town02 comparando tres políticas/datasets bajo el mismo circuito de prueba, con 6 repeticiones po...</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2026 Carlos Andrés Velásquez Ospina. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+  </body>
+</html>

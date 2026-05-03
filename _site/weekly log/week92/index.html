@@ -1,0 +1,1008 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Week 92 - Entrenamiento en caliente - Robotics Lab URJC</title>
+<meta name="description" content="Estratificación del dataset (muestreado a 20Hz)">
+
+
+  <meta name="author" content="Carlos Velásquez">
+  
+  <meta property="article:author" content="Carlos Velásquez">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Robotics Lab URJC">
+<meta property="og:title" content="Week 92 - Entrenamiento en caliente">
+<meta property="og:url" content="http://localhost:4000/weekly%20log/week92/">
+
+
+  <meta property="og:description" content="Estratificación del dataset (muestreado a 20Hz)">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2026-03-22T00:00:00-05:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/weekly%20log/week92/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Carlos Andrés Velásquez Ospina",
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Robotics Lab URJC Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/logo.png" alt="Robotics Lab URJC"></a>
+        
+        <a class="site-title" href="/">
+          Robotics Lab URJC
+          <span class="site-subtitle">Programming Robot Intelligence</span>
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="https://mmistakes.github.io/minimal-mistakes/docs/quick-start-guide/">Quick-Start Guide</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+    <div class="author__avatar">
+      <a href="http://localhost:4000/">
+        <img src="/assets/images/me.jpg" alt="Carlos Velásquez" itemprop="image" class="u-photo">
+      </a>
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      <a class="u-url" rel="me" href="http://localhost:4000/" itemprop="url">Carlos Velásquez</a>
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>Doctoral thesis blog</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name" class="p-locality">Medellín</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="mailto:canveo@gmail.com" rel="nofollow noopener noreferrer me"><i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">Email</span></a></li>
+          
+        
+          
+            <li><a href="https://github.com/canveo" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/canveo/" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span class="label">LinkedIn</span></a></li>
+          
+        
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:canveo@gmail.com" rel="me" class="u-email">
+            <meta itemprop="email" content="canveo@gmail.com" />
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">Email</span>
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer me">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Week 92 - Entrenamiento en caliente">
+    <meta itemprop="description" content="Estratificación del dataset (muestreado a 20Hz)">
+    <meta itemprop="datePublished" content="2026-03-22T00:00:00-05:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="http://localhost:4000/weekly%20log/week92/" class="u-url" itemprop="url">Week 92 - Entrenamiento en caliente
+</a>
+          </h1>
+          
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          2 minute read
+        
+      </span>
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        <h2 id="estratificación-del-dataset-muestreado-a-20hz">Estratificación del dataset (muestreado a 20Hz)</h2>
+
+<p>Para modelar los estados de conducción se definió una <strong>estratificación conjunta steer × throttle</strong>, generando <strong>20 clases discretas</strong>.</p>
+
+<h3 id="clasificación-del-steer">Clasificación del steer</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Clase</th>
+      <th>Descripción</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>fuerte izquierda</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>suave izquierda</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>recto</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>suave derecha</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>fuerte derecha</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="clasificación-del-throttle">Clasificación del throttle</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Clase</th>
+      <th>Descripción</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>muy lento</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>lento</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>medio</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>muy rápido</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Cada muestra se asigna a una clase:</p>
+
+<p>class_20 = steer_class × 4 + throttle_class</p>
+
+<hr />
+
+<h2 id="composición-del-dataset-con-noise-injection">Composición del dataset con noise injection</h2>
+
+<p>Se construyó un dataset mixto combinando conducción natural tipo <strong>Burbuja</strong> con episodios de <strong>noise injection</strong> en el control lateral.</p>
+
+<p>Las proporciones utilizadas fueron:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Fuente</th>
+      <th>Filas</th>
+      <th>% del total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Burbuja</td>
+      <td>125.237</td>
+      <td>90 %</td>
+    </tr>
+    <tr>
+      <td>Noise (submuestreado)</td>
+      <td>13.915</td>
+      <td>10 %</td>
+    </tr>
+    <tr>
+      <td><strong>Total</strong></td>
+      <td><strong>139.152</strong></td>
+      <td><strong>100 %</strong></td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h2 id="distribución-natural-del-dataset">Distribución natural del dataset</h2>
+
+<p>El análisis inicial mostró una fuerte concentración en:</p>
+
+<ul>
+  <li>conducción <strong>recta</strong></li>
+  <li>velocidades <strong>medias y altas</strong></li>
+</ul>
+
+<p>Mientras que los estados menos frecuentes corresponden a:</p>
+
+<ul>
+  <li>giros fuertes</li>
+  <li>correcciones de trayectoria</li>
+  <li>fases de desaceleración</li>
+</ul>
+
+<p>Este patrón es consistente con conducción manual prolongada en escenarios urbanos simulados.</p>
+
+<hr />
+
+<h2 id="balanceo-en-caliente">Balanceo en caliente</h2>
+
+<p>Se utilizó <strong>WeightedRandomSampler</strong> en PyTorch para modificar la probabilidad de selección de muestras durante el entrenamiento.</p>
+
+<p>Principios:</p>
+
+<ul>
+  <li>no eliminar datos reales</li>
+  <li>no duplicar físicamente el dataset</li>
+  <li>modificar únicamente la distribución observada por el modelo</li>
+</ul>
+
+<p>El dataset permanece intacto, pero cada batch presenta una <strong>distribución controlada de estados de conducción</strong>.</p>
+
+<hr />
+
+<h2 id="distribución-objetivo-de-conducción">Distribución objetivo de conducción</h2>
+
+<p>Se definió la siguiente distribución objetivo para la variable steer:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nl">"target_steer_distribution"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="nl">"0"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.12</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"1"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.18</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"2"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.40</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"3"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.18</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"4"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.12</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Esta distribución incrementa la presencia relativa de:</p>
+
+<ul>
+  <li>giros suaves</li>
+  <li>giros fuertes</li>
+  <li>transiciones dinámicas</li>
+</ul>
+
+<p>Manteniendo la conducción recta como estado dominante.</p>
+
+<hr />
+
+<h2 id="función-de-pérdida-multi-salida">Función de pérdida multi-salida</h2>
+
+<p>El modelo PilotNet fue entrenado para predecir simultáneamente:</p>
+
+<ul>
+  <li>steer</li>
+  <li>throttle</li>
+</ul>
+
+<p>Se utilizó una pérdida ponderada:</p>
+
+<p>loss = w_steer · MSE_steer + w_throttle · MSE_throttle</p>
+
+<p>Configuración utilizada:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parámetro</th>
+      <th style="text-align: right">Valor</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>steer_loss_weight</td>
+      <td style="text-align: right">3</td>
+    </tr>
+    <tr>
+      <td>throttle_loss_weight</td>
+      <td style="text-align: right">1</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Esta ponderación prioriza el aprendizaje de la dinámica lateral.</p>
+
+<hr />
+
+<h2 id="revisión-de-métricas-en-behaviormetrics">Revisión de métricas en BehaviorMetrics</h2>
+
+<p>Actualmente se está realizando una revisión detallada del cálculo de métricas dentro del framework BehaviorMetrics, con el fin de:</p>
+
+<ul>
+  <li>descartar posibles inconsistencias en la evaluación</li>
+  <li>verificar el correcto registro de trayectorias y eventos</li>
+  <li>validar el pipeline completo recorder → replayer → evaluación</li>
+</ul>
+
+<p>Posteriormente se realizarán pruebas experimentales para determinar el efecto del balanceo en caliente y la estrategia de noise injection.</p>
+
+<hr />
+
+<h2 id="videos-preliminares-de-comportamiento-del-modelo">Videos preliminares de comportamiento del modelo</h2>
+<p>PilotNet – dataset Burbuja (balanceo en caliente)</p>
+<iframe width="1415" height="796" src="https://www.youtube.com/embed/f-Bvo_WxX-I" title="PilotNet - dataset burbuja (balanceo en caliente)" frameborder="0" allowfullscreen=""></iframe>
+
+<p>PilotNet – dataset Burbuja + Noise Injection (balanceo en caliente)</p>
+<iframe width="1415" height="796" src="https://www.youtube.com/embed/q1Xx8U5mcEA" title="PilotNet - dataset burbuja + noise injection (balanceo en caliente)" frameborder="0" allowfullscreen=""></iframe>
+<p>```</p>
+
+<h2 id="pruebas-rapidas">Pruebas Rapidas</h2>
+
+<p>caso 3</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Métrica</th>
+      <th style="text-align: right">Burbuja</th>
+      <th style="text-align: right">Noise</th>
+      <th style="text-align: left">DAgger 16k</th>
+      <th style="text-align: left">DAgger 27.6k</th>
+      <th style="text-align: left">dagger_agresivo</th>
+      <th style="text-align: left">Mejor</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">Route completed (%)</td>
+      <td style="text-align: right">99.944</td>
+      <td style="text-align: right">79.46</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left">Burbuja</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Average speed (km/h)</td>
+      <td style="text-align: right">49.535</td>
+      <td style="text-align: right">45.125</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left">Burbuja</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Dev mean (m)</td>
+      <td style="text-align: right">0.46</td>
+      <td style="text-align: right">0.349</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left">Noise</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Lane invasions (eventos)</td>
+      <td style="text-align: right">13.4</td>
+      <td style="text-align: right">8.6</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left">Noise</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Collisions (eventos)</td>
+      <td style="text-align: right">1</td>
+      <td style="text-align: right">1</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left">Empate</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Suddenness throttle (1/s)</td>
+      <td style="text-align: right">0.545</td>
+      <td style="text-align: right">0.55</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left">Burbuja</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Suddenness steer (1/s)</td>
+      <td style="text-align: right">0.134</td>
+      <td style="text-align: right">0.148</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left">Burbuja</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>caso 8</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Métrica</th>
+      <th style="text-align: right">Burbuja</th>
+      <th style="text-align: right">Noise</th>
+      <th style="text-align: left">DAgger 16k</th>
+      <th style="text-align: left">DAgger 27.6k</th>
+      <th style="text-align: left">dagger_agresivo</th>
+      <th style="text-align: left">Mejor</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">Route completed (%)</td>
+      <td style="text-align: right">99.884</td>
+      <td style="text-align: right">74.315</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left">Burbuja</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Average speed (km/h)</td>
+      <td style="text-align: right">51.363</td>
+      <td style="text-align: right">38.49</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left">Burbuja</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Dev mean (m)</td>
+      <td style="text-align: right">0.402</td>
+      <td style="text-align: right">0.326</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left">Noise</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Lane invasions (eventos)</td>
+      <td style="text-align: right">10.5</td>
+      <td style="text-align: right">6.833</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left">Noise</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Collisions (eventos)</td>
+      <td style="text-align: right">0.5</td>
+      <td style="text-align: right">1</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left">Burbuja</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Suddenness throttle (1/s)</td>
+      <td style="text-align: right">0.561</td>
+      <td style="text-align: right">0.488</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left">Noise</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Suddenness steer (1/s)</td>
+      <td style="text-align: right">0.126</td>
+      <td style="text-align: right">0.106</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left">Noise</td>
+    </tr>
+  </tbody>
+</table>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/tags/#augmentations" class="page__taxonomy-item p-category" rel="tag">Augmentations</a><span class="sep">, </span>
+    
+      <a href="/tags/#carla" class="page__taxonomy-item p-category" rel="tag">CARLA</a><span class="sep">, </span>
+    
+      <a href="/tags/#data-collection" class="page__taxonomy-item p-category" rel="tag">Data Collection</a><span class="sep">, </span>
+    
+      <a href="/tags/#dataset" class="page__taxonomy-item p-category" rel="tag">Dataset</a><span class="sep">, </span>
+    
+      <a href="/tags/#pilotnet" class="page__taxonomy-item p-category" rel="tag">PilotNet</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#weekly-log" class="page__taxonomy-item p-category" rel="tag">weekly Log</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2026-03-22T00:00:00-05:00">March 22, 2026</time></p>
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Week+92+-+Entrenamiento+en+caliente%20http%3A%2F%2Flocalhost%3A4000%2Fweekly%2520log%2Fweek92%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fweekly%2520log%2Fweek92%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fweekly%2520log%2Fweek92%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/weekly%20log/week91/" class="pagination--pager" title="Week 91 - Entrenamiento en caliente
+">Previous</a>
+    
+    
+      <a href="/weekly%20log/week93/" class="pagination--pager" title="Week 93 -  Dataset Noise injection
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h2 class="page__related-title">You may also enjoy</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/weekly%20log/week98/" rel="permalink">Week 98 - (Actualización) Búsqueda de la proporción óptima, mezcla A’–B’ vs A’–C’ en conducción autónoma
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          12 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Actualización de Week 97 incorporando los resultados extendidos hasta 75% y 100% de proporción de augmentación para ambas estrategias, además de la comparaci...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/weekly%20log/week97/" rel="permalink">Week 97 - Busqueda de la proporcion optima, mezcla Burbuja–DAgger vs Burbuja–Noise en conduccion autonoma
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          5 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">
+
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/weekly%20log/week96/" rel="permalink">Week 96 - Robustez del piloto, Caso Canónico, 15 Casos y Pruebas de Velocidad
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          18 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">En esta entrada reporto los resultados de robustez en CARLA Town02 comparando tres variantes del mismo dataset base bajo el mismo circuito de prueba, con 6 r...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/weekly%20log/week95/" rel="permalink">Week 95 - Robustez del piloto, Caso Canónico, 15 Casos y Pruebas de Velocidad
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          13 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">En esta entrada reporto los resultados de robustez en CARLA Town02 comparando tres políticas/datasets bajo el mismo circuito de prueba, con 6 repeticiones po...</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2026 Carlos Andrés Velásquez Ospina. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+  </body>
+</html>

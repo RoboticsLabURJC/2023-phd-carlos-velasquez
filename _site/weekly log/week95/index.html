@@ -1,0 +1,1222 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Week 95 - Robustez del piloto, Caso Canónico, 15 Casos y Pruebas de Velocidad - Robotics Lab URJC</title>
+<meta name="description" content="En esta entrada reporto los resultados de robustez en CARLA Town02 comparando tres políticas/datasets bajo el mismo circuito de prueba, con 6 repeticiones por condición (valores reportados como promedio de las repeticiones).">
+
+
+  <meta name="author" content="Carlos Velásquez">
+  
+  <meta property="article:author" content="Carlos Velásquez">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Robotics Lab URJC">
+<meta property="og:title" content="Week 95 - Robustez del piloto, Caso Canónico, 15 Casos y Pruebas de Velocidad">
+<meta property="og:url" content="http://localhost:4000/weekly%20log/week95/">
+
+
+  <meta property="og:description" content="En esta entrada reporto los resultados de robustez en CARLA Town02 comparando tres políticas/datasets bajo el mismo circuito de prueba, con 6 repeticiones por condición (valores reportados como promedio de las repeticiones).">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2026-04-12T00:00:00-05:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/weekly%20log/week95/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Carlos Andrés Velásquez Ospina",
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Robotics Lab URJC Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/logo.png" alt="Robotics Lab URJC"></a>
+        
+        <a class="site-title" href="/">
+          Robotics Lab URJC
+          <span class="site-subtitle">Programming Robot Intelligence</span>
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="https://mmistakes.github.io/minimal-mistakes/docs/quick-start-guide/">Quick-Start Guide</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+    <div class="author__avatar">
+      <a href="http://localhost:4000/">
+        <img src="/assets/images/me.jpg" alt="Carlos Velásquez" itemprop="image" class="u-photo">
+      </a>
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      <a class="u-url" rel="me" href="http://localhost:4000/" itemprop="url">Carlos Velásquez</a>
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>Doctoral thesis blog</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name" class="p-locality">Medellín</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="mailto:canveo@gmail.com" rel="nofollow noopener noreferrer me"><i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">Email</span></a></li>
+          
+        
+          
+            <li><a href="https://github.com/canveo" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/canveo/" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span class="label">LinkedIn</span></a></li>
+          
+        
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:canveo@gmail.com" rel="me" class="u-email">
+            <meta itemprop="email" content="canveo@gmail.com" />
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">Email</span>
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer me">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Week 95 - Robustez del piloto, Caso Canónico, 15 Casos y Pruebas de Velocidad">
+    <meta itemprop="description" content="En esta entrada reporto los resultados de robustez en CARLA Town02 comparando tres políticas/datasets bajo el mismo circuito de prueba, con 6 repeticiones por condición (valores reportados como promedio de las repeticiones).">
+    <meta itemprop="datePublished" content="2026-04-12T00:00:00-05:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="http://localhost:4000/weekly%20log/week95/" class="u-url" itemprop="url">Week 95 - Robustez del piloto, Caso Canónico, 15 Casos y Pruebas de Velocidad
+</a>
+          </h1>
+          
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          11 minute read
+        
+      </span>
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        <p>En esta entrada reporto los resultados de robustez en <strong>CARLA Town02</strong> comparando tres políticas/datasets bajo el mismo circuito de prueba, con <strong>6 repeticiones por condición</strong> (valores reportados como promedio de las repeticiones).</p>
+
+<h2 id="circuito-base">Circuito base</h2>
+
+<ul>
+  <li><strong>Caso canónico:</strong> recorrido siguiendo la <strong>malla externa</strong> (outer loop) de <strong>Town02</strong>, manteniéndose en el carril derecho.</li>
+  <li><strong>Casos 1–15:</strong> se ejecuta <strong>el mismo circuito</strong>, pero cambiando las condiciones iniciales (posición y orientación) para evaluar recuperación.</li>
+  <li><strong>Pruebas de velocidad (30/60/80 km/h):</strong> mismo circuito. Se impone manualmente una <strong>velocidad inicial</strong>; cuando el vehículo alcanza la velocidad objetivo, <strong>inicia la inferencia</strong> del modelo.</li>
+  <li><strong>Casos aleatorios:</strong> se seleccionan tres posiciones aleatorias de inicio dentro de la <strong>malla externa</strong>, manteniendo el mismo punto final.</li>
+</ul>
+
+<h2 id="datasets--políticas-evaluadas">Datasets / políticas evaluadas</h2>
+
+<p>El dataset original (~95k imágenes) estaba dominado por conducción recta y aceleración constante, por lo que se aplicó una estratificación 5×4 (steer × throttle), generando 20 clases balanceadas y reduciendo el dataset a 50k muestras equilibradas, denominado <strong>Burbuja</strong>. Luego, Burbuja se combinó con DAgger y Noise Injection para entrenar un PilotNet modificado (salidas: steer y throttle).</p>
+
+<p>Como entrada, se utilizó la imagen segmentada procesada: se extrajo únicamente la calzada para generar una máscara binaria, se recortó la región superior, se redimensionó a 66×200, y se normalizó tipo ImageNet. Esto permite que el modelo aprenda directamente la geometría de la vía, reduciendo distracciones visuales y complejidad perceptual.</p>
+
+<h4 id="políticas-evaluadas">Políticas evaluadas</h4>
+
+<ul>
+  <li><strong>Burbuja (Baseline):</strong> dataset de <strong>50k</strong> muestras de conducción humana natural balanceada.</li>
+  <li><strong>Noise Injection:</strong> Burbuja + <strong>perturbaciones artificiales controladas</strong>. Se inyecta ruido gaussiano en steering, generando pequeños offsets laterales con label humano. Objetivo: aprender tolerancia a perturbaciones pequeñas.</li>
+  <li><strong>DAgger:</strong> Burbuja 50k + muestras DAgger con intervención estructural de recuperación. Introduce estados fuera del manifold y correcciones activas.</li>
+</ul>
+
+<h4 id="en-las-tablas-se-usan-estos-nombres">En las tablas se usan estos nombres</h4>
+
+<ul>
+  <li><strong>Burbuja:</strong> dataset de 50k muestras de conducción humana natural.</li>
+  <li><strong>Noise:</strong> Burbuja + perturbaciones artificiales controladas.</li>
+  <li><strong>DAgger:</strong> Burbuja 50k + muestras DAgger con recuperación estructural.</li>
+</ul>
+
+<hr />
+
+<h2 id="métricas-y-unidades">Métricas y unidades</h2>
+
+<ul>
+  <li><strong>Route completed (%):</strong> <code class="language-plaintext highlighter-rouge">percentage_completed_ideal_mean</code> — más alto es mejor.</li>
+  <li><strong>Average speed (km/h):</strong> <code class="language-plaintext highlighter-rouge">average_speed_mean</code> — más alto es mejor.</li>
+  <li><strong>Dev mean (m):</strong> <code class="language-plaintext highlighter-rouge">position_deviation_mean_mean</code> — más bajo es mejor.</li>
+  <li><strong>Lane invasions (eventos):</strong> número de invasiones de carril — más bajo es mejor.</li>
+  <li><strong>Collisions (eventos):</strong> colisiones — más bajo es mejor.</li>
+  <li><strong>Suddenness throttle (1/s):</strong> <code class="language-plaintext highlighter-rouge">suddenness_distance_throttle_mean</code> — más bajo es mejor.</li>
+  <li><strong>Suddenness steer (1/s):</strong> <code class="language-plaintext highlighter-rouge">suddenness_distance_steer_mean</code> — más bajo es mejor.</li>
+</ul>
+
+<blockquote>
+  <p>Nota sobre <em>suddenness (1/s)</em>: throttle/steer son comandos normalizados (adimensionales). Al expresarse “por segundo”, la unidad queda como <strong>1/s</strong>.</p>
+</blockquote>
+
+<hr />
+
+<h2 id="caso-canónico">Caso Canónico</h2>
+
+<p><strong>Descripción:</strong> recorrido estándar en la <strong>malla externa de Town02</strong>, pensado como “trayecto nominal” para comparar desempeño sin perturbaciones iniciales.</p>
+
+<h3 id="tabla-resumen-caso-canónico">Tabla resumen (Caso Canónico)</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Métrica</th>
+      <th style="text-align: right">Burbuja</th>
+      <th style="text-align: right">Noise</th>
+      <th style="text-align: right">DAgger</th>
+      <th style="text-align: left">Mejor</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">Route completed (%)</td>
+      <td style="text-align: right"><strong>100.000</strong></td>
+      <td style="text-align: right">98.975</td>
+      <td style="text-align: right"><strong>100.000</strong></td>
+      <td style="text-align: left">Empate</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Average speed (km/h)</td>
+      <td style="text-align: right">55.108</td>
+      <td style="text-align: right"><strong>61.757</strong></td>
+      <td style="text-align: right">56.731</td>
+      <td style="text-align: left">Noise</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Dev mean (m)</td>
+      <td style="text-align: right"><strong>0.478</strong></td>
+      <td style="text-align: right">0.585</td>
+      <td style="text-align: right">0.619</td>
+      <td style="text-align: left">Burbuja</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Lane invasions (eventos)</td>
+      <td style="text-align: right"><strong>7.167</strong></td>
+      <td style="text-align: right">11.167</td>
+      <td style="text-align: right">15.500</td>
+      <td style="text-align: left">Burbuja</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Collisions (eventos)</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: left">Empate</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Suddenness throttle (1/s)</td>
+      <td style="text-align: right">0.0175</td>
+      <td style="text-align: right">0.0180</td>
+      <td style="text-align: right"><strong>0.0165</strong></td>
+      <td style="text-align: left">DAgger</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Suddenness steer (1/s)</td>
+      <td style="text-align: right"><strong>0.0051</strong></td>
+      <td style="text-align: right">0.0078</td>
+      <td style="text-align: right">0.0076</td>
+      <td style="text-align: left">Burbuja</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>En condiciones nominales, Burbuja y DAgger completan la ruta al 100%, mientras que Noise no lo logra (98.975%). Burbuja muestra la mejor precisión lateral (Dev mean 0.478 m) y el menor número de invasiones de carril (7.2), indicando que el entrenamiento con datos naturales balanceados produce el seguimiento más limpio en escenarios sin perturbaciones. DAgger, a pesar de completar la ruta, genera significativamente más invasiones de carril (15.5), probablemente por la mayor reactividad introducida por las muestras de recuperación en un entorno ya estable.</p>
+
+<hr />
+
+<h2 id="casos-115-robustez-por-condición-inicial">Casos 1–15 (robustez por condición inicial)</h2>
+
+<p><strong>Descripción:</strong> se definieron <strong>15 posiciones iniciales</strong> para evaluar la robustez del modelo en Town02. Las configuraciones combinan:</p>
+
+<h3 id="5-posiciones-laterales-dentro-del-carril--4-m-de-ancho">5 posiciones laterales dentro del carril (≈ 4 m de ancho)</h3>
+<ul>
+  <li><strong>Duro izquierda:</strong> −1.8 m</li>
+  <li><strong>Suave izquierda:</strong> −0.9 m</li>
+  <li><strong>Centrado:</strong> 0 m</li>
+  <li><strong>Suave derecha:</strong> +0.9 m</li>
+  <li><strong>Duro derecha:</strong> +1.8 m</li>
+</ul>
+
+<h3 id="3-orientaciones-respecto-al-carril">3 orientaciones respecto al carril</h3>
+<ul>
+  <li><strong>−15°:</strong> desviado a la izquierda</li>
+  <li><strong>0°:</strong> alineado al carril</li>
+  <li><strong>+15°:</strong> desviado a la derecha</li>
+</ul>
+
+<p>En total:</p>
+
+\[5\;\text{posiciones laterales} \times 3\;\text{orientaciones} = 15\;\text{configuraciones}\]
+
+<p>Por cada caso se realizan 6 repeticiones para un total de 90 experimentos.</p>
+
+<p>Estas posiciones permiten evaluar:</p>
+<ul>
+  <li><strong>Corrección lateral</strong> (volver al centro del carril),</li>
+  <li><strong>Corrección angular</strong> (alinear yaw),</li>
+  <li>y <strong>errores combinados</strong> (offset + yaw).</li>
+</ul>
+
+<h3 id="tabla-resumen-casos-115">Tabla resumen (Casos 1–15)</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Métrica</th>
+      <th style="text-align: right">Burbuja</th>
+      <th style="text-align: right">Noise</th>
+      <th style="text-align: right">DAgger</th>
+      <th style="text-align: left">Mejor</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">Route completed (%)</td>
+      <td style="text-align: right">97.822</td>
+      <td style="text-align: right"><strong>100.000</strong></td>
+      <td style="text-align: right">99.077</td>
+      <td style="text-align: left">Noise</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Average speed (km/h)</td>
+      <td style="text-align: right">53.525</td>
+      <td style="text-align: right"><strong>61.729</strong></td>
+      <td style="text-align: right">55.782</td>
+      <td style="text-align: left">Noise</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Dev mean (m)</td>
+      <td style="text-align: right">0.840</td>
+      <td style="text-align: right"><strong>0.796</strong></td>
+      <td style="text-align: right">0.808</td>
+      <td style="text-align: left">Noise</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Lane invasions (eventos)</td>
+      <td style="text-align: right"><strong>8.489</strong></td>
+      <td style="text-align: right">10.022</td>
+      <td style="text-align: right">14.556</td>
+      <td style="text-align: left">Burbuja</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Collisions (eventos)</td>
+      <td style="text-align: right">0.022</td>
+      <td style="text-align: right"><strong>0.011</strong></td>
+      <td style="text-align: right">0.233</td>
+      <td style="text-align: left">Noise</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Suddenness throttle (1/s)</td>
+      <td style="text-align: right">0.0171</td>
+      <td style="text-align: right">0.0180</td>
+      <td style="text-align: right"><strong>0.0167</strong></td>
+      <td style="text-align: left">DAgger</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Suddenness steer (1/s)</td>
+      <td style="text-align: right"><strong>0.0052</strong></td>
+      <td style="text-align: right">0.0081</td>
+      <td style="text-align: right">0.0078</td>
+      <td style="text-align: left">Burbuja</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Ante perturbaciones iniciales, Noise Injection lidera en completado de ruta (100%) y desviación media (0.796 m), lo que revela que las perturbaciones artificiales durante entrenamiento mejoran efectivamente la capacidad de recuperar el carril desde estados desviados. Burbuja muestra la menor tasa de invasiones (8.5) y los comandos más suaves en steer (0.0052), pero no logra completar todos los casos (97.8%). DAgger presenta el mayor número de invasiones (14.6) y colisiones (0.233), sugiriendo que la recuperación agresiva introduce inestabilidad cuando las perturbaciones iniciales son moderadas.</p>
+
+<hr />
+
+<h2 id="pruebas-de-velocidad-30-60-80-kmh">Pruebas de velocidad (30, 60, 80 km/h)</h2>
+
+<p><strong>Descripción:</strong> se aplica manualmente una velocidad inicial de <strong>30, 60 y 80 km/h</strong>. Cuando el vehículo alcanza la velocidad objetivo, el modelo inicia la inferencia y el control. Para cada velocidad se realizan 6 repeticiones.</p>
+
+<h3 id="tabla-resumen-velocidades-30-60-80-kmh">Tabla resumen (Velocidades 30, 60, 80 km/h)</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Métrica</th>
+      <th style="text-align: right">Burbuja</th>
+      <th style="text-align: right">Noise</th>
+      <th style="text-align: right">DAgger</th>
+      <th style="text-align: left">Mejor</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">Route completed (%)</td>
+      <td style="text-align: right"><strong>100.000</strong></td>
+      <td style="text-align: right"><strong>100.000</strong></td>
+      <td style="text-align: right">91.647</td>
+      <td style="text-align: left">Empate</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Average speed (km/h)</td>
+      <td style="text-align: right">58.595</td>
+      <td style="text-align: right"><strong>64.184</strong></td>
+      <td style="text-align: right">53.938</td>
+      <td style="text-align: left">Noise</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Dev mean (m)</td>
+      <td style="text-align: right"><strong>0.471</strong></td>
+      <td style="text-align: right">0.575</td>
+      <td style="text-align: right">0.870</td>
+      <td style="text-align: left">Burbuja</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Lane invasions (eventos)</td>
+      <td style="text-align: right"><strong>7.222</strong></td>
+      <td style="text-align: right">9.000</td>
+      <td style="text-align: right">11.611</td>
+      <td style="text-align: left">Burbuja</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Collisions (eventos)</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">0.500</td>
+      <td style="text-align: left">Empate*</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Suddenness throttle (1/s)</td>
+      <td style="text-align: right">0.0176</td>
+      <td style="text-align: right">0.0180</td>
+      <td style="text-align: right"><strong>0.0154</strong></td>
+      <td style="text-align: left">DAgger</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Suddenness steer (1/s)</td>
+      <td style="text-align: right"><strong>0.0052</strong></td>
+      <td style="text-align: right">0.0080</td>
+      <td style="text-align: right">0.0075</td>
+      <td style="text-align: left">Burbuja</td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p>* Empate entre Burbuja y Noise (0 colisiones). DAgger registra 0.5 colisiones promedio.</p>
+</blockquote>
+
+<h3 id="detalle-por-velocidad">Detalle por velocidad</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Velocidad</th>
+      <th style="text-align: left">Métrica</th>
+      <th style="text-align: right">Burbuja</th>
+      <th style="text-align: right">Noise</th>
+      <th style="text-align: right">DAgger</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">30 km/h</td>
+      <td style="text-align: left">Route completed (%)</td>
+      <td style="text-align: right">100.00</td>
+      <td style="text-align: right">100.00</td>
+      <td style="text-align: right">100.00</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left">Dev mean (m)</td>
+      <td style="text-align: right">0.474</td>
+      <td style="text-align: right">0.589</td>
+      <td style="text-align: right">0.574</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left">Lane invasions</td>
+      <td style="text-align: right">7.5</td>
+      <td style="text-align: right">9.3</td>
+      <td style="text-align: right">13.3</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">60 km/h</td>
+      <td style="text-align: left">Route completed (%)</td>
+      <td style="text-align: right">100.00</td>
+      <td style="text-align: right">100.00</td>
+      <td style="text-align: right">87.67</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left">Dev mean (m)</td>
+      <td style="text-align: right">0.488</td>
+      <td style="text-align: right">0.573</td>
+      <td style="text-align: right">0.826</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left">Lane invasions</td>
+      <td style="text-align: right">7.0</td>
+      <td style="text-align: right">9.7</td>
+      <td style="text-align: right">11.8</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">80 km/h</td>
+      <td style="text-align: left">Route completed (%)</td>
+      <td style="text-align: right">100.00</td>
+      <td style="text-align: right">100.00</td>
+      <td style="text-align: right">87.27</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left">Dev mean (m)</td>
+      <td style="text-align: right">0.452</td>
+      <td style="text-align: right">0.563</td>
+      <td style="text-align: right">1.209</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left">Lane invasions</td>
+      <td style="text-align: right">7.2</td>
+      <td style="text-align: right">8.0</td>
+      <td style="text-align: right">9.7</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Este grupo de pruebas es particularmente revelador: Burbuja y Noise mantienen 100% de completado en las tres velocidades, mientras que DAgger colapsa a partir de 60 km/h (~87.7%) y su desviación se dispara a 1.209 m a 80 km/h. Burbuja domina en precisión lateral en todas las velocidades y mantiene el menor número de invasiones, lo que confirma que su distribución de entrenamiento, aunque sin recuperación explícita, produce un seguimiento estable y robusto ante el incremento de velocidad. Noise mantiene 100% de completado con mayor velocidad media (64.2 km/h), a costa de mayor desviación y más invasiones.</p>
+
+<hr />
+
+<h2 id="casos-aleatorios">Casos Aleatorios</h2>
+
+<p><strong>Descripción:</strong> tres posiciones de inicio seleccionadas aleatoriamente dentro de la malla externa de Town02, manteniendo el mismo punto final. Se realizan 6 repeticiones por caso.</p>
+
+<h3 id="tabla-resumen-casos-aleatorios">Tabla resumen (Casos Aleatorios)</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Métrica</th>
+      <th style="text-align: right">Burbuja</th>
+      <th style="text-align: right">Noise</th>
+      <th style="text-align: right">DAgger</th>
+      <th style="text-align: left">Mejor</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">Route completed (%)</td>
+      <td style="text-align: right">97.238</td>
+      <td style="text-align: right">95.395</td>
+      <td style="text-align: right"><strong>100.000</strong></td>
+      <td style="text-align: left">DAgger</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Average speed (km/h)</td>
+      <td style="text-align: right">45.010</td>
+      <td style="text-align: right"><strong>47.403</strong></td>
+      <td style="text-align: right">43.075</td>
+      <td style="text-align: left">Noise</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Dev mean (m)</td>
+      <td style="text-align: right"><strong>0.498</strong></td>
+      <td style="text-align: right">0.534</td>
+      <td style="text-align: right">0.618</td>
+      <td style="text-align: left">Burbuja</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Lane invasions (eventos)</td>
+      <td style="text-align: right"><strong>1.944</strong></td>
+      <td style="text-align: right">2.000</td>
+      <td style="text-align: right">2.067</td>
+      <td style="text-align: left">Burbuja</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Collisions (eventos)</td>
+      <td style="text-align: right"><strong>0.056</strong></td>
+      <td style="text-align: right">0.111</td>
+      <td style="text-align: right">0.189</td>
+      <td style="text-align: left">Burbuja</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Suddenness throttle (1/s)</td>
+      <td style="text-align: right">0.0164</td>
+      <td style="text-align: right">0.0186</td>
+      <td style="text-align: right"><strong>0.0123</strong></td>
+      <td style="text-align: left">DAgger</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Suddenness steer (1/s)</td>
+      <td style="text-align: right"><strong>0.0051</strong></td>
+      <td style="text-align: right">0.0086</td>
+      <td style="text-align: right">0.0055</td>
+      <td style="text-align: left">Burbuja</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>En escenarios con inicio completamente arbitrario, DAgger es el único modelo que completa la ruta al 100%, lo cual constituye su resultado más relevante del conjunto de experimentos. Sin embargo, presenta la mayor desviación (0.618 m) y más colisiones (0.189). Burbuja, aunque no completa siempre la ruta (97.2%), mantiene el mejor control lateral, menor número de invasiones y la menor tasa de colisiones. Noise es el peor en completado (95.4%) y presenta la mayor brusquedad en throttle y steer.</p>
+
+<hr />
+
+<h1 id="interpretación-de-resultados-robustez-control-y-recuperación">Interpretación de Resultados: Robustez, Control y Recuperación</h1>
+
+<p>Tras ejecutar el conjunto completo de experimentos (caso canónico, 15 condiciones iniciales, pruebas de velocidad y escenarios aleatorios), es posible extraer conclusiones claras sobre el comportamiento de cada política.</p>
+
+<p>El objetivo del análisis no es únicamente identificar quién completa más porcentaje de ruta, sino determinar qué modelo ofrece:</p>
+
+<ul>
+  <li>Mayor <strong>robustez estructural</strong></li>
+  <li>Mejor <strong>control lateral</strong></li>
+  <li>Mejor capacidad de <strong>recuperación</strong></li>
+  <li>Menor <strong>brusquedad en los comandos</strong></li>
+  <li>Estabilidad ante <strong>velocidades altas</strong></li>
+</ul>
+
+<hr />
+
+<h2 id="1-robustez-global">1. Robustez Global</h2>
+
+<p>Los resultados muestran un comportamiento marcadamente diferente entre las tres políticas según el tipo de perturbación:</p>
+
+<ul>
+  <li><strong>Caso canónico:</strong> Burbuja y DAgger completan al 100%; Noise no lo logra (98.97%).</li>
+  <li><strong>Casos 1–15:</strong> Noise lidera con 100% de completado promedio; Burbuja cae a 97.8%.</li>
+  <li><strong>Velocidades 30–80 km/h:</strong> Burbuja y Noise mantienen 100%; DAgger colapsa a ~87.3–87.7% a partir de 60 km/h.</li>
+  <li><strong>Casos aleatorios:</strong> DAgger es el único que completa el 100%; Noise cae a 95.4%.</li>
+</ul>
+
+<p>Este patrón indica que ningún modelo domina en todas las condiciones: Noise es más robusto ante perturbaciones de posición inicial, Burbuja es más estable ante variaciones de velocidad, y DAgger muestra mayor generalización en inicios completamente arbitrarios.</p>
+
+<hr />
+
+<h2 id="2-control-lateral">2. Control Lateral</h2>
+
+<p>El control lateral, medido por <code class="language-plaintext highlighter-rouge">position_deviation_mean</code> e invasiones de carril, revela una jerarquía consistente: <strong>Burbuja &gt; Noise &gt; DAgger</strong> en prácticamente todos los escenarios.</p>
+
+<ul>
+  <li>Burbuja presenta la menor desviación en el caso canónico (0.478 m), en velocidades (0.471 m) y en aleatorios (0.498 m).</li>
+  <li>Noise mejora ligeramente sobre Burbuja en los casos 1–15 (0.796 vs 0.840 m), siendo su único escenario de ventaja.</li>
+  <li>DAgger presenta la mayor desviación en todas las condiciones, especialmente a 80 km/h (1.209 m), lo que sugiere que la exposición a maniobras de recuperación introduce reactividad excesiva en escenarios estables.</li>
+</ul>
+
+<p>En términos de invasiones de carril, Burbuja lidera consistentemente: 7.2 en canónico, 8.5 en casos 1–15, 7.2 en velocidades y 1.9 en aleatorios.</p>
+
+<hr />
+
+<h2 id="3-recuperación-ante-estados-fuera-del-manifold">3. Recuperación ante Estados Fuera del Manifold</h2>
+
+<p>Los Casos 1–15 son la prueba más directa de recuperación desde estados desviados.</p>
+
+<ul>
+  <li><strong>Noise Injection</strong> es el modelo más robusto ante perturbaciones de posición inicial, completando el 100% de los casos con la menor desviación promedio (0.796 m). Las perturbaciones artificiales en entrenamiento simulan efectivamente los pequeños offsets que ocurren al inicio de cada caso.</li>
+  <li><strong>Burbuja</strong> no logra recuperarse en todos los casos (97.8%), confirmando la limitación conocida del aprendizaje por imitación puro: sin exposición a estados fuera del manifold, el modelo falla ante desviaciones iniciales suficientemente grandes.</li>
+  <li><strong>DAgger</strong> completa el 99.1% de los casos pero introduce una alta tasa de colisiones (0.233) e invasiones (14.6), indicando que la recuperación estructural mejora el completado pero genera inestabilidad lateral durante el proceso correctivo.</li>
+</ul>
+
+<hr />
+
+<h2 id="4-estabilidad-dinámica-a-alta-velocidad">4. Estabilidad Dinámica a Alta Velocidad</h2>
+
+<p>Las pruebas de velocidad confirman que <strong>DAgger no escala bien</strong> con la velocidad:</p>
+
+<ul>
+  <li>A 30 km/h, los tres modelos completan el 100%.</li>
+  <li>A 60 km/h, DAgger cae a 87.67% y su desviación sube a 0.826 m.</li>
+  <li>A 80 km/h, DAgger cae a 87.27% con una desviación de 1.209 m y 0.5 colisiones promedio.</li>
+</ul>
+
+<p>Burbuja y Noise mantienen 100% de completado en todas las velocidades. La mayor precisión lateral de Burbuja a 80 km/h (Dev mean 0.452 m, el valor más bajo de todo el experimento) sugiere que su distribución de entrenamiento, basada en conducción estable y balanceada, es particularmente adecuada para el control a alta velocidad. Noise opera con mayor velocidad media (64.2 km/h vs 58.6 km/h de Burbuja), lo que puede explicar sus mayores invasiones de carril.</p>
+
+<hr />
+
+<h2 id="5-suavidad-de-comandos-suddenness">5. Suavidad de Comandos (Suddenness)</h2>
+
+<p>En términos de suavidad de comandos existe un patrón claro:</p>
+
+<ul>
+  <li><strong>Burbuja</strong> produce los comandos de steer más suaves en todos los escenarios (0.0051–0.0052 1/s), reflejando la conducción humana natural de su dataset.</li>
+  <li><strong>DAgger</strong> produce los comandos de throttle más suaves (0.0154–0.0167 1/s), posiblemente porque sus maniobras de recuperación entrenan principalmente el canal de steer, dejando el throttle más conservador.</li>
+  <li><strong>Noise</strong> presenta consistentemente los valores más altos de suddenness en steer (0.0078–0.0086 1/s), probablemente por el ruido inyectado en steering durante el entrenamiento, que introduce mayor variabilidad en los comandos.</li>
+</ul>
+
+<p>Existe un trade-off evidente: Burbuja logra suavidad porque no aprende recuperación agresiva; DAgger y Noise sacrifican suavidad para ganar robustez o completado.</p>
+
+<hr />
+
+<h1 id="conclusión-general">Conclusión General</h1>
+
+<p>Considerando todos los experimentos de forma integrada, <strong>no existe un modelo dominante en todas las condiciones</strong>, sino tres perfiles complementarios:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Fortaleza</th>
+      <th style="text-align: left">Mejor modelo</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">Control lateral y suavidad</td>
+      <td style="text-align: left"><strong>Burbuja</strong></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Recuperación desde offset inicial</td>
+      <td style="text-align: left"><strong>Noise</strong></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Generalización en inicios arbitrarios</td>
+      <td style="text-align: left"><strong>DAgger</strong></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Estabilidad a alta velocidad</td>
+      <td style="text-align: left"><strong>Burbuja</strong></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Completado en casos perturbados</td>
+      <td style="text-align: left"><strong>Noise</strong></td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Burbuja</strong> es el modelo más preciso y suave en condiciones nominales y a alta velocidad, pero su capacidad de recuperación es limitada por la ausencia de exposición a estados fuera del manifold.</p>
+
+<p><strong>Noise Injection</strong> mejora significativamente la robustez ante perturbaciones de posición inicial (100% en casos 1–15) sin comprometer la estabilidad dinámica, pero a costa de mayor desviación lateral y más invasiones de carril en condiciones nominales. Es la estrategia de augmentación más eficiente: sin recolección adicional de datos, mejora la recuperación real del modelo.</p>
+
+<p><strong>DAgger</strong> demuestra la mejor generalización en escenarios con inicios completamente arbitrarios (100% en aleatorios), pero presenta el peor control lateral, más colisiones y un colapso claro a partir de 60 km/h. Esto sugiere que el conjunto de muestras DAgger disponible introduce recuperación a costa de inestabilidad, posiblemente por acciones demasiado reactivas en el dataset de corrección.</p>
+
+<p>Los resultados son consistentes con la teoría de Imitation Learning:</p>
+
+<ul>
+  <li>Noise Injection mejora la <strong>tolerancia local</strong> a perturbaciones sin alterar la distribución global.</li>
+  <li>DAgger introduce <strong>recuperación real</strong> desde estados fuera del manifold, pero su efectividad depende críticamente de la calidad y agresividad de las acciones de corrección.</li>
+  <li>Una distribución de entrenamiento balanceada y de conducción natural (Burbuja) produce el mejor <strong>seguimiento nominal</strong> pero no generaliza ante perturbaciones estructurales.</li>
+</ul>
+
+<p>El punto óptimo en este conjunto de experimentos depende del escenario de despliegue: si se prioriza control preciso y estabilidad a alta velocidad, <strong>Burbuja</strong> es la elección; si se prioriza robustez ante condiciones iniciales variables, <strong>Noise Injection</strong> ofrece la mejor relación costo-beneficio.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/tags/#burbuja" class="page__taxonomy-item p-category" rel="tag">Burbuja</a><span class="sep">, </span>
+    
+      <a href="/tags/#carla-simulator" class="page__taxonomy-item p-category" rel="tag">CARLA Simulator</a><span class="sep">, </span>
+    
+      <a href="/tags/#dagger" class="page__taxonomy-item p-category" rel="tag">DAgger</a><span class="sep">, </span>
+    
+      <a href="/tags/#noise-injectio" class="page__taxonomy-item p-category" rel="tag">Noise Injectio</a><span class="sep">, </span>
+    
+      <a href="/tags/#robustez" class="page__taxonomy-item p-category" rel="tag">Robustez</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#weekly-log" class="page__taxonomy-item p-category" rel="tag">weekly Log</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2026-04-12T00:00:00-05:00">April 12, 2026</time></p>
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Week+95+-+Robustez+del+piloto%2C+Caso+Can%C3%B3nico%2C+15+Casos+y+Pruebas+de+Velocidad%20http%3A%2F%2Flocalhost%3A4000%2Fweekly%2520log%2Fweek95%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fweekly%2520log%2Fweek95%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fweekly%2520log%2Fweek95%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/weekly%20log/week94/" class="pagination--pager" title="Week 94 - Construcción de datasets Noise Injection y DAgger
+">Previous</a>
+    
+    
+      <a href="/weekly%20log/week96/" class="pagination--pager" title="Week 96 - Robustez del piloto, Caso Canónico, 15 Casos y Pruebas de Velocidad
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h2 class="page__related-title">You may also enjoy</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/weekly%20log/week98/" rel="permalink">Week 98 - (Actualización) Búsqueda de la proporción óptima, mezcla A’–B’ vs A’–C’ en conducción autónoma
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          12 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Actualización de Week 97 incorporando los resultados extendidos hasta 75% y 100% de proporción de augmentación para ambas estrategias, además de la comparaci...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/weekly%20log/week97/" rel="permalink">Week 97 - Busqueda de la proporcion optima, mezcla Burbuja–DAgger vs Burbuja–Noise en conduccion autonoma
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          5 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">
+
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/weekly%20log/week96/" rel="permalink">Week 96 - Robustez del piloto, Caso Canónico, 15 Casos y Pruebas de Velocidad
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          18 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">En esta entrada reporto los resultados de robustez en CARLA Town02 comparando tres variantes del mismo dataset base bajo el mismo circuito de prueba, con 6 r...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/weekly%20log/week94/" rel="permalink">Week 94 - Construcción de datasets Noise Injection y DAgger
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          1 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Avances en construcción de dataset y entrenamiento PilotNet
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2026 Carlos Andrés Velásquez Ospina. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+  </body>
+</html>
