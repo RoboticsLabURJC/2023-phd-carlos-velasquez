@@ -582,7 +582,7 @@ var store = [{
         "teaser": null
       },{
         "title": "Week 98 - (Actualización) Búsqueda de la proporción óptima, mezcla A'–B' vs A'–C' en conducción autónoma",
-        "excerpt":"Actualización de Week 97 incorporando los resultados extendidos hasta 75% y 100% de proporción de augmentación para ambas estrategias, además de la comparación con la mezcla ternaria (Mix 70A’-20B’-10C’) y los experimentos con perturbación B’ en inferencia (Test 4). Nomenclatura Datasets Todos los datasets fueron grabados a 10 Hz en...","categories": ["weekly Log"],
+        "excerpt":"Actualización de Week 97 incorporando los resultados extendidos hasta 75% y 100% de proporción de mezcla para ambas estrategias, además de la comparación con la mezcla ternaria (Mix 70A’-20B’-10C’) y los experimentos con perturbación B’ en inferencia (Test 4). Nomenclatura Datasets Todos los datasets fueron grabados a 10 Hz en...","categories": ["weekly Log"],
         "tags": ["Robustez","Burbuja","Noise Injection","DAgger","CARLA Simulator"],
         "url": "/weekly%20log/week98/",
         "teaser": null

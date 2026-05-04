@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2026-05-03T11:20:41-05:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Robotics Lab URJC</title><subtitle>Autonomous Driving</subtitle><author><name>Carlos Velásquez</name><email>canveo@gmail.com</email></author><entry><title type="html">Week 98 - (Actualización) Búsqueda de la proporción óptima, mezcla A’–B’ vs A’–C’ en conducción autónoma</title><link href="http://localhost:4000/weekly%20log/week98/" rel="alternate" type="text/html" title="Week 98 - (Actualización) Búsqueda de la proporción óptima, mezcla A’–B’ vs A’–C’ en conducción autónoma" /><published>2026-05-02T00:00:00-05:00</published><updated>2026-05-02T00:00:00-05:00</updated><id>http://localhost:4000/weekly%20log/week98</id><content type="html" xml:base="http://localhost:4000/weekly%20log/week98/"><![CDATA[<p>Actualización de Week 97 incorporando los resultados extendidos hasta <strong>75% y 100%</strong> de proporción de augmentación para ambas estrategias, además de la comparación con la mezcla ternaria (Mix 70A’-20B’-10C’) y los experimentos con <strong>perturbación B’ en inferencia (Test 4)</strong>.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2026-05-04T08:20:59-05:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Robotics Lab URJC</title><subtitle>Autonomous Driving</subtitle><author><name>Carlos Velásquez</name><email>canveo@gmail.com</email></author><entry><title type="html">Week 98 - (Actualización) Búsqueda de la proporción óptima, mezcla A’–B’ vs A’–C’ en conducción autónoma</title><link href="http://localhost:4000/weekly%20log/week98/" rel="alternate" type="text/html" title="Week 98 - (Actualización) Búsqueda de la proporción óptima, mezcla A’–B’ vs A’–C’ en conducción autónoma" /><published>2026-05-02T00:00:00-05:00</published><updated>2026-05-02T00:00:00-05:00</updated><id>http://localhost:4000/weekly%20log/week98</id><content type="html" xml:base="http://localhost:4000/weekly%20log/week98/"><![CDATA[<p>Actualización de Week 97 incorporando los resultados extendidos hasta <strong>75% y 100%</strong> de proporción de mezcla para ambas estrategias, además de la comparación con la mezcla ternaria (Mix 70A’-20B’-10C’) y los experimentos con <strong>perturbación B’ en inferencia (Test 4)</strong>.</p>
 
 <hr />
 
@@ -25,7 +25,7 @@
     <tr>
       <td style="text-align: left">B’</td>
       <td style="text-align: left">DAgger</td>
-      <td style="text-align: left">Recolección en vivo con intervención estructural de recuperación. Introduce estados fuera del manifold con correcciones activas.</td>
+      <td style="text-align: left">Recolección en vivo con intervención estructural de recuperación. Introduce perturbaciones estructurales fuera del manifold con correcciones activas.</td>
     </tr>
     <tr>
       <td style="text-align: left">C’</td>
@@ -35,7 +35,7 @@
   </tbody>
 </table>
 
-<p>Las mezclas evaluadas se expresan como proporción de augmentación sobre A’:</p>
+<p>Las mezclas evaluadas se expresan como proporción de mezcla sobre A’:</p>
 
 <ul>
   <li><strong>A’ + x% B’</strong> — Burbuja mezclado con x% de muestras DAgger</li>
@@ -187,7 +187,7 @@
   <p>† Los valores de A’+75%B’ en suddenness son artefactos del colapso del vehículo y no representan mejoras reales de control.</p>
 </blockquote>
 
-<p><strong>A’+75%B’ colapsa</strong> — route 66.6%, velocidad 29.2 km/h, desviación 2.194 m. Con una proporción tan alta de muestras de recuperación, el modelo pierde el comportamiento nominal de A’ como referencia. <strong>A’+100%B’</strong> se recupera parcialmente (99.1% de route) pero con colisiones altas (0.240) y menor velocidad que A’+50%B’.</p>
+<p><strong>A’+75%B’ colapsa</strong> — route 66.6%, velocidad 29.2 km/h, desviación 2.194 m. Con una proporción de mezcla tan alta de muestras de recuperación, el modelo pierde el comportamiento nominal de A’ como referencia. <strong>A’+100%B’</strong> se recupera parcialmente (99.1% de route) pero con colisiones altas (0.240) y menor velocidad que A’+50%B’.</p>
 
 <hr />
 
@@ -436,8 +436,8 @@
 <h3 id="test-0--robustez-y-velocidad">Test 0 – Robustez y velocidad</h3>
 
 <figure>
-  <img src="http://localhost:4000/assets/images/week98/chart_route_speed.png" alt="Route completed y Average Speed vs proporción de augmentación" style="width:100%" />
-  <figcaption>Test 0 (caso canónico): Route completed (%) y Average Speed (km/h) en función de la proporción de augmentación. La zona sombreada marca el rango óptimo A'+B' (30–50%). El colapso de A'+75%B' es visible en ambas métricas.</figcaption>
+  <img src="http://localhost:4000/assets/images/week98/chart_route_speed.png" alt="Route completed y Average Speed vs proporción de mezcla" style="width:100%" />
+  <figcaption>Test 0 (caso canónico): Route completed (%) y Average Speed (km/h) en función de la proporción de mezcla. La zona sombreada marca el rango óptimo A'+B' (30–50%). El colapso de A'+75%B' es visible en ambas métricas.</figcaption>
 </figure>
 
 <p>La curva A’+B’ muestra una mejora pronunciada entre 5% y 50%, seguida de un colapso abrupto en 75% y recuperación parcial en 100%. La curva A’+C’ asciende gradualmente y de forma estable hasta 50%, cae en 75% y alcanza su máximo en 100%. El comportamiento divergente a partir de 50% es el hallazgo estructural más relevante.</p>
@@ -447,22 +447,22 @@
 <h3 id="test-0--control-lateral-y-colisiones">Test 0 – Control lateral y colisiones</h3>
 
 <figure>
-  <img src="http://localhost:4000/assets/images/week98/chart_dev_collisions.png" alt="Desviación lateral y colisiones vs proporción de augmentación" style="width:100%" />
-  <figcaption>Test 0 (caso canónico): Desviación lateral media (m) y colisiones promedio en función de la proporción de augmentación. A'+B' domina en control lateral en todo el rango estable. A'+100%C' invierte la tendencia en colisiones (0.011).</figcaption>
+  <img src="http://localhost:4000/assets/images/week98/chart_dev_collisions.png" alt="Desviación lateral y colisiones vs proporción de mezcla" style="width:100%" />
+  <figcaption>Test 0 (caso canónico): Desviación lateral media (m) y colisiones promedio en función de la proporción de mezcla. A'+B' domina en control lateral en todo el rango estable. A'+100%C' invierte la tendencia en colisiones (0.011).</figcaption>
 </figure>
 
-<p>A’+B’ domina en control lateral (Dev mean 0.620–0.670 m) frente a A’+C’ (0.790–0.840 m) en todo el rango estable. Las colisiones crecen con la proporción en ambas estrategias, con la excepción de A’+100%C’ (0.011 colisiones).</p>
+<p>A’+B’ domina en control lateral (Dev mean 0.620–0.670 m) frente a A’+C’ (0.790–0.840 m) en todo el rango estable. Las colisiones crecen con la proporción de mezcla en ambas estrategias, con la excepción de A’+100%C’ (0.011 colisiones).</p>
 
 <hr />
 
 <h3 id="test-0--invasiones-de-carril-y-brusquedad">Test 0 – Invasiones de carril y brusquedad</h3>
 
 <figure>
-  <img src="http://localhost:4000/assets/images/week98/chart_lane_suddenness.png" alt="Lane invasions y Suddenness vs proporción de augmentación" style="width:100%" />
+  <img src="http://localhost:4000/assets/images/week98/chart_lane_suddenness.png" alt="Lane invasions y Suddenness vs proporción de mezcla" style="width:100%" />
   <figcaption>Test 0 (caso canónico): Lane invasions (izquierda) y Suddenness throttle/steer en 1/s (derecha). A'+B' reduce invasiones consistentemente hasta 50%; A'+C' las incrementa a partir de 75%.</figcaption>
 </figure>
 
-<p>A’+B’ reduce las invasiones de carril de 8.1 a 6.7 al aumentar la proporción. A’+C’ las reduce hasta 50% (7.8) y luego las incrementa hasta 10.0 en 100%.</p>
+<p>A’+B’ reduce las invasiones de carril de 8.1 a 6.7 al aumentar la proporción de mezcla. A’+C’ las reduce hasta 50% (7.8) y luego las incrementa hasta 10.0 en 100%.</p>
 
 <hr />
 
@@ -470,10 +470,10 @@
 
 <figure>
   <img src="http://localhost:4000/assets/images/week98/chart_bubble.png" alt="A'+B' vs A'+C': robustez, colisiones y velocidad promedio" style="width:100%" />
-  <figcaption>Test 0 (caso canónico): robustez (eje Y), colisiones (eje X) y velocidad promedio (tamaño de burbuja) para todas las proporciones de A'+B' (azul) y A'+C' (verde). Zona objetivo: esquina superior izquierda.</figcaption>
+  <figcaption>Test 0 (caso canónico): robustez (eje Y), colisiones (eje X) y velocidad promedio (tamaño de burbuja) para todas las proporciones de mezcla de A'+B' (azul) y A'+C' (verde). Zona objetivo: esquina superior izquierda.</figcaption>
 </figure>
 
-<p>Las configuraciones A’+B’ (azul) se posicionan consistentemente más arriba en el eje Y que las A’+C’ equivalentes. El desplazamiento hacia la derecha al aumentar la proporción confirma el trade-off robustez–colisiones. <strong>A’+30%B’</strong> es el punto más equilibrado: alta posición vertical con colisiones aún moderadas.</p>
+<p>Las configuraciones A’+B’ (azul) se posicionan consistentemente más arriba en el eje Y que las A’+C’ equivalentes. El desplazamiento hacia la derecha al aumentar la proporción de mezcla confirma el trade-off robustez–colisiones. <strong>A’+30%B’</strong> es el punto más equilibrado: alta posición vertical con colisiones aún moderadas.</p>
 
 <hr />
 
@@ -563,13 +563,13 @@
   <figcaption>Test 1 (posiciones de arranque 1–15): Route completed, Dev mean y Collisions para A'+30%B', A'+50%B', A'+30%C', A'+50%C' y Mix (70A'-20B'-10C').</figcaption>
 </figure>
 
-<p>El Mix (70A’-20B’-10C’) es el único que completa el 100% del Test 1 con cero colisiones, siendo el mejor en condiciones de perturbación estática de posición inicial. Sin embargo, opera más lento (54.3 km/h) y con más invasiones (8.9) que las configuraciones A’+B’ puras.</p>
+<p>El Mix (70A’-20B’-10C’) es el único que completa el 100% del Test 1 con cero colisiones, siendo el mejor en condiciones de perturbación estructural estática de posición inicial. Sin embargo, opera más lento (54.3 km/h) y con más invasiones (8.9) que las configuraciones A’+B’ puras.</p>
 
 <hr />
 
 <h2 id="test-4--perturbación-b-en-inferencia-evaluación-online">Test 4 – Perturbación B’ en inferencia (evaluación online)</h2>
 
-<p>La política B’ se aplica periódicamente durante la inferencia sobre el Test 0 (caso canónico): cada 8 s se ejecuta una acción forzada durante 4 ticks (0.2 s), seguida de 10 ticks de recuperación (0.5 s).</p>
+<p>La política B’ se aplica periódicamente durante la inferencia sobre el Test 0 (caso canónico): cada 8 s se ejecuta una perturbación estructural forzada durante 4 ticks (0.2 s), seguida de 10 ticks de recuperación (0.5 s).</p>
 
 <table>
   <thead>
@@ -636,15 +636,15 @@
 
 <figure>
   <img src="http://localhost:4000/assets/images/week98/chart_online.png" alt="Test 4: perturbación B' en inferencia" style="width:100%" />
-  <figcaption>Test 4 (perturbación B' en inferencia sobre Test 0): A'+30%B' mantiene su rendimiento nominal; el Mix colapsa a 81.2% de completado.</figcaption>
+  <figcaption>Test 4 (perturbación estructural B' en inferencia sobre Test 0): A'+30%B' mantiene su rendimiento nominal; el Mix colapsa a 81.2% de completado.</figcaption>
 </figure>
 
 <p>El Test 4 es el más exigente y el más informativo para robustez real. Los resultados son contundentes:</p>
 
 <ul>
   <li><strong>A’+30%B’</strong> mantiene 99.2% de completado — prácticamente idéntico a su rendimiento en Test 0 sin perturbación.</li>
-  <li><strong>A’+30%C’</strong> baja ligeramente a 98.3% — absorbe bien las perturbaciones pero con más colisiones (0.090).</li>
-  <li><strong>Mix</strong> colapsa a 81.2% con 0.667 colisiones — el mejor modelo en condiciones estáticas es el más frágil ante perturbaciones dinámicas.</li>
+  <li><strong>A’+30%C’</strong> baja ligeramente a 98.3% — absorbe bien las perturbaciones estructurales pero con más colisiones (0.090).</li>
+  <li><strong>Mix</strong> colapsa a 81.2% con 0.667 colisiones — el mejor modelo en condiciones estáticas es el más frágil ante perturbaciones estructurales dinámicas.</li>
 </ul>
 
 <hr />
@@ -653,7 +653,7 @@
 
 <h3 id="patrón-ab-mejora-pronunciada-con-umbral-de-colapso">Patrón A’+B’: mejora pronunciada con umbral de colapso</h3>
 
-<p>A’+B’ sigue una curva de mejora fuerte entre 5% y 50% en todas las métricas de robustez. A partir de 50%, la proporción de muestras de recuperación supera la capacidad del modelo de mantener A’ como referencia nominal, y el modelo colapsa en 75%. A’+100%B’ se recupera parcialmente, lo que sugiere que un dataset puro de B’ puede ser internamente coherente aunque inferior a las mezclas óptimas.</p>
+<p>A’+B’ sigue una curva de mejora fuerte entre 5% y 50% en todas las métricas de robustez. A partir de 50%, la proporción de mezcla de muestras de recuperación supera la capacidad del modelo de mantener A’ como referencia nominal, y el modelo colapsa en 75%. A’+100%B’ se recupera parcialmente, lo que sugiere que un dataset puro de B’ puede ser internamente coherente aunque inferior a las mezclas óptimas.</p>
 
 <h3 id="patrón-ac-mejora-gradual-con-inversión-en-extremos">Patrón A’+C’: mejora gradual con inversión en extremos</h3>
 
@@ -676,7 +676,7 @@
       <td style="text-align: left">—</td>
     </tr>
     <tr>
-      <td style="text-align: left">Completado (100% augmentación)</td>
+      <td style="text-align: left">Completado (100% proporción de mezcla)</td>
       <td style="text-align: left">—</td>
       <td style="text-align: left">✓ A’+100%C’ = 100%</td>
     </tr>
@@ -696,7 +696,7 @@
       <td style="text-align: left">✓ crece más lento</td>
     </tr>
     <tr>
-      <td style="text-align: left">Test 4 (perturbación online)</td>
+      <td style="text-align: left">Test 4 (perturbación estructural online)</td>
       <td style="text-align: left">✓ A’+30%B’ aguanta (99.2%)</td>
       <td style="text-align: left">— A’+30%C’ baja a 98.3%</td>
     </tr>
@@ -717,15 +717,15 @@
 
 <h2 id="conclusión">Conclusión</h2>
 
-<p><strong>A’+30%B’</strong> es la configuración más robusta del experimento considerando los cinco tests evaluados: alto completado en Test 0 (99.2%), buen control lateral (0.655 m), velocidad elevada (62.8 km/h) y — el resultado más relevante — resiste la perturbación del Test 4 sin degradación apreciable. Su trade-off son las colisiones moderadas (0.160), que crecen linealmente con la proporción de B’.</p>
+<p><strong>A’+30%B’</strong> es la configuración más robusta del experimento considerando los cinco tests evaluados: alto completado en Test 0 (99.2%), buen control lateral (0.655 m), velocidad elevada (62.8 km/h) y — el resultado más relevante — resiste la perturbación estructural del Test 4 sin degradación apreciable. Su trade-off son las colisiones moderadas (0.160), que crecen linealmente con la proporción de mezcla de B’.</p>
 
 <p><strong>A’+50%B’</strong> mejora levemente en completado y velocidad (+0.2% route, +2.1% speed) a costa de un incremento del 31% en colisiones respecto a A’+30%B’. Para la mayoría de escenarios ese incremento no justifica el coste adicional.</p>
 
 <p><strong>A’+100%C’</strong> es la mejor opción si se prioriza completado con mínimas colisiones en condiciones nominales, pero su menor control lateral y la ausencia de evaluación ante el Test 4 lo descartan como opción principal.</p>
 
-<p><strong>Mix (70A’-20B’-10C’)</strong> es el mejor modelo para el Test 1 estático (100% route, 0 colisiones), pero su colapso ante el Test 4 (81.2%) revela que su robustez es superficial: funciona cuando las condiciones son predecibles, no cuando son adversas.</p>
+<p><strong>Mix (70A’-20B’-10C’)</strong> es el mejor modelo para el Test 1 estático (100% route, 0 colisiones), pero su colapso ante la perturbación estructural del Test 4 (81.2%) revela que su robustez es superficial: funciona cuando las condiciones son predecibles, no cuando son adversas.</p>
 
-<p>El punto óptimo se sitúa en <strong>A’+30%B’</strong>, con el rango <strong>A’+15%B’ – A’+30%B’</strong> como zona de operación segura que balancea robustez estructural, control lateral y resistencia a perturbaciones externas.</p>]]></content><author><name>Carlos Velásquez</name><email>canveo@gmail.com</email></author><category term="weekly Log" /><category term="Robustez" /><category term="Burbuja" /><category term="Noise Injection" /><category term="DAgger" /><category term="CARLA Simulator" /><summary type="html"><![CDATA[Actualización de Week 97 incorporando los resultados extendidos hasta 75% y 100% de proporción de augmentación para ambas estrategias, además de la comparación con la mezcla ternaria (Mix 70A’-20B’-10C’) y los experimentos con perturbación B’ en inferencia (Test 4).]]></summary></entry><entry><title type="html">Week 97 - Busqueda de la proporcion optima, mezcla Burbuja–DAgger vs Burbuja–Noise en conduccion autonoma</title><link href="http://localhost:4000/weekly%20log/week97/" rel="alternate" type="text/html" title="Week 97 - Busqueda de la proporcion optima, mezcla Burbuja–DAgger vs Burbuja–Noise en conduccion autonoma" /><published>2026-04-26T00:00:00-05:00</published><updated>2026-04-26T00:00:00-05:00</updated><id>http://localhost:4000/weekly%20log/week97</id><content type="html" xml:base="http://localhost:4000/weekly%20log/week97/"><![CDATA[<hr />
+<p>El punto óptimo se sitúa en <strong>A’+30%B’</strong>, con el rango <strong>A’+15%B’ – A’+30%B’</strong> como zona de operación segura que balancea robustez estructural, control lateral y resistencia a perturbaciones estructurales externas.</p>]]></content><author><name>Carlos Velásquez</name><email>canveo@gmail.com</email></author><category term="weekly Log" /><category term="Robustez" /><category term="Burbuja" /><category term="Noise Injection" /><category term="DAgger" /><category term="CARLA Simulator" /><summary type="html"><![CDATA[Actualización de Week 97 incorporando los resultados extendidos hasta 75% y 100% de proporción de mezcla para ambas estrategias, además de la comparación con la mezcla ternaria (Mix 70A’-20B’-10C’) y los experimentos con perturbación B’ en inferencia (Test 4).]]></summary></entry><entry><title type="html">Week 97 - Busqueda de la proporcion optima, mezcla Burbuja–DAgger vs Burbuja–Noise en conduccion autonoma</title><link href="http://localhost:4000/weekly%20log/week97/" rel="alternate" type="text/html" title="Week 97 - Busqueda de la proporcion optima, mezcla Burbuja–DAgger vs Burbuja–Noise en conduccion autonoma" /><published>2026-04-26T00:00:00-05:00</published><updated>2026-04-26T00:00:00-05:00</updated><id>http://localhost:4000/weekly%20log/week97</id><content type="html" xml:base="http://localhost:4000/weekly%20log/week97/"><![CDATA[<hr />
 
 <h2 id="análisis-de-mezclas-burbuja--dagger">Análisis de mezclas Burbuja + DAgger</h2>
 
