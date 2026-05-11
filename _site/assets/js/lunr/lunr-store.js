@@ -586,4 +586,10 @@ var store = [{
         "tags": ["Robustez","Burbuja","Noise Injection","DAgger","CARLA Simulator"],
         "url": "/weekly%20log/week98/",
         "teaser": null
+      },{
+        "title": "Week 99 - Análisis de robustez mediante mezclas A'–B' y A'–C' en conducción autónoma",
+        "excerpt":"Actualización experimental – expansión de ejecuciones Durante esta actualización se repitieron y ampliaron las ejecuciones correspondientes a las configuraciones A’+75%B’ y A’+100%B’, incrementando significativamente el número de pruebas respecto a Week 98 con el objetivo de reducir la varianza experimental y validar el comportamiento observado en las primeras corridas. Las...","categories": ["weekly Log"],
+        "tags": ["Robustez","Behavior Cloning","Noise Injection","DAgger","CARLA Simulator","Behavior Metrics"],
+        "url": "/weekly%20log/week99/",
+        "teaser": null
       }]

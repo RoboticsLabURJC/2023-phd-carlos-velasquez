@@ -1,4 +1,403 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2026-05-04T10:25:23-05:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Robotics Lab URJC</title><subtitle>Autonomous Driving</subtitle><author><name>Carlos Velásquez</name><email>canveo@gmail.com</email></author><entry><title type="html">Week 98 - (Actualización) Búsqueda de la proporción óptima, mezcla A’–B’ vs A’–C’ en conducción autónoma</title><link href="http://localhost:4000/weekly%20log/week98/" rel="alternate" type="text/html" title="Week 98 - (Actualización) Búsqueda de la proporción óptima, mezcla A’–B’ vs A’–C’ en conducción autónoma" /><published>2026-05-02T00:00:00-05:00</published><updated>2026-05-02T00:00:00-05:00</updated><id>http://localhost:4000/weekly%20log/week98</id><content type="html" xml:base="http://localhost:4000/weekly%20log/week98/"><![CDATA[<p>Actualización de Week 97 incorporando los resultados extendidos hasta <strong>75% y 100%</strong> de proporción de mezcla para ambas estrategias, además de la comparación con la mezcla ternaria (Mix 70A’-20B’-10C’) y los experimentos con <strong>perturbación B’ en inferencia (Test 4)</strong>.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2026-05-11T09:18:36-05:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Robotics Lab URJC</title><subtitle>Autonomous Driving</subtitle><author><name>Carlos Velásquez</name><email>canveo@gmail.com</email></author><entry><title type="html">Week 99 - Análisis de robustez mediante mezclas A’–B’ y A’–C’ en conducción autónoma</title><link href="http://localhost:4000/weekly%20log/week99/" rel="alternate" type="text/html" title="Week 99 - Análisis de robustez mediante mezclas A’–B’ y A’–C’ en conducción autónoma" /><published>2026-05-11T00:00:00-05:00</published><updated>2026-05-11T00:00:00-05:00</updated><id>http://localhost:4000/weekly%20log/week99</id><content type="html" xml:base="http://localhost:4000/weekly%20log/week99/"><![CDATA[<h2 id="actualización-experimental--expansión-de-ejecuciones">Actualización experimental – expansión de ejecuciones</h2>
+
+<p>Durante esta actualización se repitieron y ampliaron las ejecuciones correspondientes a las configuraciones <strong>A’+75%B’</strong> y <strong>A’+100%B’</strong>, incrementando significativamente el número de pruebas respecto a Week 98 con el objetivo de reducir la varianza experimental y validar el comportamiento observado en las primeras corridas.</p>
+
+<p>Las nuevas ejecuciones confirmaron que proporciones altas de mezcla con B’ generan degradación estructural del comportamiento nominal, especialmente en estabilidad lateral, velocidad promedio y consistencia de recuperación.</p>
+
+<p>Actualmente el resto de configuraciones continúa en proceso de expansión experimental. Debido al número total de ejecuciones requeridas por Test 1 y Test 4, la recolección completa de resultados para todos los datasets aún se encuentra en curso.</p>
+
+<h3 id="datasets">Datasets</h3>
+
+<p>Todos los datasets fueron grabados a <strong>10 Hz</strong> en CARLA Town02.</p>
+
+<p>Todos los experimentos se ejecutan sobre la malla externa de Town02, manteniendo el carril derecho como referencia nominal.</p>
+
+<p>Cada test evalúa distintos tipos de perturbación:</p>
+<ul>
+  <li>perturbaciones iniciales,</li>
+  <li>recovery dinámico,</li>
+  <li>velocidad,</li>
+  <li>y robustez estructural.</li>
+</ul>
+
+<h2 id="nomenclatura">Nomenclatura</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">ID</th>
+      <th style="text-align: left">Nombre</th>
+      <th style="text-align: left">Descripción</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">A’</td>
+      <td style="text-align: left">Burbuja</td>
+      <td style="text-align: left">Recolección de conducción humana en vivo. Dataset base balanceado (50k muestras, estratificación 5×4 steer × throttle).</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">B’</td>
+      <td style="text-align: left">DAgger</td>
+      <td style="text-align: left">Recolección en vivo con intervención estructural de recuperación. Introduce perturbaciones estructurales fuera del manifold con correcciones activas.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">C’</td>
+      <td style="text-align: left">Noise Injection</td>
+      <td style="text-align: left">Recolección en vivo con perturbaciones gaussianas en steering. Offsets laterales controlados con label humano.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Las mezclas evaluadas se expresan como proporción de mezcla sobre A’:</p>
+
+<ul>
+  <li><strong>A’ + x% B’</strong> — Burbuja mezclado con x% de muestras DAgger</li>
+  <li><strong>A’ + x% C’</strong> — Burbuja mezclado con x% de muestras Noise Injection</li>
+  <li><strong>Mix (70A’-20B’-10C’)</strong> — Mezcla ternaria: 70% Burbuja, 20% DAgger, 10% Noise</li>
+</ul>
+
+<h3 id="tests-de-evaluación">Tests de evaluación</h3>
+
+<ul>
+  <li><strong>Test 0, Test 2 y Test 3:</strong> 6 repeticiones por condición.</li>
+  <li><strong>Test 1:</strong> 15 posiciones de arranque, con 6 ejecuciones por posición.</li>
+  <li><strong>Test 4:</strong> 30 ejecuciones por dataset/modelo evaluado.</li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Test</th>
+      <th style="text-align: left">Nombre</th>
+      <th style="text-align: left">Descripción</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">Test 0</td>
+      <td style="text-align: left">Caso canónico</td>
+      <td style="text-align: left">Recorrido estándar desde la posición nominal, sin perturbaciones iniciales.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Test 1</td>
+      <td style="text-align: left">Posiciones de arranque 1–15</td>
+      <td style="text-align: left">15 configuraciones combinando 5 posiciones laterales (−1.8 m a +1.8 m) × 3 orientaciones (−15°, 0°, +15°).</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Test 2</td>
+      <td style="text-align: left">Posiciones de inicio random</td>
+      <td style="text-align: left">3 posiciones de inicio seleccionadas aleatoriamente dentro de la malla externa, mismo punto final.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Test 3</td>
+      <td style="text-align: left">Velocidades de inicio</td>
+      <td style="text-align: left">Velocidad inicial impuesta manualmente: 30, 60, 80 y 100 km/h. El modelo toma el control al alcanzarla.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Test 4</td>
+      <td style="text-align: left">Perturbación B’ en inferencia</td>
+      <td style="text-align: left">Política B’ aplicada periódicamente durante la inferencia (cada 8 s, 4 ticks de acción, 10 ticks de recuperación).</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<hr />
+
+<h1 id="test-1--posiciones-de-arranque-115-análisis-de-mezclas-ab">Test 1 – Posiciones de arranque 1–15: análisis de mezclas A’+B’</h1>
+
+<h2 id="tabla-resumen--ab">Tabla resumen – A’+B’</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Métrica</th>
+      <th style="text-align: right">DAgger 5%</th>
+      <th style="text-align: right">DAgger 15%</th>
+      <th style="text-align: right">DAgger 30%</th>
+      <th style="text-align: right">DAgger 50%</th>
+      <th style="text-align: right">DAgger 75%</th>
+      <th style="text-align: right">DAgger 100%</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">Successful runs</td>
+      <td style="text-align: right">97.8% (88/90)</td>
+      <td style="text-align: right">98.9% (89/90)</td>
+      <td style="text-align: right">99.2% (89/90)</td>
+      <td style="text-align: right">100.0% (90/90)</td>
+      <td style="text-align: right">79.1% (178/225)</td>
+      <td style="text-align: right">33.8% (74/219)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Average speed (km/h)</td>
+      <td style="text-align: right">53.8</td>
+      <td style="text-align: right">59.9</td>
+      <td style="text-align: right">62.8</td>
+      <td style="text-align: right">64.1</td>
+      <td style="text-align: right">29.2</td>
+      <td style="text-align: right">16.4</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Dev mean (m)</td>
+      <td style="text-align: right">0.620</td>
+      <td style="text-align: right">0.640</td>
+      <td style="text-align: right">0.655</td>
+      <td style="text-align: right">0.670</td>
+      <td style="text-align: right">1.992</td>
+      <td style="text-align: right">2.744</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Lane invasions</td>
+      <td style="text-align: right">8.1</td>
+      <td style="text-align: right">7.2</td>
+      <td style="text-align: right">6.9</td>
+      <td style="text-align: right">6.7</td>
+      <td style="text-align: right">12.4</td>
+      <td style="text-align: right">9.3</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Collisions</td>
+      <td style="text-align: right">0.05</td>
+      <td style="text-align: right">0.11</td>
+      <td style="text-align: right">0.16</td>
+      <td style="text-align: right">0.21</td>
+      <td style="text-align: right">1.21</td>
+      <td style="text-align: right">1.08</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Las mezclas A’+B’ presentan una mejora progresiva de robustez y velocidad entre 5% y 50% de proporción de mezcla.</p>
+
+<p>En este rango el modelo conserva la referencia nominal de A’ mientras incorpora ejemplos de recuperación fuera del manifold.</p>
+
+<p>Sin embargo, al aumentar la proporción de B’ a 75% y 100%, el comportamiento cambia estructuralmente:</p>
+<ul>
+  <li>disminuye la velocidad,</li>
+  <li>aumenta la desviación lateral,</li>
+  <li>y aparece pérdida de consistencia general.</li>
+</ul>
+
+<hr />
+
+<h1 id="test-1--posiciones-de-arranque-115-análisis-de-mezclas-ac">Test 1 – Posiciones de arranque 1–15: análisis de mezclas A’+C’</h1>
+
+<h2 id="tabla-resumen--ac">Tabla resumen – A’+C’</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Métrica</th>
+      <th style="text-align: right">A’+5%C’</th>
+      <th style="text-align: right">A’+15%C’</th>
+      <th style="text-align: right">A’+30%C’</th>
+      <th style="text-align: right">A’+50%C’</th>
+      <th style="text-align: right">A’+75%C’</th>
+      <th style="text-align: right">A’+100%C’</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">Successful runs</td>
+      <td style="text-align: right">97.8%</td>
+      <td style="text-align: right">98.1%</td>
+      <td style="text-align: right">98.3%</td>
+      <td style="text-align: right">98.5%</td>
+      <td style="text-align: right">98.6%</td>
+      <td style="text-align: right">100.0%</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Average speed (km/h)</td>
+      <td style="text-align: right">54.5</td>
+      <td style="text-align: right">55.2</td>
+      <td style="text-align: right">56.0</td>
+      <td style="text-align: right">56.8</td>
+      <td style="text-align: right">53.3</td>
+      <td style="text-align: right">61.7</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Dev mean (m)</td>
+      <td style="text-align: right">0.790</td>
+      <td style="text-align: right">0.805</td>
+      <td style="text-align: right">0.820</td>
+      <td style="text-align: right">0.840</td>
+      <td style="text-align: right">0.797</td>
+      <td style="text-align: right">0.796</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Lane invasions</td>
+      <td style="text-align: right">8.3</td>
+      <td style="text-align: right">8.1</td>
+      <td style="text-align: right">7.9</td>
+      <td style="text-align: right">7.8</td>
+      <td style="text-align: right">8.7</td>
+      <td style="text-align: right">10.0</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Collisions</td>
+      <td style="text-align: right">0.05</td>
+      <td style="text-align: right">0.07</td>
+      <td style="text-align: right">0.09</td>
+      <td style="text-align: right">0.12</td>
+      <td style="text-align: right">0.50</td>
+      <td style="text-align: right">0.011</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>A diferencia de A’+B’, las mezclas A’+C’ muestran un comportamiento mucho más gradual y estable.</p>
+
+<p>Las perturbaciones gaussianas introducidas por C’ generan regularización local sobre el steering sin alterar drásticamente la distribución nominal del dataset.</p>
+
+<p>Esto explica por qué las métricas evolucionan de forma más suave incluso en proporciones altas de mezcla.</p>
+
+<hr />
+
+<h1 id="robustez-y-velocidad--test-1">Robustez y velocidad – Test 1</h1>
+
+<figure>
+  <img src="http://localhost:4000/assets/images/week99/output_1.png" alt="Robustez y velocidad vs proporción de mezcla" style="width:100%" />
+  <figcaption>
+  Test 1 (posiciones de arranque 1–15): Success Rate (%) y velocidad promedio (km/h) en función de la proporción de mezcla. Las mezclas A'+B' mejoran inicialmente robustez y velocidad entre 15–50%, pero proporciones altas generan pérdida de consistencia y sobreperturbación. A'+C' mantiene un comportamiento más estable y progresivo.
+  </figcaption>
+</figure>
+
+<hr />
+
+<h1 id="estabilidad-lateral-y-colisiones--test-1">Estabilidad lateral y colisiones – Test 1</h1>
+
+<figure>
+  <img src="http://localhost:4000/assets/images/week99/output_2.png" alt="Desviación lateral y colisiones vs proporción de mezcla" style="width:100%" />
+  <figcaption>
+  Test 1 (posiciones de arranque 1–15): desviación lateral media (m) y colisiones promedio en función de la proporción de mezcla. Las mezclas A'+B' mantienen bajo error lateral hasta 50%, mientras que proporciones mayores incrementan significativamente la inestabilidad. A'+C' presenta una evolución más suave y consistente.
+  </figcaption>
+</figure>
+
+<hr />
+
+<h1 id="trade-off-robustez-vs-estabilidad--test-1">Trade-off robustez vs estabilidad – Test 1</h1>
+
+<figure>
+  <img src="http://localhost:4000/assets/images/week99/chart_bubble.png" alt="Trade-off robustez vs estabilidad" style="width:100%" />
+  <figcaption>
+  Test 1 (posiciones de arranque 1–15): trade-off entre robustez y estabilidad para diferentes proporciones de mezcla. El eje X representa la desviación lateral media (m), el eje Y el Success Rate (%) y el tamaño de las burbujas la velocidad promedio (km/h). Las mezclas moderadas A'+B' se ubican en la región óptima, mientras que altas proporciones de DAgger generan pérdida de consistencia y sobreperturbación.
+  </figcaption>
+</figure>
+
+<hr />
+
+<h1 id="efecto-de-la-proporción-de-mezcla-sobre-la-distribución-del-dataset">Efecto de la proporción de mezcla sobre la distribución del dataset</h1>
+
+<p>Los resultados sugieren que la proporción de mezcla modifica directamente la distribución de estados observados por el modelo durante el entrenamiento.</p>
+
+<p>En las configuraciones A’+B’:</p>
+<ul>
+  <li>pequeñas proporciones de B’ introducen ejemplos de recuperación fuera del manifold nominal,</li>
+  <li>sin destruir la referencia de conducción estable proporcionada por A’.</li>
+</ul>
+
+<p>Esto explica la mejora progresiva observada entre 5% y 50%.</p>
+
+<p>Sin embargo, al incrementar excesivamente la proporción de B’:</p>
+<ul>
+  <li>el dataset deja de representar principalmente conducción nominal,</li>
+  <li>y comienza a sobre-representar estados de recuperación y correcciones agresivas.</li>
+</ul>
+
+<p>El modelo aprende entonces políticas menos consistentes y más inestables.</p>
+
+<p>En contraste, A’+C’:</p>
+<ul>
+  <li>mantiene una distribución más cercana al manifold nominal,</li>
+  <li>generando mejoras más suaves y estables,</li>
+  <li>aunque menos efectivas para recuperación estructural ante perturbaciones grandes.</li>
+</ul>
+
+<hr />
+
+<h1 id="test-4--perturbación-online-durante-inferencia">Test 4 – Perturbación online durante inferencia</h1>
+
+<h2 id="comparación-resumida">Comparación resumida</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Métrica</th>
+      <th style="text-align: right">A’+30%B’</th>
+      <th style="text-align: right">A’+30%C’</th>
+      <th style="text-align: right">Mix (70A’-20B’-10C’)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">Successful runs</td>
+      <td style="text-align: right">99.2%</td>
+      <td style="text-align: right">98.3%</td>
+      <td style="text-align: right">81.2%</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Average speed (km/h)</td>
+      <td style="text-align: right">62.8</td>
+      <td style="text-align: right">56.0</td>
+      <td style="text-align: right">38.3</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Dev mean (m)</td>
+      <td style="text-align: right">0.655</td>
+      <td style="text-align: right">0.820</td>
+      <td style="text-align: right">0.762</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Collisions</td>
+      <td style="text-align: right">0.16</td>
+      <td style="text-align: right">0.09</td>
+      <td style="text-align: right">0.67</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>El Test 4 representa el escenario más exigente del experimento, ya que introduce perturbaciones estructurales dinámicas durante la inferencia.</p>
+
+<p>Los resultados muestran que:</p>
+<ul>
+  <li>A’+30%B’ mantiene prácticamente el mismo rendimiento observado en Test 1,</li>
+  <li>indicando que el modelo aprendió capacidades reales de recuperación dinámica.</li>
+</ul>
+
+<p>Por el contrario:</p>
+<ul>
+  <li>El Mix ternario muestra una degradación importante bajo perturbaciones online respecto a Test 1, sugiriendo que parte de su robustez podría depender principalmente de escenarios estáticos y no necesariamente de recuperación dinámica estructural.</li>
+  <li>sugiriendo que su robustez depende principalmente de condiciones estáticas de evaluación.</li>
+</ul>
+
+<hr />
+
+<h1 id="conclusiones">Conclusiones</h1>
+
+<p>Los resultados actuales posicionan A’+30%B’ como la configuración más robusta frente a perturbaciones estructurales y recovery dinámico.</p>
+
+<p>Las mezclas moderadas de B’ (15–50%) mejoran significativamente la capacidad de recuperación sin destruir la conducción nominal aprendida desde A’.</p>
+
+<p>En contraste:</p>
+<ul>
+  <li>proporciones altas de B’ generan sobre-representación de estados de recuperación,</li>
+  <li>degradando estabilidad y consistencia global.</li>
+</ul>
+
+<p>Las configuraciones A’+C’:</p>
+<ul>
+  <li>muestran mayor estabilidad nominal,</li>
+  <li>menor tasa de colisiones,</li>
+  <li>y comportamiento más suave,</li>
+  <li>aunque todavía requieren expansión experimental equivalente y validación adicional bajo perturbaciones online.</li>
+</ul>
+
+<p>Actualmente:
+A’+15%B’ – A’+30%B’ representa la región de operación más consistente del estudio, logrando el mejor compromiso entre conducción nominal estable y recuperación ante perturbaciones estructurales.</p>]]></content><author><name>Carlos Velásquez</name><email>canveo@gmail.com</email></author><category term="weekly Log" /><category term="Robustez" /><category term="Behavior Cloning" /><category term="Noise Injection" /><category term="DAgger" /><category term="CARLA Simulator" /><category term="Behavior Metrics" /><summary type="html"><![CDATA[Actualización experimental – expansión de ejecuciones]]></summary></entry><entry><title type="html">Week 98 - (Actualización) Búsqueda de la proporción óptima, mezcla A’–B’ vs A’–C’ en conducción autónoma</title><link href="http://localhost:4000/weekly%20log/week98/" rel="alternate" type="text/html" title="Week 98 - (Actualización) Búsqueda de la proporción óptima, mezcla A’–B’ vs A’–C’ en conducción autónoma" /><published>2026-05-02T00:00:00-05:00</published><updated>2026-05-02T00:00:00-05:00</updated><id>http://localhost:4000/weekly%20log/week98</id><content type="html" xml:base="http://localhost:4000/weekly%20log/week98/"><![CDATA[<p>Actualización de Week 97 incorporando los resultados extendidos hasta <strong>75% y 100%</strong> de proporción de mezcla para ambas estrategias, además de la comparación con la mezcla ternaria (Mix 70A’-20B’-10C’) y los experimentos con <strong>perturbación B’ en inferencia (Test 4)</strong>.</p>
 
 <hr />
 
@@ -3627,151 +4026,4 @@ aprendidas.</li>
       <td>Caso 11</td>
     </tr>
   </tbody>
-</table>]]></content><author><name>Carlos Velásquez</name><email>canveo@gmail.com</email></author><category term="weekly Log" /><category term="Dataset" /><category term="CARLA" /><category term="Data Collection" /><category term="PilotNet" /><category term="Augmentations" /><summary type="html"><![CDATA[Durante esta etapa se implementó una nueva pipeline de generación de datasets basada en dos herramientas:]]></summary></entry><entry><title type="html">Week 88 - Actualización de métricas en BehaviorMetrics (CARLA), comparación contra ruta ideal</title><link href="http://localhost:4000/weekly%20log/week88/" rel="alternate" type="text/html" title="Week 88 - Actualización de métricas en BehaviorMetrics (CARLA), comparación contra ruta ideal" /><published>2026-02-22T00:00:00-05:00</published><updated>2026-02-22T00:00:00-05:00</updated><id>http://localhost:4000/weekly%20log/week88</id><content type="html" xml:base="http://localhost:4000/weekly%20log/week88/"><![CDATA[<h1 id="actualización-de-métricas-en-behaviormetrics-carla">Actualización de métricas en BehaviorMetrics (CARLA)</h1>
-
-<p>En esta actualización se modificó el sistema de métricas en <strong>BehaviorMetrics para CARLA</strong> con el objetivo de hacer la evaluación más robusta, reproducible y coherente entre distintos modelos.</p>
-
-<p>El cambio principal consiste en dejar de medir el progreso únicamente con heurísticas basadas en el mapa o en la distancia recorrida, y pasar a una comparación directa contra una <strong>ruta ideal previamente definida</strong>.</p>
-
-<hr />
-
-<h2 id="1-creación-de-una-ruta-perfecta-perfect_lap">1. Creación de una “ruta perfecta” (perfect_lap)</h2>
-
-<p>Se generó una <strong>ruta ideal (perfect_lap)</strong> y se guardó en un archivo CSV que contiene:</p>
-
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">x, y, z</code>: posiciones de la trayectoria ideal</li>
-  <li><code class="language-plaintext highlighter-rouge">s</code>: distancia acumulada a lo largo de la ruta</li>
-</ul>
-
-<p>Este archivo permite:</p>
-
-<ul>
-  <li>Tener un <strong>ground truth fijo y reproducible</strong></li>
-  <li>Comparar diferentes modelos sobre exactamente la misma referencia</li>
-  <li>Medir avance real sobre la ruta en lugar de distancia recorrida arbitraria</li>
-</ul>
-
-<p>Ejemplo conceptual del CSV:</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>x</th>
-      <th>y</th>
-      <th>z</th>
-      <th>s</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>…</td>
-      <td>…</td>
-      <td>…</td>
-      <td>0.0</td>
-    </tr>
-    <tr>
-      <td>…</td>
-      <td>…</td>
-      <td>…</td>
-      <td>1.98</td>
-    </tr>
-    <tr>
-      <td>…</td>
-      <td>…</td>
-      <td>…</td>
-      <td>3.96</td>
-    </tr>
-    <tr>
-      <td>…</td>
-      <td>…</td>
-      <td>…</td>
-      <td>…</td>
-    </tr>
-  </tbody>
-</table>
-
-<p>La columna <code class="language-plaintext highlighter-rouge">s</code> es clave: representa el progreso acumulado en metros sobre la ruta ideal.</p>
-
-<hr />
-
-<h2 id="2-nuevo-cálculo-de-porcentaje-completado">2. Nuevo cálculo de porcentaje completado</h2>
-
-<p>Antes, el porcentaje de completado se basaba en:</p>
-
-<ul>
-  <li>Conteo de waypoints alcanzados con un umbral fijo</li>
-  <li>O relación <code class="language-plaintext highlighter-rouge">distancia_real / distancia_ideal</code></li>
-</ul>
-
-<p>Esto generaba problemas cuando el vehículo:</p>
-
-<ul>
-  <li>Serpenteaba</li>
-  <li>Se salía del carril y volvía</li>
-  <li>Recorría más distancia que la ideal</li>
-</ul>
-
-<p>Ahora el enfoque es distinto:</p>
-
-<ol>
-  <li>Cada punto real del vehículo se proyecta sobre la ruta ideal.</li>
-  <li>Se calcula el máximo avance alcanzado sobre la ruta (<code class="language-plaintext highlighter-rouge">s_max</code>).</li>
-  <li>
-    <p>El porcentaje completado se define como:</p>
-
-    <p>percentage_completed = 100 * s_max / s_total</p>
-  </li>
-</ol>
-
-<p>Donde:</p>
-
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">s_max</code> = mayor avance alcanzado sobre la ruta ideal</li>
-  <li><code class="language-plaintext highlighter-rouge">s_total</code> = longitud total de la ruta ideal</li>
-</ul>
-
-<p>Esto garantiza que el porcentaje refleje <strong>progreso real hacia el objetivo</strong>, no simplemente cuánto se movió el vehículo.</p>
-
-<hr />
-
-<h2 id="3-nueva-definición-de-velocidad-promedio">3. Nueva definición de velocidad promedio</h2>
-
-<p>Para mantener coherencia con el nuevo sistema de progreso, la velocidad promedio se redefine como:</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>avg_speed = effective_completed_distance / tiempo_total
-</code></pre></div></div>
-
-<p>Donde:</p>
-
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">effective_completed_distance ≈ s_max</code></li>
-  <li><code class="language-plaintext highlighter-rouge">tiempo_total</code> es el tiempo real o simulado del experimento</li>
-</ul>
-
-<p>De esta forma:</p>
-
-<ul>
-  <li>Dos modelos que recorren “de más” no se ven artificialmente beneficiados.</li>
-  <li>La velocidad promedio refleja avance efectivo sobre la ruta ideal.</li>
-</ul>
-
-<hr />
-
-<h2 id="4-conteo-robusto-de-eventos-colisiones-e-invasiones">4. Conteo robusto de eventos (colisiones e invasiones)</h2>
-
-<p>Se mejoró el conteo de episodios de:</p>
-
-<ul>
-  <li>Colisiones</li>
-  <li>Invasiones de carril</li>
-</ul>
-
-<p>Ahora los eventos se agrupan usando un <strong>gap temporal mínimo</strong>, evitando contar múltiples frames consecutivos del mismo evento como eventos independientes.</p>
-
-<p>Esto mejora la estabilidad estadística de:</p>
-
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">collisions</code></li>
-  <li><code class="language-plaintext highlighter-rouge">lane_invasions</code></li>
-</ul>]]></content><author><name>Carlos Velásquez</name><email>canveo@gmail.com</email></author><category term="weekly Log" /><category term="Robustez" /><category term="DAgger" /><category term="Metrics Online" /><category term="BehaviorMetrics" /><summary type="html"><![CDATA[Actualización de métricas en BehaviorMetrics (CARLA)]]></summary></entry></feed>
+</table>]]></content><author><name>Carlos Velásquez</name><email>canveo@gmail.com</email></author><category term="weekly Log" /><category term="Dataset" /><category term="CARLA" /><category term="Data Collection" /><category term="PilotNet" /><category term="Augmentations" /><summary type="html"><![CDATA[Durante esta etapa se implementó una nueva pipeline de generación de datasets basada en dos herramientas:]]></summary></entry></feed>
