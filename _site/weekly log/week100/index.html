@@ -1,0 +1,849 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Week 100 - Análisis de robustez - Resultados parciales - Robotics Lab URJC</title>
+<meta name="description" content="Actualmente se está ampliando la cantidad de muestras utilizadas en los Test de Robustez 1 y 4. En el Test 1 se realizan 15 ejecuciones por cada una de las 15 condiciones iniciales evaluadas, para un total de 225 ejecuciones por configuración experimental. En el Test 4 se realizan igualmente 225 ejecuciones por configuración experimental bajo perturbaciones online durante la inferencia. Debido al tiempo requerido para ejecutar y validar cada experimento, hasta el momento solo se dispone de los siguientes resultados parciales.">
+
+
+  <meta name="author" content="Carlos Velásquez">
+  
+  <meta property="article:author" content="Carlos Velásquez">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Robotics Lab URJC">
+<meta property="og:title" content="Week 100 - Análisis de robustez - Resultados parciales">
+<meta property="og:url" content="http://localhost:4000/weekly%20log/week100/">
+
+
+  <meta property="og:description" content="Actualmente se está ampliando la cantidad de muestras utilizadas en los Test de Robustez 1 y 4. En el Test 1 se realizan 15 ejecuciones por cada una de las 15 condiciones iniciales evaluadas, para un total de 225 ejecuciones por configuración experimental. En el Test 4 se realizan igualmente 225 ejecuciones por configuración experimental bajo perturbaciones online durante la inferencia. Debido al tiempo requerido para ejecutar y validar cada experimento, hasta el momento solo se dispone de los siguientes resultados parciales.">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2026-05-25T00:00:00-05:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/weekly%20log/week100/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Carlos Andrés Velásquez Ospina",
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Robotics Lab URJC Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/logo.png" alt="Robotics Lab URJC"></a>
+        
+        <a class="site-title" href="/">
+          Robotics Lab URJC
+          <span class="site-subtitle">Programming Robot Intelligence</span>
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="https://mmistakes.github.io/minimal-mistakes/docs/quick-start-guide/">Quick-Start Guide</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+    <div class="author__avatar">
+      <a href="http://localhost:4000/">
+        <img src="/assets/images/me.jpg" alt="Carlos Velásquez" itemprop="image" class="u-photo">
+      </a>
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      <a class="u-url" rel="me" href="http://localhost:4000/" itemprop="url">Carlos Velásquez</a>
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>Doctoral thesis blog</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name" class="p-locality">Medellín</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="mailto:canveo@gmail.com" rel="nofollow noopener noreferrer me"><i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">Email</span></a></li>
+          
+        
+          
+            <li><a href="https://github.com/canveo" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/canveo/" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span class="label">LinkedIn</span></a></li>
+          
+        
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:canveo@gmail.com" rel="me" class="u-email">
+            <meta itemprop="email" content="canveo@gmail.com" />
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">Email</span>
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer me">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Week 100 - Análisis de robustez - Resultados parciales">
+    <meta itemprop="description" content="Actualmente se está ampliando la cantidad de muestras utilizadas en los Test de Robustez 1 y 4.En el Test 1 se realizan 15 ejecuciones por cada una de las 15 condiciones iniciales evaluadas, para un total de 225 ejecuciones por configuración experimental. En el Test 4 se realizan igualmente 225 ejecuciones por configuración experimental bajo perturbaciones online durante la inferencia. Debido al tiempo requerido para ejecutar y validar cada experimento, hasta el momento solo se dispone de los siguientes resultados parciales.">
+    <meta itemprop="datePublished" content="2026-05-25T00:00:00-05:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="http://localhost:4000/weekly%20log/week100/" class="u-url" itemprop="url">Week 100 - Análisis de robustez - Resultados parciales
+</a>
+          </h1>
+          
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          4 minute read
+        
+      </span>
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        <p>Actualmente se está ampliando la cantidad de muestras utilizadas en los Test de Robustez 1 y 4.<br />
+En el Test 1 se realizan 15 ejecuciones por cada una de las 15 condiciones iniciales evaluadas, para un total de 225 ejecuciones por configuración experimental. En el Test 4 se realizan igualmente 225 ejecuciones por configuración experimental bajo perturbaciones online durante la inferencia. Debido al tiempo requerido para ejecutar y validar cada experimento, hasta el momento solo se dispone de los siguientes resultados parciales.</p>
+
+<h1 id="definición-de-las-mezclas-de-entrenamiento">Definición de las mezclas de entrenamiento</h1>
+
+<p>Todos los experimentos se realizan utilizando datasets de tamaño fijo de aproximadamente 65k muestras. Sea $\alpha \in [0,1]$ la proporción de muestras augmentadas dentro del dataset final.</p>
+
+<p>Las mezclas evaluadas se definen como:</p>
+
+\[D_{\alpha}^{B} = (1-\alpha)A' + \alpha B'\]
+
+<p>para las mezclas con DAgger, y</p>
+
+\[D_{\alpha}^{C} = (1-\alpha)A' + \alpha C'\]
+
+<p>para las mezclas con Noise Injection.</p>
+
+<p>Donde:</p>
+
+<ul>
+  <li>$A’$: dataset Burbuja (conducción humana base)</li>
+  <li>$B’$: dataset DAgger</li>
+  <li>$C’$: dataset Noise Injection</li>
+  <li>$\alpha$: proporción de muestras augmentadas en el dataset final</li>
+</ul>
+
+<h2 id="ejemplos-de-interpretación">Ejemplos de interpretación</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Configuración</th>
+      <th>Composición real del dataset</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>$D_{0.50}^{B}$</td>
+      <td>50% Burbuja + 50% DAgger</td>
+    </tr>
+    <tr>
+      <td>$D_{0.75}^{B}$</td>
+      <td>25% Burbuja + 75% DAgger</td>
+    </tr>
+    <tr>
+      <td>$D_{0.50}^{C}$</td>
+      <td>50% Burbuja + 50% Noise Injection</td>
+    </tr>
+    <tr>
+      <td>$D_{0.75}^{C}$</td>
+      <td>25% Burbuja + 75% Noise Injection</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h1 id="test-1--robustez-bajo-condiciones-iniciales">Test 1 – Robustez bajo condiciones iniciales</h1>
+
+<p>225 ejecuciones por configuración experimental.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Métrica</th>
+      <th style="text-align: right">$D_{0.50}^{B}$</th>
+      <th style="text-align: right">$D_{0.50}^{C}$</th>
+      <th style="text-align: right">$D_{0.75}^{B}$</th>
+      <th style="text-align: right">$D_{0.75}^{C}$</th>
+      <th style="text-align: right">$D_{1.00}^{B}$</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Successful runs</td>
+      <td style="text-align: right"><strong>97.3% (219/225)</strong></td>
+      <td style="text-align: right">74.2% (167/225)</td>
+      <td style="text-align: right">40.4% (91/225)</td>
+      <td style="text-align: right">45.3% (102/225)</td>
+      <td style="text-align: right">0.0% (0/226)</td>
+    </tr>
+    <tr>
+      <td>Average speed (km/h)</td>
+      <td style="text-align: right">55.3</td>
+      <td style="text-align: right"><strong>56.1</strong></td>
+      <td style="text-align: right">29.2</td>
+      <td style="text-align: right">52.5</td>
+      <td style="text-align: right">16.3</td>
+    </tr>
+    <tr>
+      <td>Dev mean (m)</td>
+      <td style="text-align: right">0.860</td>
+      <td style="text-align: right"><strong>0.785</strong></td>
+      <td style="text-align: right">1.992</td>
+      <td style="text-align: right">0.901</td>
+      <td style="text-align: right">2.747</td>
+    </tr>
+    <tr>
+      <td>Collisions</td>
+      <td style="text-align: right">0.03</td>
+      <td style="text-align: right"><strong>0.00</strong></td>
+      <td style="text-align: right">1.22</td>
+      <td style="text-align: right">0.60</td>
+      <td style="text-align: right">1.08</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h1 id="test-4--perturbación-online-durante-inferencia">Test 4 – Perturbación online durante inferencia</h1>
+
+<p>225 ejecuciones por configuración experimental.</p>
+
+<h2 id="test-4--perturbación-online-durante-inferencia-1">Test 4 – Perturbación online durante inferencia</h2>
+
+<p>225 ejecuciones por configuración experimental.</p>
+
+<h1 id="test-4--perturbación-online-durante-inferencia-2">Test 4 – Perturbación online durante inferencia</h1>
+
+<p>225 ejecuciones por configuración experimental.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Métrica</th>
+      <th style="text-align: right">$D_{0.30}^{B}$</th>
+      <th style="text-align: right">$D_{0.30}^{C}$</th>
+      <th style="text-align: right">$D_{0.50}^{B}$</th>
+      <th style="text-align: right">$D_{0.50}^{C}$</th>
+      <th style="text-align: right">$D_{0.75}^{B}$</th>
+      <th style="text-align: right">$D_{0.75}^{C}$</th>
+      <th style="text-align: right">$D^{M}$</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Successful runs</td>
+      <td style="text-align: right">71.1% (160/225)</td>
+      <td style="text-align: right">79.6% (179/225)</td>
+      <td style="text-align: right">62.2% (140/225)</td>
+      <td style="text-align: right"><strong>91.1% (205/225)</strong></td>
+      <td style="text-align: right">20.0% (45/225)</td>
+      <td style="text-align: right">47.1% (106/225)</td>
+      <td style="text-align: right">58.2% (131/225)</td>
+    </tr>
+    <tr>
+      <td>Average speed (km/h)</td>
+      <td style="text-align: right">45.6</td>
+      <td style="text-align: right">49.7</td>
+      <td style="text-align: right">42.6</td>
+      <td style="text-align: right"><strong>51.6</strong></td>
+      <td style="text-align: right">23.1</td>
+      <td style="text-align: right">45.7</td>
+      <td style="text-align: right">36.3</td>
+    </tr>
+    <tr>
+      <td>Dev mean (m)</td>
+      <td style="text-align: right">0.895</td>
+      <td style="text-align: right">0.808</td>
+      <td style="text-align: right">1.118</td>
+      <td style="text-align: right"><strong>0.567</strong></td>
+      <td style="text-align: right">2.253</td>
+      <td style="text-align: right">1.117</td>
+      <td style="text-align: right">1.416</td>
+    </tr>
+    <tr>
+      <td>Collisions</td>
+      <td style="text-align: right">1.07</td>
+      <td style="text-align: right">0.37</td>
+      <td style="text-align: right">0.64</td>
+      <td style="text-align: right"><strong>0.16</strong></td>
+      <td style="text-align: right">1.44</td>
+      <td style="text-align: right">0.76</td>
+      <td style="text-align: right">0.68</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Donde:</p>
+
+\[D^{M}=0.70A' + 0.20B' + 0.10C'\]
+
+<p>corresponde a la mezcla híbrida <strong>Magic Mix</strong> compuesta por:</p>
+
+<ul>
+  <li>70% Burbuja ($A’$)</li>
+  <li>20% DAgger ($B’$)</li>
+  <li>10% Noise Injection ($C’$)</li>
+</ul>
+
+<h2 id="comparación-entre-test-1-y-test-4">Comparación entre Test 1 y Test 4</h2>
+
+<p>Al comparar los resultados de ambos experimentos aparece un comportamiento interesante. Mientras que las mezclas basadas en DAgger muestran un mejor desempeño en el Test 1, donde se evalúa la capacidad de recuperación desde condiciones iniciales adversas, las mezclas basadas en Noise Injection obtienen los mejores resultados en el Test 4, donde el vehículo es sometido a perturbaciones online durante la inferencia.</p>
+
+<p>Una posible explicación es que ambas estrategias estén fortaleciendo propiedades diferentes de la política de conducción. DAgger incorpora ejemplos de recuperación desde estados fuera de distribución, por lo que favorece la capacidad de regresar a la trayectoria cuando el vehículo ya se encuentra en una situación desfavorable. Por el contrario, Noise Injection introduce pequeñas perturbaciones y correcciones continuas alrededor de la trayectoria nominal, favoreciendo una conducción más estable y resistente a perturbaciones durante la ejecución.</p>
+
+<p>Desde esta perspectiva, DAgger parece mejorar principalmente la <strong>capacidad de recuperación (recoverability)</strong>, mientras que Noise Injection mejora la <strong>estabilidad local (stability)</strong> de la política aprendida.</p>
+
+<h2 id="evaluación-de-la-mezcla-híbrida-magic-mix">Evaluación de la mezcla híbrida (Magic Mix)</h2>
+
+<p>Con el objetivo de combinar las ventajas observadas en ambas estrategias, se evaluó una mezcla híbrida:</p>
+
+\[D^{M}=0.70A' + 0.20B' + 0.10C'\]
+
+<p>compuesta por un 70% de muestras Burbuja, 20% DAgger y 10% Noise Injection.</p>
+
+<p>En el Test 4, esta configuración alcanzó un <strong>58.2% de successful runs (131/225)</strong>, con una velocidad media de <strong>36.3 km/h</strong>, una desviación lateral media de <strong>1.416 m</strong> y <strong>0.68 colisiones</strong> por ejecución.</p>
+
+<p>Aunque Magic Mix mejora respecto a algunas configuraciones con altas proporciones de DAgger, no logra alcanzar el desempeño observado en las mejores mezclas basadas exclusivamente en Noise Injection. Esto sugiere que la simple combinación de datasets no garantiza una combinación equivalente de sus beneficios. Los patrones de recuperación aprendidos mediante DAgger y los patrones de estabilización aprendidos mediante Noise Injection podrían estar compitiendo entre sí durante el entrenamiento, limitando el desempeño final de la política.</p>
+
+<p>De forma preliminar, los resultados sugieren que:</p>
+
+<ul>
+  <li>DAgger favorece la recuperación desde estados fuera de distribución.</li>
+  <li>Noise Injection favorece la estabilidad frente a perturbaciones online.</li>
+  <li>Las mezclas híbridas requieren una exploración más profunda para determinar si existe una proporción capaz de combinar simultáneamente ambas ventajas.</li>
+</ul>
+
+<p>Actualmente se continúa ampliando la cantidad de ejecuciones y muestras evaluadas con el objetivo de aumentar la validez estadística de los resultados y obtener conclusiones más sólidas sobre el comportamiento y la robustez de los diferentes datasets comparados. Como trabajo futuro, se contempla la evaluación de nuevas configuraciones híbridas, explorando distintas proporciones entre Burbuja, DAgger y Noise Injection para determinar si existe una región de mezcla capaz de maximizar simultáneamente la capacidad de recuperación ante estados fuera de distribución y la estabilidad frente a perturbaciones online durante la conducción autónoma.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/tags/#augmentations" class="page__taxonomy-item p-category" rel="tag">Augmentations</a><span class="sep">, </span>
+    
+      <a href="/tags/#carla" class="page__taxonomy-item p-category" rel="tag">CARLA</a><span class="sep">, </span>
+    
+      <a href="/tags/#data-collection" class="page__taxonomy-item p-category" rel="tag">Data Collection</a><span class="sep">, </span>
+    
+      <a href="/tags/#dataset" class="page__taxonomy-item p-category" rel="tag">Dataset</a><span class="sep">, </span>
+    
+      <a href="/tags/#pilotnet" class="page__taxonomy-item p-category" rel="tag">PilotNet</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#weekly-log" class="page__taxonomy-item p-category" rel="tag">weekly Log</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2026-05-25T00:00:00-05:00">May 25, 2026</time></p>
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Week+100+-+An%C3%A1lisis+de+robustez+-+Resultados+parciales%20http%3A%2F%2Flocalhost%3A4000%2Fweekly%2520log%2Fweek100%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fweekly%2520log%2Fweek100%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fweekly%2520log%2Fweek100%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/weekly%20log/week99/" class="pagination--pager" title="Week 99 - Análisis de robustez mediante mezclas A’–B’ y A’–C’ en conducción autónoma
+">Previous</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h2 class="page__related-title">You may also enjoy</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/weekly%20log/week99/" rel="permalink">Week 99 - Análisis de robustez mediante mezclas A’–B’ y A’–C’ en conducción autónoma
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          5 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Actualización experimental – expansión de ejecuciones
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/weekly%20log/week98/" rel="permalink">Week 98 - (Actualización) Búsqueda de la proporción óptima, mezcla A’–B’ vs A’–C’ en conducción autónoma
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          9 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Actualización de Week 97 incorporando los resultados extendidos hasta 75% y 100% de proporción de mezcla para ambas estrategias, además de la comparación con...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/weekly%20log/week97/" rel="permalink">Week 97 - Busqueda de la proporcion optima, mezcla Burbuja–DAgger vs Burbuja–Noise en conduccion autonoma
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          3 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">
+
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/weekly%20log/week96/" rel="permalink">Week 96 - Robustez del piloto, Caso Canónico, 15 Casos y Pruebas de Velocidad
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          19 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">En esta entrada reporto los resultados de robustez en CARLA Town02 comparando tres variantes del mismo dataset base bajo el mismo circuito de prueba, con 6 r...</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2026 Carlos Andrés Velásquez Ospina. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+  </body>
+</html>

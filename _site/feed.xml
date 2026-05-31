@@ -1,4 +1,223 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2026-05-11T09:18:36-05:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Robotics Lab URJC</title><subtitle>Autonomous Driving</subtitle><author><name>Carlos Velásquez</name><email>canveo@gmail.com</email></author><entry><title type="html">Week 99 - Análisis de robustez mediante mezclas A’–B’ y A’–C’ en conducción autónoma</title><link href="http://localhost:4000/weekly%20log/week99/" rel="alternate" type="text/html" title="Week 99 - Análisis de robustez mediante mezclas A’–B’ y A’–C’ en conducción autónoma" /><published>2026-05-11T00:00:00-05:00</published><updated>2026-05-11T00:00:00-05:00</updated><id>http://localhost:4000/weekly%20log/week99</id><content type="html" xml:base="http://localhost:4000/weekly%20log/week99/"><![CDATA[<h2 id="actualización-experimental--expansión-de-ejecuciones">Actualización experimental – expansión de ejecuciones</h2>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2026-05-31T14:03:07-05:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Robotics Lab URJC</title><subtitle>Autonomous Driving</subtitle><author><name>Carlos Velásquez</name><email>canveo@gmail.com</email></author><entry><title type="html">Week 100 - Análisis de robustez - Resultados parciales</title><link href="http://localhost:4000/weekly%20log/week100/" rel="alternate" type="text/html" title="Week 100 - Análisis de robustez - Resultados parciales" /><published>2026-05-25T00:00:00-05:00</published><updated>2026-05-25T00:00:00-05:00</updated><id>http://localhost:4000/weekly%20log/week100</id><content type="html" xml:base="http://localhost:4000/weekly%20log/week100/"><![CDATA[<p>Actualmente se está ampliando la cantidad de muestras utilizadas en los Test de Robustez 1 y 4.<br />
+En el Test 1 se realizan 15 ejecuciones por cada una de las 15 condiciones iniciales evaluadas, para un total de 225 ejecuciones por configuración experimental. En el Test 4 se realizan igualmente 225 ejecuciones por configuración experimental bajo perturbaciones online durante la inferencia. Debido al tiempo requerido para ejecutar y validar cada experimento, hasta el momento solo se dispone de los siguientes resultados parciales.</p>
+
+<h1 id="definición-de-las-mezclas-de-entrenamiento">Definición de las mezclas de entrenamiento</h1>
+
+<p>Todos los experimentos se realizan utilizando datasets de tamaño fijo de aproximadamente 65k muestras. Sea $\alpha \in [0,1]$ la proporción de muestras augmentadas dentro del dataset final.</p>
+
+<p>Las mezclas evaluadas se definen como:</p>
+
+\[D_{\alpha}^{B} = (1-\alpha)A' + \alpha B'\]
+
+<p>para las mezclas con DAgger, y</p>
+
+\[D_{\alpha}^{C} = (1-\alpha)A' + \alpha C'\]
+
+<p>para las mezclas con Noise Injection.</p>
+
+<p>Donde:</p>
+
+<ul>
+  <li>$A’$: dataset Burbuja (conducción humana base)</li>
+  <li>$B’$: dataset DAgger</li>
+  <li>$C’$: dataset Noise Injection</li>
+  <li>$\alpha$: proporción de muestras augmentadas en el dataset final</li>
+</ul>
+
+<h2 id="ejemplos-de-interpretación">Ejemplos de interpretación</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Configuración</th>
+      <th>Composición real del dataset</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>$D_{0.50}^{B}$</td>
+      <td>50% Burbuja + 50% DAgger</td>
+    </tr>
+    <tr>
+      <td>$D_{0.75}^{B}$</td>
+      <td>25% Burbuja + 75% DAgger</td>
+    </tr>
+    <tr>
+      <td>$D_{0.50}^{C}$</td>
+      <td>50% Burbuja + 50% Noise Injection</td>
+    </tr>
+    <tr>
+      <td>$D_{0.75}^{C}$</td>
+      <td>25% Burbuja + 75% Noise Injection</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h1 id="test-1--robustez-bajo-condiciones-iniciales">Test 1 – Robustez bajo condiciones iniciales</h1>
+
+<p>225 ejecuciones por configuración experimental.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Métrica</th>
+      <th style="text-align: right">$D_{0.50}^{B}$</th>
+      <th style="text-align: right">$D_{0.50}^{C}$</th>
+      <th style="text-align: right">$D_{0.75}^{B}$</th>
+      <th style="text-align: right">$D_{0.75}^{C}$</th>
+      <th style="text-align: right">$D_{1.00}^{B}$</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Successful runs</td>
+      <td style="text-align: right"><strong>97.3% (219/225)</strong></td>
+      <td style="text-align: right">74.2% (167/225)</td>
+      <td style="text-align: right">40.4% (91/225)</td>
+      <td style="text-align: right">45.3% (102/225)</td>
+      <td style="text-align: right">0.0% (0/226)</td>
+    </tr>
+    <tr>
+      <td>Average speed (km/h)</td>
+      <td style="text-align: right">55.3</td>
+      <td style="text-align: right"><strong>56.1</strong></td>
+      <td style="text-align: right">29.2</td>
+      <td style="text-align: right">52.5</td>
+      <td style="text-align: right">16.3</td>
+    </tr>
+    <tr>
+      <td>Dev mean (m)</td>
+      <td style="text-align: right">0.860</td>
+      <td style="text-align: right"><strong>0.785</strong></td>
+      <td style="text-align: right">1.992</td>
+      <td style="text-align: right">0.901</td>
+      <td style="text-align: right">2.747</td>
+    </tr>
+    <tr>
+      <td>Collisions</td>
+      <td style="text-align: right">0.03</td>
+      <td style="text-align: right"><strong>0.00</strong></td>
+      <td style="text-align: right">1.22</td>
+      <td style="text-align: right">0.60</td>
+      <td style="text-align: right">1.08</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h1 id="test-4--perturbación-online-durante-inferencia">Test 4 – Perturbación online durante inferencia</h1>
+
+<p>225 ejecuciones por configuración experimental.</p>
+
+<h2 id="test-4--perturbación-online-durante-inferencia-1">Test 4 – Perturbación online durante inferencia</h2>
+
+<p>225 ejecuciones por configuración experimental.</p>
+
+<h1 id="test-4--perturbación-online-durante-inferencia-2">Test 4 – Perturbación online durante inferencia</h1>
+
+<p>225 ejecuciones por configuración experimental.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Métrica</th>
+      <th style="text-align: right">$D_{0.30}^{B}$</th>
+      <th style="text-align: right">$D_{0.30}^{C}$</th>
+      <th style="text-align: right">$D_{0.50}^{B}$</th>
+      <th style="text-align: right">$D_{0.50}^{C}$</th>
+      <th style="text-align: right">$D_{0.75}^{B}$</th>
+      <th style="text-align: right">$D_{0.75}^{C}$</th>
+      <th style="text-align: right">$D^{M}$</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Successful runs</td>
+      <td style="text-align: right">71.1% (160/225)</td>
+      <td style="text-align: right">79.6% (179/225)</td>
+      <td style="text-align: right">62.2% (140/225)</td>
+      <td style="text-align: right"><strong>91.1% (205/225)</strong></td>
+      <td style="text-align: right">20.0% (45/225)</td>
+      <td style="text-align: right">47.1% (106/225)</td>
+      <td style="text-align: right">58.2% (131/225)</td>
+    </tr>
+    <tr>
+      <td>Average speed (km/h)</td>
+      <td style="text-align: right">45.6</td>
+      <td style="text-align: right">49.7</td>
+      <td style="text-align: right">42.6</td>
+      <td style="text-align: right"><strong>51.6</strong></td>
+      <td style="text-align: right">23.1</td>
+      <td style="text-align: right">45.7</td>
+      <td style="text-align: right">36.3</td>
+    </tr>
+    <tr>
+      <td>Dev mean (m)</td>
+      <td style="text-align: right">0.895</td>
+      <td style="text-align: right">0.808</td>
+      <td style="text-align: right">1.118</td>
+      <td style="text-align: right"><strong>0.567</strong></td>
+      <td style="text-align: right">2.253</td>
+      <td style="text-align: right">1.117</td>
+      <td style="text-align: right">1.416</td>
+    </tr>
+    <tr>
+      <td>Collisions</td>
+      <td style="text-align: right">1.07</td>
+      <td style="text-align: right">0.37</td>
+      <td style="text-align: right">0.64</td>
+      <td style="text-align: right"><strong>0.16</strong></td>
+      <td style="text-align: right">1.44</td>
+      <td style="text-align: right">0.76</td>
+      <td style="text-align: right">0.68</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Donde:</p>
+
+\[D^{M}=0.70A' + 0.20B' + 0.10C'\]
+
+<p>corresponde a la mezcla híbrida <strong>Magic Mix</strong> compuesta por:</p>
+
+<ul>
+  <li>70% Burbuja ($A’$)</li>
+  <li>20% DAgger ($B’$)</li>
+  <li>10% Noise Injection ($C’$)</li>
+</ul>
+
+<h2 id="comparación-entre-test-1-y-test-4">Comparación entre Test 1 y Test 4</h2>
+
+<p>Al comparar los resultados de ambos experimentos aparece un comportamiento interesante. Mientras que las mezclas basadas en DAgger muestran un mejor desempeño en el Test 1, donde se evalúa la capacidad de recuperación desde condiciones iniciales adversas, las mezclas basadas en Noise Injection obtienen los mejores resultados en el Test 4, donde el vehículo es sometido a perturbaciones online durante la inferencia.</p>
+
+<p>Una posible explicación es que ambas estrategias estén fortaleciendo propiedades diferentes de la política de conducción. DAgger incorpora ejemplos de recuperación desde estados fuera de distribución, por lo que favorece la capacidad de regresar a la trayectoria cuando el vehículo ya se encuentra en una situación desfavorable. Por el contrario, Noise Injection introduce pequeñas perturbaciones y correcciones continuas alrededor de la trayectoria nominal, favoreciendo una conducción más estable y resistente a perturbaciones durante la ejecución.</p>
+
+<p>Desde esta perspectiva, DAgger parece mejorar principalmente la <strong>capacidad de recuperación (recoverability)</strong>, mientras que Noise Injection mejora la <strong>estabilidad local (stability)</strong> de la política aprendida.</p>
+
+<h2 id="evaluación-de-la-mezcla-híbrida-magic-mix">Evaluación de la mezcla híbrida (Magic Mix)</h2>
+
+<p>Con el objetivo de combinar las ventajas observadas en ambas estrategias, se evaluó una mezcla híbrida:</p>
+
+\[D^{M}=0.70A' + 0.20B' + 0.10C'\]
+
+<p>compuesta por un 70% de muestras Burbuja, 20% DAgger y 10% Noise Injection.</p>
+
+<p>En el Test 4, esta configuración alcanzó un <strong>58.2% de successful runs (131/225)</strong>, con una velocidad media de <strong>36.3 km/h</strong>, una desviación lateral media de <strong>1.416 m</strong> y <strong>0.68 colisiones</strong> por ejecución.</p>
+
+<p>Aunque Magic Mix mejora respecto a algunas configuraciones con altas proporciones de DAgger, no logra alcanzar el desempeño observado en las mejores mezclas basadas exclusivamente en Noise Injection. Esto sugiere que la simple combinación de datasets no garantiza una combinación equivalente de sus beneficios. Los patrones de recuperación aprendidos mediante DAgger y los patrones de estabilización aprendidos mediante Noise Injection podrían estar compitiendo entre sí durante el entrenamiento, limitando el desempeño final de la política.</p>
+
+<p>De forma preliminar, los resultados sugieren que:</p>
+
+<ul>
+  <li>DAgger favorece la recuperación desde estados fuera de distribución.</li>
+  <li>Noise Injection favorece la estabilidad frente a perturbaciones online.</li>
+  <li>Las mezclas híbridas requieren una exploración más profunda para determinar si existe una proporción capaz de combinar simultáneamente ambas ventajas.</li>
+</ul>
+
+<p>Actualmente se continúa ampliando la cantidad de ejecuciones y muestras evaluadas con el objetivo de aumentar la validez estadística de los resultados y obtener conclusiones más sólidas sobre el comportamiento y la robustez de los diferentes datasets comparados. Como trabajo futuro, se contempla la evaluación de nuevas configuraciones híbridas, explorando distintas proporciones entre Burbuja, DAgger y Noise Injection para determinar si existe una región de mezcla capaz de maximizar simultáneamente la capacidad de recuperación ante estados fuera de distribución y la estabilidad frente a perturbaciones online durante la conducción autónoma.</p>]]></content><author><name>Carlos Velásquez</name><email>canveo@gmail.com</email></author><category term="weekly Log" /><category term="Dataset" /><category term="CARLA" /><category term="Data Collection" /><category term="PilotNet" /><category term="Augmentations" /><summary type="html"><![CDATA[Actualmente se está ampliando la cantidad de muestras utilizadas en los Test de Robustez 1 y 4. En el Test 1 se realizan 15 ejecuciones por cada una de las 15 condiciones iniciales evaluadas, para un total de 225 ejecuciones por configuración experimental. En el Test 4 se realizan igualmente 225 ejecuciones por configuración experimental bajo perturbaciones online durante la inferencia. Debido al tiempo requerido para ejecutar y validar cada experimento, hasta el momento solo se dispone de los siguientes resultados parciales.]]></summary></entry><entry><title type="html">Week 99 - Análisis de robustez mediante mezclas A’–B’ y A’–C’ en conducción autónoma</title><link href="http://localhost:4000/weekly%20log/week99/" rel="alternate" type="text/html" title="Week 99 - Análisis de robustez mediante mezclas A’–B’ y A’–C’ en conducción autónoma" /><published>2026-05-11T00:00:00-05:00</published><updated>2026-05-11T00:00:00-05:00</updated><id>http://localhost:4000/weekly%20log/week99</id><content type="html" xml:base="http://localhost:4000/weekly%20log/week99/"><![CDATA[<h2 id="actualización-experimental--expansión-de-ejecuciones">Actualización experimental – expansión de ejecuciones</h2>
 
 <p>Durante esta actualización se repitieron y ampliaron las ejecuciones correspondientes a las configuraciones <strong>A’+75%B’</strong> y <strong>A’+100%B’</strong>, incrementando significativamente el número de pruebas respecto a Week 98 con el objetivo de reducir la varianza experimental y validar el comportamiento observado en las primeras corridas.</p>
 
@@ -3739,291 +3958,4 @@ En su lugar, se genera en <strong>ciclos controlados</strong>, manteniéndose du
 <ul>
   <li>una <strong>alta resolución temporal</strong> es crítica para aprender la dinámica lateral</li>
   <li>la reducción excesiva de frecuencia degrada la capacidad de recuperación del modelo</li>
-</ul>]]></content><author><name>Carlos Velásquez</name><email>canveo@gmail.com</email></author><category term="weekly Log" /><category term="Dataset" /><category term="CARLA" /><category term="Data Collection" /><category term="PilotNet" /><category term="Augmentations" /><summary type="html"><![CDATA[Estratificación del dataset]]></summary></entry><entry><title type="html">Week 90 - Recorder/Replayer, muestreo temporal y revisión de augmentations en PilotNet</title><link href="http://localhost:4000/weekly%20log/week90/" rel="alternate" type="text/html" title="Week 90 - Recorder/Replayer, muestreo temporal y revisión de augmentations en PilotNet" /><published>2026-03-08T00:00:00-05:00</published><updated>2026-03-08T00:00:00-05:00</updated><id>http://localhost:4000/weekly%20log/week90</id><content type="html" xml:base="http://localhost:4000/weekly%20log/week90/"><![CDATA[<p>Durante esta etapa se implementó una nueva pipeline de generación de
-datasets basada en dos herramientas:</p>
-
-<ul>
-  <li><strong>Recorder</strong></li>
-  <li><strong>Replayer</strong></li>
-</ul>
-
-<p>El objetivo fue separar la <strong>captura de conducción humana</strong> de la
-<strong>generación del dataset final</strong>, permitiendo reutilizar una misma
-sesión de conducción múltiples veces.</p>
-
-<hr />
-
-<h2 id="arquitectura-de-adquisición-de-datos">Arquitectura de adquisición de datos</h2>
-
-<p>El flujo general es:</p>
-
-<p>Driver → Recorder → session.log → Replayer → Dataset</p>
-
-<h3 id="recorder">Recorder</h3>
-
-<p>El <strong>recorder</strong> registra la sesión completa de conducción manual en
-CARLA, almacenando:</p>
-
-<ul>
-  <li>timestamp\</li>
-  <li>controles del conductor (steer, throttle, brake)\</li>
-  <li>estado del vehículo</li>
-</ul>
-
-<p>El resultado es un archivo <code class="language-plaintext highlighter-rouge">session.log</code> que funciona como una <strong>caja
-negra de la sesión de conducción</strong>.</p>
-
-<hr />
-
-<h3 id="replayer">Replayer</h3>
-
-<p>El <strong>replayer</strong> reconstruye la sesión y genera el dataset final
-aplicando un intervalo de muestreo.</p>
-
-<p>Ejemplo:</p>
-
-<p>python3 replayer_sync.py –log runs/session.log –interval 0.5 –out
-dataset/dataset_new</p>
-
-<p>El parámetro clave es:</p>
-
-<p>interval = 0.5 s</p>
-
-<p>lo que equivale a <strong>2 muestras por segundo</strong>.</p>
-
-<hr />
-
-<h2 id="muestreo-temporal">Muestreo temporal</h2>
-
-<p>Con un muestreo de <strong>0.5 s</strong> se obtienen aproximadamente:</p>
-
-<p>Tiempo     Muestras
-  ———- ———-
-  1 minuto   120
-  1 hora     7200
-  7 horas    ~50000
-  14 horas   ~100000</p>
-
-<p>Esto implica que para construir datasets grandes se requieren <strong>sesiones
-largas de conducción</strong>.</p>
-
-<p>En la práctica, obtener un dataset de tamaño comparable al utilizado
-previamente (~50k muestras) requiere aproximadamente <strong>7–10 horas de
-grabación continua</strong>.</p>
-
-<hr />
-
-<h2 id="estrategia-para-ampliar-el-dataset">Estrategia para ampliar el dataset</h2>
-
-<p>Para acelerar la construcción del dataset se aplicó una estrategia de
-<strong>reprocesamiento del mismo recorder con distintos intervalos</strong>:</p>
-
-<p>interval = 0.4<br />
-interval = 0.5<br />
-interval = 0.6</p>
-
-<p>El objetivo era generar datasets ligeramente diferentes a partir de la
-misma sesión de conducción y aumentar el número total de muestras
-disponibles para entrenar el modelo <strong>PilotNet</strong>.</p>
-
-<hr />
-
-<h2 id="resultados-iniciales">Resultados iniciales</h2>
-
-<p>El modelo se reentrenó utilizando el dataset generado con el pipeline
-<strong>recorder–replayer</strong>, pero los resultados no fueron satisfactorios.</p>
-
-<p>Durante la conducción en CARLA el modelo mostró un comportamiento
-<strong>errático</strong>:</p>
-
-<ul>
-  <li>zigzagueo constante dentro del carril\</li>
-  <li>inestabilidad lateral\</li>
-  <li>colisiones frecuentes</li>
-</ul>
-
-<p>En comparación con el modelo entrenado con el dataset <strong>Burbuja</strong>
-original, el nuevo modelo resultó claramente menos estable.</p>
-
-<hr />
-
-<h2 id="revisión-de-augmentations">Revisión de augmentations</h2>
-
-<p>Inicialmente el pipeline de entrenamiento incluía varias
-transformaciones geométricas:</p>
-
-<ul>
-  <li><strong>Affine</strong></li>
-  <li><strong>Perspective</strong></li>
-  <li><strong>ElasticTransform</strong></li>
-</ul>
-
-<p>además de efectos suaves como:</p>
-
-<ul>
-  <li><strong>GaussianBlur</strong></li>
-  <li><strong>MotionBlur</strong></li>
-  <li><strong>CoarseDropout</strong></li>
-</ul>
-
-<p>El objetivo era aumentar la diversidad del dataset.</p>
-
-<p>Sin embargo, se observó que algunas transformaciones geométricas pueden
-entrar en conflicto con las estrategias de robustez utilizadas
-posteriormente, especialmente <strong>Noise Injection</strong> y <strong>DAgger</strong>.</p>
-
-<p>Las transformaciones geométricas modifican la posición aparente de la
-carretera respecto al vehículo <strong>sin modificar la etiqueta de control
-(<code class="language-plaintext highlighter-rouge">steer</code>)</strong>, generando inconsistencias entre imagen y acción.</p>
-
-<p>En la práctica esto equivale a introducir perturbaciones artificiales
-adicionales sobre datos que ya incluyen perturbaciones reales durante la
-recolección.</p>
-
-<p>Como consecuencia, el modelo puede aprender asociaciones incorrectas,
-por ejemplo:</p>
-
-<p>carretera desplazada + steer ≈ 0</p>
-
-<p>lo que reduce su capacidad de recuperación lateral durante la
-conducción.</p>
-
-<hr />
-
-<h2 id="ajuste-del-pipeline-de-augmentations">Ajuste del pipeline de augmentations</h2>
-
-<p>Para evitar estas inconsistencias se decidió simplificar las
-augmentations y limitarse a transformaciones <strong>no geométricas</strong>, como:</p>
-
-<ul>
-  <li><strong>GaussianBlur</strong></li>
-  <li><strong>MotionBlur</strong></li>
-  <li><strong>CoarseDropout</strong></li>
-</ul>
-
-<p>Estas transformaciones enriquecen el dataset sin alterar la geometría
-del carril.</p>
-
-<p>De esta manera, las perturbaciones que modifican la posición del
-vehículo quedan exclusivamente a cargo de:</p>
-
-<ul>
-  <li><strong>Noise Injection</strong></li>
-  <li><strong>DAgger</strong></li>
-</ul>
-
-<p>manteniendo mayor coherencia entre las imágenes y las etiquetas de
-control.</p>
-
-<hr />
-
-<h2 id="próximos-pasos">Próximos pasos</h2>
-
-<p>Dado que el dataset generado mediante reprocesamiento con distintos
-intervalos produjo un modelo inestable, el siguiente paso es:</p>
-
-<ul>
-  <li>ampliar la duración del <strong>recorder</strong> para obtener más datos reales\</li>
-  <li>generar un dataset más grande usando <strong>interval = 0.5 s</strong>\</li>
-  <li>evaluar también intervalos más densos (<strong>0.1–0.2 s</strong>)</li>
-</ul>
-
-<p>El objetivo es determinar si el comportamiento errático proviene de:</p>
-
-<ul>
-  <li>la densidad temporal del dataset\</li>
-  <li>la reutilización de trayectorias\</li>
-  <li>o la interacción entre augmentations y políticas de control
-aprendidas.</li>
-</ul>
-
-<hr />
-
-<h3 id="resumen-de-algunas-pruebas-realizadas">Resumen de algunas pruebas realizadas</h3>
-
-<table>
-  <thead>
-    <tr>
-      <th>Métrica</th>
-      <th>Caso 6</th>
-      <th>Caso 11</th>
-      <th>Promedio (6-11)</th>
-      <th>Caso Canónico 1</th>
-      <th>Mejor</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Average speed (km/h)</td>
-      <td><strong>57.552</strong></td>
-      <td>57.479</td>
-      <td>57.515</td>
-      <td>57.108</td>
-      <td>Caso 6</td>
-    </tr>
-    <tr>
-      <td>Max speed (km/h)</td>
-      <td><strong>72.714</strong></td>
-      <td>72.334</td>
-      <td>72.524</td>
-      <td>72.260</td>
-      <td>Caso 6</td>
-    </tr>
-    <tr>
-      <td>Completed distance (m)</td>
-      <td><strong>757.377</strong></td>
-      <td>756.489</td>
-      <td>756.933</td>
-      <td>756.651</td>
-      <td>Caso 6</td>
-    </tr>
-    <tr>
-      <td>Effective completed distance (m)</td>
-      <td>386.083</td>
-      <td>613.833</td>
-      <td>499.958</td>
-      <td><strong>648.583</strong></td>
-      <td>Canónico</td>
-    </tr>
-    <tr>
-      <td>Dev mean (m)</td>
-      <td>0.822</td>
-      <td>0.460</td>
-      <td>0.641</td>
-      <td><strong>0.420</strong></td>
-      <td>Canónico</td>
-    </tr>
-    <tr>
-      <td>Lane invasions (eventos)</td>
-      <td><strong>2.333</strong></td>
-      <td>3.000</td>
-      <td>2.667</td>
-      <td>2.833</td>
-      <td>Caso 6</td>
-    </tr>
-    <tr>
-      <td>Collisions (eventos)</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>Empate</td>
-    </tr>
-    <tr>
-      <td>Suddenness throttle (1/s)</td>
-      <td>0.799</td>
-      <td><strong>0.782</strong></td>
-      <td>0.790</td>
-      <td>0.807</td>
-      <td>Caso 11</td>
-    </tr>
-    <tr>
-      <td>Suddenness steer (1/s)</td>
-      <td>0.233</td>
-      <td><strong>0.227</strong></td>
-      <td>0.230</td>
-      <td>0.234</td>
-      <td>Caso 11</td>
-    </tr>
-  </tbody>
-</table>]]></content><author><name>Carlos Velásquez</name><email>canveo@gmail.com</email></author><category term="weekly Log" /><category term="Dataset" /><category term="CARLA" /><category term="Data Collection" /><category term="PilotNet" /><category term="Augmentations" /><summary type="html"><![CDATA[Durante esta etapa se implementó una nueva pipeline de generación de datasets basada en dos herramientas:]]></summary></entry></feed>
+</ul>]]></content><author><name>Carlos Velásquez</name><email>canveo@gmail.com</email></author><category term="weekly Log" /><category term="Dataset" /><category term="CARLA" /><category term="Data Collection" /><category term="PilotNet" /><category term="Augmentations" /><summary type="html"><![CDATA[Estratificación del dataset]]></summary></entry></feed>

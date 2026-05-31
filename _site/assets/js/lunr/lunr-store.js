@@ -592,4 +592,10 @@ var store = [{
         "tags": ["Robustez","Behavior Cloning","Noise Injection","DAgger","CARLA Simulator","Behavior Metrics"],
         "url": "/weekly%20log/week99/",
         "teaser": null
+      },{
+        "title": "Week 100 - Análisis de robustez - Resultados parciales",
+        "excerpt":"Actualmente se está ampliando la cantidad de muestras utilizadas en los Test de Robustez 1 y 4. En el Test 1 se realizan 15 ejecuciones por cada una de las 15 condiciones iniciales evaluadas, para un total de 225 ejecuciones por configuración experimental. En el Test 4 se realizan igualmente...","categories": ["weekly Log"],
+        "tags": ["Dataset","CARLA","Data Collection","PilotNet","Augmentations"],
+        "url": "/weekly%20log/week100/",
+        "teaser": null
       }]
