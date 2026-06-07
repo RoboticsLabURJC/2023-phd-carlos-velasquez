@@ -598,4 +598,10 @@ var store = [{
         "tags": ["Dataset","CARLA","Data Collection","PilotNet","Augmentations"],
         "url": "/weekly%20log/week100/",
         "teaser": null
+      },{
+        "title": "Week 101 - Análisis de robustez - Resultados parciales",
+        "excerpt":"Actualmente se continúa ampliando la cantidad de muestras utilizadas en los experimentos de robustez. Las métricas presentadas en esta actualización se calculan únicamente sobre las ejecuciones exitosas, es decir, aquellas en las que el vehículo alcanza correctamente la meta. Configuración experimental Test 1 – Robustez bajo condiciones iniciales Se evalúan...","categories": ["weekly Log"],
+        "tags": ["Dataset","CARLA","Data Collection","PilotNet","Augmentations"],
+        "url": "/weekly%20log/week101/",
+        "teaser": null
       }]
