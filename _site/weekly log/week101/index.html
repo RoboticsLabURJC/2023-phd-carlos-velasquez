@@ -306,7 +306,7 @@
       <span class="page__meta-readtime">
         <i class="far fa-clock" aria-hidden="true"></i>
         
-          4 minute read
+          9 minute read
         
       </span>
     
@@ -438,141 +438,6 @@
   <thead>
     <tr>
       <th>Métrica</th>
-      <th style="text-align: right">$D_{0.50}^{B}$</th>
-      <th style="text-align: right">$D_{0.75}^{B}$</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Successful runs</td>
-      <td style="text-align: right">97.3% (219/225)</td>
-      <td style="text-align: right">40.4% (91/225)</td>
-    </tr>
-    <tr>
-      <td>Collisions</td>
-      <td style="text-align: right">0.013</td>
-      <td style="text-align: right">1.121</td>
-    </tr>
-    <tr>
-      <td>Average speed (km/h)</td>
-      <td style="text-align: right">55.96</td>
-      <td style="text-align: right">38.20</td>
-    </tr>
-    <tr>
-      <td>Dev mean (m)</td>
-      <td style="text-align: right">0.843</td>
-      <td style="text-align: right">1.469</td>
-    </tr>
-  </tbody>
-</table>
-
-<h2 id="noise-injection">Noise Injection</h2>
-
-<table>
-  <thead>
-    <tr>
-      <th>Métrica</th>
-      <th style="text-align: right">$D_{0.50}^{C}$</th>
-      <th style="text-align: right">$D_{0.75}^{C}$</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Successful runs</td>
-      <td style="text-align: right">74.2% (167/225)</td>
-      <td style="text-align: right">45.3% (101/225)</td>
-    </tr>
-    <tr>
-      <td>Collisions</td>
-      <td style="text-align: right">0.004</td>
-      <td style="text-align: right">0.583</td>
-    </tr>
-    <tr>
-      <td>Average speed (km/h)</td>
-      <td style="text-align: right">56.27</td>
-      <td style="text-align: right">52.99</td>
-    </tr>
-    <tr>
-      <td>Dev mean (m)</td>
-      <td style="text-align: right">0.775</td>
-      <td style="text-align: right">0.853</td>
-    </tr>
-  </tbody>
-</table>
-
-<h2 id="comparación-general">Comparación general</h2>
-
-<table>
-  <thead>
-    <tr>
-      <th>Modelo</th>
-      <th style="text-align: right">Success (%)</th>
-      <th style="text-align: right">Collisions</th>
-      <th style="text-align: right">Speed (km/h)</th>
-      <th style="text-align: right">Dev Mean (m)</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>$D^{A}$</td>
-      <td style="text-align: right"><strong>100.0</strong></td>
-      <td style="text-align: right"><strong>0.000</strong></td>
-      <td style="text-align: right">54.71</td>
-      <td style="text-align: right"><strong>0.767</strong></td>
-    </tr>
-    <tr>
-      <td>$D_{0.50}^{B}$</td>
-      <td style="text-align: right">97.3</td>
-      <td style="text-align: right">0.013</td>
-      <td style="text-align: right">55.96</td>
-      <td style="text-align: right">0.843</td>
-    </tr>
-    <tr>
-      <td>$D_{0.75}^{B}$</td>
-      <td style="text-align: right">40.4</td>
-      <td style="text-align: right">1.121</td>
-      <td style="text-align: right">38.20</td>
-      <td style="text-align: right">1.469</td>
-    </tr>
-    <tr>
-      <td>$D_{0.50}^{C}$</td>
-      <td style="text-align: right">74.2</td>
-      <td style="text-align: right">0.004</td>
-      <td style="text-align: right"><strong>56.27</strong></td>
-      <td style="text-align: right">0.775</td>
-    </tr>
-    <tr>
-      <td>$D_{0.75}^{C}$</td>
-      <td style="text-align: right">45.3</td>
-      <td style="text-align: right">0.583</td>
-      <td style="text-align: right">52.99</td>
-      <td style="text-align: right">0.853</td>
-    </tr>
-  </tbody>
-</table>
-
-<h2 id="análisis-del-test-1">Análisis del Test 1</h2>
-
-<p>Los resultados muestran que las configuraciones más cercanas al dataset original continúan obteniendo el mejor desempeño bajo condiciones nominales.</p>
-
-<p>El modelo base $D^{A}$ alcanza un <strong>100% de successful runs</strong>, sin colisiones y con la menor desviación lateral media observada. Esto indica que el dataset Burbuja contiene suficiente diversidad para resolver correctamente las condiciones iniciales consideradas en este conjunto de pruebas.</p>
-
-<p>La configuración $D_{0.50}^{B}$ mantiene un comportamiento muy cercano al modelo base, alcanzando un <strong>97.3% de successful runs</strong>. Sin embargo, al incrementar la proporción de muestras DAgger hasta el 75%, el desempeño disminuye considerablemente, observándose un aumento importante en colisiones y desviación lateral.</p>
-
-<p>Las configuraciones basadas en Noise Injection muestran una tendencia similar. Aunque $D_{0.50}^{C}$ mantiene una velocidad elevada y una desviación lateral comparable a la observada en Burbuja, la tasa de éxito disminuye hasta el 74.2%. La configuración $D_{0.75}^{C}$ presenta una degradación adicional, aunque menos pronunciada que la observada en DAgger.</p>
-
-<p>En conjunto, estos resultados sugieren que el Test 1 favorece principalmente a las configuraciones que conservan una alta proporción de muestras originales del dataset Burbuja.</p>
-
-<hr />
-
-<h1 id="test-4--perturbación-online-durante-inferencia-1">Test 4 – Perturbación online durante inferencia</h1>
-
-<h2 id="dagger-1">DAgger</h2>
-
-<table>
-  <thead>
-    <tr>
-      <th>Métrica</th>
       <th style="text-align: right">$D_{0.30}^{B}$</th>
       <th style="text-align: right">$D_{0.50}^{B}$</th>
       <th style="text-align: right">$D_{0.75}^{B}$</th>
@@ -581,32 +446,32 @@
   <tbody>
     <tr>
       <td>Successful runs</td>
-      <td style="text-align: right">71.1% (160/225)</td>
-      <td style="text-align: right">62.2% (140/225)</td>
-      <td style="text-align: right">20.0% (45/225)</td>
+      <td style="text-align: right">100.0% (225/225)</td>
+      <td style="text-align: right">97.3% (219/225)</td>
+      <td style="text-align: right">40.4% (91/225)</td>
     </tr>
     <tr>
       <td>Collisions</td>
-      <td style="text-align: right">0.994</td>
-      <td style="text-align: right">0.129</td>
-      <td style="text-align: right">0.978</td>
+      <td style="text-align: right">1.000</td>
+      <td style="text-align: right">0.013</td>
+      <td style="text-align: right">1.121</td>
     </tr>
     <tr>
       <td>Average speed (km/h)</td>
-      <td style="text-align: right">53.9</td>
-      <td style="text-align: right">54.5</td>
-      <td style="text-align: right">47.6</td>
+      <td style="text-align: right"><strong>57.12</strong></td>
+      <td style="text-align: right">55.96</td>
+      <td style="text-align: right">38.20</td>
     </tr>
     <tr>
       <td>Dev mean (m)</td>
-      <td style="text-align: right">0.641</td>
-      <td style="text-align: right">0.702</td>
-      <td style="text-align: right">0.817</td>
+      <td style="text-align: right">0.884</td>
+      <td style="text-align: right"><strong>0.843</strong></td>
+      <td style="text-align: right">1.469</td>
     </tr>
   </tbody>
 </table>
 
-<h2 id="noise-injection-1">Noise Injection</h2>
+<h2 id="noise-injection">Noise Injection</h2>
 
 <table>
   <thead>
@@ -620,24 +485,195 @@
   <tbody>
     <tr>
       <td>Successful runs</td>
+      <td style="text-align: right">91.9% (207/225)</td>
+      <td style="text-align: right">74.2% (167/225)</td>
+      <td style="text-align: right">45.3% (102/225)</td>
+    </tr>
+    <tr>
+      <td>Collisions</td>
+      <td style="text-align: right">0.000</td>
+      <td style="text-align: right">0.004</td>
+      <td style="text-align: right">0.583</td>
+    </tr>
+    <tr>
+      <td>Average speed (km/h)</td>
+      <td style="text-align: right"><strong>59.27</strong></td>
+      <td style="text-align: right">56.27</td>
+      <td style="text-align: right">52.99</td>
+    </tr>
+    <tr>
+      <td>Dev mean (m)</td>
+      <td style="text-align: right">0.788</td>
+      <td style="text-align: right"><strong>0.775</strong></td>
+      <td style="text-align: right">0.853</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="comparación-general">Comparación general</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Modelo</th>
+      <th style="text-align: right">Successful Runs</th>
+      <th style="text-align: right">Collisions</th>
+      <th style="text-align: right">Speed (km/h)</th>
+      <th style="text-align: right">Dev Mean (m)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>$D^{A}$</td>
+      <td style="text-align: right"><strong>100.0% (225/225)</strong></td>
+      <td style="text-align: right"><strong>0.000</strong></td>
+      <td style="text-align: right">54.71</td>
+      <td style="text-align: right"><strong>0.767</strong></td>
+    </tr>
+    <tr>
+      <td>$D_{0.30}^{B}$</td>
+      <td style="text-align: right"><strong>100.0% (225/225)</strong></td>
+      <td style="text-align: right">1.000</td>
+      <td style="text-align: right">57.12</td>
+      <td style="text-align: right">0.884</td>
+    </tr>
+    <tr>
+      <td>$D_{0.50}^{B}$</td>
+      <td style="text-align: right">97.3% (219/225)</td>
+      <td style="text-align: right">0.013</td>
+      <td style="text-align: right">55.96</td>
+      <td style="text-align: right">0.843</td>
+    </tr>
+    <tr>
+      <td>$D_{0.75}^{B}$</td>
+      <td style="text-align: right">40.4% (91/225)</td>
+      <td style="text-align: right">1.121</td>
+      <td style="text-align: right">38.20</td>
+      <td style="text-align: right">1.469</td>
+    </tr>
+    <tr>
+      <td>$D_{0.30}^{C}$</td>
+      <td style="text-align: right">91.9% (207/225)</td>
+      <td style="text-align: right"><strong>0.000</strong></td>
+      <td style="text-align: right"><strong>59.27</strong></td>
+      <td style="text-align: right">0.788</td>
+    </tr>
+    <tr>
+      <td>$D_{0.50}^{C}$</td>
+      <td style="text-align: right">74.2% (167/225)</td>
+      <td style="text-align: right">0.004</td>
+      <td style="text-align: right">56.27</td>
+      <td style="text-align: right">0.775</td>
+    </tr>
+    <tr>
+      <td>$D_{0.75}^{C}$</td>
+      <td style="text-align: right">45.3% (102/225)</td>
+      <td style="text-align: right">0.583</td>
+      <td style="text-align: right">52.99</td>
+      <td style="text-align: right">0.853</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="análisis-del-test-1">Análisis del Test 1</h2>
+
+<p>Los resultados actualizados muestran que las configuraciones más cercanas al dataset original continúan obteniendo el mejor desempeño bajo condiciones nominales. Sin embargo, la incorporación de nuevas mezclas permite observar con mayor claridad el efecto de la proporción de muestras augmentadas sobre el comportamiento de la política.</p>
+
+<p>El modelo base $D^{A}$ alcanza un <strong>100% de successful runs (225/225)</strong>, sin colisiones y con la menor desviación lateral media observada. Estos resultados confirman que el dataset Burbuja contiene suficiente diversidad para resolver correctamente las condiciones iniciales consideradas en este conjunto de pruebas.</p>
+
+<p>En las configuraciones basadas en DAgger se observa un comportamiento particularmente interesante. La mezcla $D_{0.30}^{B}$ también alcanza un <strong>100% de successful runs (225/225)</strong>, igualando el desempeño del modelo base y obteniendo además una velocidad media ligeramente superior. La configuración $D_{0.50}^{B}$ mantiene un desempeño muy elevado con un <strong>97.3% de successful runs (219/225)</strong>. Sin embargo, al incrementar la proporción de muestras DAgger hasta el 75% y el 100%, el rendimiento se degrada significativamente, observándose una reducción drástica de la tasa de éxito, un aumento de las colisiones y una mayor desviación lateral.</p>
+
+<p>Las configuraciones basadas en Noise Injection muestran una tendencia similar. La mezcla $D_{0.30}^{C}$ alcanza un <strong>91.9% de successful runs (207/225)</strong> y la mayor velocidad media observada entre todas las configuraciones evaluadas. No obstante, al aumentar la proporción de muestras con ruido hasta el 50% y el 75%, la tasa de éxito disminuye progresivamente hasta alcanzar un <strong>45.3% (102/225)</strong> para $D_{0.75}^{C}$.</p>
+
+<p>En conjunto, los resultados sugieren que existe una proporción óptima de muestras augmentadas tanto para DAgger como para Noise Injection. Cantidades moderadas de datos augmentados parecen aportar información útil para mejorar la robustez de la política sin alterar excesivamente la distribución original de conducción. Por el contrario, cuando las muestras augmentadas dominan el dataset de entrenamiento, el rendimiento disminuye de forma significativa.</p>
+
+<p>De manera preliminar, los resultados indican que las mejores configuraciones del Test 1 corresponden a $D^{A}$ y $D_{0.30}^{B}$, seguidas por $D_{0.50}^{B}$ y $D_{0.30}^{C}$. Esto sugiere que una incorporación moderada de ejemplos de recuperación puede ser beneficiosa, mientras que proporciones excesivas de datos DAgger o Noise Injection terminan alejando al modelo de la distribución nominal de conducción.</p>
+
+<hr />
+
+<h1 id="test-4--perturbación-online-durante-inferencia-1">Test 4 – Perturbación online durante inferencia</h1>
+
+<h2 id="dagger-1">DAgger</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Métrica</th>
+      <th style="text-align: right">$D_{0.15}^{B}$</th>
+      <th style="text-align: right">$D_{0.30}^{B}$</th>
+      <th style="text-align: right">$D_{0.50}^{B}$</th>
+      <th style="text-align: right">$D_{0.75}^{B}$</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Successful runs</td>
+      <td style="text-align: right">30.2% (68/225)</td>
+      <td style="text-align: right">71.1% (160/225)</td>
+      <td style="text-align: right">62.2% (140/225)</td>
+      <td style="text-align: right">20.0% (45/225)</td>
+    </tr>
+    <tr>
+      <td>Collisions</td>
+      <td style="text-align: right">0.221</td>
+      <td style="text-align: right">0.994</td>
+      <td style="text-align: right">0.129</td>
+      <td style="text-align: right">0.978</td>
+    </tr>
+    <tr>
+      <td>Average speed (km/h)</td>
+      <td style="text-align: right"><strong>56.8</strong></td>
+      <td style="text-align: right">53.9</td>
+      <td style="text-align: right">54.5</td>
+      <td style="text-align: right">47.6</td>
+    </tr>
+    <tr>
+      <td>Dev mean (m)</td>
+      <td style="text-align: right"><strong>0.593</strong></td>
+      <td style="text-align: right">0.641</td>
+      <td style="text-align: right">0.702</td>
+      <td style="text-align: right">0.817</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="noise-injection-1">Noise Injection</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Métrica</th>
+      <th style="text-align: right">$D_{0.15}^{C}$</th>
+      <th style="text-align: right">$D_{0.30}^{C}$</th>
+      <th style="text-align: right">$D_{0.50}^{C}$</th>
+      <th style="text-align: right">$D_{0.75}^{C}$</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Successful runs</td>
+      <td style="text-align: right">82.2% (185/225)</td>
       <td style="text-align: right">79.6% (179/225)</td>
       <td style="text-align: right"><strong>91.1% (205/225)</strong></td>
       <td style="text-align: right">47.1% (106/225)</td>
     </tr>
     <tr>
       <td>Collisions</td>
+      <td style="text-align: right">0.076</td>
       <td style="text-align: right">0.179</td>
       <td style="text-align: right"><strong>0.054</strong></td>
       <td style="text-align: right">0.509</td>
     </tr>
     <tr>
       <td>Average speed (km/h)</td>
+      <td style="text-align: right">52.9</td>
       <td style="text-align: right"><strong>56.2</strong></td>
       <td style="text-align: right">54.6</td>
       <td style="text-align: right">52.2</td>
     </tr>
     <tr>
       <td>Dev mean (m)</td>
+      <td style="text-align: right">0.530</td>
       <td style="text-align: right">0.554</td>
       <td style="text-align: right"><strong>0.466</strong></td>
       <td style="text-align: right">0.828</td>
@@ -677,32 +713,121 @@
 
 <h2 id="análisis-del-test-4">Análisis del Test 4</h2>
 
-<p>A diferencia de lo observado en el Test 1, las configuraciones basadas en Noise Injection dominan claramente el escenario de perturbación online.</p>
+<p>A diferencia de lo observado en el Test 1, las configuraciones basadas en Noise Injection continúan mostrando el mejor desempeño frente a perturbaciones online durante la inferencia.</p>
 
-<p>La mejor configuración corresponde a $D_{0.50}^{C}$, que alcanza un <strong>91.1% de successful runs</strong>, acompañado por la menor desviación lateral media y el menor número de colisiones entre todas las mezclas evaluadas.</p>
+<p>La mejor configuración corresponde a $D_{0.50}^{C}$, que alcanza un <strong>91.1% de successful runs (205/225)</strong>, acompañado por la menor desviación lateral media observada (<strong>0.466 m</strong>) y el menor número de colisiones (<strong>0.054</strong>) entre todas las configuraciones evaluadas. Este resultado sugiere que una proporción intermedia de muestras Noise Injection proporciona un equilibrio adecuado entre estabilidad y capacidad de recuperación frente a perturbaciones continuas.</p>
 
-<p>Las configuraciones basadas en DAgger muestran una tendencia opuesta. Aunque $D_{0.30}^{B}$ mantiene un desempeño razonable, el incremento de la proporción de muestras DAgger provoca una degradación progresiva del rendimiento, alcanzando únicamente un <strong>20.0% de successful runs</strong> para $D_{0.75}^{B}$.</p>
+<p>La incorporación de la nueva configuración $D_{0.15}^{C}$ aporta información adicional sobre el comportamiento de esta estrategia. Con un <strong>82.2% de successful runs (185/225)</strong>, una desviación lateral de <strong>0.530 m</strong> y únicamente <strong>0.076 colisiones</strong>, se observa que incluso pequeñas cantidades de muestras Noise Injection producen mejoras significativas respecto al modelo base Burbuja. Sin embargo, el mejor desempeño continúa apareciendo en torno al 50% de mezcla, mientras que proporciones más elevadas ($D_{0.75}^{C}$) provocan una degradación apreciable del rendimiento.</p>
 
-<p>La mezcla híbrida $D^{M}$ presenta un resultado particularmente interesante. Con un <strong>88.9% de successful runs</strong>, se aproxima al desempeño observado en $D_{0.50}^{C}$ y supera ampliamente al modelo base Burbuja. Esto sugiere que una combinación moderada de muestras DAgger y Noise Injection puede aportar beneficios complementarios sin llegar a degradar la estabilidad global de la política.</p>
+<p>Las configuraciones basadas en DAgger presentan un comportamiento más complejo. La mezcla $D_{0.30}^{B}$ continúa siendo la mejor configuración de esta familia con un <strong>71.1% de successful runs (160/225)</strong>. Sin embargo, tanto la reducción hasta $D_{0.15}^{B}$ como el incremento hacia $D_{0.50}^{B}$ y $D_{0.75}^{B}$ producen una disminución del desempeño. En particular, $D_{0.15}^{B}$ alcanza únicamente un <strong>30.2% de successful runs (68/225)</strong>, mientras que $D_{0.75}^{B}$ desciende hasta el <strong>20.0% (45/225)</strong>.</p>
+
+<p>Este comportamiento resulta especialmente interesante porque contradice parcialmente la expectativa inicial de que pequeñas cantidades de ejemplos DAgger serían suficientes para mejorar la robustez frente a perturbaciones. Los resultados sugieren que existe una región relativamente estrecha alrededor del 30% donde las muestras DAgger aportan beneficios, mientras que proporciones demasiado bajas o demasiado altas terminan degradando el rendimiento global de la política.</p>
+
+<p>La mezcla híbrida $D^{M}$ (Magic Mix) presenta uno de los resultados más destacados de esta actualización. Con un <strong>88.9% de successful runs (200/225)</strong>, únicamente <strong>0.085 colisiones</strong> y una desviación lateral media de <strong>0.512 m</strong>, se aproxima notablemente al desempeño obtenido por $D_{0.50}^{C}$ y supera ampliamente tanto al modelo base Burbuja como a todas las configuraciones basadas exclusivamente en DAgger.</p>
+
+<p>En conjunto, los resultados indican que las perturbaciones online evaluadas en el Test 4 favorecen claramente las estrategias basadas en Noise Injection. De manera preliminar, esto sugiere que las correcciones locales y continuas introducidas durante la generación de este dataset producen políticas más robustas frente a pequeñas perturbaciones repetidas durante la conducción. Al mismo tiempo, los resultados de Magic Mix muestran que la incorporación controlada de ejemplos DAgger puede seguir aportando información útil cuando se combina adecuadamente con muestras Noise Injection y Burbuja.</p>
 
 <hr />
 
-<h1 id="comparación-entre-test-1-y-test-4">Comparación entre Test 1 y Test 4</h1>
+<h2 id="comparación-entre-test-1-y-test-4">Comparación entre Test 1 y Test 4</h2>
 
-<p>La comparación entre ambos experimentos muestra que los distintos datasets fortalecen propiedades diferentes de la política aprendida.</p>
+<p>Los resultados muestran que las distintas estrategias de generación de datos fortalecen propiedades diferentes de la política de conducción.</p>
 
-<p>En el Test 1, las configuraciones más cercanas al dataset original ($D^{A}$ y $D_{0.50}^{B}$) obtienen los mejores resultados. Sin embargo, en el Test 4 las configuraciones basadas en Noise Injection dominan claramente el escenario de perturbación online.</p>
+<p>En el Test 1, las mejores configuraciones corresponden a <strong>Burbuja ($D^{A}$)</strong> y <strong>DAgger 30% ($D_{0.30}^{B}$)</strong>, ambas con un <strong>100% de successful runs</strong>, lo que indica un excelente desempeño bajo condiciones nominales y estados iniciales conocidos. También destacan <strong>DAgger 50%</strong> y <strong>Noise 30%</strong>, confirmando que proporciones moderadas de muestras augmentadas pueden mejorar la robustez sin alterar significativamente la distribución original del dataset.</p>
+
+<p>Por el contrario, en el Test 4 las configuraciones basadas en <strong>Noise Injection</strong> obtienen los mejores resultados frente a perturbaciones online. La mejor política observada corresponde a <strong>$D_{0.50}^{C}$</strong>, con un <strong>91.1% de successful runs</strong>, seguida muy de cerca por <strong>Magic Mix ($D^{M}$)</strong> con un <strong>88.9%</strong>.</p>
 
 <p>De forma preliminar, los resultados sugieren que:</p>
 
 <ul>
   <li><strong>Burbuja ($D^{A}$)</strong> favorece el desempeño nominal bajo condiciones conocidas.</li>
-  <li><strong>DAgger ($D^{B}$)</strong> puede mejorar la recuperación en determinadas situaciones, aunque proporciones elevadas de muestras DAgger terminan degradando el rendimiento general.</li>
-  <li><strong>Noise Injection ($D^{C}$)</strong> favorece la estabilidad local de la política frente a perturbaciones continuas durante la inferencia.</li>
-  <li><strong>Magic Mix ($D^{M}$)</strong> representa actualmente el mejor compromiso entre estabilidad y robustez frente a perturbaciones.</li>
+  <li><strong>DAgger ($D^{B}$)</strong> mejora la capacidad de recuperación cuando se utiliza en proporciones moderadas.</li>
+  <li><strong>Noise Injection ($D^{C}$)</strong> favorece la estabilidad frente a perturbaciones continuas durante la inferencia.</li>
+  <li><strong>Magic Mix ($D^{M}$)</strong> ofrece un compromiso interesante entre estabilidad y robustez.</li>
 </ul>
 
-<p>Aunque los resultados muestran tendencias consistentes, la ampliación de las ejecuciones continúa en curso. Como trabajo futuro se contempla la evaluación de nuevas configuraciones híbridas y nuevas proporciones de mezcla entre Burbuja, DAgger y Noise Injection para identificar regiones de entrenamiento capaces de maximizar simultáneamente la robustez ante condiciones iniciales adversas y la resistencia frente a perturbaciones online durante la conducción autónoma.</p>
+<p>En conjunto, los resultados indican que no existe una única configuración óptima para todos los escenarios. Mientras que las mezclas basadas en DAgger muestran ventajas en condiciones iniciales controladas, las mezclas basadas en Noise Injection resultan más efectivas cuando el vehículo debe enfrentarse a perturbaciones online durante la conducción.</p>
+
+<hr />
+
+<h1 id="análisis-adicional-diferencia-entre-la-generación-del-dataset-dagger-y-el-test-4">Análisis adicional: diferencia entre la generación del dataset DAgger y el Test 4</h1>
+
+<p>Al revisar en detalle la configuración utilizada para generar el dataset DAgger y la configuración empleada posteriormente durante el Test 4, se observó que ambas no son equivalentes.</p>
+
+<p>La siguiente tabla resume las principales diferencias:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parámetro</th>
+      <th style="text-align: right">Dataset DAgger</th>
+      <th style="text-align: right">Test 4</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Frecuencia de perturbación</td>
+      <td style="text-align: right">12 s</td>
+      <td style="text-align: right">6 s</td>
+    </tr>
+    <tr>
+      <td>Duración de la perturbación (hold)</td>
+      <td style="text-align: right">0.40 s</td>
+      <td style="text-align: right">0.30 s</td>
+    </tr>
+    <tr>
+      <td>Duración del recovery</td>
+      <td style="text-align: right">0.50 s</td>
+      <td style="text-align: right">0.60 s</td>
+    </tr>
+    <tr>
+      <td>Steer máximo aplicado</td>
+      <td style="text-align: right">±0.40</td>
+      <td style="text-align: right">±0.18</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>La principal diferencia aparece en la magnitud de las perturbaciones. Durante la generación del dataset DAgger se utilizaron acciones con amplitudes de hasta:</p>
+
+\[steer = \pm 0.40\]
+
+<p>mientras que en el Test 4 las perturbaciones máximas fueron:</p>
+
+\[steer = \pm 0.18\]
+
+<p>Sin embargo, las perturbaciones del Test 4 se aplican con una frecuencia aproximadamente dos veces mayor, pasando de una perturbación cada 12 segundos a una perturbación cada 6 segundos.</p>
+
+<p>Desde una perspectiva conceptual, el dataset DAgger fue generado mediante episodios de recuperación relativamente severos y poco frecuentes:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Perturbación fuerte
+↓
+Recuperación humana
+↓
+Conducción normal durante varios segundos
+↓
+Nueva perturbación
+</code></pre></div></div>
+
+<p>Por el contrario, el Test 4 introduce perturbaciones más suaves pero mucho más frecuentes:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Perturbación suave
+↓
+Recuperación
+↓
+Pocos segundos de conducción
+↓
+Nueva perturbación
+</code></pre></div></div>
+
+<p>Esto implica que el Test 4 podría estar evaluando principalmente la estabilidad continua de la política frente a pequeñas perturbaciones repetidas, más que la capacidad de recuperación frente a estados claramente fuera de distribución.</p>
+
+<p>Esta diferencia resulta especialmente relevante al interpretar los resultados obtenidos. Mientras que Noise Injection fue diseñado precisamente para exponer al modelo a pequeñas perturbaciones alrededor de la trayectoria nominal, DAgger fue concebido para incorporar ejemplos de recuperación desde estados potencialmente más alejados de la distribución original.</p>
+
+<p>Por tanto, una posible explicación de la superioridad observada de $D_{0.50}^{C}$ en el Test 4 es que el escenario de evaluación se asemeja más al proceso utilizado para generar el dataset Noise Injection que al procedimiento empleado para construir el dataset DAgger.</p>
+
+<p>Como trabajo futuro se plantea repetir el Test 4 utilizando exactamente las mismas perturbaciones empleadas durante la generación del dataset DAgger. Esto permitirá determinar si las ventajas teóricas de DAgger aparecen con mayor claridad cuando las condiciones de evaluación coinciden con las condiciones bajo las cuales fueron recolectadas las muestras de recuperación.</p>
+
 
         
       </section>
