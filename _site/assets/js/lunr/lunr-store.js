@@ -604,4 +604,10 @@ var store = [{
         "tags": ["Dataset","CARLA","Data Collection","PilotNet","Augmentations"],
         "url": "/weekly%20log/week101/",
         "teaser": null
+      },{
+        "title": "Week 102 - Evaluación de robustez en distintos escenarios de conducción",
+        "excerpt":"Diseño experimental Datasets Todos los datasets fueron grabados a 10 Hz en CARLA Town02. ID Nombre Descripción A’ Burbuja Recolección de conducción humana en vivo. Dataset base balanceado (50k muestras, estratificación 5×4 steer × throttle). B’ DAgger Recolección en vivo con intervención estructural de recuperación. Introduce perturbaciones estructurales fuera del...","categories": ["weekly Log"],
+        "tags": ["Robustez","Burbuja","Noise Injection","DAgger","CARLA Simulator"],
+        "url": "/weekly%20log/week102/",
+        "teaser": null
       }]

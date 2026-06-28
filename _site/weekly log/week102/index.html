@@ -1,0 +1,1265 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Week 102 - Evaluación de robustez en distintos escenarios de conducción - Robotics Lab URJC</title>
+<meta name="description" content="Diseño experimental">
+
+
+  <meta name="author" content="Carlos Velásquez">
+  
+  <meta property="article:author" content="Carlos Velásquez">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Robotics Lab URJC">
+<meta property="og:title" content="Week 102 - Evaluación de robustez en distintos escenarios de conducción">
+<meta property="og:url" content="http://localhost:4000/weekly%20log/week102/">
+
+
+  <meta property="og:description" content="Diseño experimental">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2026-06-28T00:00:00-05:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/weekly%20log/week102/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Carlos Andrés Velásquez Ospina",
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Robotics Lab URJC Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/logo.png" alt="Robotics Lab URJC"></a>
+        
+        <a class="site-title" href="/">
+          Robotics Lab URJC
+          <span class="site-subtitle">Programming Robot Intelligence</span>
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="https://mmistakes.github.io/minimal-mistakes/docs/quick-start-guide/">Quick-Start Guide</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+    <div class="author__avatar">
+      <a href="http://localhost:4000/">
+        <img src="/assets/images/me.jpg" alt="Carlos Velásquez" itemprop="image" class="u-photo">
+      </a>
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      <a class="u-url" rel="me" href="http://localhost:4000/" itemprop="url">Carlos Velásquez</a>
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>Doctoral thesis blog</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name" class="p-locality">Medellín</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="mailto:canveo@gmail.com" rel="nofollow noopener noreferrer me"><i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">Email</span></a></li>
+          
+        
+          
+            <li><a href="https://github.com/canveo" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/canveo/" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span class="label">LinkedIn</span></a></li>
+          
+        
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:canveo@gmail.com" rel="me" class="u-email">
+            <meta itemprop="email" content="canveo@gmail.com" />
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">Email</span>
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer me">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Week 102 - Evaluación de robustez en distintos escenarios de conducción">
+    <meta itemprop="description" content="Diseño experimental">
+    <meta itemprop="datePublished" content="2026-06-28T00:00:00-05:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="http://localhost:4000/weekly%20log/week102/" class="u-url" itemprop="url">Week 102 - Evaluación de robustez en distintos escenarios de conducción
+</a>
+          </h1>
+          
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          15 minute read
+        
+      </span>
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        <h2 id="diseño-experimental">Diseño experimental</h2>
+
+<h3 id="datasets">Datasets</h3>
+
+<p>Todos los datasets fueron grabados a <strong>10 Hz</strong> en CARLA Town02.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">ID</th>
+      <th style="text-align: left">Nombre</th>
+      <th style="text-align: left">Descripción</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">A’</td>
+      <td style="text-align: left">Burbuja</td>
+      <td style="text-align: left">Recolección de conducción humana en vivo. Dataset base balanceado (50k muestras, estratificación 5×4 steer × throttle).</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">B’</td>
+      <td style="text-align: left">DAgger</td>
+      <td style="text-align: left">Recolección en vivo con intervención estructural de recuperación. Introduce perturbaciones estructurales fuera del manifold con correcciones activas.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">C’</td>
+      <td style="text-align: left">Noise Injection</td>
+      <td style="text-align: left">Recolección en vivo con perturbaciones gaussianas en steering. Offsets laterales controlados con label humano.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Las mezclas evaluadas se expresan como proporción de mezcla sobre A’:</p>
+
+<ul>
+  <li><strong>A’ + x% B’</strong> — Burbuja mezclado con x% de muestras DAgger</li>
+  <li><strong>A’ + x% C’</strong> — Burbuja mezclado con x% de muestras Noise Injection</li>
+  <li><strong>Mix (70A’-20B’-10C’)</strong> — Mezcla ternaria: 70% Burbuja, 20% DAgger, 10% Noise</li>
+</ul>
+
+<h3 id="tests-de-evaluación">Tests de evaluación</h3>
+
+<p>Todos los experimentos se ejecutan sobre el <strong>mismo circuito</strong> (malla externa de Town02, carril derecho). Cada configuración experimental está compuesta por un <strong>total de 225 ejecuciones independientes</strong>, organizadas según el escenario de evaluación correspondiente.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Test</th>
+      <th style="text-align: left">Nombre</th>
+      <th style="text-align: left">Diseño experimental</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><strong>Test 0</strong></td>
+      <td style="text-align: left">Caso canónico</td>
+      <td style="text-align: left"><strong>225 ejecuciones</strong> desde la posición nominal, sin perturbaciones iniciales.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Test 1</strong></td>
+      <td style="text-align: left">Diferentes posiciones de inicio</td>
+      <td style="text-align: left"><strong>15 posiciones de arranque</strong>, con <strong>15 ejecuciones</strong> por posición (<strong>225 ejecuciones</strong> en total).</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Test 2</strong></td>
+      <td style="text-align: left">Posiciones aleatorias</td>
+      <td style="text-align: left"><strong>3 posiciones iniciales aleatorias</strong> (<code class="language-plaintext highlighter-rouge">random_1</code>, <code class="language-plaintext highlighter-rouge">random_2</code> y <code class="language-plaintext highlighter-rouge">random_3</code>), con <strong>75 ejecuciones</strong> por posición (<strong>225 ejecuciones</strong> en total).</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Test 3</strong></td>
+      <td style="text-align: left">Diferentes velocidades iniciales</td>
+      <td style="text-align: left"><strong>4 velocidades iniciales</strong> (30, 60, 80 y 100 km/h), distribuyendo las ejecuciones para completar un <strong>total de 225 episodios</strong> por configuración.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Test 4</strong></td>
+      <td style="text-align: left">Perturbación online durante la inferencia</td>
+      <td style="text-align: left"><strong>225 ejecuciones</strong> por modelo, aplicando periódicamente una política de perturbación durante la inferencia. Se evalúan dos configuraciones: <strong>perturbación estándar</strong> y <strong>perturbación intensificada</strong>.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>En todos los casos, las métricas reportadas corresponden a la agregación de las <strong>225 ejecuciones</strong> de cada configuración experimental, garantizando que la comparación entre modelos se realiza sobre el mismo número de episodios.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Test</th>
+      <th style="text-align: left">Nombre</th>
+      <th style="text-align: left">Descripción</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">Test 0</td>
+      <td style="text-align: left">Caso canónico</td>
+      <td style="text-align: left">Recorrido estándar desde la posición nominal, sin perturbaciones iniciales.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Test 1</td>
+      <td style="text-align: left">Posiciones de arranque 1–15</td>
+      <td style="text-align: left">15 configuraciones combinando 5 posiciones laterales (−1.8 m a +1.8 m) × 3 orientaciones (−15°, 0°, +15°).</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Test 2</td>
+      <td style="text-align: left">Posiciones de inicio random</td>
+      <td style="text-align: left">3 posiciones de inicio seleccionadas aleatoriamente dentro de la malla externa, mismo punto final.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Test 3</td>
+      <td style="text-align: left">Velocidades de inicio</td>
+      <td style="text-align: left">Velocidad inicial impuesta manualmente: 30, 60, 80 y 100 km/h. El modelo toma el control al alcanzarla.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Test 4</td>
+      <td style="text-align: left">Perturbación B’ en inferencia</td>
+      <td style="text-align: left">Política B’ aplicada periódicamente durante la inferencia (cada 8 s, 4 ticks de acción, 10 ticks de recuperación).</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h2 id="definición-de-métricas">Definición de métricas</h2>
+
+<h3 id="agregación-de-métricas">Agregación de métricas</h3>
+
+<p>Todas las métricas se obtienen a partir de los registros generados automáticamente durante cada episodio de simulación en CARLA. Cada configuración experimental se evalúa mediante múltiples ejecuciones independientes y posteriormente se agregan las métricas para realizar la comparación entre modelos.</p>
+
+<p>El porcentaje de ejecuciones exitosas (Successful Runs) se calcula sobre el número total de ejecuciones realizadas. En cambio, las métricas de desempeño (velocidad media, colisiones, invasiones de carril, desviación respecto a la trayectoria ideal y suavidad de control) se calculan únicamente sobre las ejecuciones exitosas (goal_reached = 1), evitando que episodios abortados o recorridos incompletos introduzcan sesgos en la comparación entre configuraciones.</p>
+
+<h3 id="colisiones">Colisiones</h3>
+
+<p>La detección de colisiones se realiza a partir del valor collision_impulse registrado durante la simulación. Un episodio de colisión comienza cuando el impulso supera un umbral de 0.1 y permanece activo mientras continúan registrándose impactos consecutivos. Para evitar contabilizar múltiples contactos producidos por un mismo choque, los eventos se agrupan utilizando una ventana temporal de recuperación de 1 segundo (recovery_gap_s = 1.0). Solo cuando transcurre al menos un segundo sin nuevos impactos se considera que una colisión ha finalizado y un nuevo impacto inicia un episodio independiente. De esta forma, la métrica representa el número de episodios de colisión y no el número total de eventos detectados por el sensor.</p>
+
+<h3 id="invasiones-de-carril">Invasiones de carril</h3>
+
+<p>La métrica de invasión de carril se obtiene mediante el sensor Lane Invasion de la Python API de CARLA. En este trabajo únicamente se contabilizan los eventos asociados al cruce de marcas de tipo Broken, correspondientes a la línea central discontinua presente en Town02. Al igual que en las colisiones, múltiples eventos consecutivos se agrupan utilizando una ventana temporal de recuperación de 0.5 segundos (recovery_gap_s = 0.5), de modo que un cruce continuo de la misma línea se contabiliza como un único episodio de invasión. Adicionalmente, los eventos registrados como NONE se almacenan en los archivos CSV y se analizan por separado como una métrica exploratoria para estudiar posibles salidas de la calzada en zonas sin demarcación horizontal.</p>
+
+<h3 id="perturbaciones-dagger">Perturbaciones DAgger</h3>
+
+<p><strong>Perturbación suave (generación del dataset DAgger).</strong> Durante la construcción del conjunto de entrenamiento se aplican acciones de control de baja magnitud, con ángulos de dirección comprendidos entre ±0.12 y ±0.18 y aceleraciones moderadas. Estas perturbaciones producen desviaciones locales de la trayectoria que posteriormente son corregidas por el conductor experto, permitiendo recopilar ejemplos de recuperación cercanos a la distribución nominal.</p>
+
+<p><strong>Perturbación estándar (evaluación online).</strong> Para evaluar la robustez durante la inferencia se emplea un conjunto de acciones de mayor amplitud (hasta ±0.40 de dirección) y aceleraciones más elevadas, generando desviaciones significativamente mayores que las utilizadas durante la generación del dataset. Este escenario constituye el Test 4 de perturbación online.</p>
+
+<p><strong>Perturbación intensificada.</strong> Se mantiene el mismo conjunto de acciones empleado en la perturbación estándar, pero se incrementa la intensidad temporal de su aplicación (por ejemplo, duración o frecuencia), con el objetivo de analizar el comportamiento de las políticas bajo perturbaciones más severas.</p>
+
+<hr />
+
+<h1 id="resultados-experimentales">Resultados experimentales</h1>
+
+<blockquote>
+  <p><strong>Nota metodológica.</strong> Salvo el porcentaje de ejecuciones exitosas (<em>Successful Runs</em>), todas las métricas reportadas en las tablas corresponden al promedio obtenido únicamente sobre los episodios exitosos (<code class="language-plaintext highlighter-rouge">goal_reached = 1</code>). Este criterio permite comparar el comportamiento de las políticas bajo condiciones equivalentes y evita introducir sesgos debidos a recorridos incompletos.</p>
+</blockquote>
+
+<h2 id="test-0--caso-canónico">Test 0 – Caso canónico</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Modelo</th>
+      <th style="text-align: right">Successful Runs</th>
+      <th style="text-align: right">Collisions</th>
+      <th style="text-align: right">Lane Inv.</th>
+      <th style="text-align: right">Lane Inv. NONE</th>
+      <th style="text-align: right">Speed</th>
+      <th style="text-align: right">Dev Mean</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>$D^{A}$</td>
+      <td style="text-align: right">98.7% (222/225)</td>
+      <td style="text-align: right">0.000</td>
+      <td style="text-align: right">7.090</td>
+      <td style="text-align: right">4.477</td>
+      <td style="text-align: right">55.33</td>
+      <td style="text-align: right">0.468</td>
+    </tr>
+    <tr>
+      <td>$D_{0.30}^{B}$</td>
+      <td style="text-align: right">96.9% (218/225)</td>
+      <td style="text-align: right">1.000</td>
+      <td style="text-align: right">8.798</td>
+      <td style="text-align: right">5.537</td>
+      <td style="text-align: right">55.64</td>
+      <td style="text-align: right">0.558</td>
+    </tr>
+    <tr>
+      <td>$D_{0.30}^{C}$</td>
+      <td style="text-align: right">97.3% (219/225)</td>
+      <td style="text-align: right">0.000</td>
+      <td style="text-align: right">6.667</td>
+      <td style="text-align: right">4.224</td>
+      <td style="text-align: right">59.42</td>
+      <td style="text-align: right">0.486</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="test-1--diferentes-posiciones-de-inicio">Test 1 – Diferentes posiciones de inicio</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Modelo</th>
+      <th style="text-align: right">Successful Runs</th>
+      <th style="text-align: right">Collisions</th>
+      <th style="text-align: right">Lane Invasions</th>
+      <th style="text-align: right">Lane Invasions (NONE)</th>
+      <th style="text-align: right">Speed (km/h)</th>
+      <th style="text-align: right">Dev Mean (m)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>$D^{A}$</td>
+      <td style="text-align: right"><strong>100.0% (225/225)</strong></td>
+      <td style="text-align: right"><strong>0.000</strong></td>
+      <td style="text-align: right">8.751</td>
+      <td style="text-align: right">5.102</td>
+      <td style="text-align: right">54.71</td>
+      <td style="text-align: right"><strong>0.767</strong></td>
+    </tr>
+    <tr>
+      <td>$D_{0.30}^{B}$</td>
+      <td style="text-align: right">94.7% (213/225)</td>
+      <td style="text-align: right">1.005</td>
+      <td style="text-align: right">10.404</td>
+      <td style="text-align: right">6.310</td>
+      <td style="text-align: right">55.27</td>
+      <td style="text-align: right">0.817</td>
+    </tr>
+    <tr>
+      <td>$D_{0.50}^{B}$</td>
+      <td style="text-align: right">97.3% (219/225)</td>
+      <td style="text-align: right"><strong>0.000</strong></td>
+      <td style="text-align: right">10.050</td>
+      <td style="text-align: right">2.461</td>
+      <td style="text-align: right">56.65</td>
+      <td style="text-align: right">0.826</td>
+    </tr>
+    <tr>
+      <td>$D_{0.75}^{B}$</td>
+      <td style="text-align: right">40.4% (91/225)</td>
+      <td style="text-align: right">1.044</td>
+      <td style="text-align: right">18.055</td>
+      <td style="text-align: right">9.297</td>
+      <td style="text-align: right">47.81</td>
+      <td style="text-align: right">0.927</td>
+    </tr>
+    <tr>
+      <td>$D_{0.30}^{C}$</td>
+      <td style="text-align: right">96.4% (217/225)</td>
+      <td style="text-align: right"><strong>0.000</strong></td>
+      <td style="text-align: right">8.304</td>
+      <td style="text-align: right">4.926</td>
+      <td style="text-align: right"><strong>59.39</strong></td>
+      <td style="text-align: right">0.776</td>
+    </tr>
+    <tr>
+      <td>$D_{0.50}^{C}$</td>
+      <td style="text-align: right">74.2% (167/225)</td>
+      <td style="text-align: right">0.006</td>
+      <td style="text-align: right">8.449</td>
+      <td style="text-align: right">3.263</td>
+      <td style="text-align: right">56.51</td>
+      <td style="text-align: right"><strong>0.726</strong></td>
+    </tr>
+    <tr>
+      <td>$D_{0.75}^{C}$</td>
+      <td style="text-align: right">45.3% (102/225)</td>
+      <td style="text-align: right">0.578</td>
+      <td style="text-align: right">8.824</td>
+      <td style="text-align: right">7.127</td>
+      <td style="text-align: right">53.51</td>
+      <td style="text-align: right">0.799</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="test-2--posiciones-aleatorias">Test 2 – Posiciones aleatorias</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Modelo</th>
+      <th style="text-align: right">Successful Runs</th>
+      <th style="text-align: right">Collisions</th>
+      <th style="text-align: right">Lane Inv.</th>
+      <th style="text-align: right">Lane Inv. NONE</th>
+      <th style="text-align: right">Speed (km/h)</th>
+      <th style="text-align: right">Dev Mean (m)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>$D^{A}$</td>
+      <td style="text-align: right">73.8% (166/225)</td>
+      <td style="text-align: right">0.006</td>
+      <td style="text-align: right"><strong>1.801</strong></td>
+      <td style="text-align: right">1.307</td>
+      <td style="text-align: right"><strong>49.02</strong></td>
+      <td style="text-align: right"><strong>0.379</strong></td>
+    </tr>
+    <tr>
+      <td>$D_{0.15}^{B}$</td>
+      <td style="text-align: right">98.7% (222/225)</td>
+      <td style="text-align: right">0.009</td>
+      <td style="text-align: right">2.108</td>
+      <td style="text-align: right">0.905</td>
+      <td style="text-align: right">46.90</td>
+      <td style="text-align: right">0.590</td>
+    </tr>
+    <tr>
+      <td>$D_{0.15}^{C}$</td>
+      <td style="text-align: right">98.2% (221/225)</td>
+      <td style="text-align: right">0.032</td>
+      <td style="text-align: right">2.000</td>
+      <td style="text-align: right">1.149</td>
+      <td style="text-align: right">43.51</td>
+      <td style="text-align: right">0.573</td>
+    </tr>
+    <tr>
+      <td>$D_{0.30}^{B}$</td>
+      <td style="text-align: right">98.2% (221/225)</td>
+      <td style="text-align: right">0.579</td>
+      <td style="text-align: right">2.027</td>
+      <td style="text-align: right">1.602</td>
+      <td style="text-align: right">43.96</td>
+      <td style="text-align: right">0.600</td>
+    </tr>
+    <tr>
+      <td>$D_{0.30}^{C}$</td>
+      <td style="text-align: right">72.0% (162/225)</td>
+      <td style="text-align: right">0.117</td>
+      <td style="text-align: right">2.074</td>
+      <td style="text-align: right">2.716</td>
+      <td style="text-align: right"><strong>49.70</strong></td>
+      <td style="text-align: right">0.407</td>
+    </tr>
+    <tr>
+      <td>$D_{0.50}^{B}$</td>
+      <td style="text-align: right"><strong>99.1% (223/225)</strong></td>
+      <td style="text-align: right"><strong>0.000</strong></td>
+      <td style="text-align: right">2.327</td>
+      <td style="text-align: right"><strong>0.345</strong></td>
+      <td style="text-align: right">45.19</td>
+      <td style="text-align: right">0.660</td>
+    </tr>
+    <tr>
+      <td>$D_{0.50}^{C}$</td>
+      <td style="text-align: right">72.9% (164/225)</td>
+      <td style="text-align: right"><strong>0.000</strong></td>
+      <td style="text-align: right">1.963</td>
+      <td style="text-align: right">0.970</td>
+      <td style="text-align: right">48.51</td>
+      <td style="text-align: right">0.405</td>
+    </tr>
+    <tr>
+      <td>$D_{0.75}^{B}$</td>
+      <td style="text-align: right"><strong>99.1% (223/225)</strong></td>
+      <td style="text-align: right">0.430</td>
+      <td style="text-align: right">3.771</td>
+      <td style="text-align: right">1.691</td>
+      <td style="text-align: right">41.15</td>
+      <td style="text-align: right">0.780</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="test-3--diferentes-velocidades-iniciales">Test 3 – Diferentes velocidades iniciales</h2>
+
+<p>diferentes velocidades</p>
+
+<h2 id="test-4--perturbación-online-durante-la-inferencia">Test 4 – Perturbación online durante la inferencia</h2>
+
+<h3 id="perturbación-estándar">Perturbación estándar</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Modelo</th>
+      <th style="text-align: right">Successful Runs</th>
+      <th style="text-align: right">Collisions</th>
+      <th style="text-align: right">Lane Inv.</th>
+      <th style="text-align: right">Lane Inv. NONE</th>
+      <th style="text-align: right">Speed (km/h)</th>
+      <th style="text-align: right">Dev Mean (m)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>$D^{A}$</td>
+      <td style="text-align: right">88.0% (198/225)</td>
+      <td style="text-align: right"><strong>0.025</strong></td>
+      <td style="text-align: right">8.020</td>
+      <td style="text-align: right">4.354</td>
+      <td style="text-align: right">54.34</td>
+      <td style="text-align: right">0.486</td>
+    </tr>
+    <tr>
+      <td>$D^{M}$</td>
+      <td style="text-align: right">58.2% (131/225)</td>
+      <td style="text-align: right">0.076</td>
+      <td style="text-align: right">9.000</td>
+      <td style="text-align: right">5.557</td>
+      <td style="text-align: right">52.06</td>
+      <td style="text-align: right">0.593</td>
+    </tr>
+    <tr>
+      <td>$D_{0.15}^{B}$</td>
+      <td style="text-align: right">30.2% (68/225)</td>
+      <td style="text-align: right">0.221</td>
+      <td style="text-align: right"><strong>7.279</strong></td>
+      <td style="text-align: right">5.574</td>
+      <td style="text-align: right"><strong>56.81</strong></td>
+      <td style="text-align: right">0.593</td>
+    </tr>
+    <tr>
+      <td>$D_{0.15}^{C}$</td>
+      <td style="text-align: right">82.2% (185/225)</td>
+      <td style="text-align: right">0.076</td>
+      <td style="text-align: right">8.778</td>
+      <td style="text-align: right">5.016</td>
+      <td style="text-align: right">52.91</td>
+      <td style="text-align: right">0.530</td>
+    </tr>
+    <tr>
+      <td>$D_{0.30}^{B}$</td>
+      <td style="text-align: right">71.1% (160/225)</td>
+      <td style="text-align: right">0.994</td>
+      <td style="text-align: right">10.463</td>
+      <td style="text-align: right">6.738</td>
+      <td style="text-align: right">53.92</td>
+      <td style="text-align: right">0.641</td>
+    </tr>
+    <tr>
+      <td>$D_{0.30}^{C}$</td>
+      <td style="text-align: right">79.6% (179/225)</td>
+      <td style="text-align: right">0.179</td>
+      <td style="text-align: right">7.788</td>
+      <td style="text-align: right">6.307</td>
+      <td style="text-align: right">56.15</td>
+      <td style="text-align: right">0.554</td>
+    </tr>
+    <tr>
+      <td>$D_{0.50}^{B}$</td>
+      <td style="text-align: right">62.2% (140/225)</td>
+      <td style="text-align: right">0.129</td>
+      <td style="text-align: right">9.764</td>
+      <td style="text-align: right"><strong>3.486</strong></td>
+      <td style="text-align: right">54.53</td>
+      <td style="text-align: right">0.702</td>
+    </tr>
+    <tr>
+      <td>$D_{0.50}^{C}$</td>
+      <td style="text-align: right"><strong>91.1% (205/225)</strong></td>
+      <td style="text-align: right">0.054</td>
+      <td style="text-align: right">8.415</td>
+      <td style="text-align: right"><strong>3.083</strong></td>
+      <td style="text-align: right">54.60</td>
+      <td style="text-align: right"><strong>0.466</strong></td>
+    </tr>
+    <tr>
+      <td>$D_{0.75}^{B}$</td>
+      <td style="text-align: right">20.0% (45/225)</td>
+      <td style="text-align: right">0.978</td>
+      <td style="text-align: right">18.356</td>
+      <td style="text-align: right">8.644</td>
+      <td style="text-align: right">47.63</td>
+      <td style="text-align: right">0.817</td>
+    </tr>
+    <tr>
+      <td>$D_{0.75}^{C}$</td>
+      <td style="text-align: right">47.1% (106/225)</td>
+      <td style="text-align: right">0.509</td>
+      <td style="text-align: right">10.717</td>
+      <td style="text-align: right">7.726</td>
+      <td style="text-align: right">52.19</td>
+      <td style="text-align: right">0.828</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="perturbación-intensificada">Perturbación intensificada</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Modelo</th>
+      <th>Perturbación</th>
+      <th style="text-align: right">Successful Runs</th>
+      <th style="text-align: right">Collisions</th>
+      <th style="text-align: right">Lane Inv.</th>
+      <th style="text-align: right">Lane Inv. NONE</th>
+      <th style="text-align: right">Speed</th>
+      <th style="text-align: right">Dev Mean</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>$D_{0.30}^{B}$</td>
+      <td>Suave</td>
+      <td style="text-align: right">71.1% (160/225)</td>
+      <td style="text-align: right">0.994</td>
+      <td style="text-align: right">10.463</td>
+      <td style="text-align: right">6.738</td>
+      <td style="text-align: right">53.92</td>
+      <td style="text-align: right">0.641</td>
+    </tr>
+    <tr>
+      <td>$D_{0.30}^{B}$</td>
+      <td>Fuerte</td>
+      <td style="text-align: right">73.8% (166/225)</td>
+      <td style="text-align: right">0.837</td>
+      <td style="text-align: right">7.729</td>
+      <td style="text-align: right">5.404</td>
+      <td style="text-align: right">55.96</td>
+      <td style="text-align: right">0.596</td>
+    </tr>
+    <tr>
+      <td>$D_{0.30}^{C}$</td>
+      <td>Suave</td>
+      <td style="text-align: right">79.6% (179/225)</td>
+      <td style="text-align: right">0.179</td>
+      <td style="text-align: right">7.788</td>
+      <td style="text-align: right">6.307</td>
+      <td style="text-align: right">56.15</td>
+      <td style="text-align: right">0.554</td>
+    </tr>
+    <tr>
+      <td>$D_{0.30}^{C}$</td>
+      <td>Fuerte</td>
+      <td style="text-align: right"><strong>85.8% (193/225)</strong></td>
+      <td style="text-align: right"><strong>0.197</strong></td>
+      <td style="text-align: right"><strong>5.642</strong></td>
+      <td style="text-align: right"><strong>4.912</strong></td>
+      <td style="text-align: right"><strong>58.32</strong></td>
+      <td style="text-align: right"><strong>0.546</strong></td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="análisis-preliminar-de-resultados">Análisis preliminar de resultados</h2>
+
+<h3 id="test-0--caso-canónico-1">Test 0 – Caso canónico</h3>
+
+<p>El Test 0 evalúa el comportamiento nominal de las políticas desde una condición inicial controlada. En este escenario, las tres configuraciones comparadas alcanzan tasas de éxito superiores al 96 %, lo que indica que todas las políticas son capaces de completar el recorrido cuando no se introducen perturbaciones iniciales severas.</p>
+
+<p>El modelo base $D^{A}$ alcanza un 98.7 % de ejecuciones exitosas (222/225), sin colisiones y con una desviación media de 0.468 m. La configuración $D_{0.30}^{C}$ obtiene un desempeño similar, con 97.3 % de éxito (219/225), cero colisiones y la mayor velocidad media del grupo (59.42 km/h). Por su parte, $D_{0.30}^{B}$ mantiene una tasa de éxito alta (96.9 %), pero presenta un incremento en colisiones (1.000) y en desviación media (0.558 m).</p>
+
+<p>En conjunto, el caso canónico confirma que las políticas evaluadas conservan capacidad de navegación nominal. Sin embargo, las diferencias en colisiones y desviación sugieren que, incluso bajo condiciones favorables, la incorporación de muestras DAgger puede introducir comportamientos de recuperación menos suaves que los observados en Burbuja y Noise Injection.</p>
+
+<hr />
+
+<h3 id="test-1--diferentes-posiciones-de-inicio-1">Test 1 – Diferentes posiciones de inicio</h3>
+
+<p>El Test 1 evalúa la robustez frente a variaciones controladas en la posición y orientación inicial del vehículo. El modelo base $D^{A}$ obtiene el mejor comportamiento nominal, con 100.0 % de ejecuciones exitosas (225/225), cero colisiones y una desviación media de 0.767 m. Este resultado indica que el dataset Burbuja conserva suficiente cobertura para resolver las 15 condiciones iniciales evaluadas.</p>
+
+<p>Las mezclas con proporciones moderadas de datos DAgger mantienen un desempeño competitivo. $D_{0.50}^{B}$ alcanza 97.3 % de éxito (219/225) y cero colisiones, aunque con una desviación ligeramente superior a la de Burbuja (0.826 m). En cambio, $D_{0.75}^{B}$ presenta una degradación marcada: el porcentaje de éxito cae a 40.4 % (91/225), las colisiones aumentan a 1.044 y las invasiones de carril alcanzan 18.055. Esto sugiere que una proporción elevada de muestras DAgger desplaza excesivamente la distribución de entrenamiento hacia maniobras de recuperación, reduciendo la estabilidad bajo condiciones iniciales variadas.</p>
+
+<p>En Noise Injection se observa una tendencia diferente. $D_{0.30}^{C}$ mantiene una tasa alta de éxito (96.4 %, 217/225), cero colisiones y la mayor velocidad media del test (59.39 km/h). Sin embargo, al aumentar la proporción de ruido, el rendimiento disminuye progresivamente: $D_{0.50}^{C}$ cae a 74.2 % y $D_{0.75}^{C}$ a 45.3 %. Esto indica que Noise Injection aporta diversidad útil en proporciones moderadas, pero puede afectar la consistencia de la política cuando domina el dataset.</p>
+
+<p>La métrica <code class="language-plaintext highlighter-rouge">Lane Inv. NONE</code> también muestra una tendencia informativa: los peores desempeños globales, como $D_{0.75}^{B}$ y $D_{0.75}^{C}$, presentan valores elevados (9.297 y 7.127, respectivamente), lo que refuerza su utilidad como indicador complementario de desviaciones laterales o posibles incursiones en zonas sin demarcación horizontal.</p>
+
+<hr />
+
+<h3 id="test-2--posiciones-aleatorias-1">Test 2 – Posiciones aleatorias</h3>
+
+<p>El Test 2 introduce condiciones iniciales menos estructuradas mediante tres posiciones aleatorias, acumulando 225 ejecuciones por configuración. En este escenario, las configuraciones basadas en DAgger muestran las mayores tasas de finalización. $D_{0.50}^{B}$ y $D_{0.75}^{B}$ alcanzan 99.1 % de éxito (223/225), mientras que $D_{0.15}^{B}$ y $D_{0.30}^{B}$ también superan el 98 %. Esto sugiere que las muestras de recuperación DAgger mejoran la capacidad de completar el recorrido cuando el vehículo inicia desde estados menos nominales.</p>
+
+<p>No obstante, la mejora en tasa de éxito no siempre se traduce en mejor precisión de trayectoria. El modelo $D^{A}$ presenta solo 73.8 % de éxito (166/225), pero obtiene la menor desviación media (0.379 m) y el menor número de invasiones de carril convencionales (1.801). Esto evidencia un compromiso entre precisión nominal y capacidad de recuperación: Burbuja sigue mejor la trayectoria cuando logra estabilizarse, mientras que DAgger aumenta la probabilidad de completar el recorrido desde estados aleatorios.</p>
+
+<p>Las configuraciones Noise Injection presentan un comportamiento menos favorable en este test. $D_{0.30}^{C}$, por ejemplo, alcanza 72.0 % de éxito (162/225) y el valor más alto de <code class="language-plaintext highlighter-rouge">Lane Inv. NONE</code> (2.716), aunque conserva una desviación media relativamente baja (0.407 m). Esto sugiere que Noise Injection puede favorecer estabilidad local, pero no necesariamente mejora la recuperación desde posiciones iniciales aleatorias tan alejadas de la distribución nominal.</p>
+
+<p>En términos de robustez, el Test 2 favorece claramente a DAgger como mecanismo de recuperación ante condiciones iniciales no estructuradas, aunque a costa de trayectorias menos precisas y velocidades medias más bajas.</p>
+
+<hr />
+
+<h3 id="test-3--diferentes-velocidades-iniciales-1">Test 3 – Diferentes velocidades iniciales</h3>
+
+<p>El Test 3 se encuentra actualmente en fase de recolección de métricas. Este escenario permitirá evaluar la robustez dinámica de las políticas cuando el vehículo recibe el control después de alcanzar velocidades iniciales de 30, 60, 80 y 100 km/h.</p>
+
+<p>A diferencia de los tests basados únicamente en posición inicial, este experimento permitirá analizar la capacidad de estabilización del controlador bajo diferentes condiciones cinemáticas. Las métricas esperadas serán especialmente relevantes para identificar si las políticas aprenden únicamente una estrategia geométrica de seguimiento de trayectoria o si también presentan capacidad de recuperación frente a estados dinámicos más exigentes.</p>
+
+<hr />
+
+<h3 id="test-4--perturbación-online-durante-la-inferencia-1">Test 4 – Perturbación online durante la inferencia</h3>
+
+<p>El Test 4 evalúa la robustez frente a perturbaciones aplicadas durante la inferencia. A diferencia del Test 1 y Test 2, aquí el vehículo no solo debe recuperarse de una condición inicial desfavorable, sino mantener la estabilidad ante desviaciones inducidas de manera periódica durante el recorrido.</p>
+
+<p>El mejor desempeño global corresponde a $D_{0.50}^{C}$, con 91.1 % de ejecuciones exitosas (205/225), la menor desviación media (0.466 m) y el menor valor de <code class="language-plaintext highlighter-rouge">Lane Inv. NONE</code> (3.083). Este resultado sugiere que una proporción intermedia de Noise Injection mejora la estabilidad local de la política frente a perturbaciones repetidas durante la conducción.</p>
+
+<p>Las configuraciones Noise Injection superan de forma consistente a sus equivalentes DAgger. Por ejemplo, $D_{0.30}^{C}$ alcanza 79.6 % de éxito frente a 71.1 % de $D_{0.30}^{B}$, con menos colisiones (0.179 frente a 0.994) y menor desviación media (0.554 m frente a 0.641 m). La diferencia es aún más marcada en 75 %, donde $D_{0.75}^{C}$ obtiene 47.1 % de éxito frente a solo 20.0 % de $D_{0.75}^{B}$.</p>
+
+<p>En DAgger se observa una región de desempeño limitada. $D_{0.30}^{B}$ es la mejor configuración de esta familia bajo perturbación online, pero el aumento hacia $D_{0.75}^{B}$ degrada fuertemente el rendimiento, elevando las invasiones de carril hasta 18.356 y las invasiones <code class="language-plaintext highlighter-rouge">NONE</code> hasta 8.644. Este comportamiento sugiere que las muestras DAgger pueden ayudar a recuperarse de ciertos estados, pero no necesariamente producen políticas estables frente a perturbaciones periódicas durante toda la inferencia.</p>
+
+<p>El modelo Burbuja alcanza 88.0 % de éxito (198/225), con pocas colisiones (0.025) y una desviación media de 0.486 m. Aunque su desempeño es competitivo, $D_{0.50}^{C}$ obtiene una tasa de éxito superior y menor desviación. Por otra parte, Magic Mix alcanza 58.2 % de éxito (131/225), lo que indica que esta proporción específica de mezcla ternaria no mejora la robustez frente a perturbaciones online en la campaña actual.</p>
+
+<p>La métrica <code class="language-plaintext highlighter-rouge">Lane Inv. NONE</code> mantiene una tendencia coherente con la desviación lateral: configuraciones más estables, como $D_{0.50}^{C}$ y $D^{A}$, presentan valores menores, mientras que configuraciones degradadas, como $D_{0.75}^{B}$ y $D_{0.75}^{C}$, presentan valores más altos. Esto respalda su uso como indicador exploratorio para caracterizar pérdidas de estabilidad o incursiones en zonas sin demarcación horizontal.</p>
+
+<hr />
+
+<h3 id="perturbación-online-de-mayor-intensidad">Perturbación online de mayor intensidad</h3>
+
+<p>La comparación entre perturbación estándar e intensificada se realizó inicialmente para las mezclas de 30 %. En esta evaluación, $D_{0.30}^{C}$ mantiene el mejor desempeño, alcanzando 85.8 % de éxito (193/225), con 5.642 invasiones de carril, 4.912 invasiones <code class="language-plaintext highlighter-rouge">NONE</code>, 58.32 km/h de velocidad media y 0.546 m de desviación.</p>
+
+<p>En DAgger, la perturbación intensificada no produce una degradación inmediata respecto a la perturbación estándar. $D_{0.30}^{B}$ pasa de 71.1 % a 73.8 % de éxito, reduce colisiones de 0.994 a 0.837 y disminuye la desviación media de 0.641 m a 0.596 m. Sin embargo, estos resultados deben interpretarse con cautela, ya que la diferencia entre ambas configuraciones no depende únicamente de la magnitud de las acciones, sino también de la forma temporal en que se aplican.</p>
+
+<p>En ambos casos, Noise Injection conserva una ventaja clara frente a DAgger. Bajo perturbación intensificada, $D_{0.30}^{C}$ supera a $D_{0.30}^{B}$ en tasa de éxito (85.8 % frente a 73.8 %), velocidad media (58.32 frente a 55.96 km/h), desviación lateral (0.546 frente a 0.596 m) e invasiones de carril. Esto refuerza la hipótesis de que Noise Injection favorece políticas más robustas frente a perturbaciones repetidas durante la inferencia.</p>
+
+<hr />
+
+<h3 id="magic-mix">Magic Mix</h3>
+
+<p>La estrategia Magic Mix combina muestras de Burbuja, DAgger y Noise Injection con el objetivo de obtener un equilibrio entre desempeño nominal, capacidad de recuperación y estabilidad frente a perturbaciones. Sin embargo, en la campaña actual, el resultado bajo perturbación online no supera a las mejores configuraciones individuales.</p>
+
+<p>En el Test 4, Magic Mix alcanza 58.2 % de ejecuciones exitosas (131/225), con 0.076 colisiones, 9.000 invasiones de carril, 5.557 invasiones <code class="language-plaintext highlighter-rouge">NONE</code>, 52.06 km/h de velocidad media y 0.593 m de desviación. Estos valores quedan por debajo de Burbuja (88.0 % de éxito y 0.486 m de desviación) y de $D_{0.50}^{C}$ (91.1 % de éxito y 0.466 m de desviación).</p>
+
+<p>Esto sugiere que la proporción 70A’-20B’-10C’ no necesariamente constituye la combinación óptima para el escenario de perturbación online evaluado. La mezcla ternaria sigue siendo una línea prometedora, pero requiere explorar nuevas proporciones y repetir campañas experimentales antes de establecer conclusiones definitivas.</p>
+
+<hr />
+
+<h3 id="comparación-general-entre-escenarios">Comparación general entre escenarios</h3>
+
+<p>Los resultados preliminares muestran que cada estrategia de generación de datos fortalece propiedades diferentes de la política de conducción. Burbuja ($D^{A}$) mantiene un desempeño sólido bajo condiciones nominales y diferentes posiciones iniciales, destacándose en Test 1 con 100 % de éxito y cero colisiones. DAgger mejora la capacidad de completar recorridos desde posiciones aleatorias, como se observa en Test 2 con tasas superiores al 98 % para varias configuraciones. Noise Injection, en cambio, muestra su mayor aporte bajo perturbaciones online, especialmente en $D_{0.50}^{C}$, que alcanza el mejor desempeño del Test 4.</p>
+
+<p>De forma preliminar, los resultados sugieren que no existe una única configuración óptima para todos los escenarios. Las mezclas DAgger son útiles para recuperación desde estados iniciales no nominales, mientras que Noise Injection favorece la estabilidad local frente a perturbaciones continuas durante la inferencia. La selección del dataset debe, por tanto, depender del tipo de robustez que se desea priorizar: recuperación inicial, seguimiento nominal o estabilidad ante perturbaciones recurrentes.</p>
+
+<hr />
+
+<h1 id="conclusiones-preliminares">Conclusiones preliminares</h1>
+
+<p>Los resultados obtenidos muestran que la composición del conjunto de entrenamiento influye de forma significativa en la robustez de las políticas de conducción end-to-end. En condiciones nominales, el modelo Burbuja mantiene un comportamiento estable y sirve como referencia de desempeño. Bajo variaciones iniciales aleatorias, las configuraciones DAgger presentan mayor capacidad de completar el recorrido, mientras que bajo perturbaciones online las configuraciones basadas en Noise Injection muestran mayor estabilidad y menor desviación lateral.</p>
+
+<p>La evidencia disponible sugiere que las muestras de recuperación y perturbación son útiles solo en proporciones controladas. Cuando estas muestras dominan el dataset, el rendimiento tiende a degradarse, especialmente en configuraciones con alta proporción de DAgger. Los experimentos del Test 3, junto con nuevas combinaciones de Magic Mix y campañas adicionales de perturbación, permitirán validar estas tendencias y avanzar hacia una configuración de entrenamiento más robusta para conducción autónoma end-to-end.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/tags/#burbuja" class="page__taxonomy-item p-category" rel="tag">Burbuja</a><span class="sep">, </span>
+    
+      <a href="/tags/#carla-simulator" class="page__taxonomy-item p-category" rel="tag">CARLA Simulator</a><span class="sep">, </span>
+    
+      <a href="/tags/#dagger" class="page__taxonomy-item p-category" rel="tag">DAgger</a><span class="sep">, </span>
+    
+      <a href="/tags/#noise-injection" class="page__taxonomy-item p-category" rel="tag">Noise Injection</a><span class="sep">, </span>
+    
+      <a href="/tags/#robustez" class="page__taxonomy-item p-category" rel="tag">Robustez</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#weekly-log" class="page__taxonomy-item p-category" rel="tag">weekly Log</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2026-06-28T00:00:00-05:00">June 28, 2026</time></p>
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Week+102+-+Evaluaci%C3%B3n+de+robustez+en+distintos+escenarios+de+conducci%C3%B3n%20http%3A%2F%2Flocalhost%3A4000%2Fweekly%2520log%2Fweek102%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fweekly%2520log%2Fweek102%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fweekly%2520log%2Fweek102%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/weekly%20log/week101/" class="pagination--pager" title="Week 101 - Análisis de robustez - Resultados parciales
+">Previous</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h2 class="page__related-title">You may also enjoy</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/weekly%20log/week101/" rel="permalink">Week 101 - Análisis de robustez - Resultados parciales
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          9 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Actualmente se continúa ampliando la cantidad de muestras utilizadas en los experimentos de robustez. Las métricas presentadas en esta actualización se calcu...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/weekly%20log/week100/" rel="permalink">Week 100 - Análisis de robustez - Resultados parciales
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          3 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Actualmente se está ampliando la cantidad de muestras utilizadas en los Test de Robustez 1 y 4.
+En el Test 1 se realizan 15 ejecuciones por cada una de las 1...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/weekly%20log/week99/" rel="permalink">Week 99 - Análisis de robustez mediante mezclas A’–B’ y A’–C’ en conducción autónoma
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          5 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Actualización experimental – expansión de ejecuciones
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/weekly%20log/week98/" rel="permalink">Week 98 - (Actualización) Búsqueda de la proporción óptima, mezcla A’–B’ vs A’–C’ en conducción autónoma
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          9 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Actualización de Week 97 incorporando los resultados extendidos hasta 75% y 100% de proporción de mezcla para ambas estrategias, además de la comparación con...</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2026 Carlos Andrés Velásquez Ospina. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+  </body>
+</html>
