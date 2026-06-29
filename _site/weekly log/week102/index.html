@@ -306,7 +306,7 @@
       <span class="page__meta-readtime">
         <i class="far fa-clock" aria-hidden="true"></i>
         
-          15 minute read
+          16 minute read
         
       </span>
     
@@ -353,11 +353,68 @@
 
 <p>Las mezclas evaluadas se expresan como proporción de mezcla sobre A’:</p>
 
+<h4 id="definición-de-las-mezclas-de-entrenamiento">Definición de las mezclas de entrenamiento</h4>
+
+<p>Sea $\alpha \in [0,1]$ la proporción de muestras augmentadas utilizadas dentro del dataset final.</p>
+
+<p>Las mezclas basadas en DAgger se definen como:</p>
+
+\[D_{\alpha}^{B}=(1-\alpha)A'+\alpha B'\]
+
+<p>Las mezclas basadas en Noise Injection se definen como:</p>
+
+\[D_{\alpha}^{C}=(1-\alpha)A'+\alpha C'\]
+
+<p>donde:</p>
+
 <ul>
-  <li><strong>A’ + x% B’</strong> — Burbuja mezclado con x% de muestras DAgger</li>
-  <li><strong>A’ + x% C’</strong> — Burbuja mezclado con x% de muestras Noise Injection</li>
-  <li><strong>Mix (70A’-20B’-10C’)</strong> — Mezcla ternaria: 70% Burbuja, 20% DAgger, 10% Noise</li>
+  <li>$A’$: Dataset Burbuja</li>
+  <li>$B’$: Dataset DAgger</li>
+  <li>$C’$: Dataset Noise Injection</li>
 </ul>
+
+<p>Además, se evalúa una mezcla híbrida:</p>
+
+\[D^{M}=0.70A'+0.20B'+0.10C'\]
+
+<p>denominada <strong>Magic Mix</strong>.</p>
+
+<h4 id="ejemplos-de-interpretación">Ejemplos de interpretación</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>Configuración</th>
+      <th>Composición</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>$D^{A}$</td>
+      <td>100% Burbuja</td>
+    </tr>
+    <tr>
+      <td>$D_{0.50}^{B}$</td>
+      <td>50% Burbuja + 50% DAgger</td>
+    </tr>
+    <tr>
+      <td>$D_{0.75}^{B}$</td>
+      <td>25% Burbuja + 75% DAgger</td>
+    </tr>
+    <tr>
+      <td>$D_{0.50}^{C}$</td>
+      <td>50% Burbuja + 50% Noise Injection</td>
+    </tr>
+    <tr>
+      <td>$D_{0.75}^{C}$</td>
+      <td>25% Burbuja + 75% Noise Injection</td>
+    </tr>
+    <tr>
+      <td>$D^{M}$</td>
+      <td>70% Burbuja + 20% DAgger + 10% Noise Injection</td>
+    </tr>
+  </tbody>
+</table>
 
 <h3 id="tests-de-evaluación">Tests de evaluación</h3>
 
@@ -459,11 +516,13 @@
 
 <h3 id="perturbaciones-dagger">Perturbaciones DAgger</h3>
 
-<p><strong>Perturbación suave (generación del dataset DAgger).</strong> Durante la construcción del conjunto de entrenamiento se aplican acciones de control de baja magnitud, con ángulos de dirección comprendidos entre ±0.12 y ±0.18 y aceleraciones moderadas. Estas perturbaciones producen desviaciones locales de la trayectoria que posteriormente son corregidas por el conductor experto, permitiendo recopilar ejemplos de recuperación cercanos a la distribución nominal.</p>
+<p>Con el fin de evaluar la robustez de las políticas entrenadas frente a diferentes niveles de perturbación, se definieron tres configuraciones de acciones DAgger con objetivos distintos durante el entrenamiento y la evaluación.</p>
 
-<p><strong>Perturbación estándar (evaluación online).</strong> Para evaluar la robustez durante la inferencia se emplea un conjunto de acciones de mayor amplitud (hasta ±0.40 de dirección) y aceleraciones más elevadas, generando desviaciones significativamente mayores que las utilizadas durante la generación del dataset. Este escenario constituye el Test 4 de perturbación online.</p>
+<p>Perturbación para generación del dataset DAgger. Durante la construcción del conjunto de entrenamiento se aplican acciones de control destinadas a provocar desviaciones apreciables de la trayectoria, permitiendo que el conductor experto genere ejemplos de recuperación. Estas acciones presentan amplitudes de dirección de hasta ±0.40 y aceleraciones moderadas, produciendo estados alejados de la trayectoria nominal que enriquecen el dataset con maniobras correctivas.</p>
 
-<p><strong>Perturbación intensificada.</strong> Se mantiene el mismo conjunto de acciones empleado en la perturbación estándar, pero se incrementa la intensidad temporal de su aplicación (por ejemplo, duración o frecuencia), con el objetivo de analizar el comportamiento de las políticas bajo perturbaciones más severas.</p>
+<p>Perturbación estándar (evaluación online). Para evaluar la robustez durante la inferencia se utiliza un conjunto de acciones de menor magnitud que las empleadas durante la generación del dataset. El objetivo es introducir perturbaciones locales que alteren temporalmente la trayectoria del vehículo sin producir desviaciones excesivas, permitiendo analizar la capacidad de recuperación de la política durante la conducción. Este escenario corresponde al Test 4 de perturbación online.</p>
+
+<p>Perturbación intensificada. Esta configuración utiliza exactamente el mismo conjunto de acciones empleado durante la generación del dataset DAgger, incrementando así la magnitud de las perturbaciones respecto al escenario estándar. Su objetivo es evaluar el comportamiento de las políticas frente a desviaciones más severas y analizar los límites de robustez alcanzados por cada estrategia de entrenamiento.</p>
 
 <hr />
 
