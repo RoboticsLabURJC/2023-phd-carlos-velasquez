@@ -1,4 +1,227 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2026-06-29T09:10:47-05:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Robotics Lab URJC</title><subtitle>Autonomous Driving</subtitle><author><name>Carlos Velásquez</name><email>canveo@gmail.com</email></author><entry><title type="html">Week 102 - Evaluación de robustez en distintos escenarios de conducción</title><link href="http://localhost:4000/weekly%20log/week102/" rel="alternate" type="text/html" title="Week 102 - Evaluación de robustez en distintos escenarios de conducción" /><published>2026-06-28T00:00:00-05:00</published><updated>2026-06-28T00:00:00-05:00</updated><id>http://localhost:4000/weekly%20log/week102</id><content type="html" xml:base="http://localhost:4000/weekly%20log/week102/"><![CDATA[<h2 id="diseño-experimental">Diseño experimental</h2>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2026-07-02T21:17:19-05:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Robotics Lab URJC</title><subtitle>Autonomous Driving</subtitle><author><name>Carlos Velásquez</name><email>canveo@gmail.com</email></author><entry><title type="html">Week 103 - Prueba rápida del Test 1 en Town11</title><link href="http://localhost:4000/weekly%20log/week103/" rel="alternate" type="text/html" title="Week 103 - Prueba rápida del Test 1 en Town11" /><published>2026-07-02T00:00:00-05:00</published><updated>2026-07-02T00:00:00-05:00</updated><id>http://localhost:4000/weekly%20log/week103</id><content type="html" xml:base="http://localhost:4000/weekly%20log/week103/"><![CDATA[<p>Con el objetivo de validar los resultados obtenidos en el <strong>Test 1</strong>, el escenario de evaluación se trasladó de <strong>Town02</strong> a <strong>Town11</strong>, seleccionando un recorrido corto de aproximadamente <strong>1.5 km</strong> con una mayor densidad de curvas. El propósito de esta prueba preliminar es determinar si las tendencias observadas anteriormente se mantienen en un entorno más desafiante, ya que en <strong>Town02</strong> las diferencias entre los distintos conjuntos de entrenamiento no eran suficientemente evidentes.</p>
+
+<p>Una observación importante es que el modelo <strong>Burbuja</strong> presenta un comportamiento diferente en este nuevo escenario. A diferencia de Town02, no logra completar todas las ejecuciones y, particularmente en la condición de <strong>izquierda dura</strong>, el vehículo no consigue incorporarse correctamente al circuito, reduciendo su tasa de éxito.</p>
+
+<h2 id="escenario-de-evaluación">Escenario de evaluación</h2>
+
+<figure class="half">
+  <img src="http://localhost:4000/assets/images/week103/town11_map.png" alt="Town11" style="width:40%" />
+  <figcaption>Recorrido corto utilizado para la validación del Test 1 en Town11.</figcaption>
+</figure>
+
+<h2 id="configuración-experimental">Configuración experimental</h2>
+
+<p>Con respecto al <strong>Test 1 original</strong>, se realizaron dos modificaciones en las condiciones iniciales:</p>
+
+<ul>
+  <li>Se cambió el escenario de <strong>Town02</strong> a <strong>Town11</strong>.</li>
+  <li>Se incrementó la perturbación angular inicial del vehículo en <strong>15°</strong>, pasando de una variación de <strong>±15°</strong> a <strong>±30°</strong> respecto a la orientación nominal de la vía.</li>
+</ul>
+
+<p>De esta forma, se evaluaron <strong>15 condiciones iniciales</strong>, resultado de combinar <strong>cinco desplazamientos laterales</strong> con <strong>tres orientaciones iniciales</strong>.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">Caso</th>
+      <th>Posición lateral</th>
+      <th style="text-align: right">Offset (m)</th>
+      <th style="text-align: right">X (m)</th>
+      <th style="text-align: right">Y (m)</th>
+      <th style="text-align: right">Z (m)</th>
+      <th style="text-align: left">Yaw (°)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">1</td>
+      <td>Duro Izquierda</td>
+      <td style="text-align: right"><strong>+4.80</strong></td>
+      <td style="text-align: right">4802.80</td>
+      <td style="text-align: right">-5679.508</td>
+      <td style="text-align: right">100.175</td>
+      <td style="text-align: left"><strong>98.801</strong></td>
+    </tr>
+    <tr>
+      <td style="text-align: center">2</td>
+      <td>Duro Izquierda</td>
+      <td style="text-align: right"><strong>+4.80</strong></td>
+      <td style="text-align: right">4802.80</td>
+      <td style="text-align: right">-5679.508</td>
+      <td style="text-align: right">100.175</td>
+      <td style="text-align: left"><strong>128.801</strong></td>
+    </tr>
+    <tr>
+      <td style="text-align: center">3</td>
+      <td>Duro Izquierda</td>
+      <td style="text-align: right"><strong>+4.80</strong></td>
+      <td style="text-align: right">4802.80</td>
+      <td style="text-align: right">-5679.508</td>
+      <td style="text-align: right">100.175</td>
+      <td style="text-align: left"><strong>158.801</strong></td>
+    </tr>
+    <tr>
+      <td style="text-align: center">4</td>
+      <td>Suave Izquierda</td>
+      <td style="text-align: right"><strong>+2.40</strong></td>
+      <td style="text-align: right">4800.40</td>
+      <td style="text-align: right">-5679.508</td>
+      <td style="text-align: right">100.175</td>
+      <td style="text-align: left"><strong>98.801</strong></td>
+    </tr>
+    <tr>
+      <td style="text-align: center">5</td>
+      <td>Suave Izquierda</td>
+      <td style="text-align: right"><strong>+2.40</strong></td>
+      <td style="text-align: right">4800.40</td>
+      <td style="text-align: right">-5679.508</td>
+      <td style="text-align: right">100.175</td>
+      <td style="text-align: left"><strong>128.801</strong></td>
+    </tr>
+    <tr>
+      <td style="text-align: center">6</td>
+      <td>Suave Izquierda</td>
+      <td style="text-align: right"><strong>+2.40</strong></td>
+      <td style="text-align: right">4800.40</td>
+      <td style="text-align: right">-5679.508</td>
+      <td style="text-align: right">100.175</td>
+      <td style="text-align: left"><strong>158.801</strong></td>
+    </tr>
+    <tr>
+      <td style="text-align: center">7</td>
+      <td>Centrado</td>
+      <td style="text-align: right"><strong>0.00</strong></td>
+      <td style="text-align: right">4798.00</td>
+      <td style="text-align: right">-5679.508</td>
+      <td style="text-align: right">100.175</td>
+      <td style="text-align: left"><strong>98.801</strong></td>
+    </tr>
+    <tr>
+      <td style="text-align: center">8</td>
+      <td>Centrado</td>
+      <td style="text-align: right"><strong>0.00</strong></td>
+      <td style="text-align: right">4798.00</td>
+      <td style="text-align: right">-5679.508</td>
+      <td style="text-align: right">100.175</td>
+      <td style="text-align: left"><strong>128.801</strong></td>
+    </tr>
+    <tr>
+      <td style="text-align: center">9</td>
+      <td>Centrado</td>
+      <td style="text-align: right"><strong>0.00</strong></td>
+      <td style="text-align: right">4798.00</td>
+      <td style="text-align: right">-5679.508</td>
+      <td style="text-align: right">100.175</td>
+      <td style="text-align: left"><strong>158.801</strong></td>
+    </tr>
+    <tr>
+      <td style="text-align: center">10</td>
+      <td>Suave Derecha</td>
+      <td style="text-align: right"><strong>−2.40</strong></td>
+      <td style="text-align: right">4795.60</td>
+      <td style="text-align: right">-5679.508</td>
+      <td style="text-align: right">100.175</td>
+      <td style="text-align: left"><strong>98.801</strong></td>
+    </tr>
+    <tr>
+      <td style="text-align: center">11</td>
+      <td>Suave Derecha</td>
+      <td style="text-align: right"><strong>−2.40</strong></td>
+      <td style="text-align: right">4795.60</td>
+      <td style="text-align: right">-5679.508</td>
+      <td style="text-align: right">100.175</td>
+      <td style="text-align: left"><strong>128.801</strong></td>
+    </tr>
+    <tr>
+      <td style="text-align: center">12</td>
+      <td>Suave Derecha</td>
+      <td style="text-align: right"><strong>−2.40</strong></td>
+      <td style="text-align: right">4795.60</td>
+      <td style="text-align: right">-5679.508</td>
+      <td style="text-align: right">100.175</td>
+      <td style="text-align: left"><strong>158.801</strong></td>
+    </tr>
+    <tr>
+      <td style="text-align: center">13</td>
+      <td>Duro Derecha</td>
+      <td style="text-align: right"><strong>−4.80</strong></td>
+      <td style="text-align: right">4793.20</td>
+      <td style="text-align: right">-5679.508</td>
+      <td style="text-align: right">100.175</td>
+      <td style="text-align: left"><strong>98.801</strong></td>
+    </tr>
+    <tr>
+      <td style="text-align: center">14</td>
+      <td>Duro Derecha</td>
+      <td style="text-align: right"><strong>−4.80</strong></td>
+      <td style="text-align: right">4793.20</td>
+      <td style="text-align: right">-5679.508</td>
+      <td style="text-align: right">100.175</td>
+      <td style="text-align: left"><strong>128.801</strong></td>
+    </tr>
+    <tr>
+      <td style="text-align: center">15</td>
+      <td>Duro Derecha</td>
+      <td style="text-align: right"><strong>−4.80</strong></td>
+      <td style="text-align: right">4793.20</td>
+      <td style="text-align: right">-5679.508</td>
+      <td style="text-align: right">100.175</td>
+      <td style="text-align: left"><strong>158.801</strong></td>
+    </tr>
+  </tbody>
+</table>
+
+<figure class="half">
+  <img src="http://localhost:4000/assets/images/week103/car_rotation.png" alt="car_rotation" style="width:60%" />
+  <figcaption>Orientaciones iniciales utilizadas. La perturbación angular se incrementó de ±15° a ±30° respecto al Test 1 original.</figcaption>
+</figure>
+
+<h2 id="resultados">Resultados</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Modelo</th>
+      <th style="text-align: center">Successful Runs</th>
+      <th style="text-align: right">Collisions</th>
+      <th style="text-align: right">Lane Inv.</th>
+      <th style="text-align: right">Speed (km/h)</th>
+      <th style="text-align: right">Mean Lateral Error (m)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Burbuja</td>
+      <td style="text-align: center">28/30 (93.3%)</td>
+      <td style="text-align: right"><strong>0.00</strong></td>
+      <td style="text-align: right"><strong>4.93</strong></td>
+      <td style="text-align: right"><strong>76.78</strong></td>
+      <td style="text-align: right">0.283</td>
+    </tr>
+    <tr>
+      <td>DAgger 50%</td>
+      <td style="text-align: center"><strong>30/30 (100%)</strong></td>
+      <td style="text-align: right"><strong>0.00</strong></td>
+      <td style="text-align: right">26.07</td>
+      <td style="text-align: right">61.10</td>
+      <td style="text-align: right">0.427</td>
+    </tr>
+    <tr>
+      <td>Noise 50%</td>
+      <td style="text-align: center"><strong>30/30 (100%)</strong></td>
+      <td style="text-align: right"><strong>0.00</strong></td>
+      <td style="text-align: right">6.93</td>
+      <td style="text-align: right">65.95</td>
+      <td style="text-align: right"><strong>0.199</strong></td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="discusión">Discusión</h2>
+
+<p>Los resultados obtenidos mantienen las tendencias observadas previamente en el <strong>Test 1</strong>, aunque las diferencias entre modelos son ahora más evidentes. <strong>Burbuja</strong> continúa siendo el modelo más rápido, pero pierde robustez en un escenario con mayor cantidad de curvas y perturbaciones iniciales más severas. <strong>DAgger (50%)</strong> conserva una tasa de éxito del 100 %, aunque presenta el mayor número de invasiones de carril y el mayor error lateral medio, indicando un seguimiento menos preciso de la trayectoria. Por su parte, <strong>Noise Injection (50%)</strong> también alcanza un 100 % de recorridos exitosos y obtiene el menor error lateral, confirmando una mayor precisión durante el seguimiento de la ruta ideal.</p>
+
+<p>Aunque esta evaluación corresponde únicamente a una prueba rápida sobre un recorrido corto, los resultados sugieren que <strong>Town11 constituye un escenario más discriminante que Town02</strong>, permitiendo evidenciar con mayor claridad las fortalezas y limitaciones de cada estrategia de entrenamiento. Estos resultados motivan realizar el <strong>Test 1 completo</strong> en Town11 utilizando el mismo protocolo experimental empleado anteriormente.</p>]]></content><author><name>Carlos Velásquez</name><email>canveo@gmail.com</email></author><category term="Weekly Log" /><category term="Robustez" /><category term="Burbuja" /><category term="Noise Injection" /><category term="DAgger" /><category term="CARLA Simulator" /><summary type="html"><![CDATA[Con el objetivo de validar los resultados obtenidos en el Test 1, el escenario de evaluación se trasladó de Town02 a Town11, seleccionando un recorrido corto de aproximadamente 1.5 km con una mayor densidad de curvas. El propósito de esta prueba preliminar es determinar si las tendencias observadas anteriormente se mantienen en un entorno más desafiante, ya que en Town02 las diferencias entre los distintos conjuntos de entrenamiento no eran suficientemente evidentes.]]></summary></entry><entry><title type="html">Week 102 - Evaluación de robustez en distintos escenarios de conducción</title><link href="http://localhost:4000/weekly%20log/week102/" rel="alternate" type="text/html" title="Week 102 - Evaluación de robustez en distintos escenarios de conducción" /><published>2026-06-28T00:00:00-05:00</published><updated>2026-06-28T00:00:00-05:00</updated><id>http://localhost:4000/weekly%20log/week102</id><content type="html" xml:base="http://localhost:4000/weekly%20log/week102/"><![CDATA[<h2 id="diseño-experimental">Diseño experimental</h2>
 
 <h3 id="datasets">Datasets</h3>
 
@@ -4426,94 +4649,4 @@ A’+15%B’ – A’+30%B’ representa la región de operación más consisten
 
 <p>Esto sugiere que la construcción <strong>en vivo</strong> preserva mejor la correspondencia entre imagen y etiqueta.</p>
 
-<p>Se están evaluando algunas métricas de desempeño con el fin de confirmar la forma correcta de construir el dataset. Estas métricas se incorporarán posteriormente al análisis.</p>]]></content><author><name>Carlos Velásquez</name><email>canveo@gmail.com</email></author><category term="weekly Log" /><category term="Dataset" /><category term="CARLA" /><category term="Data Collection" /><category term="PilotNet" /><category term="Augmentations" /><summary type="html"><![CDATA[Avances en construcción de dataset y entrenamiento PilotNet]]></summary></entry><entry><title type="html">Week 93 - Dataset Noise injection</title><link href="http://localhost:4000/weekly%20log/week93/" rel="alternate" type="text/html" title="Week 93 - Dataset Noise injection" /><published>2026-03-30T00:00:00-05:00</published><updated>2026-03-30T00:00:00-05:00</updated><id>http://localhost:4000/weekly%20log/week93</id><content type="html" xml:base="http://localhost:4000/weekly%20log/week93/"><![CDATA[<h2 id="noise-injection-y-generación-del-dataset">Noise Injection y generación del dataset</h2>
-
-<p>Durante esta etapa se aplicó la estrategia de <strong>noise injection</strong> para mejorar la robustez del modelo frente a desviaciones de trayectoria.
-Se mantuvo la misma metodología de captura basada en <strong>recorder + replayer</strong>, grabando primero la sesión en un archivo <code class="language-plaintext highlighter-rouge">.log</code> junto con un <code class="language-plaintext highlighter-rouge">csv</code> de comandos, y posteriormente reconstruyendo el dataset mediante un <em>replayer</em>. Todo el proceso se ejecutó a <strong>20 Hz</strong>.</p>
-
-<p>La idea principal consiste en introducir pequeñas perturbaciones aleatorias sobre el ángulo de dirección durante la conducción humana. Si se activa una perturbación, esta se mantiene constante durante varios <em>frames</em> para simular una desviación sostenida y realista del vehículo.</p>
-
-<p>La imagen capturada corresponde al estado perturbado, mientras que la etiqueta almacenada conserva la acción correcta del conductor humano, permitiendo que el modelo aprenda maniobras de recuperación.</p>
-
-<h3 id="lógica-aplicada">Lógica aplicada</h3>
-
-<p>```text id=”5jqn4m”
-Inicializar recorder
-Definir:
-    magnitude
-    hold_count
-    jolt_prob</p>
-
-<p>Mientras la simulación esté activa:</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Leer imagen
-Leer steering_humano
-Leer throttle_humano
-
-Si se cumple ciclo de actualización:
-    Con probabilidad jolt_prob:
-        generar perturbación aleatoria
-    mantenerla durante hold_count frames
-
-steering_aplicado = steering_humano + perturbación
-
-Aplicar control al vehículo
-
-Guardar:
-    imagen
-    steering_humano
-    steering_aplicado
-    noise_active
-    event_id ```
-</code></pre></div></div>
-
-<h3 id="consideración-importante">Consideración importante</h3>
-
-<p>El ruido no se aplica continuamente para evitar trayectorias irreales o vibraciones artificiales del vehículo.
-En su lugar, se genera en <strong>ciclos controlados</strong>, manteniéndose durante varios <em>frames</em>, lo que permite simular desviaciones más naturales y proporcionar al modelo ejemplos útiles de corrección.</p>
-
-<p>Este enfoque ayuda a reducir el problema de <em>distributional shift</em> en <strong>Behavioral Cloning</strong>, mejorando el desempeño del modelo durante la conducción online.</p>
-
-<hr />
-
-<h2 id="consolidación-del-dataset-en-hdf5">Consolidación del dataset en HDF5</h2>
-
-<p>Posteriormente, el dataset fue consolidado en formato <strong>HDF5</strong>, con el objetivo de mejorar la trazabilidad, el acceso a metadatos y la eficiencia en lectura durante el entrenamiento.</p>
-
-<p>Este formato permitió almacenar de manera estructurada:</p>
-
-<ul>
-  <li>imágenes de segmentación</li>
-  <li>controles humanos</li>
-  <li>controles aplicados</li>
-  <li>indicadores de ruido</li>
-  <li>velocidad</li>
-  <li>town</li>
-  <li>condiciones climáticas</li>
-  <li>identificadores de sesión</li>
-</ul>
-
-<h3 id="resumen-del-dataset-generado">Resumen del dataset generado</h3>
-
-<ul>
-  <li><strong>Número de archivos:</strong> 7</li>
-  <li><strong>Tamaño total en disco:</strong> 3.24 GB</li>
-  <li><strong>Total de datasets internos detectados:</strong> 133</li>
-  <li><strong>Frecuencia asumida:</strong> 20.00 Hz</li>
-  <li><strong>Samples/frames estimados en total:</strong> 180,381</li>
-  <li><strong>Duración total estimada:</strong> 2h 30m 19.0s</li>
-</ul>
-
-<h3 id="cobertura-de-mapas">Cobertura de mapas</h3>
-
-<p>El dataset final incluye trayectorias capturadas en múltiples escenarios de CARLA:</p>
-
-<ul>
-  <li>Carla/Maps/Town01</li>
-  <li>Carla/Maps/Town03</li>
-  <li>Carla/Maps/Town04</li>
-  <li>Carla/Maps/Town05</li>
-  <li>Carla/Maps/Town07</li>
-</ul>
-
-<p>Esta diversidad de escenarios permite mejorar la generalización del modelo frente a diferentes tipos de curvas, intersecciones y configuraciones urbanas.</p>]]></content><author><name>Carlos Velásquez</name><email>canveo@gmail.com</email></author><category term="weekly Log" /><category term="Dataset" /><category term="CARLA" /><category term="Data Collection" /><category term="PilotNet" /><category term="Augmentations" /><summary type="html"><![CDATA[Noise Injection y generación del dataset]]></summary></entry></feed>
+<p>Se están evaluando algunas métricas de desempeño con el fin de confirmar la forma correcta de construir el dataset. Estas métricas se incorporarán posteriormente al análisis.</p>]]></content><author><name>Carlos Velásquez</name><email>canveo@gmail.com</email></author><category term="weekly Log" /><category term="Dataset" /><category term="CARLA" /><category term="Data Collection" /><category term="PilotNet" /><category term="Augmentations" /><summary type="html"><![CDATA[Avances en construcción de dataset y entrenamiento PilotNet]]></summary></entry></feed>

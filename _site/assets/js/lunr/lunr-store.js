@@ -610,4 +610,10 @@ var store = [{
         "tags": ["Robustez","Burbuja","Noise Injection","DAgger","CARLA Simulator"],
         "url": "/weekly%20log/week102/",
         "teaser": null
+      },{
+        "title": "Week 103 - Prueba rápida del Test 1 en Town11",
+        "excerpt":"Con el objetivo de validar los resultados obtenidos en el Test 1, el escenario de evaluación se trasladó de Town02 a Town11, seleccionando un recorrido corto de aproximadamente 1.5 km con una mayor densidad de curvas. El propósito de esta prueba preliminar es determinar si las tendencias observadas anteriormente se...","categories": ["Weekly Log"],
+        "tags": ["Robustez","Burbuja","Noise Injection","DAgger","CARLA Simulator"],
+        "url": "/weekly%20log/week103/",
+        "teaser": null
       }]
