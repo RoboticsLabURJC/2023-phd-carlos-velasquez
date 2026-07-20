@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2026-07-05T17:05:01-05:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Robotics Lab URJC</title><subtitle>Autonomous Driving</subtitle><author><name>Carlos Velásquez</name><email>canveo@gmail.com</email></author><entry><title type="html">Week 103 - Prueba rápida del Test 1 en Town11</title><link href="http://localhost:4000/weekly%20log/week103/" rel="alternate" type="text/html" title="Week 103 - Prueba rápida del Test 1 en Town11" /><published>2026-07-02T00:00:00-05:00</published><updated>2026-07-02T00:00:00-05:00</updated><id>http://localhost:4000/weekly%20log/week103</id><content type="html" xml:base="http://localhost:4000/weekly%20log/week103/"><![CDATA[<blockquote>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2026-07-20T09:56:30-05:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Robotics Lab URJC</title><subtitle>Autonomous Driving</subtitle><author><name>Carlos Velásquez</name><email>canveo@gmail.com</email></author><entry><title type="html">Week 103 - Prueba rápida del Test 1 en Town11</title><link href="http://localhost:4000/weekly%20log/week103/" rel="alternate" type="text/html" title="Week 103 - Prueba rápida del Test 1 en Town11" /><published>2026-07-02T00:00:00-05:00</published><updated>2026-07-02T00:00:00-05:00</updated><id>http://localhost:4000/weekly%20log/week103</id><content type="html" xml:base="http://localhost:4000/weekly%20log/week103/"><![CDATA[<blockquote>
   <p>Se actualizó <a href="/weekly%20log/week102/">Week 102</a> con nuevas métricas y cambios en el orden de las tablas.</p>
 </blockquote>
 
@@ -229,7 +229,276 @@
   </tbody>
 </table>
 
+<h2 id="test-0--caso-canónico">Test 0 – Caso canónico</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Modelo</th>
+      <th style="text-align: right">Successful Runs</th>
+      <th style="text-align: right">Collisions</th>
+      <th style="text-align: right">Lane Invasions</th>
+      <th style="text-align: right">Speed (km/h)</th>
+      <th style="text-align: right">Dev Mean (m)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>$D^{A}$</td>
+      <td style="text-align: right">100.0% (30/30)</td>
+      <td style="text-align: right">0.000</td>
+      <td style="text-align: right">8.233</td>
+      <td style="text-align: right">71.72</td>
+      <td style="text-align: right">0.361</td>
+    </tr>
+    <tr>
+      <td>$D_{0.15}^{B}$</td>
+      <td style="text-align: right">100.0% (30/30)</td>
+      <td style="text-align: right">0.000</td>
+      <td style="text-align: right">12.300</td>
+      <td style="text-align: right">66.70</td>
+      <td style="text-align: right">0.356</td>
+    </tr>
+    <tr>
+      <td>$D_{0.30}^{B}$</td>
+      <td style="text-align: right">100.0% (30/30)</td>
+      <td style="text-align: right">0.000</td>
+      <td style="text-align: right">21.367</td>
+      <td style="text-align: right">72.12</td>
+      <td style="text-align: right">0.429</td>
+    </tr>
+    <tr>
+      <td>$D_{0.50}^{B}$</td>
+      <td style="text-align: right">96.7% (29/30)</td>
+      <td style="text-align: right">0.000</td>
+      <td style="text-align: right">24.621</td>
+      <td style="text-align: right">62.33</td>
+      <td style="text-align: right">0.409</td>
+    </tr>
+    <tr>
+      <td>$D_{0.75}^{B}$</td>
+      <td style="text-align: right">100.0% (29/29)</td>
+      <td style="text-align: right">0.000</td>
+      <td style="text-align: right">33.276</td>
+      <td style="text-align: right">65.98</td>
+      <td style="text-align: right">0.523</td>
+    </tr>
+    <tr>
+      <td>$D_{0.15}^{C}$</td>
+      <td style="text-align: right">100.0% (30/30)</td>
+      <td style="text-align: right">0.000</td>
+      <td style="text-align: right">11.933</td>
+      <td style="text-align: right">63.37</td>
+      <td style="text-align: right">0.341</td>
+    </tr>
+    <tr>
+      <td>$D_{0.30}^{C}$</td>
+      <td style="text-align: right">96.7% (29/30)</td>
+      <td style="text-align: right">0.000</td>
+      <td style="text-align: right">12.345</td>
+      <td style="text-align: right">67.40</td>
+      <td style="text-align: right">0.312</td>
+    </tr>
+    <tr>
+      <td>$D_{0.50}^{C}$</td>
+      <td style="text-align: right">100.0% (30/30)</td>
+      <td style="text-align: right">0.000</td>
+      <td style="text-align: right">5.767</td>
+      <td style="text-align: right">63.99</td>
+      <td style="text-align: right">0.231</td>
+    </tr>
+    <tr>
+      <td>$D_{0.75}^{C}$</td>
+      <td style="text-align: right">100.0% (30/30)</td>
+      <td style="text-align: right">0.000</td>
+      <td style="text-align: right">15.400</td>
+      <td style="text-align: right">54.12</td>
+      <td style="text-align: right">0.277</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="test-1">Test 1</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Modelo</th>
+      <th style="text-align: right">Successful Runs</th>
+      <th style="text-align: right">Collisions</th>
+      <th style="text-align: right">Lane Invasions</th>
+      <th style="text-align: right">Speed (km/h)</th>
+      <th style="text-align: right">Dev Mean (m)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>$D^{A}$</td>
+      <td style="text-align: right">93.3% (28/30)</td>
+      <td style="text-align: right">0.000</td>
+      <td style="text-align: right">4.929</td>
+      <td style="text-align: right">76.78</td>
+      <td style="text-align: right">0.289</td>
+    </tr>
+    <tr>
+      <td>$D_{0.30}^{B}$</td>
+      <td style="text-align: right">100.0% (30/30)</td>
+      <td style="text-align: right">0.000</td>
+      <td style="text-align: right">27.067</td>
+      <td style="text-align: right">61.02</td>
+      <td style="text-align: right">0.427</td>
+    </tr>
+    <tr>
+      <td>$D_{0.50}^{B}$</td>
+      <td style="text-align: right">100.0% (30/30)</td>
+      <td style="text-align: right">0.000</td>
+      <td style="text-align: right">26.067</td>
+      <td style="text-align: right">61.10</td>
+      <td style="text-align: right">0.415</td>
+    </tr>
+    <tr>
+      <td>$D_{0.75}^{B}$</td>
+      <td style="text-align: right">100.0% (30/30)</td>
+      <td style="text-align: right">0.000</td>
+      <td style="text-align: right">34.300</td>
+      <td style="text-align: right">62.06</td>
+      <td style="text-align: right">0.546</td>
+    </tr>
+    <tr>
+      <td>$D_{0.30}^{C}$</td>
+      <td style="text-align: right">100.0% (30/30)</td>
+      <td style="text-align: right">0.000</td>
+      <td style="text-align: right">13.567</td>
+      <td style="text-align: right">66.89</td>
+      <td style="text-align: right">0.321</td>
+    </tr>
+    <tr>
+      <td>$D_{0.50}^{C}$</td>
+      <td style="text-align: right">100.0% (30/30)</td>
+      <td style="text-align: right">0.000</td>
+      <td style="text-align: right">7.172</td>
+      <td style="text-align: right">65.95</td>
+      <td style="text-align: right">0.228</td>
+    </tr>
+    <tr>
+      <td>$D_{0.75}^{C}$</td>
+      <td style="text-align: right">93.1% (27/29)</td>
+      <td style="text-align: right">0.000</td>
+      <td style="text-align: right">15.481</td>
+      <td style="text-align: right">55.66</td>
+      <td style="text-align: right">0.299</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="test-3">Test 3</h2>
+
+<h2 id="test-4--perturbación-online">Test 4 – Perturbación online</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Modelo</th>
+      <th style="text-align: right">Successful Runs</th>
+      <th style="text-align: right">Collisions</th>
+      <th style="text-align: right">Lane Invasions</th>
+      <th style="text-align: right">Speed (km/h)</th>
+      <th style="text-align: right">Dev Mean (m)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>$D^{A}$</td>
+      <td style="text-align: right">0.0% (0/30)</td>
+      <td style="text-align: right">—</td>
+      <td style="text-align: right">—</td>
+      <td style="text-align: right">—</td>
+      <td style="text-align: right">—</td>
+    </tr>
+    <tr>
+      <td>$D_{0.15}^{B}$</td>
+      <td style="text-align: right">83.3% (25/30)</td>
+      <td style="text-align: right">0.000</td>
+      <td style="text-align: right">29.080</td>
+      <td style="text-align: right">46.91</td>
+      <td style="text-align: right">0.365</td>
+    </tr>
+    <tr>
+      <td>$D_{0.30}^{B}$</td>
+      <td style="text-align: right">90.0% (27/30)</td>
+      <td style="text-align: right">0.000</td>
+      <td style="text-align: right">28.778</td>
+      <td style="text-align: right">57.46</td>
+      <td style="text-align: right">0.434</td>
+    </tr>
+    <tr>
+      <td>$D_{0.50}^{B}$</td>
+      <td style="text-align: right">96.7% (29/30)</td>
+      <td style="text-align: right">0.000</td>
+      <td style="text-align: right">31.069</td>
+      <td style="text-align: right">54.32</td>
+      <td style="text-align: right">0.426</td>
+    </tr>
+    <tr>
+      <td>$D_{0.75}^{B}$</td>
+      <td style="text-align: right">73.3% (22/30)</td>
+      <td style="text-align: right">0.000</td>
+      <td style="text-align: right">47.500</td>
+      <td style="text-align: right">57.24</td>
+      <td style="text-align: right">0.506</td>
+    </tr>
+    <tr>
+      <td>$D_{0.15}^{C}$</td>
+      <td style="text-align: right">0.0% (0/30)</td>
+      <td style="text-align: right">—</td>
+      <td style="text-align: right">—</td>
+      <td style="text-align: right">—</td>
+      <td style="text-align: right">—</td>
+    </tr>
+    <tr>
+      <td>$D_{0.30}^{C}$</td>
+      <td style="text-align: right">70.0% (21/30)</td>
+      <td style="text-align: right">0.000</td>
+      <td style="text-align: right">22.143</td>
+      <td style="text-align: right">61.20</td>
+      <td style="text-align: right">0.328</td>
+    </tr>
+    <tr>
+      <td>$D_{0.50}^{C}$</td>
+      <td style="text-align: right">100.0% (30/30)</td>
+      <td style="text-align: right">0.000</td>
+      <td style="text-align: right">19.167</td>
+      <td style="text-align: right">57.46</td>
+      <td style="text-align: right">0.228</td>
+    </tr>
+    <tr>
+      <td>$D_{0.75}^{C}$</td>
+      <td style="text-align: right">73.3% (22/30)</td>
+      <td style="text-align: right">0.000</td>
+      <td style="text-align: right">25.409</td>
+      <td style="text-align: right">50.94</td>
+      <td style="text-align: right">0.285</td>
+    </tr>
+  </tbody>
+</table>
+
 <h3 id="24-discusión">2.4 Discusión</h3>
+
+<p>Los resultados mantienen las tendencias observadas previamente en el Test 1, aunque las diferencias entre modelos son ahora más evidentes y el escenario resulta considerablemente más exigente que Town02.</p>
+
+<ul>
+  <li>
+    <p><strong>Burbuja ($D^{A}$)</strong> continúa siendo el modelo más rápido (76.78 km/h) y presenta un bajo número de invasiones de carril. Sin embargo, pierde robustez y deja de completar todas las ejecuciones, alcanzando únicamente 93.3 % de éxito. Esto confirma que la política nominal tiene dificultades para recuperarse cuando las perturbaciones iniciales son más severas y la geometría del mapa contiene un mayor número de curvas.</p>
+  </li>
+  <li>
+    <p>Las configuraciones basadas en <strong>DAgger</strong> mantienen tasas de éxito del 100 %, evidenciando una mayor capacidad de recuperación desde estados iniciales alejados de la distribución de entrenamiento. No obstante, esta mejora se obtiene a costa de un incremento muy importante en las invasiones de carril y en el error lateral medio. El deterioro se acentúa conforme aumenta la proporción de datos DAgger, alcanzando 34.3 invasiones para $D_{0.75}^{B}$.</p>
+  </li>
+  <li>
+    <p>Las configuraciones de <strong>Noise Injection</strong> presentan el mejor compromiso entre robustez y precisión. En particular, $D_{0.50}^{C}$ alcanza 100 % de éxito, mantiene un número reducido de invasiones de carril (7.172) y obtiene el menor error lateral medio del experimento (0.228 m). Además, conserva velocidades medias elevadas, lo que sugiere una política más estable y precisa.</p>
+  </li>
+</ul>
+
+<p><strong>Conclusión parcial:</strong> Town11 constituye un escenario considerablemente más discriminante que Town02, permitiendo evidenciar con mayor claridad las fortalezas y debilidades de cada estrategia de generación de datos. Los resultados sugieren que las políticas entrenadas mediante Noise Injection ofrecen el mejor equilibrio entre capacidad de recuperación y precisión de seguimiento.</p>
 
 <p>Los resultados mantienen las tendencias observadas previamente en el Test 1, aunque las diferencias entre modelos son ahora más evidentes:</p>
 
@@ -252,11 +521,15 @@
 <h3 id="32-escenario-de-evaluación">3.2 Escenario de evaluación</h3>
 
 <figure class="half">
-  <img src="http://localhost:4000/assets/images/week103/ruta_example2.png" alt="" style="width:60%" />
-  <figcaption>Mapa nuevo Example_2.</figcaption>
+  <img src="http://localhost:4000/assets/images/week103/ruta_example2.png" alt="Mapa comunitario csonthomisi" style="width:60%" />
+  <figcaption>Mapa comunitario csonthomisi.</figcaption>
 </figure>
 
-<p>Se utilizó el mapa <strong>Example_2</strong> del repositorio <em>CARLA Custom Maps</em>, con una red OpenDRIVE de <strong>452 waypoints</strong> y <strong>dos puntos de aparición</strong>.</p>
+<p>Se utilizó el mapa comunitario <strong>csonthomisi</strong>, publicado originalmente con el nombre <code class="language-plaintext highlighter-rouge">Example_2</code> en el repositorio <a href="https://github.com/csonthomisi/CARLA_Custom_Maps">CARLA_Custom_Maps</a>. El escenario cuenta con una red OpenDRIVE de <strong>452 waypoints</strong> y <strong>dos puntos de aparición</strong>.</p>
+
+<blockquote>
+  <p><strong>Fuente y autoría.</strong> El mapa fue creado y compartido por <strong>csonthomisi</strong>, desarrollador de la comunidad de CARLA. Su perfil público de GitHub incluye proyectos relacionados con mapas personalizados para CARLA, desarrollo sobre el simulador y modelado vehicular. El recurso utilizado fue tomado del repositorio <a href="https://github.com/csonthomisi/CARLA_Custom_Maps">csonthomisi/CARLA_Custom_Maps</a>, donde aparece publicado originalmente como <code class="language-plaintext highlighter-rouge">Example_2</code>.</p>
+</blockquote>
 
 <p>Características del circuito, en contraste con Town04:</p>
 
@@ -305,89 +578,267 @@
 
 <h3 id="34-resultados">3.4 Resultados</h3>
 
+<h2 id="test-0">Test 0</h2>
+
+<p>En proceso</p>
+
+<h2 id="test-1--diferentes-posiciones-de-inicio">Test 1 – Diferentes posiciones de inicio</h2>
+
 <table>
   <thead>
     <tr>
       <th>Modelo</th>
       <th style="text-align: right">Successful Runs</th>
       <th style="text-align: right">Collisions</th>
-      <th style="text-align: right">Lane Inv.</th>
+      <th style="text-align: right">Lane Invasions</th>
       <th style="text-align: right">Speed (km/h)</th>
-      <th style="text-align: right">Mean Lateral Error (m)</th>
+      <th style="text-align: right">Dev Mean (m)</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>$D^{A}$</td>
       <td style="text-align: right">7.7% (2/26)</td>
-      <td style="text-align: right"><strong>0.000</strong></td>
+      <td style="text-align: right">0.000</td>
       <td style="text-align: right">36.000</td>
-      <td style="text-align: right"><strong>52.31</strong></td>
+      <td style="text-align: right">52.31</td>
       <td style="text-align: right">0.515</td>
+    </tr>
+    <tr>
+      <td>$D_{0.15}^{B}$</td>
+      <td style="text-align: right">26.9% (7/26)</td>
+      <td style="text-align: right">0.000</td>
+      <td style="text-align: right">32.857</td>
+      <td style="text-align: right">45.56</td>
+      <td style="text-align: right">0.347</td>
+    </tr>
+    <tr>
+      <td>$D_{0.30}^{B}$</td>
+      <td style="text-align: right">81.5% (22/27)</td>
+      <td style="text-align: right">0.000</td>
+      <td style="text-align: right">42.955</td>
+      <td style="text-align: right">28.32</td>
+      <td style="text-align: right">0.437</td>
     </tr>
     <tr>
       <td>$D_{0.50}^{B}$</td>
       <td style="text-align: right">77.8% (21/27)</td>
-      <td style="text-align: right"><strong>0.000</strong></td>
-      <td style="text-align: right">37.074</td>
-      <td style="text-align: right">40.63</td>
-      <td style="text-align: right">0.401</td>
+      <td style="text-align: right">0.000</td>
+      <td style="text-align: right">37.143</td>
+      <td style="text-align: right">40.50</td>
+      <td style="text-align: right">0.403</td>
     </tr>
     <tr>
       <td>$D_{0.75}^{B}$</td>
       <td style="text-align: right">91.3% (21/23)</td>
-      <td style="text-align: right"><strong>0.000</strong></td>
-      <td style="text-align: right">62.146</td>
-      <td style="text-align: right">36.22</td>
-      <td style="text-align: right">0.451</td>
+      <td style="text-align: right">0.000</td>
+      <td style="text-align: right">62.095</td>
+      <td style="text-align: right">35.23</td>
+      <td style="text-align: right">0.455</td>
+    </tr>
+    <tr>
+      <td>$D_{0.15}^{C}$</td>
+      <td style="text-align: right">20.8% (5/24)</td>
+      <td style="text-align: right">0.000</td>
+      <td style="text-align: right">43.400</td>
+      <td style="text-align: right">46.11</td>
+      <td style="text-align: right">0.527</td>
+    </tr>
+    <tr>
+      <td>$D_{0.30}^{C}$</td>
+      <td style="text-align: right">33.3% (9/27)</td>
+      <td style="text-align: right">0.000</td>
+      <td style="text-align: right">39.778</td>
+      <td style="text-align: right">43.97</td>
+      <td style="text-align: right">0.445</td>
     </tr>
     <tr>
       <td>$D_{0.50}^{C}$</td>
       <td style="text-align: right">88.9% (24/27)</td>
-      <td style="text-align: right"><strong>0.000</strong></td>
-      <td style="text-align: right">36.574</td>
-      <td style="text-align: right">41.81</td>
-      <td style="text-align: right">0.420</td>
+      <td style="text-align: right">0.000</td>
+      <td style="text-align: right">36.583</td>
+      <td style="text-align: right">41.88</td>
+      <td style="text-align: right">0.419</td>
     </tr>
     <tr>
       <td>$D_{0.75}^{C}$</td>
-      <td style="text-align: right"><strong>96.3% (26/27)</strong></td>
-      <td style="text-align: right"><strong>0.000</strong></td>
-      <td style="text-align: right"><strong>31.278</strong></td>
-      <td style="text-align: right">39.41</td>
-      <td style="text-align: right"><strong>0.378</strong></td>
+      <td style="text-align: right">96.3% (26/27)</td>
+      <td style="text-align: right">0.000</td>
+      <td style="text-align: right">30.923</td>
+      <td style="text-align: right">39.46</td>
+      <td style="text-align: right">0.378</td>
     </tr>
     <tr>
       <td>$D^{M}_{30/30/40}$</td>
-      <td style="text-align: right"><strong>96.3% (26/27)</strong></td>
-      <td style="text-align: right"><strong>0.000</strong></td>
-      <td style="text-align: right">41.944</td>
-      <td style="text-align: right">38.26</td>
-      <td style="text-align: right">0.438</td>
+      <td style="text-align: right">96.3% (26/27)</td>
+      <td style="text-align: right">0.000</td>
+      <td style="text-align: right">42.308</td>
+      <td style="text-align: right">38.24</td>
+      <td style="text-align: right">0.439</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="test-2">Test 2</h2>
+
+<p>En proceso</p>
+
+<h2 id="test-3-1">Test 3</h2>
+
+<p>En proceso</p>
+
+<h2 id="test-4--perturbación-online-1">Test 4 – Perturbación online</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Modelo</th>
+      <th style="text-align: right">Successful Runs</th>
+      <th style="text-align: right">Collisions</th>
+      <th style="text-align: right">Lane Invasions</th>
+      <th style="text-align: right">Speed (km/h)</th>
+      <th style="text-align: right">Dev Mean (m)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>$D_{0.15}^{B}$</td>
+      <td style="text-align: right">65.5% (19/29)</td>
+      <td style="text-align: right">0.000</td>
+      <td style="text-align: right">38.632</td>
+      <td style="text-align: right">42.63</td>
+      <td style="text-align: right">0.377</td>
+    </tr>
+    <tr>
+      <td>$D_{0.30}^{B}$</td>
+      <td style="text-align: right">76.7% (23/30)</td>
+      <td style="text-align: right">0.000</td>
+      <td style="text-align: right">52.609</td>
+      <td style="text-align: right">27.82</td>
+      <td style="text-align: right">0.450</td>
+    </tr>
+    <tr>
+      <td>$D_{0.50}^{B}$</td>
+      <td style="text-align: right">96.6% (28/29)</td>
+      <td style="text-align: right">0.000</td>
+      <td style="text-align: right">37.500</td>
+      <td style="text-align: right">37.49</td>
+      <td style="text-align: right">0.395</td>
+    </tr>
+    <tr>
+      <td>$D_{0.15}^{C}$</td>
+      <td style="text-align: right">33.3% (10/30)</td>
+      <td style="text-align: right">0.000</td>
+      <td style="text-align: right">49.300</td>
+      <td style="text-align: right">44.31</td>
+      <td style="text-align: right">0.516</td>
+    </tr>
+    <tr>
+      <td>$D_{0.30}^{C}$</td>
+      <td style="text-align: right">31.0% (9/29)</td>
+      <td style="text-align: right">0.000</td>
+      <td style="text-align: right">50.667</td>
+      <td style="text-align: right">42.12</td>
+      <td style="text-align: right">0.441</td>
+    </tr>
+    <tr>
+      <td>$D_{0.50}^{C}$</td>
+      <td style="text-align: right">79.3% (23/29)</td>
+      <td style="text-align: right">0.000</td>
+      <td style="text-align: right">39.435</td>
+      <td style="text-align: right">40.32</td>
+      <td style="text-align: right">0.421</td>
     </tr>
   </tbody>
 </table>
 
 <h3 id="35-observaciones">3.5 Observaciones</h3>
 
+<p>Los resultados obtenidos en el mapa csonthomisi muestran un comportamiento muy diferente al observado en Town02 y Town11, evidenciando que la capacidad de generalización constituye un desafío considerablemente más exigente que las perturbaciones iniciales sobre mapas conocidos.</p>
+
 <ul>
-  <li>El escenario Example_2 resulta considerablemente más exigente para el modelo entrenado únicamente con <strong>Burbuja</strong> ($D^{A}$), que alcanza solo <strong>7.7%</strong> de ejecuciones exitosas.</li>
+  <li>
+    <p>El modelo <strong>Burbuja</strong> ($D^{A}$) prácticamente pierde su capacidad de transferencia, alcanzando únicamente 7.7 % de ejecuciones exitosas. Esto sugiere un fuerte sobreajuste a la geometría y distribución presentes durante el entrenamiento.</p>
+  </li>
+  <li>
+    <p>Las configuraciones basadas en <strong>DAgger</strong> presentan una mejora muy significativa respecto a Burbuja. Particularmente, $D_{0.30}^{B}$ y $D_{0.50}^{B}$ alcanzan tasas de éxito superiores al 75 %, aunque manteniendo velocidades considerablemente menores y un elevado número de invasiones de carril.</p>
+  </li>
+  <li>
+    <p>Las configuraciones basadas en <strong>Noise Injection</strong> muestran nuevamente una elevada capacidad de generalización. En especial, $D_{0.50}^{C}$ obtiene el mejor desempeño global, alcanzando 88.9 % de éxito y manteniendo un error lateral reducido.</p>
+  </li>
+  <li>
+    <p>Resulta interesante observar que las políticas más robustas tienden a reducir significativamente su velocidad media, sugiriendo la aparición de estrategias de conducción más conservadoras para compensar la incertidumbre asociada a un entorno completamente desconocido.</p>
+  </li>
+</ul>
+
+<p>En conjunto, estos resultados sugieren que la exposición del controlador a perturbaciones continuas durante el entrenamiento favorece la construcción de representaciones más invariantes y transferibles a escenarios no vistos previamente.</p>
+
+<h3 id="35-observaciones-1">3.5 Observaciones</h3>
+
+<ul>
+  <li>El escenario csonthomisi resulta considerablemente más exigente para el modelo entrenado únicamente con <strong>Burbuja</strong> ($D^{A}$), que alcanza solo <strong>7.7%</strong> de ejecuciones exitosas.</li>
   <li>Las configuraciones con <strong>Noise Injection</strong> muestran la mejor capacidad de generalización. En particular, $D_{0.75}^{C}$ obtiene <strong>96.3%</strong> de éxito, el menor número de invasiones de carril (<strong>31.28</strong>) y el menor error lateral medio (<strong>0.378 m</strong>).</li>
   <li>Las configuraciones basadas en <strong>DAgger</strong> mejoran notablemente respecto a Burbuja, aunque un incremento excesivo de muestras DAgger (75%) aumenta significativamente las invasiones de carril (<strong>62.15</strong>).</li>
   <li><strong>Magic Mix 30/30/40</strong> mantiene una tasa de éxito equivalente a Noise 75%, aunque con mayor número de invasiones de carril y un error lateral medio superior.</li>
 </ul>
 
 <hr />
+<h2 id="4-gráficos">4. Gráficos</h2>
 
-<h2 id="4-conclusiones-generales">4. Conclusiones generales</h2>
+<figure class="half">
+  <img src="http://localhost:4000/assets/images/week103/test4_town02_curvas.png" alt="Resultados Test 4 en Town02" style="width:50%" />
+  <figcaption>
+    Curvas de desempeño del Test 4 en Town02. Noise Injection alcanza su mejor desempeño con una proporción del 50%, mientras que DAgger presenta una degradación significativa para proporciones elevadas.
+  </figcaption>
+</figure>
 
-<ol>
-  <li><strong>Town11</strong> se confirma como un escenario más discriminante que Town02 para evaluar robustez ante perturbaciones iniciales, y justifica ejecutar el Test 1 completo bajo este mapa.</li>
-  <li><strong>Burbuja</strong>, si bien es el modelo más veloz, es también el menos robusto ante condiciones no vistas o perturbaciones severas, tanto en Town11 como en Example_2.</li>
-  <li><strong>Noise Injection</strong>, particularmente con proporciones altas (75%), ofrece el mejor balance entre tasa de éxito, invasiones de carril y error lateral, destacando en capacidad de generalización.</li>
-  <li><strong>DAgger</strong> mejora la tasa de éxito respecto a Burbuja, pero a costa de mayor invasión de carril, especialmente en proporciones elevadas (75%).</li>
-  <li><strong>Magic Mix (30/30/40)</strong> logra un desempeño competitivo en tasa de éxito, aunque no supera a Noise Injection en precisión de trayectoria.</li>
-</ol>]]></content><author><name>Carlos Velásquez</name><email>canveo@gmail.com</email></author><category term="Weekly Log" /><category term="Robustez" /><category term="Burbuja" /><category term="Noise Injection" /><category term="DAgger" /><category term="CARLA Simulator" /><summary type="html"><![CDATA[Se actualizó Week 102 con nuevas métricas y cambios en el orden de las tablas.]]></summary></entry><entry><title type="html">Week 102 - Evaluación de robustez en distintos escenarios de conducción</title><link href="http://localhost:4000/weekly%20log/week102/" rel="alternate" type="text/html" title="Week 102 - Evaluación de robustez en distintos escenarios de conducción" /><published>2026-06-28T00:00:00-05:00</published><updated>2026-06-28T00:00:00-05:00</updated><id>http://localhost:4000/weekly%20log/week102</id><content type="html" xml:base="http://localhost:4000/weekly%20log/week102/"><![CDATA[<h2 id="diseño-experimental">Diseño experimental</h2>
+<figure class="half">
+  <img src="http://localhost:4000/assets/images/week103/test4_town11_curvas.png" alt="Resultados Test 4 en Town11" style="width:50%" />
+  <figcaption>
+    Curvas de desempeño del Test 4 en Town11. El escenario resulta altamente discriminante para el modelo base, mientras que las configuraciones intermedias de DAgger y Noise Injection mejoran considerablemente la robustez, destacando $D_{0.50}^{C}$ con un 100% de ejecuciones exitosas.
+  </figcaption>
+</figure>
+
+<figure class="half">
+  <img src="http://localhost:4000/assets/images/week103/test4_csonthomisi_curvas.png" alt="Resultados Test 4 en el mapa comunitario csonthomisi" style="width:50%" />
+  <figcaption>
+    Curvas de desempeño del Test 4 en el mapa comunitario csonthomisi. A diferencia de Town02 y Town11, las configuraciones basadas en DAgger muestran una capacidad de generalización significativamente superior, alcanzando hasta un 96.6% de éxito para $D_{0.50}^{B}$.
+  </figcaption>
+</figure>
+
+<hr />
+
+<h2 id="5-conclusiones-generales">5. Conclusiones generales</h2>
+
+<ul>
+  <li>
+    <p><strong>Burbuja ($D^{A}$)</strong> favorece el desempeño nominal en escenarios conocidos, pero presenta una capacidad de generalización limitada y una menor robustez frente a perturbaciones severas o cambios significativos en la distribución del entorno.</p>
+  </li>
+  <li>
+    <p><strong>Noise Injection ($D^{C}$)</strong> induce principalmente <strong>robustez local</strong>, mejorando la estabilidad de la política frente a perturbaciones pequeñas y moderadas alrededor de la trayectoria nominal. Su mejor desempeño se observa en Town02 y Town11, particularmente para proporciones intermedias y altas ($30\%-50\%$).</p>
+  </li>
+  <li>
+    <p><strong>DAgger ($D^{B}$)</strong> induce principalmente <strong>robustez de recuperación</strong>, permitiendo al agente recuperarse desde estados alejados de la trayectoria nominal y generalizar mejor ante escenarios significativamente fuera de distribución, como ocurre en el mapa csonthomisi.</p>
+  </li>
+  <li>
+    <p><strong>Magic Mix ($D^{M}$)</strong> ofrece un compromiso interesante entre ambas propiedades de robustez, aunque los resultados actuales sugieren que la proporción de mezcla aún puede optimizarse para aprovechar simultáneamente las ventajas de Noise Injection y DAgger.</p>
+  </li>
+</ul>
+
+<p>En conjunto, estos resultados indican que la robustez en conducción autónoma end-to-end puede descomponerse en dos componentes complementarias:</p>
+
+\[\boxed{
+\text{Robustez Local}
+\quad+\quad
+\text{Robustez de Recuperación}
+}\]
+
+<p>donde:</p>
+
+<ul>
+  <li>La <strong>robustez local</strong> está asociada con la capacidad de la política para tolerar pequeñas desviaciones alrededor de la distribución de entrenamiento.</li>
+  <li>La <strong>robustez de recuperación</strong> está asociada con la capacidad de retornar a estados seguros cuando el vehículo alcanza configuraciones significativamente fuera de distribución.</li>
+</ul>]]></content><author><name>Carlos Velásquez</name><email>canveo@gmail.com</email></author><category term="Weekly Log" /><category term="Robustez" /><category term="Burbuja" /><category term="Noise Injection" /><category term="DAgger" /><category term="CARLA Simulator" /><summary type="html"><![CDATA[Se actualizó Week 102 con nuevas métricas y cambios en el orden de las tablas.]]></summary></entry><entry><title type="html">Week 102 - Evaluación de robustez en distintos escenarios de conducción</title><link href="http://localhost:4000/weekly%20log/week102/" rel="alternate" type="text/html" title="Week 102 - Evaluación de robustez en distintos escenarios de conducción" /><published>2026-06-28T00:00:00-05:00</published><updated>2026-06-28T00:00:00-05:00</updated><id>http://localhost:4000/weekly%20log/week102</id><content type="html" xml:base="http://localhost:4000/weekly%20log/week102/"><![CDATA[<h2 id="diseño-experimental">Diseño experimental</h2>
 
 <h3 id="datasets">Datasets</h3>
 
@@ -609,7 +1060,7 @@
       <th>Modelo</th>
       <th style="text-align: right">Successful Runs</th>
       <th style="text-align: right">Collisions</th>
-      <th style="text-align: right">Lane Inv.</th>
+      <th style="text-align: right">Lane Invasions</th>
       <th style="text-align: right">Speed (km/h)</th>
       <th style="text-align: right">Dev Mean (m)</th>
     </tr>
@@ -617,83 +1068,59 @@
   <tbody>
     <tr>
       <td>$D^{A}$</td>
-      <td style="text-align: right"><strong>98.7% (222/225)</strong></td>
-      <td style="text-align: right"><strong>0.000</strong></td>
-      <td style="text-align: right">7.908</td>
+      <td style="text-align: right">98.7% (222/225)</td>
+      <td style="text-align: right">0.000</td>
+      <td style="text-align: right">7.090</td>
       <td style="text-align: right">55.33</td>
-      <td style="text-align: right"><strong>0.468</strong></td>
+      <td style="text-align: right">0.233</td>
     </tr>
     <tr>
       <td>$D_{0.15}^{B}$</td>
-      <td style="text-align: right">98.2% (221/225)</td>
-      <td style="text-align: right"><strong>0.000</strong></td>
-      <td style="text-align: right"><strong>7.412</strong></td>
-      <td style="text-align: right"><strong>59.91</strong></td>
-      <td style="text-align: right">0.487</td>
+      <td style="text-align: right">99.1% (223/225)</td>
+      <td style="text-align: right">0.099</td>
+      <td style="text-align: right">6.493</td>
+      <td style="text-align: right">61.09</td>
+      <td style="text-align: right">0.397</td>
     </tr>
     <tr>
       <td>$D_{0.30}^{B}$</td>
       <td style="text-align: right">96.9% (218/225)</td>
       <td style="text-align: right">1.000</td>
-      <td style="text-align: right">9.875</td>
-      <td style="text-align: right">55.63</td>
-      <td style="text-align: right">0.558</td>
+      <td style="text-align: right">8.798</td>
+      <td style="text-align: right">55.64</td>
+      <td style="text-align: right">0.348</td>
     </tr>
     <tr>
       <td>$D_{0.50}^{B}$</td>
-      <td style="text-align: right"><strong>98.7% (222/225)</strong></td>
-      <td style="text-align: right"><strong>0.000</strong></td>
-      <td style="text-align: right">8.590</td>
-      <td style="text-align: right">57.33</td>
-      <td style="text-align: right">0.536</td>
-    </tr>
-    <tr>
-      <td>$D_{0.75}^{B}$</td>
-      <td style="text-align: right">53.8% (121/225)</td>
-      <td style="text-align: right">0.835</td>
-      <td style="text-align: right">15.438</td>
-      <td style="text-align: right">50.48</td>
-      <td style="text-align: right">0.780</td>
+      <td style="text-align: right">99.1% (223/225)</td>
+      <td style="text-align: right">0.000</td>
+      <td style="text-align: right">8.076</td>
+      <td style="text-align: right">57.16</td>
+      <td style="text-align: right">0.514</td>
     </tr>
     <tr>
       <td>$D_{0.15}^{C}$</td>
-      <td style="text-align: right">98.7% (222/225)</td>
-      <td style="text-align: right"><strong>0.000</strong></td>
-      <td style="text-align: right">8.189</td>
-      <td style="text-align: right">53.31</td>
-      <td style="text-align: right">0.477</td>
+      <td style="text-align: right">97.3% (219/225)</td>
+      <td style="text-align: right">0.151</td>
+      <td style="text-align: right">7.598</td>
+      <td style="text-align: right">54.14</td>
+      <td style="text-align: right">0.324</td>
     </tr>
     <tr>
       <td>$D_{0.30}^{C}$</td>
       <td style="text-align: right">97.3% (219/225)</td>
-      <td style="text-align: right"><strong>0.000</strong></td>
-      <td style="text-align: right">7.563</td>
+      <td style="text-align: right">0.000</td>
+      <td style="text-align: right">6.667</td>
       <td style="text-align: right">59.42</td>
-      <td style="text-align: right">0.486</td>
+      <td style="text-align: right">0.329</td>
     </tr>
     <tr>
       <td>$D_{0.50}^{C}$</td>
-      <td style="text-align: right">78.2% (176/225)</td>
-      <td style="text-align: right"><strong>0.000</strong></td>
-      <td style="text-align: right">8.443</td>
-      <td style="text-align: right">57.18</td>
-      <td style="text-align: right">0.500</td>
-    </tr>
-    <tr>
-      <td>$D_{0.75}^{C}$</td>
-      <td style="text-align: right">55.6% (125/225)</td>
-      <td style="text-align: right">0.528</td>
-      <td style="text-align: right">8.688</td>
-      <td style="text-align: right">53.69</td>
-      <td style="text-align: right">0.591</td>
-    </tr>
-    <tr>
-      <td>$D^{M}_{30/30/40}$</td>
-      <td style="text-align: right">71.4% (160/224)</td>
-      <td style="text-align: right">0.081</td>
-      <td style="text-align: right"><strong>6.688</strong></td>
-      <td style="text-align: right">57.14</td>
-      <td style="text-align: right">0.546</td>
+      <td style="text-align: right">99.6% (224/225)</td>
+      <td style="text-align: right">0.009</td>
+      <td style="text-align: right">7.094</td>
+      <td style="text-align: right">56.28</td>
+      <td style="text-align: right">0.276</td>
     </tr>
   </tbody>
 </table>
@@ -714,88 +1141,88 @@
   <tbody>
     <tr>
       <td>$D^{A}$</td>
-      <td style="text-align: right"><strong>100.0% (225/225)</strong></td>
-      <td style="text-align: right"><strong>0.000</strong></td>
-      <td style="text-align: right">9.444</td>
+      <td style="text-align: right">100.0% (225/225)</td>
+      <td style="text-align: right">0.000</td>
+      <td style="text-align: right">8.707</td>
       <td style="text-align: right">54.71</td>
-      <td style="text-align: right"><strong>0.767</strong></td>
+      <td style="text-align: right">0.262</td>
     </tr>
     <tr>
       <td>$D_{0.15}^{B}$</td>
-      <td style="text-align: right"><strong>98.2% (221/225)</strong></td>
-      <td style="text-align: right">0.103</td>
-      <td style="text-align: right"><strong>8.732</strong></td>
-      <td style="text-align: right"><strong>60.75</strong></td>
-      <td style="text-align: right">0.782</td>
+      <td style="text-align: right">98.2% (221/225)</td>
+      <td style="text-align: right">0.104</td>
+      <td style="text-align: right">8.136</td>
+      <td style="text-align: right">60.75</td>
+      <td style="text-align: right">0.417</td>
     </tr>
     <tr>
       <td>$D_{0.30}^{B}$</td>
       <td style="text-align: right">94.7% (213/225)</td>
-      <td style="text-align: right">1.004</td>
-      <td style="text-align: right">11.649</td>
-      <td style="text-align: right">55.25</td>
-      <td style="text-align: right">0.816</td>
+      <td style="text-align: right">1.005</td>
+      <td style="text-align: right">10.404</td>
+      <td style="text-align: right">55.27</td>
+      <td style="text-align: right">0.381</td>
     </tr>
     <tr>
       <td>$D_{0.50}^{B}$</td>
       <td style="text-align: right">97.3% (219/225)</td>
-      <td style="text-align: right"><strong>0.000</strong></td>
-      <td style="text-align: right">10.421</td>
+      <td style="text-align: right">0.000</td>
+      <td style="text-align: right">10.050</td>
       <td style="text-align: right">56.65</td>
-      <td style="text-align: right">0.825</td>
+      <td style="text-align: right">0.526</td>
     </tr>
     <tr>
       <td>$D_{0.75}^{B}$</td>
       <td style="text-align: right">40.4% (91/225)</td>
-      <td style="text-align: right">1.024</td>
-      <td style="text-align: right">17.138</td>
-      <td style="text-align: right">47.17</td>
-      <td style="text-align: right">0.945</td>
+      <td style="text-align: right">1.044</td>
+      <td style="text-align: right">18.055</td>
+      <td style="text-align: right">47.81</td>
+      <td style="text-align: right">0.600</td>
+    </tr>
+    <tr>
+      <td>$D_{1.00}^{B}$</td>
+      <td style="text-align: right">0.0% (0/225)</td>
+      <td style="text-align: right">—</td>
+      <td style="text-align: right">—</td>
+      <td style="text-align: right">—</td>
+      <td style="text-align: right">—</td>
     </tr>
     <tr>
       <td>$D_{0.15}^{C}$</td>
       <td style="text-align: right">96.9% (218/225)</td>
       <td style="text-align: right">0.147</td>
-      <td style="text-align: right">9.688</td>
-      <td style="text-align: right">53.91</td>
-      <td style="text-align: right">0.779</td>
+      <td style="text-align: right">9.156</td>
+      <td style="text-align: right">53.90</td>
+      <td style="text-align: right">0.346</td>
     </tr>
     <tr>
       <td>$D_{0.30}^{C}$</td>
       <td style="text-align: right">96.4% (217/225)</td>
-      <td style="text-align: right"><strong>0.000</strong></td>
-      <td style="text-align: right"><strong>8.604</strong></td>
+      <td style="text-align: right">0.000</td>
+      <td style="text-align: right">8.295</td>
       <td style="text-align: right">59.39</td>
-      <td style="text-align: right">0.776</td>
+      <td style="text-align: right">0.337</td>
     </tr>
     <tr>
       <td>$D_{0.50}^{C}$</td>
       <td style="text-align: right">74.2% (167/225)</td>
-      <td style="text-align: right">0.004</td>
-      <td style="text-align: right">9.295</td>
-      <td style="text-align: right">56.49</td>
-      <td style="text-align: right"><strong>0.765</strong></td>
+      <td style="text-align: right">0.006</td>
+      <td style="text-align: right">8.449</td>
+      <td style="text-align: right">56.51</td>
+      <td style="text-align: right">0.307</td>
     </tr>
     <tr>
       <td>$D_{0.75}^{C}$</td>
       <td style="text-align: right">45.3% (102/225)</td>
-      <td style="text-align: right">0.570</td>
-      <td style="text-align: right">10.272</td>
-      <td style="text-align: right">53.45</td>
-      <td style="text-align: right">0.804</td>
-    </tr>
-    <tr>
-      <td>$D^{M}_{30/30/40}$</td>
-      <td style="text-align: right">61.6% (138/224)</td>
-      <td style="text-align: right">0.065</td>
-      <td style="text-align: right"><strong>7.790</strong></td>
-      <td style="text-align: right">56.79</td>
-      <td style="text-align: right">—</td>
+      <td style="text-align: right">0.578</td>
+      <td style="text-align: right">8.824</td>
+      <td style="text-align: right">53.51</td>
+      <td style="text-align: right">0.392</td>
     </tr>
   </tbody>
 </table>
 
-<h2 id="test-2--posiciones-aleatorias">Test 2 – Posiciones aleatorias</h2>
+<h2 id="test-2--condiciones-iniciales-aleatorias">Test 2 – Condiciones iniciales aleatorias</h2>
 
 <table>
   <thead>
@@ -803,7 +1230,7 @@
       <th>Modelo</th>
       <th style="text-align: right">Successful Runs</th>
       <th style="text-align: right">Collisions</th>
-      <th style="text-align: right">Lane Inv.</th>
+      <th style="text-align: right">Lane Invasions</th>
       <th style="text-align: right">Speed (km/h)</th>
       <th style="text-align: right">Dev Mean (m)</th>
     </tr>
@@ -812,73 +1239,158 @@
     <tr>
       <td>$D^{A}$</td>
       <td style="text-align: right">73.8% (166/225)</td>
-      <td style="text-align: right">0.018</td>
-      <td style="text-align: right"><strong>2.484</strong></td>
-      <td style="text-align: right"><strong>45.12</strong></td>
-      <td style="text-align: right"><strong>0.499</strong></td>
+      <td style="text-align: right">0.006</td>
+      <td style="text-align: right">1.801</td>
+      <td style="text-align: right">49.02</td>
+      <td style="text-align: right">0.197</td>
     </tr>
     <tr>
       <td>$D_{0.15}^{B}$</td>
       <td style="text-align: right">98.7% (222/225)</td>
       <td style="text-align: right">0.009</td>
-      <td style="text-align: right">2.153</td>
-      <td style="text-align: right">46.83</td>
-      <td style="text-align: right">0.592</td>
+      <td style="text-align: right">2.108</td>
+      <td style="text-align: right">46.90</td>
+      <td style="text-align: right">0.336</td>
     </tr>
     <tr>
       <td>$D_{0.30}^{B}$</td>
       <td style="text-align: right">98.2% (221/225)</td>
-      <td style="text-align: right">0.586</td>
-      <td style="text-align: right">2.127</td>
-      <td style="text-align: right">44.04</td>
-      <td style="text-align: right">0.597</td>
+      <td style="text-align: right">0.579</td>
+      <td style="text-align: right">2.027</td>
+      <td style="text-align: right">43.96</td>
+      <td style="text-align: right">0.314</td>
     </tr>
     <tr>
       <td>$D_{0.50}^{B}$</td>
-      <td style="text-align: right"><strong>99.1% (223/225)</strong></td>
-      <td style="text-align: right"><strong>0.000</strong></td>
-      <td style="text-align: right">2.333</td>
-      <td style="text-align: right">45.11</td>
-      <td style="text-align: right">0.663</td>
+      <td style="text-align: right">99.1% (223/225)</td>
+      <td style="text-align: right">0.000</td>
+      <td style="text-align: right">2.327</td>
+      <td style="text-align: right">45.19</td>
+      <td style="text-align: right">0.380</td>
     </tr>
     <tr>
       <td>$D_{0.75}^{B}$</td>
-      <td style="text-align: right"><strong>99.1% (223/225)</strong></td>
-      <td style="text-align: right">0.432</td>
-      <td style="text-align: right">3.788</td>
-      <td style="text-align: right">41.16</td>
-      <td style="text-align: right">0.779</td>
+      <td style="text-align: right">99.1% (223/225)</td>
+      <td style="text-align: right">0.430</td>
+      <td style="text-align: right">3.771</td>
+      <td style="text-align: right">41.15</td>
+      <td style="text-align: right">0.504</td>
     </tr>
     <tr>
       <td>$D_{0.15}^{C}$</td>
       <td style="text-align: right">98.2% (221/225)</td>
       <td style="text-align: right">0.032</td>
-      <td style="text-align: right">2.356</td>
-      <td style="text-align: right">43.52</td>
-      <td style="text-align: right">0.572</td>
+      <td style="text-align: right">2.000</td>
+      <td style="text-align: right">43.51</td>
+      <td style="text-align: right">0.255</td>
     </tr>
     <tr>
       <td>$D_{0.30}^{C}$</td>
       <td style="text-align: right">72.0% (162/225)</td>
-      <td style="text-align: right">0.487</td>
-      <td style="text-align: right">3.955</td>
-      <td style="text-align: right">43.89</td>
-      <td style="text-align: right"><strong>0.484</strong></td>
+      <td style="text-align: right">0.117</td>
+      <td style="text-align: right">2.074</td>
+      <td style="text-align: right">49.70</td>
+      <td style="text-align: right">0.263</td>
     </tr>
     <tr>
       <td>$D_{0.50}^{C}$</td>
       <td style="text-align: right">72.9% (164/225)</td>
-      <td style="text-align: right"><strong>0.000</strong></td>
-      <td style="text-align: right">2.079</td>
-      <td style="text-align: right">44.81</td>
-      <td style="text-align: right">0.557</td>
+      <td style="text-align: right">0.000</td>
+      <td style="text-align: right">1.963</td>
+      <td style="text-align: right">48.51</td>
+      <td style="text-align: right">0.264</td>
     </tr>
   </tbody>
 </table>
 
 <h2 id="test-3--diferentes-velocidades-iniciales">Test 3 – Diferentes velocidades iniciales</h2>
 
-<p>diferentes velocidades</p>
+<table>
+  <thead>
+    <tr>
+      <th>Modelo</th>
+      <th style="text-align: right">Successful Runs</th>
+      <th style="text-align: right">Collisions</th>
+      <th style="text-align: right">Lane Invasions</th>
+      <th style="text-align: right">Speed (km/h)</th>
+      <th style="text-align: right">Dev Mean (m)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>$D^{A}$</td>
+      <td style="text-align: right">98.6% (218/221)</td>
+      <td style="text-align: right">0.000</td>
+      <td style="text-align: right">7.110</td>
+      <td style="text-align: right">59.71</td>
+      <td style="text-align: right">0.236</td>
+    </tr>
+    <tr>
+      <td>$D_{0.15}^{B}$</td>
+      <td style="text-align: right">76.7% (168/219)</td>
+      <td style="text-align: right">0.310</td>
+      <td style="text-align: right">13.226</td>
+      <td style="text-align: right">63.77</td>
+      <td style="text-align: right">0.410</td>
+    </tr>
+    <tr>
+      <td>$D_{0.30}^{B}$</td>
+      <td style="text-align: right">89.0% (195/219)</td>
+      <td style="text-align: right">1.021</td>
+      <td style="text-align: right">17.164</td>
+      <td style="text-align: right">56.89</td>
+      <td style="text-align: right">0.365</td>
+    </tr>
+    <tr>
+      <td>$D_{0.50}^{B}$</td>
+      <td style="text-align: right">78.2% (172/220)</td>
+      <td style="text-align: right">0.058</td>
+      <td style="text-align: right">15.942</td>
+      <td style="text-align: right">59.75</td>
+      <td style="text-align: right">0.505</td>
+    </tr>
+    <tr>
+      <td>$D_{0.75}^{B}$</td>
+      <td style="text-align: right">33.6% (74/220)</td>
+      <td style="text-align: right">1.541</td>
+      <td style="text-align: right">23.338</td>
+      <td style="text-align: right">48.62</td>
+      <td style="text-align: right">0.563</td>
+    </tr>
+    <tr>
+      <td>$D_{0.15}^{C}$</td>
+      <td style="text-align: right">97.7% (215/220)</td>
+      <td style="text-align: right">0.186</td>
+      <td style="text-align: right">7.595</td>
+      <td style="text-align: right">58.04</td>
+      <td style="text-align: right">0.319</td>
+    </tr>
+    <tr>
+      <td>$D_{0.30}^{C}$</td>
+      <td style="text-align: right">91.8% (202/220)</td>
+      <td style="text-align: right">0.139</td>
+      <td style="text-align: right">6.480</td>
+      <td style="text-align: right">63.11</td>
+      <td style="text-align: right">0.301</td>
+    </tr>
+    <tr>
+      <td>$D_{0.50}^{C}$</td>
+      <td style="text-align: right">97.6% (161/165)</td>
+      <td style="text-align: right">0.006</td>
+      <td style="text-align: right">6.969</td>
+      <td style="text-align: right">60.01</td>
+      <td style="text-align: right">0.277</td>
+    </tr>
+    <tr>
+      <td>$D_{0.75}^{C}$</td>
+      <td style="text-align: right">43.6% (24/55)</td>
+      <td style="text-align: right">0.500</td>
+      <td style="text-align: right">7.000</td>
+      <td style="text-align: right">55.06</td>
+      <td style="text-align: right">0.375</td>
+    </tr>
+  </tbody>
+</table>
 
 <h2 id="test-4--perturbación-online-durante-la-inferencia">Test 4 – Perturbación online durante la inferencia</h2>
 
@@ -890,7 +1402,7 @@
       <th>Modelo</th>
       <th style="text-align: right">Successful Runs</th>
       <th style="text-align: right">Collisions</th>
-      <th style="text-align: right">Lane Inv.</th>
+      <th style="text-align: right">Lane Invasions</th>
       <th style="text-align: right">Speed (km/h)</th>
       <th style="text-align: right">Dev Mean (m)</th>
     </tr>
@@ -899,90 +1411,90 @@
     <tr>
       <td>$D^{A}$</td>
       <td style="text-align: right">88.0% (198/225)</td>
-      <td style="text-align: right"><strong>0.025</strong></td>
-      <td style="text-align: right">8.993</td>
+      <td style="text-align: right">0.025</td>
+      <td style="text-align: right">8.020</td>
       <td style="text-align: right">54.34</td>
-      <td style="text-align: right">0.486</td>
-    </tr>
-    <tr>
-      <td>$D^{M}_{70/20/10}$</td>
-      <td style="text-align: right">47.1% (106/225)</td>
-      <td style="text-align: right">0.264</td>
-      <td style="text-align: right">8.887</td>
-      <td style="text-align: right">53.53</td>
-      <td style="text-align: right">0.717</td>
-    </tr>
-    <tr>
-      <td>$D^{M}_{30/30/40}$</td>
-      <td style="text-align: right">57.3% (129/225)</td>
-      <td style="text-align: right">0.147</td>
-      <td style="text-align: right"><strong>7.876</strong></td>
-      <td style="text-align: right">52.39</td>
-      <td style="text-align: right">0.677</td>
+      <td style="text-align: right">0.232</td>
     </tr>
     <tr>
       <td>$D_{0.15}^{B}$</td>
       <td style="text-align: right">30.2% (68/225)</td>
       <td style="text-align: right">0.221</td>
-      <td style="text-align: right"><strong>7.760</strong></td>
-      <td style="text-align: right"><strong>56.82</strong></td>
-      <td style="text-align: right">0.593</td>
+      <td style="text-align: right">7.279</td>
+      <td style="text-align: right">56.81</td>
+      <td style="text-align: right">0.420</td>
     </tr>
     <tr>
       <td>$D_{0.30}^{B}$</td>
       <td style="text-align: right">71.1% (160/225)</td>
       <td style="text-align: right">0.994</td>
-      <td style="text-align: right">11.341</td>
-      <td style="text-align: right">53.93</td>
-      <td style="text-align: right">0.640</td>
+      <td style="text-align: right">10.463</td>
+      <td style="text-align: right">53.92</td>
+      <td style="text-align: right">0.350</td>
     </tr>
     <tr>
       <td>$D_{0.50}^{B}$</td>
       <td style="text-align: right">62.2% (140/225)</td>
       <td style="text-align: right">0.129</td>
-      <td style="text-align: right">10.604</td>
-      <td style="text-align: right">54.55</td>
-      <td style="text-align: right">0.701</td>
+      <td style="text-align: right">9.764</td>
+      <td style="text-align: right">54.53</td>
+      <td style="text-align: right">0.531</td>
     </tr>
     <tr>
       <td>$D_{0.75}^{B}$</td>
       <td style="text-align: right">20.0% (45/225)</td>
       <td style="text-align: right">0.978</td>
-      <td style="text-align: right">18.800</td>
-      <td style="text-align: right">47.65</td>
-      <td style="text-align: right">0.817</td>
+      <td style="text-align: right">18.356</td>
+      <td style="text-align: right">47.63</td>
+      <td style="text-align: right">0.577</td>
     </tr>
     <tr>
       <td>$D_{0.15}^{C}$</td>
       <td style="text-align: right">82.2% (185/225)</td>
       <td style="text-align: right">0.076</td>
-      <td style="text-align: right">9.752</td>
-      <td style="text-align: right">52.92</td>
-      <td style="text-align: right">0.530</td>
+      <td style="text-align: right">8.778</td>
+      <td style="text-align: right">52.91</td>
+      <td style="text-align: right">0.337</td>
     </tr>
     <tr>
       <td>$D_{0.30}^{C}$</td>
       <td style="text-align: right">79.6% (179/225)</td>
       <td style="text-align: right">0.179</td>
-      <td style="text-align: right">8.485</td>
-      <td style="text-align: right">56.17</td>
-      <td style="text-align: right">0.554</td>
+      <td style="text-align: right">7.788</td>
+      <td style="text-align: right">56.15</td>
+      <td style="text-align: right">0.342</td>
     </tr>
     <tr>
       <td>$D_{0.50}^{C}$</td>
-      <td style="text-align: right"><strong>91.1% (205/225)</strong></td>
+      <td style="text-align: right">91.1% (205/225)</td>
       <td style="text-align: right">0.054</td>
-      <td style="text-align: right">9.034</td>
-      <td style="text-align: right">54.61</td>
-      <td style="text-align: right"><strong>0.466</strong></td>
+      <td style="text-align: right">8.415</td>
+      <td style="text-align: right">54.60</td>
+      <td style="text-align: right">0.290</td>
     </tr>
     <tr>
       <td>$D_{0.75}^{C}$</td>
       <td style="text-align: right">47.1% (106/225)</td>
       <td style="text-align: right">0.509</td>
-      <td style="text-align: right">11.562</td>
-      <td style="text-align: right">52.20</td>
-      <td style="text-align: right">0.828</td>
+      <td style="text-align: right">10.717</td>
+      <td style="text-align: right">52.19</td>
+      <td style="text-align: right">0.398</td>
+    </tr>
+    <tr>
+      <td>$D^{M}_{30/30/40}$</td>
+      <td style="text-align: right">61.6% (138/224)</td>
+      <td style="text-align: right">0.065</td>
+      <td style="text-align: right">7.848</td>
+      <td style="text-align: right">56.79</td>
+      <td style="text-align: right">0.279</td>
+    </tr>
+    <tr>
+      <td>$D^{M}_{70/20/10}$</td>
+      <td style="text-align: right">58.2% (131/225)</td>
+      <td style="text-align: right">0.076</td>
+      <td style="text-align: right">9.000</td>
+      <td style="text-align: right">52.06</td>
+      <td style="text-align: right">0.416</td>
     </tr>
   </tbody>
 </table>
@@ -996,7 +1508,7 @@
       <th>Perturbación</th>
       <th style="text-align: right">Successful Runs</th>
       <th style="text-align: right">Collisions</th>
-      <th style="text-align: right">Lane Inv.</th>
+      <th style="text-align: right">Lane Invasions</th>
       <th style="text-align: right">Speed (km/h)</th>
       <th style="text-align: right">Dev Mean (m)</th>
     </tr>
@@ -1004,39 +1516,39 @@
   <tbody>
     <tr>
       <td>$D_{0.30}^{B}$</td>
-      <td>Suave</td>
+      <td>Estándar</td>
       <td style="text-align: right">71.1% (160/225)</td>
       <td style="text-align: right">0.994</td>
-      <td style="text-align: right">11.341</td>
-      <td style="text-align: right">53.93</td>
-      <td style="text-align: right">0.640</td>
+      <td style="text-align: right">10.463</td>
+      <td style="text-align: right">53.92</td>
+      <td style="text-align: right">0.350</td>
     </tr>
     <tr>
       <td>$D_{0.30}^{B}$</td>
-      <td>Fuerte</td>
-      <td style="text-align: right">73.8% (166/225)</td>
-      <td style="text-align: right">0.837</td>
-      <td style="text-align: right">8.619</td>
-      <td style="text-align: right">55.98</td>
-      <td style="text-align: right">0.595</td>
+      <td>Intensificada</td>
+      <td style="text-align: right">48.4% (109/225)</td>
+      <td style="text-align: right">1.018</td>
+      <td style="text-align: right">9.798</td>
+      <td style="text-align: right">55.96</td>
+      <td style="text-align: right">0.348</td>
     </tr>
     <tr>
       <td>$D_{0.30}^{C}$</td>
-      <td>Suave</td>
+      <td>Estándar</td>
       <td style="text-align: right">79.6% (179/225)</td>
       <td style="text-align: right">0.179</td>
-      <td style="text-align: right">8.485</td>
-      <td style="text-align: right">56.17</td>
-      <td style="text-align: right">0.554</td>
+      <td style="text-align: right">7.788</td>
+      <td style="text-align: right">56.15</td>
+      <td style="text-align: right">0.342</td>
     </tr>
     <tr>
       <td>$D_{0.30}^{C}$</td>
-      <td><strong>Fuerte</strong></td>
-      <td style="text-align: right"><strong>85.8% (193/225)</strong></td>
-      <td style="text-align: right"><strong>0.197</strong></td>
-      <td style="text-align: right"><strong>6.430</strong></td>
-      <td style="text-align: right"><strong>58.34</strong></td>
-      <td style="text-align: right"><strong>0.546</strong></td>
+      <td>Intensificada</td>
+      <td style="text-align: right">51.1% (115/225)</td>
+      <td style="text-align: right">0.157</td>
+      <td style="text-align: right">8.122</td>
+      <td style="text-align: right">58.32</td>
+      <td style="text-align: right">0.337</td>
     </tr>
   </tbody>
 </table>
@@ -1065,7 +1577,7 @@
 
 <hr />
 
-<h3 id="test-2--posiciones-aleatorias-1">Test 2 – Posiciones aleatorias</h3>
+<h3 id="test-2--posiciones-aleatorias">Test 2 – Posiciones aleatorias</h3>
 
 <p>El Test 2 introduce condiciones iniciales menos estructuradas mediante tres posiciones aleatorias, acumulando 225 ejecuciones por configuración. En este escenario, las configuraciones basadas en DAgger muestran las mayores tasas de finalización. $D_{0.50}^{B}$ y $D_{0.75}^{B}$ alcanzan 99.1 % de éxito (223/225), mientras que $D_{0.15}^{B}$ y $D_{0.30}^{B}$ también superan el 98 %. Esto sugiere que las muestras de recuperación DAgger mejoran la capacidad de completar el recorrido cuando el vehículo inicia desde estados menos nominales.</p>
 
@@ -1079,9 +1591,15 @@
 
 <h3 id="test-3--diferentes-velocidades-iniciales-1">Test 3 – Diferentes velocidades iniciales</h3>
 
-<p>El Test 3 se encuentra actualmente en fase de recolección de métricas. Este escenario permitirá evaluar la robustez dinámica de las políticas cuando el vehículo recibe el control después de alcanzar velocidades iniciales de 30, 60, 80 y 100 km/h.</p>
+<p>El Test 3 evalúa la robustez dinámica de las políticas cuando el vehículo recibe el control después de alcanzar velocidades iniciales de 30, 60, 80 y 100 km/h. A diferencia de los escenarios anteriores, este test introduce estados cinemáticos significativamente distintos, permitiendo analizar la capacidad de estabilización del controlador ante mayores energías y velocidades de entrada.</p>
 
-<p>A diferencia de los tests basados únicamente en posición inicial, este experimento permitirá analizar la capacidad de estabilización del controlador bajo diferentes condiciones cinemáticas. Las métricas esperadas serán especialmente relevantes para identificar si las políticas aprenden únicamente una estrategia geométrica de seguimiento de trayectoria o si también presentan capacidad de recuperación frente a estados dinámicos más exigentes.</p>
+<p>El modelo base $D^{A}$ mantiene un desempeño sobresaliente, alcanzando 98.6 % de ejecuciones exitosas (218/221), sin colisiones y con una desviación media de únicamente 0.236 m. Esto indica que el dataset Burbuja proporciona suficiente cobertura para estabilizar el vehículo incluso cuando la política toma el control a velocidades elevadas.</p>
+
+<p>Las configuraciones basadas en Noise Injection presentan un comportamiento igualmente competitivo. $D_{0.50}^{C}$ alcanza 97.6 % de éxito (161/165), manteniendo una desviación media de 0.277 m y un número reducido de invasiones de carril. Por su parte, $D_{0.30}^{C}$ obtiene la mayor velocidad media del escenario (63.11 km/h) y el menor número de invasiones de carril (6.480), aunque con una ligera reducción en la tasa de finalización (91.8 %).</p>
+
+<p>Sin embargo, al incrementar excesivamente la proporción de muestras perturbadas, el rendimiento vuelve a deteriorarse. La configuración $D_{0.75}^{C}$ presenta únicamente 43.6 % de éxito (24/55), incremento en colisiones y una desviación lateral superior, sugiriendo nuevamente que una elevada proporción de estados perturbados desplaza la distribución de entrenamiento lejos de las condiciones nominales de conducción.</p>
+
+<p>En términos generales, el Test 3 indica que las políticas entrenadas conservan una notable capacidad de estabilización dinámica frente a diferentes velocidades iniciales. Además, los resultados muestran que la robustez frente a perturbaciones cinemáticas parece beneficiarse de proporciones moderadas de Noise Injection, mientras que proporciones excesivas degradan la capacidad de generalización.</p>
 
 <hr />
 
@@ -1133,7 +1651,27 @@
 
 <p>Los resultados obtenidos muestran que la composición del conjunto de entrenamiento influye de forma significativa en la robustez de las políticas de conducción end-to-end. En condiciones nominales, el modelo Burbuja mantiene un comportamiento estable y sirve como referencia de desempeño. Bajo variaciones iniciales aleatorias, las configuraciones DAgger presentan mayor capacidad de completar el recorrido, mientras que bajo perturbaciones online las configuraciones basadas en Noise Injection muestran mayor estabilidad y menor desviación lateral.</p>
 
-<p>La evidencia disponible sugiere que las muestras de recuperación y perturbación son útiles solo en proporciones controladas. Cuando estas muestras dominan el dataset, el rendimiento tiende a degradarse, especialmente en configuraciones con alta proporción de DAgger. Los experimentos del Test 3, junto con nuevas combinaciones de Magic Mix y campañas adicionales de perturbación, permitirán validar estas tendencias y avanzar hacia una configuración de entrenamiento más robusta para conducción autónoma end-to-end.</p>]]></content><author><name>Carlos Velásquez</name><email>canveo@gmail.com</email></author><category term="weekly Log" /><category term="Robustez" /><category term="Burbuja" /><category term="Noise Injection" /><category term="DAgger" /><category term="CARLA Simulator" /><summary type="html"><![CDATA[Diseño experimental]]></summary></entry><entry><title type="html">Week 101 - Análisis de robustez - Resultados parciales</title><link href="http://localhost:4000/weekly%20log/week101/" rel="alternate" type="text/html" title="Week 101 - Análisis de robustez - Resultados parciales" /><published>2026-06-07T00:00:00-05:00</published><updated>2026-06-07T00:00:00-05:00</updated><id>http://localhost:4000/weekly%20log/week101</id><content type="html" xml:base="http://localhost:4000/weekly%20log/week101/"><![CDATA[<p>Actualmente se continúa ampliando la cantidad de muestras utilizadas en los experimentos de robustez. Las métricas presentadas en esta actualización se calculan únicamente sobre las ejecuciones exitosas, es decir, aquellas en las que el vehículo alcanza correctamente la meta.</p>
+<p>La evidencia disponible sugiere que las muestras de recuperación y perturbación son útiles solo en proporciones controladas. Cuando estas muestras dominan el dataset, el rendimiento tiende a degradarse, especialmente en configuraciones con alta proporción de DAgger. Los experimentos del Test 3, junto con nuevas combinaciones de Magic Mix y campañas adicionales de perturbación, permitirán validar estas tendencias y avanzar hacia una configuración de entrenamiento más robusta para conducción autónoma end-to-end.</p>
+
+<hr />
+
+<h3 id="perturbación-online-de-mayor-intensidad-1">Perturbación online de mayor intensidad</h3>
+
+<p>La comparación entre perturbación estándar e intensificada se realizó para las configuraciones de 30 % de DAgger y Noise Injection. La nueva campaña experimental muestra una reducción significativa en la tasa de éxito cuando se incrementa la intensidad de las perturbaciones.</p>
+
+<p>En DAgger, $D_{0.30}^{B}$ pasa de 71.1 % de éxito bajo perturbación estándar a 48.4 % bajo perturbación intensificada. Aunque las invasiones de carril y la desviación lateral permanecen relativamente similares, la fuerte reducción en episodios completados indica que la política presenta dificultades para recuperarse frente a desviaciones más severas y frecuentes.</p>
+
+<p>Un comportamiento similar se observa en Noise Injection. La configuración $D_{0.30}^{C}$ reduce su tasa de éxito desde 79.6 % hasta 51.1 %. No obstante, continúa manteniendo una ventaja importante respecto a DAgger, registrando menos colisiones y menor desviación lateral.</p>
+
+<p>En conjunto, estos resultados indican que las perturbaciones intensificadas representan un escenario considerablemente más exigente, permitiendo identificar con mayor claridad los límites de robustez de cada política.</p>
+
+<h3 id="actualización-de-magic-mix">Actualización de Magic Mix</h3>
+
+<p>La nueva configuración $D^{M}<em>{30/30/40}$ muestra una mejora importante respecto a la mezcla inicial $D^{M}</em>{70/20/10}$. Bajo perturbación online estándar, $D^{M}<em>{30/30/40}$ alcanza 61.6 % de éxito (138/224), frente al 58.2 % obtenido por $D^{M}</em>{70/20/10}$.</p>
+
+<p>Además, presenta menos invasiones de carril, mayor velocidad media y una desviación lateral considerablemente menor (0.279 m frente a 0.416 m). A pesar de esta mejora, ambas configuraciones permanecen por debajo del desempeño alcanzado por las mejores mezclas basadas exclusivamente en Noise Injection, particularmente $D_{0.50}^{C}$.</p>
+
+<p>Estos resultados sugieren que aumentar la proporción de muestras provenientes de Noise Injection puede mejorar el comportamiento de las mezclas ternarias, aunque todavía es necesario explorar nuevas proporciones antes de establecer una configuración óptima.</p>]]></content><author><name>Carlos Velásquez</name><email>canveo@gmail.com</email></author><category term="weekly Log" /><category term="Robustez" /><category term="Burbuja" /><category term="Noise Injection" /><category term="DAgger" /><category term="CARLA Simulator" /><summary type="html"><![CDATA[Diseño experimental]]></summary></entry><entry><title type="html">Week 101 - Análisis de robustez - Resultados parciales</title><link href="http://localhost:4000/weekly%20log/week101/" rel="alternate" type="text/html" title="Week 101 - Análisis de robustez - Resultados parciales" /><published>2026-06-07T00:00:00-05:00</published><updated>2026-06-07T00:00:00-05:00</updated><id>http://localhost:4000/weekly%20log/week101</id><content type="html" xml:base="http://localhost:4000/weekly%20log/week101/"><![CDATA[<p>Actualmente se continúa ampliando la cantidad de muestras utilizadas en los experimentos de robustez. Las métricas presentadas en esta actualización se calculan únicamente sobre las ejecuciones exitosas, es decir, aquellas en las que el vehículo alcanza correctamente la meta.</p>
 
 <h2 id="configuración-experimental">Configuración experimental</h2>
 
