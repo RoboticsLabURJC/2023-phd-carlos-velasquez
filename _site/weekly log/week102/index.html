@@ -306,7 +306,7 @@
       <span class="page__meta-readtime">
         <i class="far fa-clock" aria-hidden="true"></i>
         
-          19 minute read
+          21 minute read
         
       </span>
     
@@ -441,8 +441,8 @@
     </tr>
     <tr>
       <td style="text-align: left"><strong>Test 2</strong></td>
-      <td style="text-align: left">Posiciones aleatorias</td>
-      <td style="text-align: left"><strong>3 posiciones iniciales aleatorias</strong> (<code class="language-plaintext highlighter-rouge">random_1</code>, <code class="language-plaintext highlighter-rouge">random_2</code> y <code class="language-plaintext highlighter-rouge">random_3</code>), con <strong>75 ejecuciones</strong> por posición (<strong>225 ejecuciones</strong> en total).</td>
+      <td style="text-align: left">Diferentes puntos de inicio</td>
+      <td style="text-align: left"><strong>3 posiciones iniciales diferentes</strong> (<code class="language-plaintext highlighter-rouge">random_1</code>, <code class="language-plaintext highlighter-rouge">random_2</code> y <code class="language-plaintext highlighter-rouge">random_3</code>), con <strong>75 ejecuciones por posición</strong> (<strong>225 ejecuciones</strong> en total). La trayectoria fue corregida para que todas las condiciones completen una vuelta del mismo circuito; únicamente cambia el punto de inicio. La meta se ubica aproximadamente 10–15 m antes del punto de partida, siguiendo el sentido de circulación.</td>
     </tr>
     <tr>
       <td style="text-align: left"><strong>Test 3</strong></td>
@@ -481,7 +481,7 @@
     <tr>
       <td style="text-align: left">Test 2</td>
       <td style="text-align: left">Posiciones de inicio random</td>
-      <td style="text-align: left">3 posiciones de inicio seleccionadas aleatoriamente dentro de la malla externa, mismo punto final.</td>
+      <td style="text-align: left">3 posiciones de inicio seleccionadas en sectores distintos del circuito. La trayectoria ideal se reorganiza circularmente para cada posición, de modo que las tres condiciones completan el mismo circuito y solo cambia el punto de inicio. La meta se sitúa aproximadamente 10–15 m antes del punto de partida, siguiendo el sentido de circulación.</td>
     </tr>
     <tr>
       <td style="text-align: left">Test 3</td>
@@ -579,6 +579,14 @@
       <td style="text-align: right">0.514</td>
     </tr>
     <tr>
+      <td>$D_{0.75}^{B}$</td>
+      <td style="text-align: right">49.1% (110/224)</td>
+      <td style="text-align: right">1.618</td>
+      <td style="text-align: right">24.255</td>
+      <td style="text-align: right">46.73</td>
+      <td style="text-align: right">0.580</td>
+    </tr>
+    <tr>
       <td>$D_{0.15}^{C}$</td>
       <td style="text-align: right">97.3% (219/225)</td>
       <td style="text-align: right">0.151</td>
@@ -601,6 +609,14 @@
       <td style="text-align: right">7.094</td>
       <td style="text-align: right">56.28</td>
       <td style="text-align: right">0.276</td>
+    </tr>
+    <tr>
+      <td>$D_{0.75}^{C}$</td>
+      <td style="text-align: right">60.9% (137/225)</td>
+      <td style="text-align: right">0.533</td>
+      <td style="text-align: right">11.759</td>
+      <td style="text-align: right">54.53</td>
+      <td style="text-align: right">0.390</td>
     </tr>
   </tbody>
 </table>
@@ -702,7 +718,7 @@
   </tbody>
 </table>
 
-<h2 id="test-2--condiciones-iniciales-aleatorias">Test 2 – Condiciones iniciales aleatorias</h2>
+<h2 id="test-2--diferentes-puntos-de-inicio">Test 2 – Diferentes puntos de inicio</h2>
 
 <table>
   <thead>
@@ -718,19 +734,19 @@
   <tbody>
     <tr>
       <td>$D^{A}$</td>
-      <td style="text-align: right">73.8% (166/225)</td>
-      <td style="text-align: right">0.006</td>
-      <td style="text-align: right">1.801</td>
-      <td style="text-align: right">49.02</td>
-      <td style="text-align: right">0.197</td>
+      <td style="text-align: right">0.0% (0/0)</td>
+      <td style="text-align: right">—</td>
+      <td style="text-align: right">—</td>
+      <td style="text-align: right">—</td>
+      <td style="text-align: right">—</td>
     </tr>
     <tr>
       <td>$D_{0.15}^{B}$</td>
-      <td style="text-align: right">98.7% (222/225)</td>
-      <td style="text-align: right">0.009</td>
-      <td style="text-align: right">2.108</td>
-      <td style="text-align: right">46.90</td>
-      <td style="text-align: right">0.336</td>
+      <td style="text-align: right">90.2% (203/225)</td>
+      <td style="text-align: right">0.000</td>
+      <td style="text-align: right">10.182</td>
+      <td style="text-align: right">55.70</td>
+      <td style="text-align: right">0.510</td>
     </tr>
     <tr>
       <td>$D_{0.30}^{B}$</td>
@@ -1057,15 +1073,19 @@
 
 <hr />
 
-<h3 id="test-2--posiciones-aleatorias">Test 2 – Posiciones aleatorias</h3>
+<h3 id="test-2--diferentes-puntos-de-inicio-1">Test 2 – Diferentes puntos de inicio</h3>
 
-<p>El Test 2 introduce condiciones iniciales menos estructuradas mediante tres posiciones aleatorias, acumulando 225 ejecuciones por configuración. En este escenario, las configuraciones basadas en DAgger muestran las mayores tasas de finalización. $D_{0.50}^{B}$ y $D_{0.75}^{B}$ alcanzan 99.1 % de éxito (223/225), mientras que $D_{0.15}^{B}$ y $D_{0.30}^{B}$ también superan el 98 %. Esto sugiere que las muestras de recuperación DAgger mejoran la capacidad de completar el recorrido cuando el vehículo inicia desde estados menos nominales.</p>
+<p>El Test 2 fue corregido para que las tres condiciones de evaluación completen el mismo circuito, modificando únicamente el punto de inicio del vehículo. En la implementación actual se utilizan tres posiciones de arranque diferentes (<code class="language-plaintext highlighter-rouge">random_1</code>, <code class="language-plaintext highlighter-rouge">random_2</code> y <code class="language-plaintext highlighter-rouge">random_3</code>). Para cada una, la trayectoria ideal se reorganiza circularmente a partir del punto seleccionado, de manera que el vehículo recorre una vuelta completa antes de alcanzar la meta.</p>
 
-<p>No obstante, la mejora en tasa de éxito no siempre se traduce en mejor precisión de trayectoria. El modelo $D^{A}$ presenta solo 73.8 % de éxito (166/225), pero obtiene la menor desviación media (0.379 m) y el menor número de invasiones de carril convencionales (1.801). Esto evidencia un compromiso entre precisión nominal y capacidad de recuperación: Burbuja sigue mejor la trayectoria cuando logra estabilizarse, mientras que DAgger aumenta la probabilidad de completar el recorrido desde estados aleatorios.</p>
+<p>En la versión inicial del test, las distintas posiciones de inicio producían recorridos de diferente longitud y, por tanto, condiciones de evaluación no equivalentes. La corrección elimina esta diferencia: ahora todas las configuraciones cubren la misma trayectoria completa y se distinguen exclusivamente por el sector del circuito desde el cual comienza la conducción. Por esta razón, los resultados obtenidos con la metodología anterior no son directamente comparables con la campaña actual.</p>
 
-<p>Las configuraciones Noise Injection presentan un comportamiento menos favorable en este test. $D_{0.30}^{C}$, por ejemplo, alcanza 72.0 % de éxito (162/225) y el valor más alto de <code class="language-plaintext highlighter-rouge">Lane Inv. NONE</code> (2.716), aunque conserva una desviación media relativamente baja (0.407 m). Esto sugiere que Noise Injection puede favorecer estabilidad local, pero no necesariamente mejora la recuperación desde posiciones iniciales aleatorias tan alejadas de la distribución nominal.</p>
+<p>Los resultados disponibles muestran que las mezclas DAgger con proporciones entre 30 % y 75 % presentan las mayores tasas de finalización. Tanto $D_{0.50}^{B}$ como $D_{0.75}^{B}$ alcanzan 99.1 % de éxito (223/225), seguidas por $D_{0.30}^{B}$ con 98.2 % (221/225). Entre ellas, $D_{0.50}^{B}$ ofrece el mejor equilibrio: completa prácticamente todas las ejecuciones, no registra colisiones y mantiene las invasiones de carril en 2.327. En cambio, aumentar la proporción de DAgger hasta 75 % no mejora la tasa de éxito y eleva las colisiones, las invasiones de carril y la desviación media. Esto indica que, para este escenario, una mayor cantidad de muestras de recuperación no se traduce necesariamente en una trayectoria más estable.</p>
 
-<p>En términos de robustez, el Test 2 favorece claramente a DAgger como mecanismo de recuperación ante condiciones iniciales no estructuradas, aunque a costa de trayectorias menos precisas y velocidades medias más bajas.</p>
+<p>La configuración $D_{0.15}^{B}$ se aparta de esta tendencia. Aunque alcanza la mayor velocidad media del test (55.70 km/h) y no presenta colisiones, su tasa de éxito disminuye a 90.2 %, mientras que las invasiones de carril aumentan hasta 10.182 y la desviación media alcanza 0.510 m. Por tanto, la mayor velocidad no representa una mejora global, sino que coincide con un seguimiento lateral menos preciso.</p>
+
+<p>En Noise Injection, $D_{0.15}^{C}$ obtiene el mejor compromiso entre finalización y precisión: alcanza 98.2 % de éxito (221/225), registra 0.032 colisiones, 2.000 invasiones de carril y presenta la menor desviación media de todas las configuraciones evaluadas (0.255 m). Al incrementar la proporción de Noise Injection a 30 % y 50 %, la desviación y las invasiones permanecen bajas en los episodios exitosos, pero la tasa de finalización cae hasta 72.0 % y 72.9 %, respectivamente. Esto sugiere que dichas políticas conducen de forma precisa cuando logran completar el circuito, aunque presentan menor consistencia para finalizarlo desde los tres puntos de inicio.</p>
+
+<p>En conjunto, los datos disponibles sugieren dos comportamientos complementarios: las mezclas DAgger de 30–50 % favorecen la finalización del recorrido desde diferentes sectores del mapa, mientras que Noise Injection, especialmente en 15 %, favorece un seguimiento lateral más preciso. No obstante, esta interpretación es todavía preliminar. El modelo base $D^{A}$ aún no cuenta con ejecuciones válidas y tampoco se dispone de resultados para todas las proporciones de Noise Injection, por lo que no es posible cuantificar la mejora de cada estrategia respecto a Burbuja ni establecer una configuración óptima definitiva. Además, dado que las métricas de desempeño se calculan únicamente sobre episodios exitosos, los bajos valores de desviación de $D_{0.30}^{C}$ y $D_{0.50}^{C}$ deben interpretarse junto con sus menores tasas de finalización.</p>
 
 <hr />
 
@@ -1250,6 +1270,46 @@
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
+        <a href="/weekly%20log/weeek104/" rel="permalink">Week 104 - Entrenamiento FastViT
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          8 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Modelo y configuración del entrenamiento
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
         <a href="/weekly%20log/week103/" rel="permalink">Week 103 - Prueba rápida del Test 1 en Town11
 </a>
       
@@ -1268,7 +1328,7 @@
       <span class="page__meta-readtime">
         <i class="far fa-clock" aria-hidden="true"></i>
         
-          14 minute read
+          21 minute read
         
       </span>
     
@@ -1358,46 +1418,6 @@
 
     <p class="archive__item-excerpt" itemprop="description">Actualmente se está ampliando la cantidad de muestras utilizadas en los Test de Robustez 1 y 4.
 En el Test 1 se realizan 15 ejecuciones por cada una de las 1...</p>
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/weekly%20log/week99/" rel="permalink">Week 99 - Análisis de robustez mediante mezclas A’–B’ y A’–C’ en conducción autónoma
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-
-    
-
-    
-      
-      
-
-      <span class="page__meta-readtime">
-        <i class="far fa-clock" aria-hidden="true"></i>
-        
-          5 minute read
-        
-      </span>
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">Actualización experimental – expansión de ejecuciones
-</p>
   </article>
 </div>
 

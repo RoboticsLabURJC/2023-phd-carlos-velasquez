@@ -1,16 +1,329 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2026-07-20T09:56:30-05:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Robotics Lab URJC</title><subtitle>Autonomous Driving</subtitle><author><name>Carlos Velásquez</name><email>canveo@gmail.com</email></author><entry><title type="html">Week 103 - Prueba rápida del Test 1 en Town11</title><link href="http://localhost:4000/weekly%20log/week103/" rel="alternate" type="text/html" title="Week 103 - Prueba rápida del Test 1 en Town11" /><published>2026-07-02T00:00:00-05:00</published><updated>2026-07-02T00:00:00-05:00</updated><id>http://localhost:4000/weekly%20log/week103</id><content type="html" xml:base="http://localhost:4000/weekly%20log/week103/"><![CDATA[<blockquote>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2026-08-30T14:43:15-05:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Robotics Lab URJC</title><subtitle>Autonomous Driving</subtitle><author><name>Carlos Velásquez</name><email>canveo@gmail.com</email></author><entry><title type="html">Week 104 - Entrenamiento FastViT</title><link href="http://localhost:4000/weekly%20log/weeek104/" rel="alternate" type="text/html" title="Week 104 - Entrenamiento FastViT" /><published>2026-08-30T00:00:00-05:00</published><updated>2026-08-30T00:00:00-05:00</updated><id>http://localhost:4000/weekly%20log/weeek104</id><content type="html" xml:base="http://localhost:4000/weekly%20log/weeek104/"><![CDATA[<h3 id="modelo-y-configuración-del-entrenamiento">Modelo y configuración del entrenamiento</h3>
+
+<p>Como línea base para la comparación posterior con los diferentes métodos de enriquecimiento de datos, se entrenó un modelo <strong>FastViT-SA12</strong> utilizando exclusivamente el dataset <strong>Burbuja</strong>, compuesto por aproximadamente 60.000 muestras provenientes de 11 recorridos (<em>runs</em>).</p>
+
+<p>El experimento fue identificado como:</p>
+
+<p><code class="language-plaintext highlighter-rouge">fastvit_sa12_burbuja_60k_reg_bal_v4</code></p>
+
+<p>La arquitectura <strong>FastViT-SA12</strong> fue implementada mediante <code class="language-plaintext highlighter-rouge">timm</code> e inicializada sin pesos preentrenados (<code class="language-plaintext highlighter-rouge">pretrained=False</code>). La cabeza de clasificación original del modelo fue sustituida por una capa lineal de <strong>dos salidas continuas</strong>, correspondientes a las variables de control:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">steer</code>: comando de dirección.</li>
+  <li><code class="language-plaintext highlighter-rouge">throttle</code>: comando de aceleración.</li>
+</ul>
+
+<p>Por tanto, la salida del modelo tiene la forma:</p>
+
+<p><code class="language-plaintext highlighter-rouge">[steer, throttle]</code></p>
+
+<p>La modificación de la cabeza se realizó mediante:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">num_ftrs</span> <span class="o">=</span> <span class="n">model</span><span class="p">.</span><span class="n">head</span><span class="p">.</span><span class="n">fc</span><span class="p">.</span><span class="n">in_features</span>
+<span class="n">model</span><span class="p">.</span><span class="n">head</span><span class="p">.</span><span class="n">fc</span> <span class="o">=</span> <span class="n">nn</span><span class="p">.</span><span class="nc">Linear</span><span class="p">(</span><span class="n">num_ftrs</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>De esta manera, FastViT-SA12 se utiliza como modelo de regresión para conducción autónoma en lugar de como clasificador de imágenes.</p>
+
+<p>Las imágenes utilizadas provienen de la cámara de segmentación semántica de CARLA. A partir de cada imagen se extrae únicamente la clase correspondiente a la carretera (<code class="language-plaintext highlighter-rouge">road</code>), obteniendo una máscara binaria. El procesamiento aplicado es:</p>
+
+<p><code class="language-plaintext highlighter-rouge">Segmentación CARLA → extracción de road → crop → resize 224×224 → máscara binaria → 3 canales</code></p>
+
+<p>La máscara se normaliza al rango <code class="language-plaintext highlighter-rouge">[0,1]</code> y se replica en tres canales, obteniendo una entrada de tamaño <code class="language-plaintext highlighter-rouge">3 × 224 × 224</code>.</p>
+
+<p>No se aplicaron rotaciones, traslaciones ni <em>flip</em> horizontal durante este experimento, con el objetivo de conservar la relación geométrica entre la posición de la carretera y el valor de <code class="language-plaintext highlighter-rouge">steer</code>.</p>
+
+<p>La configuración principal del entrenamiento fue:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parámetro</th>
+      <th style="text-align: right">Valor</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Arquitectura</td>
+      <td style="text-align: right">FastViT-SA12</td>
+    </tr>
+    <tr>
+      <td>Dataset</td>
+      <td style="text-align: right">Burbuja 60k</td>
+    </tr>
+    <tr>
+      <td>Pretrained</td>
+      <td style="text-align: right">No</td>
+    </tr>
+    <tr>
+      <td>Entrada</td>
+      <td style="text-align: right">224 × 224 × 3</td>
+    </tr>
+    <tr>
+      <td>Salidas</td>
+      <td style="text-align: right">steer, throttle</td>
+    </tr>
+    <tr>
+      <td>Batch size</td>
+      <td style="text-align: right">64</td>
+    </tr>
+    <tr>
+      <td>Épocas máximas</td>
+      <td style="text-align: right">30</td>
+    </tr>
+    <tr>
+      <td>Learning rate</td>
+      <td style="text-align: right">1e-4</td>
+    </tr>
+    <tr>
+      <td>Optimizador</td>
+      <td style="text-align: right">AdamW</td>
+    </tr>
+    <tr>
+      <td>Weight decay</td>
+      <td style="text-align: right">0.08</td>
+    </tr>
+    <tr>
+      <td>Warm-up</td>
+      <td style="text-align: right">5 épocas</td>
+    </tr>
+    <tr>
+      <td>Scheduler</td>
+      <td style="text-align: right">Warm-up lineal + Cosine Annealing</td>
+    </tr>
+    <tr>
+      <td>Drop path</td>
+      <td style="text-align: right">0.20</td>
+    </tr>
+    <tr>
+      <td>Mixed Precision (AMP)</td>
+      <td style="text-align: right">Sí</td>
+    </tr>
+    <tr>
+      <td>Gradient clipping</td>
+      <td style="text-align: right">5.0</td>
+    </tr>
+    <tr>
+      <td>Early stopping</td>
+      <td style="text-align: right">8 épocas</td>
+    </tr>
+    <tr>
+      <td>Función de pérdida</td>
+      <td style="text-align: right">Smooth L1</td>
+    </tr>
+    <tr>
+      <td>Peso steer</td>
+      <td style="text-align: right">1.5</td>
+    </tr>
+    <tr>
+      <td>Peso throttle</td>
+      <td style="text-align: right">1.2</td>
+    </tr>
+    <tr>
+      <td>Smooth L1 beta</td>
+      <td style="text-align: right">0.05</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Para evitar fuga de información entre imágenes consecutivas, el conjunto se dividió <strong>por recorridos completos y no por frames individuales</strong>. De los 11 runs disponibles, se utilizaron <strong>9 para entrenamiento y 2 para validación</strong>.</p>
+
+<p>También se realizó un balanceo de las muestras según la magnitud del <code class="language-plaintext highlighter-rouge">steer</code>, utilizando la siguiente distribución objetivo:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Condición</th>
+      <th style="text-align: right">Distribución objetivo</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Giro fuerte izquierda</td>
+      <td style="text-align: right">15 %</td>
+    </tr>
+    <tr>
+      <td>Giro moderado izquierda</td>
+      <td style="text-align: right">20 %</td>
+    </tr>
+    <tr>
+      <td>Recta</td>
+      <td style="text-align: right">30 %</td>
+    </tr>
+    <tr>
+      <td>Giro moderado derecha</td>
+      <td style="text-align: right">20 %</td>
+    </tr>
+    <tr>
+      <td>Giro fuerte derecha</td>
+      <td style="text-align: right">15 %</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>El balanceo considera adicionalmente cuatro intervalos de <code class="language-plaintext highlighter-rouge">throttle</code>, formando 20 clases combinadas <code class="language-plaintext highlighter-rouge">steer × throttle</code>.</p>
+
+<h3 id="resultados-del-entrenamiento">Resultados del entrenamiento</h3>
+
+<p>El entrenamiento finalizó mediante <em>early stopping</em> en la época 16. Los mejores resultados de validación fueron:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Métrica</th>
+      <th style="text-align: right">Resultado</th>
+      <th style="text-align: right">Época</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Mejor pérdida total</td>
+      <td style="text-align: right">0.317248</td>
+      <td style="text-align: right">3</td>
+    </tr>
+    <tr>
+      <td>Mejor MAE de steer</td>
+      <td style="text-align: right"><strong>0.053772</strong></td>
+      <td style="text-align: right"><strong>8</strong></td>
+    </tr>
+    <tr>
+      <td>Mejor MAE de throttle</td>
+      <td style="text-align: right">0.240016</td>
+      <td style="text-align: right">1</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Para las pruebas de conducción se utilizó principalmente el checkpoint <code class="language-plaintext highlighter-rouge">best_steer_model.pth</code>, correspondiente al menor error de dirección en validación.</p>
+
+<p>Los resultados muestran una diferencia importante entre las dos variables de control. El <code class="language-plaintext highlighter-rouge">steer</code> continúa mejorando durante las primeras épocas, mientras que el mejor resultado de <code class="language-plaintext highlighter-rouge">throttle</code> aparece desde la primera época y posteriormente no mejora en validación. Esto indica una capacidad limitada del modelo para generalizar la aceleración a partir únicamente de la máscara binaria de carretera.</p>
+
+<h3 id="evaluación-offline">Evaluación offline</h3>
+
+<p>El modelo se evaluó sobre <strong>10.797 muestras</strong> no utilizadas para el entrenamiento. Los principales resultados fueron:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Variable</th>
+      <th style="text-align: right">MAE</th>
+      <th style="text-align: right">RMSE</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Steer</td>
+      <td style="text-align: right"><strong>0.0538</strong></td>
+      <td style="text-align: right">0.0931</td>
+    </tr>
+    <tr>
+      <td>Throttle</td>
+      <td style="text-align: right"><strong>0.2493</strong></td>
+      <td style="text-align: right">0.3122</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>El resultado global de <code class="language-plaintext highlighter-rouge">steer</code> es razonable; sin embargo, al separar las muestras según la intensidad de la curva se observa una diferencia importante:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Condición</th>
+      <th style="text-align: right">Muestras</th>
+      <th style="text-align: right">MAE steer</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Recta (<code class="language-plaintext highlighter-rouge">|steer| ≤ 0.04</code>)</td>
+      <td style="text-align: right">7.239 (67.0 %)</td>
+      <td style="text-align: right"><strong>0.0331</strong></td>
+    </tr>
+    <tr>
+      <td>Curva media (<code class="language-plaintext highlighter-rouge">0.04 &lt; |steer| ≤ 0.14</code>)</td>
+      <td style="text-align: right">2.161 (20.0 %)</td>
+      <td style="text-align: right"><strong>0.0565</strong></td>
+    </tr>
+    <tr>
+      <td>Curva fuerte (<code class="language-plaintext highlighter-rouge">|steer| &gt; 0.14</code>)</td>
+      <td style="text-align: right">1.397 (12.9 %)</td>
+      <td style="text-align: right"><strong>0.1567</strong></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Por tanto, el error de dirección en curvas fuertes es aproximadamente cinco veces mayor que en conducción recta. Esto permite explicar por qué un MAE global relativamente bajo no se traduce necesariamente en una conducción completamente robusta en lazo cerrado.</p>
+
+<p>También se observa que la desviación estándar de las predicciones de steer (<code class="language-plaintext highlighter-rouge">0.106</code>) es menor que la de las etiquetas reales (<code class="language-plaintext highlighter-rouge">0.126</code>), lo que sugiere cierta tendencia del modelo a suavizar las correcciones de mayor magnitud.</p>
+
+<p>El comportamiento del <code class="language-plaintext highlighter-rouge">throttle</code> es menos satisfactorio. El MAE obtenido fue de aproximadamente <strong>0.25</strong>, con un RMSE de <strong>0.31</strong>. Además, la variabilidad de las predicciones (<code class="language-plaintext highlighter-rouge">std ≈ 0.160</code>) es considerablemente menor que la de los valores reales (<code class="language-plaintext highlighter-rouge">std ≈ 0.288</code>), mostrando una tendencia a concentrar la salida en valores intermedios.</p>
+
+<p>Debido a este comportamiento, durante las pruebas online fue necesario <strong>restringir la salida de throttle</strong>, utilizando valores máximos del orden de <strong>0.5–0.6</strong>, con el fin de evitar aceleraciones excesivas y poder evaluar con mayor claridad el desempeño del modelo en dirección.</p>
+
+<h3 id="evaluación-online-en-carla">Evaluación online en CARLA</h3>
+
+<p>Las pruebas online se realizaron en CARLA utilizando la misma geometría de cámara empleada durante la generación del dataset: cámara de segmentación semántica ubicada en <code class="language-plaintext highlighter-rouge">x=1.3 m</code>, <code class="language-plaintext highlighter-rouge">y=0 m</code>, <code class="language-plaintext highlighter-rouge">z=1.5 m</code>, orientación <code class="language-plaintext highlighter-rouge">(0°,0°,0°)</code>, FOV de <code class="language-plaintext highlighter-rouge">90°</code> y resolución original de <code class="language-plaintext highlighter-rouge">800 × 600</code>.</p>
+
+<p>La política se ejecutó a <strong>10 Hz</strong>. Durante las pruebas se visualizaron en tiempo real la segmentación recibida por el modelo, las predicciones de <code class="language-plaintext highlighter-rouge">steer</code> y <code class="language-plaintext highlighter-rouge">throttle</code>, los comandos aplicados al vehículo y el tiempo de inferencia.</p>
+
+<p>En términos cualitativos, el vehículo logra navegar correctamente <strong>la mayor parte del circuito</strong>, manteniéndose sobre la trayectoria y superando numerosas curvas. Sin embargo, el comportamiento todavía no es completamente robusto. En determinadas curvas la corrección de steer resulta insuficiente y, especialmente durante la salida de algunas de ellas, el vehículo puede abandonar la trayectoria e impactar contra elementos del entorno, como postes.</p>
+
+<p>Este comportamiento es consistente con el análisis offline, donde las curvas fuertes presentan un MAE de steer considerablemente mayor que las rectas. Por tanto, el principal problema del modelo Burbuja no se encuentra en la conducción nominal, sino en su capacidad para responder ante situaciones que requieren correcciones de dirección de mayor magnitud.</p>
+
+<p>El tiempo medio de inferencia del modelo fue de aproximadamente <strong>5.2 ms</strong>, mientras que el pipeline completo de procesamiento e inferencia requirió alrededor de <strong>13.6 ms</strong> por imagen, por lo que el tiempo de cómputo no constituye actualmente una limitación para una política ejecutada a 10 Hz.</p>
+
+<p>Estos resultados se utilizarán como <strong>línea base del dataset Burbuja</strong>. Los siguientes experimentos mantendrán la misma arquitectura y protocolo de evaluación, modificando principalmente la composición del dataset mediante estrategias de enriquecimiento y mezcla, con el objetivo de determinar si estas permiten mejorar la robustez frente a curvas y situaciones de recuperación.</p>
+
+<h3 id="evaluación-offline-del-modelo-fastvit-sa12">Evaluación offline del modelo FastViT-SA12</h3>
+
+<p>Para facilitar la interpretación visual, las comparaciones entre los valores reales y predichos se muestran sobre una ventana de <strong>200 muestras consecutivas</strong>. Las métricas y los histogramas de error se calcularon utilizando la totalidad del conjunto de validación.</p>
+
+<figure class="half">
+  <img src="http://localhost:4000/assets/images/week104/steer_real_vs_pred.png" alt="Comparación entre steer real y predicho por FastViT-SA12" style="width:90%" />
+  <figcaption>Comparación entre los valores reales y predichos de steer para una ventana de 200 muestras.</figcaption>
+</figure>
+
+<p>En la comparación del <code class="language-plaintext highlighter-rouge">steer</code> se observa que FastViT-SA12 reproduce adecuadamente la tendencia general de la dirección y el signo de muchas de las correcciones. Sin embargo, el modelo tiende a suavizar algunos valores extremos, especialmente cuando se requieren giros de mayor magnitud. Este comportamiento es consistente con las pruebas online, donde la mayor parte del recorrido se completa correctamente, pero algunas curvas requieren una corrección más intensa de la que el modelo genera.</p>
+
+<figure class="half">
+  <img src="http://localhost:4000/assets/images/week104/steer_error_hist.png" alt="Distribución del error de steer de FastViT-SA12" style="width:70%" />
+  <figcaption>Distribución del error de steer, calculado como predicción menos valor real.</figcaption>
+</figure>
+
+<p>La distribución del error de <code class="language-plaintext highlighter-rouge">steer</code> se encuentra fuertemente concentrada alrededor de cero, indicando que la mayoría de las predicciones presentan errores pequeños. No obstante, aparecen colas hacia ambos extremos, asociadas principalmente a muestras con mayores valores de dirección. El MAE global obtenido fue aproximadamente <strong>0.054</strong>, aunque el análisis por intensidad de giro mostró que el error aumenta considerablemente en curvas fuertes.</p>
+
+<figure class="half">
+  <img src="http://localhost:4000/assets/images/week104/throttle_real_vs_pred.png" alt="Comparación entre throttle real y predicho por FastViT-SA12" style="width:90%" />
+  <figcaption>Comparación entre los valores reales y predichos de throttle para una ventana de 200 muestras.</figcaption>
+</figure>
+
+<p>La predicción del <code class="language-plaintext highlighter-rouge">throttle</code> presenta un comportamiento menos satisfactorio. Mientras los valores reales varían ampliamente entre aceleraciones bajas y altas, las predicciones del modelo se concentran principalmente en valores intermedios. FastViT-SA12 no reproduce adecuadamente las variaciones rápidas del acelerador y tiende a suavizar tanto los valores bajos como los altos.</p>
+
+<figure class="half">
+  <img src="http://localhost:4000/assets/images/week104/throttle_error_hist.png" alt="Distribución del error de throttle de FastViT-SA12" style="width:70%" />
+  <figcaption>Distribución del error de throttle, calculado como predicción menos valor real.</figcaption>
+</figure>
+
+<p>El histograma del <code class="language-plaintext highlighter-rouge">throttle</code> presenta una dispersión considerablemente mayor que el correspondiente al <code class="language-plaintext highlighter-rouge">steer</code>, confirmando la dificultad del modelo para estimar esta variable. El MAE obtenido fue aproximadamente <strong>0.25</strong>, por lo que durante las pruebas online fue necesario restringir la salida del acelerador, utilizando valores máximos del orden de <strong>0.5–0.6</strong>, para evitar aceleraciones excesivas y evaluar de manera más controlada el comportamiento de la dirección.</p>
+
+<h3 id="observaciones-de-la-prueba-online">Observaciones de la prueba online</h3>
+
+<p>En las pruebas realizadas en CARLA, el vehículo logra navegar correctamente la mayor parte del circuito. Sin embargo, todavía se presentan fallos puntuales, principalmente durante algunas curvas y en la salida de estas. En determinadas situaciones la corrección de <code class="language-plaintext highlighter-rouge">steer</code> resulta insuficiente y el vehículo puede abandonar la trayectoria e impactar contra elementos del entorno, como postes.</p>
+
+<p>Estos resultados muestran que el modelo entrenado únicamente con el dataset <strong>Burbuja</strong> proporciona una conducción nominal aceptable, pero todavía presenta limitaciones ante situaciones que requieren correcciones de dirección de mayor magnitud. Este comportamiento se utilizará como línea base para determinar posteriormente si las estrategias de enriquecimiento y mezcla de datasets mejoran la robustez de la conducción.</p>]]></content><author><name>Carlos Velásquez</name><email>canveo@gmail.com</email></author><category term="Weekly Log" /><category term="Robustez" /><category term="Burbuja" /><category term="Noise Injection" /><category term="DAgger" /><category term="CARLA Simulator" /><summary type="html"><![CDATA[Modelo y configuración del entrenamiento]]></summary></entry><entry><title type="html">Week 103 - Prueba rápida del Test 1 en Town11</title><link href="http://localhost:4000/weekly%20log/week103/" rel="alternate" type="text/html" title="Week 103 - Prueba rápida del Test 1 en Town11" /><published>2026-07-02T00:00:00-05:00</published><updated>2026-07-02T00:00:00-05:00</updated><id>http://localhost:4000/weekly%20log/week103</id><content type="html" xml:base="http://localhost:4000/weekly%20log/week103/"><![CDATA[<blockquote>
   <p>Se actualizó <a href="/weekly%20log/week102/">Week 102</a> con nuevas métricas y cambios en el orden de las tablas.</p>
 </blockquote>
 
 <h2 id="1-objetivo">1. Objetivo</h2>
 
-<p>Validar los resultados obtenidos previamente en el <strong>Test 1</strong>, trasladando el escenario de evaluación de <strong>Town02</strong> a <strong>Town11</strong>, con el fin de determinar si las tendencias observadas se mantienen en un entorno más desafiante. Esta motivación surge de que, en Town02, las diferencias entre los distintos conjuntos de entrenamiento no resultaban suficientemente evidentes.</p>
+<p>Evaluar si las tendencias observadas previamente en <strong>Town02</strong> se mantienen al trasladar los tests de robustez a <strong>Town11</strong>, un entorno con mayor densidad de curvas. El análisis considera el caso canónico, las variaciones en la posición y la velocidad inicial, y las perturbaciones aplicadas durante la inferencia.</p>
 
-<p>Como hallazgo preliminar, se observa que el modelo <strong>Burbuja</strong> presenta un comportamiento distinto en este nuevo escenario: a diferencia de Town02, no logra completar todas las ejecuciones, y en particular en la condición de <strong>izquierda dura</strong> el vehículo no consigue incorporarse correctamente al circuito, reduciendo su tasa de éxito.</p>
+<p>Además, se estudia la generalización de las políticas en el mapa comunitario <strong>csonthomisi</strong>, cuya geometría no fue utilizada durante el entrenamiento. Ambos experimentos se analizan de forma independiente para distinguir la robustez dentro de un mapa conocido de la transferencia hacia un escenario nuevo.</p>
 
 <hr />
 
-<h2 id="2-experimento-1--validación-del-test-1-en-town11">2. Experimento 1 — Validación del Test 1 en Town11</h2>
+<h2 id="2-experimento-1--evaluación-en-town11">2. Experimento 1 — Evaluación en Town11</h2>
 
 <h3 id="21-escenario-de-evaluación">2.1 Escenario de evaluación</h3>
 
@@ -18,7 +331,7 @@
 
 <figure class="half">
   <img src="http://localhost:4000/assets/images/week103/town11_map.png" alt="Town11" style="width:40%" />
-  <figcaption>Recorrido corto utilizado para la validación del Test 1 en Town11.</figcaption>
+  <figcaption>Recorrido corto utilizado para la evaluación de robustez en Town11.</figcaption>
 </figure>
 
 <h3 id="22-configuración-experimental">2.2 Configuración experimental</h3>
@@ -190,6 +503,10 @@
 
 <h3 id="23-resultados">2.3 Resultados</h3>
 
+<blockquote>
+  <p><strong>Nota metodológica.</strong> Salvo <em>Successful Runs</em>, las métricas se calculan únicamente sobre los episodios exitosos. Por esta razón, las colisiones, invasiones de carril, velocidad y desviación deben interpretarse junto con la tasa de finalización de cada modelo.</p>
+</blockquote>
+
 <table>
   <thead>
     <tr>
@@ -318,7 +635,11 @@
   </tbody>
 </table>
 
-<h2 id="test-1">Test 1</h2>
+<p>En el caso canónico, casi todas las configuraciones completan la totalidad de los recorridos y no se registran colisiones. En DAgger, las invasiones de carril crecen conforme aumenta la proporción de datos perturbados, mientras que las mezclas más altas mantienen una desviación elevada sin aportar una mejora equivalente en la tasa de éxito.</p>
+
+<p>Noise Injection mantiene tasas de finalización altas y un seguimiento lateral más preciso. En particular, $D_{0.50}^{C}$ presenta el mejor compromiso del test, con 100 % de éxito, 5.767 invasiones de carril y una desviación media de 0.231 m. El aumento hasta 75 % conserva la tasa de éxito, pero no mejora estas métricas y reduce la velocidad media, lo que sugiere que una mayor proporción de datos perturbados no aporta beneficios adicionales en condiciones nominales.</p>
+
+<h2 id="test-1--diferentes-posiciones-de-inicio">Test 1 – Diferentes posiciones de inicio</h2>
 
 <table>
   <thead>
@@ -391,7 +712,108 @@
   </tbody>
 </table>
 
-<h2 id="test-3">Test 3</h2>
+<p>Frente a las posiciones y orientaciones iniciales perturbadas, $D^{A}$ reduce su tasa de éxito a 93.3 %, aunque conserva pocas invasiones de carril y la mayor velocidad media. Las configuraciones DAgger evaluadas completan todas las ejecuciones, lo que sugiere una mayor capacidad de recuperación, pero presentan entre 26.067 y 34.300 invasiones y una desviación superior a la de Burbuja.</p>
+
+<p>Noise Injection ofrece un mejor compromiso entre recuperación y precisión. $D_{0.30}^{C}$ y $D_{0.50}^{C}$ alcanzan 100 % de éxito, mientras que $D_{0.50}^{C}$ reduce las invasiones a 7.172 y obtiene una desviación de 0.228 m. Al aumentar la proporción a 75 %, la tasa de éxito cae a 93.1 %, por lo que la mejora no es monotónica.</p>
+
+<h2 id="test-2--diferentes-sectores-de-inicio">Test 2 – Diferentes sectores de inicio</h2>
+
+<blockquote>
+  <p><strong>Pendiente de ejecución.</strong> En Town11, al tratarse de una trayectoria abierta, el Test 2 utilizará tres posiciones iniciales diferentes y recorridos de igual longitud (~700 m), con 10 ejecuciones por posición y por modelo, para un total de 30 episodios por configuración.</p>
+</blockquote>
+
+<h2 id="test-3--diferentes-velocidades-iniciales">Test 3 – Diferentes velocidades iniciales</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Modelo</th>
+      <th style="text-align: right">Successful Runs</th>
+      <th style="text-align: right">Collisions</th>
+      <th style="text-align: right">Lane Invasions</th>
+      <th style="text-align: right">Speed (km/h)</th>
+      <th style="text-align: right">Dev Mean (m)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>$D^{A}$</td>
+      <td style="text-align: right">64.3% (18/28)</td>
+      <td style="text-align: right">0.000</td>
+      <td style="text-align: right">7.278</td>
+      <td style="text-align: right">75.54</td>
+      <td style="text-align: right">0.314</td>
+    </tr>
+    <tr>
+      <td>$D_{0.15}^{B}$</td>
+      <td style="text-align: right">85.7% (24/28)</td>
+      <td style="text-align: right">0.000</td>
+      <td style="text-align: right">14.333</td>
+      <td style="text-align: right">67.87</td>
+      <td style="text-align: right">0.338</td>
+    </tr>
+    <tr>
+      <td>$D_{0.30}^{B}$</td>
+      <td style="text-align: right">96.4% (27/28)</td>
+      <td style="text-align: right">0.000</td>
+      <td style="text-align: right">23.593</td>
+      <td style="text-align: right">74.95</td>
+      <td style="text-align: right">0.474</td>
+    </tr>
+    <tr>
+      <td>$D_{0.50}^{B}$</td>
+      <td style="text-align: right">100.0% (28/28)</td>
+      <td style="text-align: right">0.000</td>
+      <td style="text-align: right">28.250</td>
+      <td style="text-align: right">63.59</td>
+      <td style="text-align: right">0.425</td>
+    </tr>
+    <tr>
+      <td>$D_{0.75}^{B}$</td>
+      <td style="text-align: right">96.4% (27/28)</td>
+      <td style="text-align: right">0.000</td>
+      <td style="text-align: right">33.667</td>
+      <td style="text-align: right">65.82</td>
+      <td style="text-align: right">0.520</td>
+    </tr>
+    <tr>
+      <td>$D_{0.15}^{C}$</td>
+      <td style="text-align: right">77.8% (21/27)</td>
+      <td style="text-align: right">0.000</td>
+      <td style="text-align: right">12.238</td>
+      <td style="text-align: right">65.97</td>
+      <td style="text-align: right">0.317</td>
+    </tr>
+    <tr>
+      <td>$D_{0.30}^{C}$</td>
+      <td style="text-align: right">57.1% (16/28)</td>
+      <td style="text-align: right">0.000</td>
+      <td style="text-align: right">13.625</td>
+      <td style="text-align: right">69.04</td>
+      <td style="text-align: right">0.296</td>
+    </tr>
+    <tr>
+      <td>$D_{0.50}^{C}$</td>
+      <td style="text-align: right">82.1% (23/28)</td>
+      <td style="text-align: right">0.000</td>
+      <td style="text-align: right">6.957</td>
+      <td style="text-align: right">66.78</td>
+      <td style="text-align: right">0.222</td>
+    </tr>
+    <tr>
+      <td>$D_{0.75}^{C}$</td>
+      <td style="text-align: right">59.3% (16/27)</td>
+      <td style="text-align: right">0.000</td>
+      <td style="text-align: right">17.000</td>
+      <td style="text-align: right">56.52</td>
+      <td style="text-align: right">0.292</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Las distintas velocidades iniciales reducen el éxito de $D^{A}$ a 64.3 %. DAgger mejora progresivamente la tasa de finalización hasta $D_{0.50}^{B}$, que completa 28/28 ejecuciones; sin embargo, esta mejora coincide con más invasiones de carril y mayor desviación lateral. Con 75 % de DAgger, la tasa de éxito deja de aumentar y las métricas laterales vuelven a degradarse.</p>
+
+<p>Noise Injection muestra tasas de éxito menores que las mejores configuraciones DAgger, pero mayor precisión en los episodios completados. $D_{0.50}^{C}$ presenta el mejor seguimiento lateral, con 6.957 invasiones y 0.222 m de desviación, aunque finaliza 82.1 % de las ejecuciones. Por tanto, el test muestra un compromiso entre la capacidad de completar el recorrido y la precisión de trayectoria; una menor desviación entre episodios exitosos no implica por sí sola una robustez global superior.</p>
 
 <h2 id="test-4--perturbación-online">Test 4 – Perturbación online</h2>
 
@@ -482,37 +904,19 @@
   </tbody>
 </table>
 
-<h3 id="24-discusión">2.4 Discusión</h3>
+<p>La perturbación online resulta especialmente exigente para las configuraciones sin suficiente capacidad de recuperación: $D^{A}$ y $D_{0.15}^{C}$ no completan ninguna de las 30 ejecuciones. Dentro de DAgger, $D_{0.50}^{B}$ alcanza la mayor tasa de éxito (96.7 %), mientras que aumentar la mezcla a 75 % produce una degradación en finalización, invasiones de carril y desviación.</p>
 
-<p>Los resultados mantienen las tendencias observadas previamente en el Test 1, aunque las diferencias entre modelos son ahora más evidentes y el escenario resulta considerablemente más exigente que Town02.</p>
+<p>$D_{0.50}^{C}$ presenta el mejor compromiso global del test: completa las 30 ejecuciones y obtiene menos invasiones de carril y menor desviación que las configuraciones DAgger. Las proporciones de 30 % y 75 % de Noise Injection mantienen métricas laterales relativamente bajas entre los episodios exitosos, pero solo alcanzan 70.0 % y 73.3 % de éxito. No se registran colisiones en ninguna de las configuraciones que completan episodios.</p>
 
-<ul>
-  <li>
-    <p><strong>Burbuja ($D^{A}$)</strong> continúa siendo el modelo más rápido (76.78 km/h) y presenta un bajo número de invasiones de carril. Sin embargo, pierde robustez y deja de completar todas las ejecuciones, alcanzando únicamente 93.3 % de éxito. Esto confirma que la política nominal tiene dificultades para recuperarse cuando las perturbaciones iniciales son más severas y la geometría del mapa contiene un mayor número de curvas.</p>
-  </li>
-  <li>
-    <p>Las configuraciones basadas en <strong>DAgger</strong> mantienen tasas de éxito del 100 %, evidenciando una mayor capacidad de recuperación desde estados iniciales alejados de la distribución de entrenamiento. No obstante, esta mejora se obtiene a costa de un incremento muy importante en las invasiones de carril y en el error lateral medio. El deterioro se acentúa conforme aumenta la proporción de datos DAgger, alcanzando 34.3 invasiones para $D_{0.75}^{B}$.</p>
-  </li>
-  <li>
-    <p>Las configuraciones de <strong>Noise Injection</strong> presentan el mejor compromiso entre robustez y precisión. En particular, $D_{0.50}^{C}$ alcanza 100 % de éxito, mantiene un número reducido de invasiones de carril (7.172) y obtiene el menor error lateral medio del experimento (0.228 m). Además, conserva velocidades medias elevadas, lo que sugiere una política más estable y precisa.</p>
-  </li>
-</ul>
+<h3 id="24-discusión-general-de-town11">2.4 Discusión general de Town11</h3>
 
-<p><strong>Conclusión parcial:</strong> Town11 constituye un escenario considerablemente más discriminante que Town02, permitiendo evidenciar con mayor claridad las fortalezas y debilidades de cada estrategia de generación de datos. Los resultados sugieren que las políticas entrenadas mediante Noise Injection ofrecen el mejor equilibrio entre capacidad de recuperación y precisión de seguimiento.</p>
+<p>En Town11, $D^{A}$ conserva un desempeño sólido en el caso canónico, pero pierde capacidad de finalización ante cambios en la posición, la velocidad inicial y, especialmente, bajo perturbación online. Las configuraciones DAgger mejoran la recuperación y alcanzan las mayores tasas de éxito en varios escenarios exigentes, aunque este comportamiento suele estar acompañado por más invasiones de carril y mayor desviación.</p>
 
-<p>Los resultados mantienen las tendencias observadas previamente en el Test 1, aunque las diferencias entre modelos son ahora más evidentes:</p>
-
-<ul>
-  <li><strong>Burbuja</strong> sigue siendo el modelo más rápido, pero pierde robustez en un escenario con mayor cantidad de curvas y perturbaciones iniciales más severas.</li>
-  <li><strong>DAgger (50%)</strong> conserva una tasa de éxito del 100%, aunque presenta el mayor número de invasiones de carril y el mayor error lateral medio, lo que indica un seguimiento menos preciso de la trayectoria.</li>
-  <li><strong>Noise Injection (50%)</strong> alcanza también un 100% de recorridos exitosos y obtiene el menor error lateral, confirmando mayor precisión en el seguimiento de la ruta ideal.</li>
-</ul>
-
-<p><strong>Conclusión parcial:</strong> aunque esta evaluación corresponde a una prueba rápida sobre un recorrido corto, los resultados sugieren que <strong>Town11 constituye un escenario más discriminante que Town02</strong>, permitiendo evidenciar con mayor claridad las fortalezas y limitaciones de cada estrategia de entrenamiento. Esto motiva ejecutar el <strong>Test 1 completo</strong> en Town11, empleando el mismo protocolo experimental utilizado hasta ahora.</p>
+<p>Noise Injection, particularmente $D_{0.50}^{C}$, presenta el mejor compromiso entre robustez y precisión lateral: mantiene 100 % de éxito en los Tests 0, 1 y 4, y obtiene las menores desviaciones en los cuatro tests ejecutados. No obstante, en el Test 3 su tasa de finalización es inferior a la de varias mezclas DAgger. En conjunto, los resultados sugieren que DAgger favorece la recuperación, mientras que una proporción intermedia de Noise Injection combina mejor la finalización con un seguimiento preciso. El Test 2 permanece pendiente y no se incluye en esta interpretación.</p>
 
 <hr />
 
-<h2 id="3-experimento-2--generalización-en-un-escenario-no-visto-test-1-nuevo">3. Experimento 2 — Generalización en un escenario no visto (Test 1 nuevo)</h2>
+<h2 id="3-experimento-2--generalización-en-el-mapa-csonthomisi">3. Experimento 2 — Generalización en el mapa csonthomisi</h2>
 
 <h3 id="31-motivación">3.1 Motivación</h3>
 
@@ -578,11 +982,108 @@
 
 <h3 id="34-resultados">3.4 Resultados</h3>
 
-<h2 id="test-0">Test 0</h2>
+<h2 id="test-0--caso-canónico-1">Test 0 – Caso canónico</h2>
 
-<p>En proceso</p>
+<table>
+  <thead>
+    <tr>
+      <th>Modelo</th>
+      <th style="text-align: right">Successful Runs</th>
+      <th style="text-align: right">Collisions</th>
+      <th style="text-align: right">Lane Invasions</th>
+      <th style="text-align: right">Speed (km/h)</th>
+      <th style="text-align: right">Dev Mean (m)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>$D^{A}$</td>
+      <td style="text-align: right">0.0% (0/24)</td>
+      <td style="text-align: right">—</td>
+      <td style="text-align: right">—</td>
+      <td style="text-align: right">—</td>
+      <td style="text-align: right">—</td>
+    </tr>
+    <tr>
+      <td>$D_{0.15}^{B}$</td>
+      <td style="text-align: right">31.8% (7/22)</td>
+      <td style="text-align: right">0.000</td>
+      <td style="text-align: right">31.714</td>
+      <td style="text-align: right">45.62</td>
+      <td style="text-align: right">0.361</td>
+    </tr>
+    <tr>
+      <td>$D_{0.30}^{B}$</td>
+      <td style="text-align: right">84.0% (21/25)</td>
+      <td style="text-align: right">0.000</td>
+      <td style="text-align: right">42.619</td>
+      <td style="text-align: right">29.28</td>
+      <td style="text-align: right">0.424</td>
+    </tr>
+    <tr>
+      <td>$D_{0.50}^{B}$</td>
+      <td style="text-align: right">84.0% (21/25)</td>
+      <td style="text-align: right">0.000</td>
+      <td style="text-align: right">32.571</td>
+      <td style="text-align: right">40.37</td>
+      <td style="text-align: right">0.400</td>
+    </tr>
+    <tr>
+      <td>$D_{0.75}^{B}$</td>
+      <td style="text-align: right">80.0% (20/25)</td>
+      <td style="text-align: right">0.000</td>
+      <td style="text-align: right">57.000</td>
+      <td style="text-align: right">34.55</td>
+      <td style="text-align: right">0.459</td>
+    </tr>
+    <tr>
+      <td>$D_{0.15}^{C}$</td>
+      <td style="text-align: right">29.2% (7/24)</td>
+      <td style="text-align: right">0.000</td>
+      <td style="text-align: right">41.143</td>
+      <td style="text-align: right">48.09</td>
+      <td style="text-align: right">0.509</td>
+    </tr>
+    <tr>
+      <td>$D_{0.30}^{C}$</td>
+      <td style="text-align: right">20.0% (5/25)</td>
+      <td style="text-align: right">0.000</td>
+      <td style="text-align: right">40.200</td>
+      <td style="text-align: right">43.99</td>
+      <td style="text-align: right">0.459</td>
+    </tr>
+    <tr>
+      <td>$D_{0.50}^{C}$</td>
+      <td style="text-align: right">84.0% (21/25)</td>
+      <td style="text-align: right">0.000</td>
+      <td style="text-align: right">32.571</td>
+      <td style="text-align: right">43.12</td>
+      <td style="text-align: right">0.419</td>
+    </tr>
+    <tr>
+      <td>$D_{0.75}^{C}$</td>
+      <td style="text-align: right">95.8% (23/24)</td>
+      <td style="text-align: right">0.000</td>
+      <td style="text-align: right">29.391</td>
+      <td style="text-align: right">39.73</td>
+      <td style="text-align: right">0.364</td>
+    </tr>
+    <tr>
+      <td>$D^{M}_{30/30/40}$</td>
+      <td style="text-align: right">96.0% (24/25)</td>
+      <td style="text-align: right">0.000</td>
+      <td style="text-align: right">38.833</td>
+      <td style="text-align: right">39.32</td>
+      <td style="text-align: right">0.436</td>
+    </tr>
+  </tbody>
+</table>
 
-<h2 id="test-1--diferentes-posiciones-de-inicio">Test 1 – Diferentes posiciones de inicio</h2>
+<p>El caso canónico ya representa una dificultad importante de transferencia: $D^{A}$ no completa ninguna ejecución y las mezclas con 15 % de datos perturbados mantienen tasas de éxito cercanas al 30 %. DAgger mejora al utilizar proporciones de 30–50 %, ambas con 84.0 % de éxito, mientras que 75 % incrementa notablemente las invasiones de carril y no mejora la finalización.</p>
+
+<p>En Noise Injection se observa una diferencia marcada entre proporciones: 15–30 % ofrecen poca capacidad de generalización, mientras que $D_{0.75}^{C}$ alcanza 95.8 % de éxito y presenta menos invasiones que las configuraciones DAgger de alto desempeño. $D^{M}<em>{30/30/40}$ obtiene la mayor tasa de éxito, con 96.0 %, aunque su desviación e invasiones son superiores a las de $D</em>{0.75}^{C}$. Por tanto, Magic Mix destaca en finalización y Noise Injection 75 % presenta el mejor compromiso lateral entre las configuraciones con mayor éxito.</p>
+
+<h2 id="test-1--diferentes-posiciones-de-inicio-1">Test 1 – Diferentes posiciones de inicio</h2>
 
 <table>
   <thead>
@@ -679,13 +1180,195 @@
   </tbody>
 </table>
 
-<h2 id="test-2">Test 2</h2>
+<p>Las posiciones iniciales perturbadas acentúan la dificultad de generalización de $D^{A}$, que completa 2 de 26 ejecuciones. En DAgger, las proporciones de 30–75 % superan claramente a $D_{0.15}^{B}$ y la mayor tasa de éxito corresponde a $D_{0.75}^{B}$, con 91.3 %. Sin embargo, esta configuración también registra el mayor número de invasiones de carril del test. Esto sugiere una mayor capacidad de finalización, aunque con menor estabilidad lateral.</p>
 
-<p>En proceso</p>
+<p>Noise Injection también mejora con proporciones altas. $D_{0.75}^{C}$ y $D^{M}<em>{30/30/40}$ alcanzan 96.3 % de éxito, pero $D</em>{0.75}^{C}$ presenta menos invasiones y menor desviación. En esta evaluación, $D_{0.75}^{C}$ ofrece el mejor compromiso entre generalización, recuperación inicial y precisión de trayectoria; la velocidad se interpreta solo como un indicador complementario.</p>
 
-<h2 id="test-3-1">Test 3</h2>
+<h2 id="test-2--diferentes-puntos-de-inicio">Test 2 – Diferentes puntos de inicio</h2>
 
-<p>En proceso</p>
+<table>
+  <thead>
+    <tr>
+      <th>Modelo</th>
+      <th style="text-align: right">Successful Runs</th>
+      <th style="text-align: right">Collisions</th>
+      <th style="text-align: right">Lane Invasions</th>
+      <th style="text-align: right">Speed (km/h)</th>
+      <th style="text-align: right">Dev Mean (m)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>$D^{A}$</td>
+      <td style="text-align: right">33.3% (10/30)</td>
+      <td style="text-align: right">0.000</td>
+      <td style="text-align: right">27.100</td>
+      <td style="text-align: right">51.96</td>
+      <td style="text-align: right">0.486</td>
+    </tr>
+    <tr>
+      <td>$D_{0.15}^{B}$</td>
+      <td style="text-align: right">39.1% (9/23)</td>
+      <td style="text-align: right">0.000</td>
+      <td style="text-align: right">32.333</td>
+      <td style="text-align: right">48.82</td>
+      <td style="text-align: right">0.452</td>
+    </tr>
+    <tr>
+      <td>$D_{0.30}^{B}$</td>
+      <td style="text-align: right">10.0% (3/30)</td>
+      <td style="text-align: right">0.000</td>
+      <td style="text-align: right">40.667</td>
+      <td style="text-align: right">29.36</td>
+      <td style="text-align: right">0.432</td>
+    </tr>
+    <tr>
+      <td>$D_{0.50}^{B}$</td>
+      <td style="text-align: right">42.9% (12/28)</td>
+      <td style="text-align: right">0.000</td>
+      <td style="text-align: right">28.917</td>
+      <td style="text-align: right">41.07</td>
+      <td style="text-align: right">0.387</td>
+    </tr>
+    <tr>
+      <td>$D_{0.75}^{B}$</td>
+      <td style="text-align: right">30.0% (9/30)</td>
+      <td style="text-align: right">0.000</td>
+      <td style="text-align: right">60.111</td>
+      <td style="text-align: right">35.42</td>
+      <td style="text-align: right">0.460</td>
+    </tr>
+    <tr>
+      <td>$D_{0.15}^{C}$</td>
+      <td style="text-align: right">38.1% (8/21)</td>
+      <td style="text-align: right">0.000</td>
+      <td style="text-align: right">37.625</td>
+      <td style="text-align: right">47.41</td>
+      <td style="text-align: right">0.477</td>
+    </tr>
+    <tr>
+      <td>$D_{0.30}^{C}$</td>
+      <td style="text-align: right">20.8% (5/24)</td>
+      <td style="text-align: right">0.000</td>
+      <td style="text-align: right">34.200</td>
+      <td style="text-align: right">43.47</td>
+      <td style="text-align: right">0.390</td>
+    </tr>
+    <tr>
+      <td>$D_{0.50}^{C}$</td>
+      <td style="text-align: right">53.3% (16/30)</td>
+      <td style="text-align: right">0.000</td>
+      <td style="text-align: right">31.812</td>
+      <td style="text-align: right">42.39</td>
+      <td style="text-align: right">0.401</td>
+    </tr>
+    <tr>
+      <td>$D_{0.75}^{C}$</td>
+      <td style="text-align: right">32.1% (9/28)</td>
+      <td style="text-align: right">0.000</td>
+      <td style="text-align: right">29.556</td>
+      <td style="text-align: right">39.15</td>
+      <td style="text-align: right">0.361</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>El Test 2 es el escenario más difícil de csonthomisi: ninguna configuración supera 53.3 % de éxito. $D_{0.50}^{C}$ obtiene la mayor tasa de finalización, seguida por $D_{0.50}^{B}$ con 42.9 %. Las mezclas de 50 % presentan así el comportamiento más consistente dentro de cada estrategia, aunque la diferencia entre ambas es moderada y no permite establecer una ventaja general para Noise Injection.</p>
+
+<p>Entre los episodios exitosos, $D_{0.50}^{B}$ registra menos invasiones y una desviación ligeramente menor que $D_{0.50}^{C}$. $D_{0.75}^{C}$ alcanza la menor desviación global, pero solo completa 32.1 % de las ejecuciones; por ello, su precisión lateral no debe interpretarse como un mejor desempeño total. Los resultados sugieren que cambiar el sector de inicio sigue siendo un reto importante para todas las políticas.</p>
+
+<h2 id="test-3--diferentes-velocidades-iniciales-1">Test 3 – Diferentes velocidades iniciales</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Modelo</th>
+      <th style="text-align: right">Successful Runs</th>
+      <th style="text-align: right">Collisions</th>
+      <th style="text-align: right">Lane Invasions</th>
+      <th style="text-align: right">Speed (km/h)</th>
+      <th style="text-align: right">Dev Mean (m)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>$D^{A}$</td>
+      <td style="text-align: right">16.7% (4/24)</td>
+      <td style="text-align: right">0.000</td>
+      <td style="text-align: right">26.000</td>
+      <td style="text-align: right">48.16</td>
+      <td style="text-align: right">0.500</td>
+    </tr>
+    <tr>
+      <td>$D_{0.15}^{B}$</td>
+      <td style="text-align: right">70.8% (17/24)</td>
+      <td style="text-align: right">0.000</td>
+      <td style="text-align: right">18.412</td>
+      <td style="text-align: right">43.42</td>
+      <td style="text-align: right">0.306</td>
+    </tr>
+    <tr>
+      <td>$D_{0.30}^{B}$</td>
+      <td style="text-align: right">91.7% (22/24)</td>
+      <td style="text-align: right">0.000</td>
+      <td style="text-align: right">34.091</td>
+      <td style="text-align: right">27.70</td>
+      <td style="text-align: right">0.360</td>
+    </tr>
+    <tr>
+      <td>$D_{0.50}^{B}$</td>
+      <td style="text-align: right">87.0% (20/23)</td>
+      <td style="text-align: right">0.000</td>
+      <td style="text-align: right">25.500</td>
+      <td style="text-align: right">39.98</td>
+      <td style="text-align: right">0.378</td>
+    </tr>
+    <tr>
+      <td>$D_{0.75}^{B}$</td>
+      <td style="text-align: right">73.9% (17/23)</td>
+      <td style="text-align: right">0.000</td>
+      <td style="text-align: right">44.294</td>
+      <td style="text-align: right">30.90</td>
+      <td style="text-align: right">0.478</td>
+    </tr>
+    <tr>
+      <td>$D_{0.15}^{C}$</td>
+      <td style="text-align: right">42.1% (8/19)</td>
+      <td style="text-align: right">0.000</td>
+      <td style="text-align: right">32.375</td>
+      <td style="text-align: right">44.73</td>
+      <td style="text-align: right">0.498</td>
+    </tr>
+    <tr>
+      <td>$D_{0.30}^{C}$</td>
+      <td style="text-align: right">61.1% (11/18)</td>
+      <td style="text-align: right">0.000</td>
+      <td style="text-align: right">31.727</td>
+      <td style="text-align: right">41.96</td>
+      <td style="text-align: right">0.442</td>
+    </tr>
+    <tr>
+      <td>$D_{0.50}^{C}$</td>
+      <td style="text-align: right">82.6% (19/23)</td>
+      <td style="text-align: right">0.000</td>
+      <td style="text-align: right">26.211</td>
+      <td style="text-align: right">44.56</td>
+      <td style="text-align: right">0.432</td>
+    </tr>
+    <tr>
+      <td>$D_{0.75}^{C}$</td>
+      <td style="text-align: right">95.8% (23/24)</td>
+      <td style="text-align: right">0.000</td>
+      <td style="text-align: right">28.826</td>
+      <td style="text-align: right">41.15</td>
+      <td style="text-align: right">0.378</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Los cambios en la velocidad inicial reducen la tasa de éxito de $D^{A}$ a 16.7 %, lo que sugiere dificultades para transferir la política base a estados dinámicos no vistos en este mapa. DAgger mejora claramente la finalización y alcanza su mejor resultado con $D_{0.30}^{B}$ (91.7 %); al aumentar la proporción a 50 % y 75 %, la tasa de éxito disminuye y, en 75 %, también empeoran las invasiones y la desviación.</p>
+
+<p>En Noise Injection se observa la tendencia opuesta: la tasa de éxito aumenta con la proporción hasta llegar a 95.8 % con $D_{0.75}^{C}$. Esta configuración mantiene valores intermedios de invasiones y desviación, mientras que algunas mezclas con menor error, como $D_{0.15}^{B}$, completan menos episodios. Los resultados sugieren que $D_{0.75}^{C}$ ofrece el mejor compromiso global para generalizar frente a variaciones del estado dinámico inicial.</p>
 
 <h2 id="test-4--perturbación-online-1">Test 4 – Perturbación online</h2>
 
@@ -752,35 +1435,15 @@
   </tbody>
 </table>
 
-<h3 id="35-observaciones">3.5 Observaciones</h3>
+<p>En perturbación online, DAgger mantiene una mayor tasa de éxito que Noise Injection para las proporciones comparables. $D_{0.50}^{B}$ alcanza 96.6 % de finalización, frente a 79.3 % de $D_{0.50}^{C}$, y además presenta valores ligeramente menores de invasiones y desviación. Entre las configuraciones disponibles, $D_{0.50}^{B}$ ofrece el mejor compromiso para recuperarse de perturbaciones recurrentes en el mapa no visto.</p>
 
-<p>Los resultados obtenidos en el mapa csonthomisi muestran un comportamiento muy diferente al observado en Town02 y Town11, evidenciando que la capacidad de generalización constituye un desafío considerablemente más exigente que las perturbaciones iniciales sobre mapas conocidos.</p>
+<p>Las proporciones de 15–30 % de Noise Injection muestran una degradación clara, con tasas de éxito de 33.3 % y 31.0 % y un número elevado de invasiones. No se registran colisiones, algo coherente con un escenario sin obstáculos, por lo que la comparación depende principalmente de la finalización y del seguimiento lateral.</p>
 
-<ul>
-  <li>
-    <p>El modelo <strong>Burbuja</strong> ($D^{A}$) prácticamente pierde su capacidad de transferencia, alcanzando únicamente 7.7 % de ejecuciones exitosas. Esto sugiere un fuerte sobreajuste a la geometría y distribución presentes durante el entrenamiento.</p>
-  </li>
-  <li>
-    <p>Las configuraciones basadas en <strong>DAgger</strong> presentan una mejora muy significativa respecto a Burbuja. Particularmente, $D_{0.30}^{B}$ y $D_{0.50}^{B}$ alcanzan tasas de éxito superiores al 75 %, aunque manteniendo velocidades considerablemente menores y un elevado número de invasiones de carril.</p>
-  </li>
-  <li>
-    <p>Las configuraciones basadas en <strong>Noise Injection</strong> muestran nuevamente una elevada capacidad de generalización. En especial, $D_{0.50}^{C}$ obtiene el mejor desempeño global, alcanzando 88.9 % de éxito y manteniendo un error lateral reducido.</p>
-  </li>
-  <li>
-    <p>Resulta interesante observar que las políticas más robustas tienden a reducir significativamente su velocidad media, sugiriendo la aparición de estrategias de conducción más conservadoras para compensar la incertidumbre asociada a un entorno completamente desconocido.</p>
-  </li>
-</ul>
+<h3 id="observaciones-generales">Observaciones generales</h3>
 
-<p>En conjunto, estos resultados sugieren que la exposición del controlador a perturbaciones continuas durante el entrenamiento favorece la construcción de representaciones más invariantes y transferibles a escenarios no vistos previamente.</p>
+<p>Los cinco tests muestran que csonthomisi exige una capacidad de transferencia que $D^{A}$ no mantiene de forma consistente. DAgger favorece la recuperación, especialmente con proporciones de 30–50 %, y $D_{0.50}^{B}$ destaca bajo perturbación online. Su principal limitación es el aumento de invasiones de carril en varias configuraciones, particularmente cuando DAgger alcanza 75 %.</p>
 
-<h3 id="35-observaciones-1">3.5 Observaciones</h3>
-
-<ul>
-  <li>El escenario csonthomisi resulta considerablemente más exigente para el modelo entrenado únicamente con <strong>Burbuja</strong> ($D^{A}$), que alcanza solo <strong>7.7%</strong> de ejecuciones exitosas.</li>
-  <li>Las configuraciones con <strong>Noise Injection</strong> muestran la mejor capacidad de generalización. En particular, $D_{0.75}^{C}$ obtiene <strong>96.3%</strong> de éxito, el menor número de invasiones de carril (<strong>31.28</strong>) y el menor error lateral medio (<strong>0.378 m</strong>).</li>
-  <li>Las configuraciones basadas en <strong>DAgger</strong> mejoran notablemente respecto a Burbuja, aunque un incremento excesivo de muestras DAgger (75%) aumenta significativamente las invasiones de carril (<strong>62.15</strong>).</li>
-  <li><strong>Magic Mix 30/30/40</strong> mantiene una tasa de éxito equivalente a Noise 75%, aunque con mayor número de invasiones de carril y un error lateral medio superior.</li>
-</ul>
+<p>Noise Injection presenta un comportamiento más dependiente de la proporción y del test. $D_{0.75}^{C}$ obtiene tasas de éxito altas en los Tests 0, 1 y 3, con un seguimiento lateral competitivo, mientras que $D_{0.50}^{C}$ lidera el Test 2. Magic Mix alcanza las mejores tasas de finalización en los Tests 0 y 1, pero no dispone de resultados en los Tests 2–4 y muestra menor precisión lateral que $D_{0.75}^{C}$ en las comparaciones disponibles. En conjunto, los resultados sugieren que DAgger favorece la recuperación ante perturbaciones recurrentes y que Noise Injection en proporciones altas puede favorecer la transferencia y la precisión, aunque ninguna estrategia domina todos los escenarios.</p>
 
 <hr />
 <h2 id="4-gráficos">4. Gráficos</h2>
@@ -788,21 +1451,21 @@
 <figure class="half">
   <img src="http://localhost:4000/assets/images/week103/test4_town02_curvas.png" alt="Resultados Test 4 en Town02" style="width:50%" />
   <figcaption>
-    Curvas de desempeño del Test 4 en Town02. Noise Injection alcanza su mejor desempeño con una proporción del 50%, mientras que DAgger presenta una degradación significativa para proporciones elevadas.
+    Curvas de desempeño del Test 4 en Town02. Noise Injection alcanza su mayor tasa de éxito con una proporción de 50 %, mientras que DAgger muestra una degradación al utilizar proporciones elevadas.
   </figcaption>
 </figure>
 
 <figure class="half">
   <img src="http://localhost:4000/assets/images/week103/test4_town11_curvas.png" alt="Resultados Test 4 en Town11" style="width:50%" />
   <figcaption>
-    Curvas de desempeño del Test 4 en Town11. El escenario resulta altamente discriminante para el modelo base, mientras que las configuraciones intermedias de DAgger y Noise Injection mejoran considerablemente la robustez, destacando $D_{0.50}^{C}$ con un 100% de ejecuciones exitosas.
+    Curvas de desempeño del Test 4 en Town11. $D^{A}$ no completa ninguna ejecución y las mezclas intermedias mejoran la recuperación. $D_{0.50}^{C}$ alcanza 100 % de éxito y el menor error lateral.
   </figcaption>
 </figure>
 
 <figure class="half">
   <img src="http://localhost:4000/assets/images/week103/test4_csonthomisi_curvas.png" alt="Resultados Test 4 en el mapa comunitario csonthomisi" style="width:50%" />
   <figcaption>
-    Curvas de desempeño del Test 4 en el mapa comunitario csonthomisi. A diferencia de Town02 y Town11, las configuraciones basadas en DAgger muestran una capacidad de generalización significativamente superior, alcanzando hasta un 96.6% de éxito para $D_{0.50}^{B}$.
+    Curvas de desempeño del Test 4 en el mapa comunitario csonthomisi. Entre las configuraciones evaluadas, $D_{0.50}^{B}$ presenta la mayor tasa de éxito, con 96.6 %, y supera a $D_{0.50}^{C}$ en finalización y precisión lateral.
   </figcaption>
 </figure>
 
@@ -812,20 +1475,20 @@
 
 <ul>
   <li>
-    <p><strong>Burbuja ($D^{A}$)</strong> favorece el desempeño nominal en escenarios conocidos, pero presenta una capacidad de generalización limitada y una menor robustez frente a perturbaciones severas o cambios significativos en la distribución del entorno.</p>
+    <p><strong>Burbuja ($D^{A}$)</strong> mantiene un desempeño sólido en el caso canónico de Town11, pero su tasa de éxito disminuye al cambiar la posición o la velocidad inicial y llega a 0/30 bajo perturbación online. En csonthomisi también presenta tasas de finalización bajas, lo que sugiere una capacidad limitada para transferirse a geometrías y condiciones alejadas del dominio nominal.</p>
   </li>
   <li>
-    <p><strong>Noise Injection ($D^{C}$)</strong> induce principalmente <strong>robustez local</strong>, mejorando la estabilidad de la política frente a perturbaciones pequeñas y moderadas alrededor de la trayectoria nominal. Su mejor desempeño se observa en Town02 y Town11, particularmente para proporciones intermedias y altas ($30\%-50\%$).</p>
+    <p><strong>DAgger ($D_{\alpha}^{B}$)</strong> favorece la recuperación y alcanza tasas de éxito altas en los escenarios exigentes de Town11. En csonthomisi, $D_{0.50}^{B}$ destaca bajo perturbación online. Sin embargo, esta mejora suele estar acompañada por más invasiones de carril y mayor desviación, especialmente con proporciones elevadas.</p>
   </li>
   <li>
-    <p><strong>DAgger ($D^{B}$)</strong> induce principalmente <strong>robustez de recuperación</strong>, permitiendo al agente recuperarse desde estados alejados de la trayectoria nominal y generalizar mejor ante escenarios significativamente fuera de distribución, como ocurre en el mapa csonthomisi.</p>
+    <p><strong>Noise Injection ($D_{\alpha}^{C}$)</strong> presenta el mejor compromiso entre finalización y precisión en Town11 con $D_{0.50}^{C}$. En csonthomisi, $D_{0.75}^{C}$ obtiene resultados competitivos en los Tests 0, 1 y 3, pero su comportamiento no es uniforme en todos los escenarios y DAgger conserva una ventaja en el Test 4.</p>
   </li>
   <li>
-    <p><strong>Magic Mix ($D^{M}$)</strong> ofrece un compromiso interesante entre ambas propiedades de robustez, aunque los resultados actuales sugieren que la proporción de mezcla aún puede optimizarse para aprovechar simultáneamente las ventajas de Noise Injection y DAgger.</p>
+    <p>**Magic Mix ($D^{M}<em>{30/30/40}$)** alcanza tasas de éxito altas en los Tests 0 y 1 de csonthomisi, aunque con menor precisión lateral que $D</em>{0.75}^{C}$ en esas comparaciones. Al no disponer de resultados para los Tests 2–4, todavía no es posible establecer si ofrece un equilibrio consistente entre ambas estrategias.</p>
   </li>
 </ul>
 
-<p>En conjunto, estos resultados indican que la robustez en conducción autónoma end-to-end puede descomponerse en dos componentes complementarias:</p>
+<p>En conjunto, los resultados permiten mantener, como interpretación preliminar, dos componentes complementarias de la robustez:</p>
 
 \[\boxed{
 \text{Robustez Local}
@@ -838,7 +1501,9 @@
 <ul>
   <li>La <strong>robustez local</strong> está asociada con la capacidad de la política para tolerar pequeñas desviaciones alrededor de la distribución de entrenamiento.</li>
   <li>La <strong>robustez de recuperación</strong> está asociada con la capacidad de retornar a estados seguros cuando el vehículo alcanza configuraciones significativamente fuera de distribución.</li>
-</ul>]]></content><author><name>Carlos Velásquez</name><email>canveo@gmail.com</email></author><category term="Weekly Log" /><category term="Robustez" /><category term="Burbuja" /><category term="Noise Injection" /><category term="DAgger" /><category term="CARLA Simulator" /><summary type="html"><![CDATA[Se actualizó Week 102 con nuevas métricas y cambios en el orden de las tablas.]]></summary></entry><entry><title type="html">Week 102 - Evaluación de robustez en distintos escenarios de conducción</title><link href="http://localhost:4000/weekly%20log/week102/" rel="alternate" type="text/html" title="Week 102 - Evaluación de robustez en distintos escenarios de conducción" /><published>2026-06-28T00:00:00-05:00</published><updated>2026-06-28T00:00:00-05:00</updated><id>http://localhost:4000/weekly%20log/week102</id><content type="html" xml:base="http://localhost:4000/weekly%20log/week102/"><![CDATA[<h2 id="diseño-experimental">Diseño experimental</h2>
+</ul>
+
+<p>DAgger parece favorecer principalmente la segunda componente, mientras que Noise Injection puede mejorar la precisión y la estabilidad local en proporciones adecuadas. No obstante, el comportamiento depende del mapa, del tipo de perturbación y de la composición del dataset, por lo que esta separación no constituye una demostración definitiva ni implica que una estrategia sea superior en todos los escenarios.</p>]]></content><author><name>Carlos Velásquez</name><email>canveo@gmail.com</email></author><category term="Weekly Log" /><category term="Robustez" /><category term="Burbuja" /><category term="Noise Injection" /><category term="DAgger" /><category term="CARLA Simulator" /><summary type="html"><![CDATA[Se actualizó Week 102 con nuevas métricas y cambios en el orden de las tablas.]]></summary></entry><entry><title type="html">Week 102 - Evaluación de robustez en distintos escenarios de conducción</title><link href="http://localhost:4000/weekly%20log/week102/" rel="alternate" type="text/html" title="Week 102 - Evaluación de robustez en distintos escenarios de conducción" /><published>2026-06-28T00:00:00-05:00</published><updated>2026-06-28T00:00:00-05:00</updated><id>http://localhost:4000/weekly%20log/week102</id><content type="html" xml:base="http://localhost:4000/weekly%20log/week102/"><![CDATA[<h2 id="diseño-experimental">Diseño experimental</h2>
 
 <h3 id="datasets">Datasets</h3>
 
@@ -961,8 +1626,8 @@
     </tr>
     <tr>
       <td style="text-align: left"><strong>Test 2</strong></td>
-      <td style="text-align: left">Posiciones aleatorias</td>
-      <td style="text-align: left"><strong>3 posiciones iniciales aleatorias</strong> (<code class="language-plaintext highlighter-rouge">random_1</code>, <code class="language-plaintext highlighter-rouge">random_2</code> y <code class="language-plaintext highlighter-rouge">random_3</code>), con <strong>75 ejecuciones</strong> por posición (<strong>225 ejecuciones</strong> en total).</td>
+      <td style="text-align: left">Diferentes puntos de inicio</td>
+      <td style="text-align: left"><strong>3 posiciones iniciales diferentes</strong> (<code class="language-plaintext highlighter-rouge">random_1</code>, <code class="language-plaintext highlighter-rouge">random_2</code> y <code class="language-plaintext highlighter-rouge">random_3</code>), con <strong>75 ejecuciones por posición</strong> (<strong>225 ejecuciones</strong> en total). La trayectoria fue corregida para que todas las condiciones completen una vuelta del mismo circuito; únicamente cambia el punto de inicio. La meta se ubica aproximadamente 10–15 m antes del punto de partida, siguiendo el sentido de circulación.</td>
     </tr>
     <tr>
       <td style="text-align: left"><strong>Test 3</strong></td>
@@ -1001,7 +1666,7 @@
     <tr>
       <td style="text-align: left">Test 2</td>
       <td style="text-align: left">Posiciones de inicio random</td>
-      <td style="text-align: left">3 posiciones de inicio seleccionadas aleatoriamente dentro de la malla externa, mismo punto final.</td>
+      <td style="text-align: left">3 posiciones de inicio seleccionadas en sectores distintos del circuito. La trayectoria ideal se reorganiza circularmente para cada posición, de modo que las tres condiciones completan el mismo circuito y solo cambia el punto de inicio. La meta se sitúa aproximadamente 10–15 m antes del punto de partida, siguiendo el sentido de circulación.</td>
     </tr>
     <tr>
       <td style="text-align: left">Test 3</td>
@@ -1099,6 +1764,14 @@
       <td style="text-align: right">0.514</td>
     </tr>
     <tr>
+      <td>$D_{0.75}^{B}$</td>
+      <td style="text-align: right">49.1% (110/224)</td>
+      <td style="text-align: right">1.618</td>
+      <td style="text-align: right">24.255</td>
+      <td style="text-align: right">46.73</td>
+      <td style="text-align: right">0.580</td>
+    </tr>
+    <tr>
       <td>$D_{0.15}^{C}$</td>
       <td style="text-align: right">97.3% (219/225)</td>
       <td style="text-align: right">0.151</td>
@@ -1121,6 +1794,14 @@
       <td style="text-align: right">7.094</td>
       <td style="text-align: right">56.28</td>
       <td style="text-align: right">0.276</td>
+    </tr>
+    <tr>
+      <td>$D_{0.75}^{C}$</td>
+      <td style="text-align: right">60.9% (137/225)</td>
+      <td style="text-align: right">0.533</td>
+      <td style="text-align: right">11.759</td>
+      <td style="text-align: right">54.53</td>
+      <td style="text-align: right">0.390</td>
     </tr>
   </tbody>
 </table>
@@ -1222,7 +1903,7 @@
   </tbody>
 </table>
 
-<h2 id="test-2--condiciones-iniciales-aleatorias">Test 2 – Condiciones iniciales aleatorias</h2>
+<h2 id="test-2--diferentes-puntos-de-inicio">Test 2 – Diferentes puntos de inicio</h2>
 
 <table>
   <thead>
@@ -1238,19 +1919,19 @@
   <tbody>
     <tr>
       <td>$D^{A}$</td>
-      <td style="text-align: right">73.8% (166/225)</td>
-      <td style="text-align: right">0.006</td>
-      <td style="text-align: right">1.801</td>
-      <td style="text-align: right">49.02</td>
-      <td style="text-align: right">0.197</td>
+      <td style="text-align: right">0.0% (0/0)</td>
+      <td style="text-align: right">—</td>
+      <td style="text-align: right">—</td>
+      <td style="text-align: right">—</td>
+      <td style="text-align: right">—</td>
     </tr>
     <tr>
       <td>$D_{0.15}^{B}$</td>
-      <td style="text-align: right">98.7% (222/225)</td>
-      <td style="text-align: right">0.009</td>
-      <td style="text-align: right">2.108</td>
-      <td style="text-align: right">46.90</td>
-      <td style="text-align: right">0.336</td>
+      <td style="text-align: right">90.2% (203/225)</td>
+      <td style="text-align: right">0.000</td>
+      <td style="text-align: right">10.182</td>
+      <td style="text-align: right">55.70</td>
+      <td style="text-align: right">0.510</td>
     </tr>
     <tr>
       <td>$D_{0.30}^{B}$</td>
@@ -1577,15 +2258,19 @@
 
 <hr />
 
-<h3 id="test-2--posiciones-aleatorias">Test 2 – Posiciones aleatorias</h3>
+<h3 id="test-2--diferentes-puntos-de-inicio-1">Test 2 – Diferentes puntos de inicio</h3>
 
-<p>El Test 2 introduce condiciones iniciales menos estructuradas mediante tres posiciones aleatorias, acumulando 225 ejecuciones por configuración. En este escenario, las configuraciones basadas en DAgger muestran las mayores tasas de finalización. $D_{0.50}^{B}$ y $D_{0.75}^{B}$ alcanzan 99.1 % de éxito (223/225), mientras que $D_{0.15}^{B}$ y $D_{0.30}^{B}$ también superan el 98 %. Esto sugiere que las muestras de recuperación DAgger mejoran la capacidad de completar el recorrido cuando el vehículo inicia desde estados menos nominales.</p>
+<p>El Test 2 fue corregido para que las tres condiciones de evaluación completen el mismo circuito, modificando únicamente el punto de inicio del vehículo. En la implementación actual se utilizan tres posiciones de arranque diferentes (<code class="language-plaintext highlighter-rouge">random_1</code>, <code class="language-plaintext highlighter-rouge">random_2</code> y <code class="language-plaintext highlighter-rouge">random_3</code>). Para cada una, la trayectoria ideal se reorganiza circularmente a partir del punto seleccionado, de manera que el vehículo recorre una vuelta completa antes de alcanzar la meta.</p>
 
-<p>No obstante, la mejora en tasa de éxito no siempre se traduce en mejor precisión de trayectoria. El modelo $D^{A}$ presenta solo 73.8 % de éxito (166/225), pero obtiene la menor desviación media (0.379 m) y el menor número de invasiones de carril convencionales (1.801). Esto evidencia un compromiso entre precisión nominal y capacidad de recuperación: Burbuja sigue mejor la trayectoria cuando logra estabilizarse, mientras que DAgger aumenta la probabilidad de completar el recorrido desde estados aleatorios.</p>
+<p>En la versión inicial del test, las distintas posiciones de inicio producían recorridos de diferente longitud y, por tanto, condiciones de evaluación no equivalentes. La corrección elimina esta diferencia: ahora todas las configuraciones cubren la misma trayectoria completa y se distinguen exclusivamente por el sector del circuito desde el cual comienza la conducción. Por esta razón, los resultados obtenidos con la metodología anterior no son directamente comparables con la campaña actual.</p>
 
-<p>Las configuraciones Noise Injection presentan un comportamiento menos favorable en este test. $D_{0.30}^{C}$, por ejemplo, alcanza 72.0 % de éxito (162/225) y el valor más alto de <code class="language-plaintext highlighter-rouge">Lane Inv. NONE</code> (2.716), aunque conserva una desviación media relativamente baja (0.407 m). Esto sugiere que Noise Injection puede favorecer estabilidad local, pero no necesariamente mejora la recuperación desde posiciones iniciales aleatorias tan alejadas de la distribución nominal.</p>
+<p>Los resultados disponibles muestran que las mezclas DAgger con proporciones entre 30 % y 75 % presentan las mayores tasas de finalización. Tanto $D_{0.50}^{B}$ como $D_{0.75}^{B}$ alcanzan 99.1 % de éxito (223/225), seguidas por $D_{0.30}^{B}$ con 98.2 % (221/225). Entre ellas, $D_{0.50}^{B}$ ofrece el mejor equilibrio: completa prácticamente todas las ejecuciones, no registra colisiones y mantiene las invasiones de carril en 2.327. En cambio, aumentar la proporción de DAgger hasta 75 % no mejora la tasa de éxito y eleva las colisiones, las invasiones de carril y la desviación media. Esto indica que, para este escenario, una mayor cantidad de muestras de recuperación no se traduce necesariamente en una trayectoria más estable.</p>
 
-<p>En términos de robustez, el Test 2 favorece claramente a DAgger como mecanismo de recuperación ante condiciones iniciales no estructuradas, aunque a costa de trayectorias menos precisas y velocidades medias más bajas.</p>
+<p>La configuración $D_{0.15}^{B}$ se aparta de esta tendencia. Aunque alcanza la mayor velocidad media del test (55.70 km/h) y no presenta colisiones, su tasa de éxito disminuye a 90.2 %, mientras que las invasiones de carril aumentan hasta 10.182 y la desviación media alcanza 0.510 m. Por tanto, la mayor velocidad no representa una mejora global, sino que coincide con un seguimiento lateral menos preciso.</p>
+
+<p>En Noise Injection, $D_{0.15}^{C}$ obtiene el mejor compromiso entre finalización y precisión: alcanza 98.2 % de éxito (221/225), registra 0.032 colisiones, 2.000 invasiones de carril y presenta la menor desviación media de todas las configuraciones evaluadas (0.255 m). Al incrementar la proporción de Noise Injection a 30 % y 50 %, la desviación y las invasiones permanecen bajas en los episodios exitosos, pero la tasa de finalización cae hasta 72.0 % y 72.9 %, respectivamente. Esto sugiere que dichas políticas conducen de forma precisa cuando logran completar el circuito, aunque presentan menor consistencia para finalizarlo desde los tres puntos de inicio.</p>
+
+<p>En conjunto, los datos disponibles sugieren dos comportamientos complementarios: las mezclas DAgger de 30–50 % favorecen la finalización del recorrido desde diferentes sectores del mapa, mientras que Noise Injection, especialmente en 15 %, favorece un seguimiento lateral más preciso. No obstante, esta interpretación es todavía preliminar. El modelo base $D^{A}$ aún no cuenta con ejecuciones válidas y tampoco se dispone de resultados para todas las proporciones de Noise Injection, por lo que no es posible cuantificar la mejora de cada estrategia respecto a Burbuja ni establecer una configuración óptima definitiva. Además, dado que las métricas de desempeño se calculan únicamente sobre episodios exitosos, los bajos valores de desviación de $D_{0.30}^{C}$ y $D_{0.50}^{C}$ deben interpretarse junto con sus menores tasas de finalización.</p>
 
 <hr />
 
@@ -5315,93 +6000,4 @@ A’+15%B’ – A’+30%B’ representa la región de operación más consisten
   <li>Una distribución de entrenamiento balanceada y de conducción natural (Burbuja) produce el mejor <strong>seguimiento nominal</strong> pero no generaliza ante perturbaciones estructurales.</li>
 </ul>
 
-<p>El punto óptimo en este conjunto de experimentos depende del escenario de despliegue: si se prioriza control preciso y estabilidad a alta velocidad, <strong>Burbuja</strong> es la elección; si se prioriza robustez ante condiciones iniciales variables, <strong>Noise Injection</strong> ofrece la mejor relación costo-beneficio.</p>]]></content><author><name>Carlos Velásquez</name><email>canveo@gmail.com</email></author><category term="weekly Log" /><category term="Robustez" /><category term="Burbuja" /><category term="Noise Injectio" /><category term="DAgger" /><category term="CARLA Simulator" /><summary type="html"><![CDATA[En esta entrada reporto los resultados de robustez en CARLA Town02 comparando tres políticas/datasets bajo el mismo circuito de prueba, con 6 repeticiones por condición (valores reportados como promedio de las repeticiones).]]></summary></entry><entry><title type="html">Week 94 - Construcción de datasets Noise Injection y DAgger</title><link href="http://localhost:4000/weekly%20log/week94/" rel="alternate" type="text/html" title="Week 94 - Construcción de datasets Noise Injection y DAgger" /><published>2026-04-05T00:00:00-05:00</published><updated>2026-04-05T00:00:00-05:00</updated><id>http://localhost:4000/weekly%20log/week94</id><content type="html" xml:base="http://localhost:4000/weekly%20log/week94/"><![CDATA[<h2 id="avances-en-construcción-de-dataset-y-entrenamiento-pilotnet">Avances en construcción de dataset y entrenamiento PilotNet</h2>
-
-<p>Durante esta fase persiste el problema de <strong>sincronización entre el archivo <code class="language-plaintext highlighter-rouge">*.log</code> del recorder de CARLA y el archivo <code class="language-plaintext highlighter-rouge">CSV</code> externo</strong>, utilizado para almacenar la acción humana sobre <code class="language-plaintext highlighter-rouge">steer</code>.</p>
-
-<p>El procedimiento implementado busca establecer correspondencia entre:</p>
-
-<ul>
-  <li><strong>imagen segmentada (<code class="language-plaintext highlighter-rouge">image_seg</code>)</strong></li>
-  <li><strong>etiqueta humana (<code class="language-plaintext highlighter-rouge">steer_human</code>)</strong></li>
-</ul>
-
-<p>Sin embargo, aunque el proceso logra asociar imágenes con etiquetas, durante el entrenamiento el modelo no presenta un desempeño consistente, lo que sugiere posibles errores de alineación temporal entre el estado visual y la acción registrada.</p>
-
-<h3 id="problema-de-sincronización">Problema de sincronización</h3>
-
-<p>La sincronización se ha intentado realizar mediante:</p>
-
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">tick_idx</code></li>
-  <li><code class="language-plaintext highlighter-rouge">sim_frame</code></li>
-  <li><code class="language-plaintext highlighter-rouge">sim_time</code></li>
-  <li>tiempo relativo por muestra</li>
-</ul>
-
-<p>El inconveniente principal es que el archivo <code class="language-plaintext highlighter-rouge">*.log</code> conserva únicamente la <strong>acción efectivamente aplicada al vehículo</strong>, mientras que la etiqueta que interesa para aprendizaje por imitación es la <strong>acción humana original</strong>, especialmente en escenarios con perturbación.</p>
-
-<p>Esto genera una posible desalineación entre el comando de dirección humano y el comando aplicado, afectando la calidad del dataset para entrenamiento.</p>
-
-<p>Se está evaluando si es posible utilizar únicamente el archivo <code class="language-plaintext highlighter-rouge">*.log</code> para reconstruir la etiqueta de <code class="language-plaintext highlighter-rouge">steer_human</code>.</p>
-
-<p>En principio, esto <strong>no sería suficiente</strong>, ya que el recorder almacena la acción aplicada en simulación, no necesariamente la corrección humana original cuando existe ruido o política DAgger.</p>
-
-<hr />
-
-<h2 id="construcción-de-datasets-en-vivo">Construcción de datasets en vivo</h2>
-
-<p>Con el fin de evitar los problemas asociados al flujo <code class="language-plaintext highlighter-rouge">recorder → replayer</code>, se construyeron dos nuevos datasets <strong>directamente en vivo</strong>, sin proceso de replay posterior, ambos a <strong>10 Hz</strong>.</p>
-
-<h3 id="dataset-b--noise-injection">Dataset B — Noise Injection</h3>
-
-<p><strong>Total muestras:</strong> <code class="language-plaintext highlighter-rouge">48k</code></p>
-
-<p>La política aplicada consiste en perturbación gaussiana sobre la dirección:</p>
-
-<p>a_exec = a_human + epsilon</p>
-
-<p>con:</p>
-
-<p>epsilon ~ N(0, sigma²)</p>
-
-<p>Configuración utilizada:</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">--noise-sigma</span> 0.04
-</code></pre></div></div>
-
-<p>El ruido se aplicó <strong>durante toda la conducción</strong>, permitiendo capturar maniobras de recuperación de forma continua.</p>
-
-<hr />
-
-<h2 id="dataset-c--dagger">Dataset C — DAgger</h2>
-
-<p><strong>Total muestras:</strong> <code class="language-plaintext highlighter-rouge">52k</code></p>
-
-<p><strong>Escenas de recuperación:</strong> <code class="language-plaintext highlighter-rouge">14.20%</code></p>
-
-<p>Política aplicada:</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">--dagger-every-seconds</span> 6
-<span class="nt">--dagger-hold-ticks</span> 8
-<span class="nt">--recovery-ticks</span> 18
-</code></pre></div></div>
-
-<p>Cada <strong>6 segundos</strong> se activa una acción DAgger durante <strong>8 ticks (0.8 s a 10 Hz)</strong>, seguida por una ventana de recuperación de <strong>18 ticks (1.8 s)</strong>.</p>
-
-<hr />
-
-<h2 id="resultado-preliminar">Resultado preliminar</h2>
-
-<p>Se entrenó <strong>PilotNet</strong> sobre ambos datasets.</p>
-
-<p>Resultado observado:</p>
-
-<ul>
-  <li><strong>Noise Injection:</strong> completa circuito</li>
-  <li><strong>DAgger:</strong> completa circuito</li>
-</ul>
-
-<p>Esto sugiere que la construcción <strong>en vivo</strong> preserva mejor la correspondencia entre imagen y etiqueta.</p>
-
-<p>Se están evaluando algunas métricas de desempeño con el fin de confirmar la forma correcta de construir el dataset. Estas métricas se incorporarán posteriormente al análisis.</p>]]></content><author><name>Carlos Velásquez</name><email>canveo@gmail.com</email></author><category term="weekly Log" /><category term="Dataset" /><category term="CARLA" /><category term="Data Collection" /><category term="PilotNet" /><category term="Augmentations" /><summary type="html"><![CDATA[Avances en construcción de dataset y entrenamiento PilotNet]]></summary></entry></feed>
+<p>El punto óptimo en este conjunto de experimentos depende del escenario de despliegue: si se prioriza control preciso y estabilidad a alta velocidad, <strong>Burbuja</strong> es la elección; si se prioriza robustez ante condiciones iniciales variables, <strong>Noise Injection</strong> ofrece la mejor relación costo-beneficio.</p>]]></content><author><name>Carlos Velásquez</name><email>canveo@gmail.com</email></author><category term="weekly Log" /><category term="Robustez" /><category term="Burbuja" /><category term="Noise Injectio" /><category term="DAgger" /><category term="CARLA Simulator" /><summary type="html"><![CDATA[En esta entrada reporto los resultados de robustez en CARLA Town02 comparando tres políticas/datasets bajo el mismo circuito de prueba, con 6 repeticiones por condición (valores reportados como promedio de las repeticiones).]]></summary></entry></feed>

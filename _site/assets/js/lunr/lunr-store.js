@@ -612,8 +612,14 @@ var store = [{
         "teaser": null
       },{
         "title": "Week 103 - Prueba rápida del Test 1 en Town11",
-        "excerpt":"Se actualizó Week 102 con nuevas métricas y cambios en el orden de las tablas. 1. Objetivo Validar los resultados obtenidos previamente en el Test 1, trasladando el escenario de evaluación de Town02 a Town11, con el fin de determinar si las tendencias observadas se mantienen en un entorno más...","categories": ["Weekly Log"],
+        "excerpt":"Se actualizó Week 102 con nuevas métricas y cambios en el orden de las tablas. 1. Objetivo Evaluar si las tendencias observadas previamente en Town02 se mantienen al trasladar los tests de robustez a Town11, un entorno con mayor densidad de curvas. El análisis considera el caso canónico, las variaciones...","categories": ["Weekly Log"],
         "tags": ["Robustez","Burbuja","Noise Injection","DAgger","CARLA Simulator"],
         "url": "/weekly%20log/week103/",
+        "teaser": null
+      },{
+        "title": "Week 104 - Entrenamiento FastViT",
+        "excerpt":"Modelo y configuración del entrenamiento Como línea base para la comparación posterior con los diferentes métodos de enriquecimiento de datos, se entrenó un modelo FastViT-SA12 utilizando exclusivamente el dataset Burbuja, compuesto por aproximadamente 60.000 muestras provenientes de 11 recorridos (runs). El experimento fue identificado como: fastvit_sa12_burbuja_60k_reg_bal_v4 La arquitectura FastViT-SA12 fue...","categories": ["Weekly Log"],
+        "tags": ["Robustez","Burbuja","Noise Injection","DAgger","CARLA Simulator"],
+        "url": "/weekly%20log/weeek104/",
         "teaser": null
       }]

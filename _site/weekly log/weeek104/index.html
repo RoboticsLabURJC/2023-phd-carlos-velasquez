@@ -1,0 +1,945 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Week 104 - Entrenamiento FastViT - Robotics Lab URJC</title>
+<meta name="description" content="Modelo y configuración del entrenamiento">
+
+
+  <meta name="author" content="Carlos Velásquez">
+  
+  <meta property="article:author" content="Carlos Velásquez">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Robotics Lab URJC">
+<meta property="og:title" content="Week 104 - Entrenamiento FastViT">
+<meta property="og:url" content="http://localhost:4000/weekly%20log/weeek104/">
+
+
+  <meta property="og:description" content="Modelo y configuración del entrenamiento">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2026-08-30T00:00:00-05:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/weekly%20log/weeek104/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Carlos Andrés Velásquez Ospina",
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Robotics Lab URJC Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/logo.png" alt="Robotics Lab URJC"></a>
+        
+        <a class="site-title" href="/">
+          Robotics Lab URJC
+          <span class="site-subtitle">Programming Robot Intelligence</span>
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="https://mmistakes.github.io/minimal-mistakes/docs/quick-start-guide/">Quick-Start Guide</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+    <div class="author__avatar">
+      <a href="http://localhost:4000/">
+        <img src="/assets/images/me.jpg" alt="Carlos Velásquez" itemprop="image" class="u-photo">
+      </a>
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      <a class="u-url" rel="me" href="http://localhost:4000/" itemprop="url">Carlos Velásquez</a>
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>Doctoral thesis blog</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name" class="p-locality">Medellín</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="mailto:canveo@gmail.com" rel="nofollow noopener noreferrer me"><i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">Email</span></a></li>
+          
+        
+          
+            <li><a href="https://github.com/canveo" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/canveo/" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span class="label">LinkedIn</span></a></li>
+          
+        
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:canveo@gmail.com" rel="me" class="u-email">
+            <meta itemprop="email" content="canveo@gmail.com" />
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">Email</span>
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer me">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Week 104 - Entrenamiento FastViT">
+    <meta itemprop="description" content="Modelo y configuración del entrenamiento">
+    <meta itemprop="datePublished" content="2026-08-30T00:00:00-05:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="http://localhost:4000/weekly%20log/weeek104/" class="u-url" itemprop="url">Week 104 - Entrenamiento FastViT
+</a>
+          </h1>
+          
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          7 minute read
+        
+      </span>
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        <h3 id="modelo-y-configuración-del-entrenamiento">Modelo y configuración del entrenamiento</h3>
+
+<p>Como línea base para la comparación posterior con los diferentes métodos de enriquecimiento de datos, se entrenó un modelo <strong>FastViT-SA12</strong> utilizando exclusivamente el dataset <strong>Burbuja</strong>, compuesto por aproximadamente 60.000 muestras provenientes de 11 recorridos (<em>runs</em>).</p>
+
+<p>El experimento fue identificado como:</p>
+
+<p><code class="language-plaintext highlighter-rouge">fastvit_sa12_burbuja_60k_reg_bal_v4</code></p>
+
+<p>La arquitectura <strong>FastViT-SA12</strong> fue implementada mediante <code class="language-plaintext highlighter-rouge">timm</code> e inicializada sin pesos preentrenados (<code class="language-plaintext highlighter-rouge">pretrained=False</code>). La cabeza de clasificación original del modelo fue sustituida por una capa lineal de <strong>dos salidas continuas</strong>, correspondientes a las variables de control:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">steer</code>: comando de dirección.</li>
+  <li><code class="language-plaintext highlighter-rouge">throttle</code>: comando de aceleración.</li>
+</ul>
+
+<p>Por tanto, la salida del modelo tiene la forma:</p>
+
+<p><code class="language-plaintext highlighter-rouge">[steer, throttle]</code></p>
+
+<p>La modificación de la cabeza se realizó mediante:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">num_ftrs</span> <span class="o">=</span> <span class="n">model</span><span class="p">.</span><span class="n">head</span><span class="p">.</span><span class="n">fc</span><span class="p">.</span><span class="n">in_features</span>
+<span class="n">model</span><span class="p">.</span><span class="n">head</span><span class="p">.</span><span class="n">fc</span> <span class="o">=</span> <span class="n">nn</span><span class="p">.</span><span class="nc">Linear</span><span class="p">(</span><span class="n">num_ftrs</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>De esta manera, FastViT-SA12 se utiliza como modelo de regresión para conducción autónoma en lugar de como clasificador de imágenes.</p>
+
+<p>Las imágenes utilizadas provienen de la cámara de segmentación semántica de CARLA. A partir de cada imagen se extrae únicamente la clase correspondiente a la carretera (<code class="language-plaintext highlighter-rouge">road</code>), obteniendo una máscara binaria. El procesamiento aplicado es:</p>
+
+<p><code class="language-plaintext highlighter-rouge">Segmentación CARLA → extracción de road → crop → resize 224×224 → máscara binaria → 3 canales</code></p>
+
+<p>La máscara se normaliza al rango <code class="language-plaintext highlighter-rouge">[0,1]</code> y se replica en tres canales, obteniendo una entrada de tamaño <code class="language-plaintext highlighter-rouge">3 × 224 × 224</code>.</p>
+
+<p>No se aplicaron rotaciones, traslaciones ni <em>flip</em> horizontal durante este experimento, con el objetivo de conservar la relación geométrica entre la posición de la carretera y el valor de <code class="language-plaintext highlighter-rouge">steer</code>.</p>
+
+<p>La configuración principal del entrenamiento fue:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parámetro</th>
+      <th style="text-align: right">Valor</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Arquitectura</td>
+      <td style="text-align: right">FastViT-SA12</td>
+    </tr>
+    <tr>
+      <td>Dataset</td>
+      <td style="text-align: right">Burbuja 60k</td>
+    </tr>
+    <tr>
+      <td>Pretrained</td>
+      <td style="text-align: right">No</td>
+    </tr>
+    <tr>
+      <td>Entrada</td>
+      <td style="text-align: right">224 × 224 × 3</td>
+    </tr>
+    <tr>
+      <td>Salidas</td>
+      <td style="text-align: right">steer, throttle</td>
+    </tr>
+    <tr>
+      <td>Batch size</td>
+      <td style="text-align: right">64</td>
+    </tr>
+    <tr>
+      <td>Épocas máximas</td>
+      <td style="text-align: right">30</td>
+    </tr>
+    <tr>
+      <td>Learning rate</td>
+      <td style="text-align: right">1e-4</td>
+    </tr>
+    <tr>
+      <td>Optimizador</td>
+      <td style="text-align: right">AdamW</td>
+    </tr>
+    <tr>
+      <td>Weight decay</td>
+      <td style="text-align: right">0.08</td>
+    </tr>
+    <tr>
+      <td>Warm-up</td>
+      <td style="text-align: right">5 épocas</td>
+    </tr>
+    <tr>
+      <td>Scheduler</td>
+      <td style="text-align: right">Warm-up lineal + Cosine Annealing</td>
+    </tr>
+    <tr>
+      <td>Drop path</td>
+      <td style="text-align: right">0.20</td>
+    </tr>
+    <tr>
+      <td>Mixed Precision (AMP)</td>
+      <td style="text-align: right">Sí</td>
+    </tr>
+    <tr>
+      <td>Gradient clipping</td>
+      <td style="text-align: right">5.0</td>
+    </tr>
+    <tr>
+      <td>Early stopping</td>
+      <td style="text-align: right">8 épocas</td>
+    </tr>
+    <tr>
+      <td>Función de pérdida</td>
+      <td style="text-align: right">Smooth L1</td>
+    </tr>
+    <tr>
+      <td>Peso steer</td>
+      <td style="text-align: right">1.5</td>
+    </tr>
+    <tr>
+      <td>Peso throttle</td>
+      <td style="text-align: right">1.2</td>
+    </tr>
+    <tr>
+      <td>Smooth L1 beta</td>
+      <td style="text-align: right">0.05</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Para evitar fuga de información entre imágenes consecutivas, el conjunto se dividió <strong>por recorridos completos y no por frames individuales</strong>. De los 11 runs disponibles, se utilizaron <strong>9 para entrenamiento y 2 para validación</strong>.</p>
+
+<p>También se realizó un balanceo de las muestras según la magnitud del <code class="language-plaintext highlighter-rouge">steer</code>, utilizando la siguiente distribución objetivo:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Condición</th>
+      <th style="text-align: right">Distribución objetivo</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Giro fuerte izquierda</td>
+      <td style="text-align: right">15 %</td>
+    </tr>
+    <tr>
+      <td>Giro moderado izquierda</td>
+      <td style="text-align: right">20 %</td>
+    </tr>
+    <tr>
+      <td>Recta</td>
+      <td style="text-align: right">30 %</td>
+    </tr>
+    <tr>
+      <td>Giro moderado derecha</td>
+      <td style="text-align: right">20 %</td>
+    </tr>
+    <tr>
+      <td>Giro fuerte derecha</td>
+      <td style="text-align: right">15 %</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>El balanceo considera adicionalmente cuatro intervalos de <code class="language-plaintext highlighter-rouge">throttle</code>, formando 20 clases combinadas <code class="language-plaintext highlighter-rouge">steer × throttle</code>.</p>
+
+<h3 id="resultados-del-entrenamiento">Resultados del entrenamiento</h3>
+
+<p>El entrenamiento finalizó mediante <em>early stopping</em> en la época 16. Los mejores resultados de validación fueron:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Métrica</th>
+      <th style="text-align: right">Resultado</th>
+      <th style="text-align: right">Época</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Mejor pérdida total</td>
+      <td style="text-align: right">0.317248</td>
+      <td style="text-align: right">3</td>
+    </tr>
+    <tr>
+      <td>Mejor MAE de steer</td>
+      <td style="text-align: right"><strong>0.053772</strong></td>
+      <td style="text-align: right"><strong>8</strong></td>
+    </tr>
+    <tr>
+      <td>Mejor MAE de throttle</td>
+      <td style="text-align: right">0.240016</td>
+      <td style="text-align: right">1</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Para las pruebas de conducción se utilizó principalmente el checkpoint <code class="language-plaintext highlighter-rouge">best_steer_model.pth</code>, correspondiente al menor error de dirección en validación.</p>
+
+<p>Los resultados muestran una diferencia importante entre las dos variables de control. El <code class="language-plaintext highlighter-rouge">steer</code> continúa mejorando durante las primeras épocas, mientras que el mejor resultado de <code class="language-plaintext highlighter-rouge">throttle</code> aparece desde la primera época y posteriormente no mejora en validación. Esto indica una capacidad limitada del modelo para generalizar la aceleración a partir únicamente de la máscara binaria de carretera.</p>
+
+<h3 id="evaluación-offline">Evaluación offline</h3>
+
+<p>El modelo se evaluó sobre <strong>10.797 muestras</strong> no utilizadas para el entrenamiento. Los principales resultados fueron:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Variable</th>
+      <th style="text-align: right">MAE</th>
+      <th style="text-align: right">RMSE</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Steer</td>
+      <td style="text-align: right"><strong>0.0538</strong></td>
+      <td style="text-align: right">0.0931</td>
+    </tr>
+    <tr>
+      <td>Throttle</td>
+      <td style="text-align: right"><strong>0.2493</strong></td>
+      <td style="text-align: right">0.3122</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>El resultado global de <code class="language-plaintext highlighter-rouge">steer</code> es razonable; sin embargo, al separar las muestras según la intensidad de la curva se observa una diferencia importante:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Condición</th>
+      <th style="text-align: right">Muestras</th>
+      <th style="text-align: right">MAE steer</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Recta (<code class="language-plaintext highlighter-rouge">|steer| ≤ 0.04</code>)</td>
+      <td style="text-align: right">7.239 (67.0 %)</td>
+      <td style="text-align: right"><strong>0.0331</strong></td>
+    </tr>
+    <tr>
+      <td>Curva media (<code class="language-plaintext highlighter-rouge">0.04 &lt; |steer| ≤ 0.14</code>)</td>
+      <td style="text-align: right">2.161 (20.0 %)</td>
+      <td style="text-align: right"><strong>0.0565</strong></td>
+    </tr>
+    <tr>
+      <td>Curva fuerte (<code class="language-plaintext highlighter-rouge">|steer| &gt; 0.14</code>)</td>
+      <td style="text-align: right">1.397 (12.9 %)</td>
+      <td style="text-align: right"><strong>0.1567</strong></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Por tanto, el error de dirección en curvas fuertes es aproximadamente cinco veces mayor que en conducción recta. Esto permite explicar por qué un MAE global relativamente bajo no se traduce necesariamente en una conducción completamente robusta en lazo cerrado.</p>
+
+<p>También se observa que la desviación estándar de las predicciones de steer (<code class="language-plaintext highlighter-rouge">0.106</code>) es menor que la de las etiquetas reales (<code class="language-plaintext highlighter-rouge">0.126</code>), lo que sugiere cierta tendencia del modelo a suavizar las correcciones de mayor magnitud.</p>
+
+<p>El comportamiento del <code class="language-plaintext highlighter-rouge">throttle</code> es menos satisfactorio. El MAE obtenido fue de aproximadamente <strong>0.25</strong>, con un RMSE de <strong>0.31</strong>. Además, la variabilidad de las predicciones (<code class="language-plaintext highlighter-rouge">std ≈ 0.160</code>) es considerablemente menor que la de los valores reales (<code class="language-plaintext highlighter-rouge">std ≈ 0.288</code>), mostrando una tendencia a concentrar la salida en valores intermedios.</p>
+
+<p>Debido a este comportamiento, durante las pruebas online fue necesario <strong>restringir la salida de throttle</strong>, utilizando valores máximos del orden de <strong>0.5–0.6</strong>, con el fin de evitar aceleraciones excesivas y poder evaluar con mayor claridad el desempeño del modelo en dirección.</p>
+
+<h3 id="evaluación-online-en-carla">Evaluación online en CARLA</h3>
+
+<p>Las pruebas online se realizaron en CARLA utilizando la misma geometría de cámara empleada durante la generación del dataset: cámara de segmentación semántica ubicada en <code class="language-plaintext highlighter-rouge">x=1.3 m</code>, <code class="language-plaintext highlighter-rouge">y=0 m</code>, <code class="language-plaintext highlighter-rouge">z=1.5 m</code>, orientación <code class="language-plaintext highlighter-rouge">(0°,0°,0°)</code>, FOV de <code class="language-plaintext highlighter-rouge">90°</code> y resolución original de <code class="language-plaintext highlighter-rouge">800 × 600</code>.</p>
+
+<p>La política se ejecutó a <strong>10 Hz</strong>. Durante las pruebas se visualizaron en tiempo real la segmentación recibida por el modelo, las predicciones de <code class="language-plaintext highlighter-rouge">steer</code> y <code class="language-plaintext highlighter-rouge">throttle</code>, los comandos aplicados al vehículo y el tiempo de inferencia.</p>
+
+<p>En términos cualitativos, el vehículo logra navegar correctamente <strong>la mayor parte del circuito</strong>, manteniéndose sobre la trayectoria y superando numerosas curvas. Sin embargo, el comportamiento todavía no es completamente robusto. En determinadas curvas la corrección de steer resulta insuficiente y, especialmente durante la salida de algunas de ellas, el vehículo puede abandonar la trayectoria e impactar contra elementos del entorno, como postes.</p>
+
+<p>Este comportamiento es consistente con el análisis offline, donde las curvas fuertes presentan un MAE de steer considerablemente mayor que las rectas. Por tanto, el principal problema del modelo Burbuja no se encuentra en la conducción nominal, sino en su capacidad para responder ante situaciones que requieren correcciones de dirección de mayor magnitud.</p>
+
+<p>El tiempo medio de inferencia del modelo fue de aproximadamente <strong>5.2 ms</strong>, mientras que el pipeline completo de procesamiento e inferencia requirió alrededor de <strong>13.6 ms</strong> por imagen, por lo que el tiempo de cómputo no constituye actualmente una limitación para una política ejecutada a 10 Hz.</p>
+
+<p>Estos resultados se utilizarán como <strong>línea base del dataset Burbuja</strong>. Los siguientes experimentos mantendrán la misma arquitectura y protocolo de evaluación, modificando principalmente la composición del dataset mediante estrategias de enriquecimiento y mezcla, con el objetivo de determinar si estas permiten mejorar la robustez frente a curvas y situaciones de recuperación.</p>
+
+<h3 id="evaluación-offline-del-modelo-fastvit-sa12">Evaluación offline del modelo FastViT-SA12</h3>
+
+<p>Para facilitar la interpretación visual, las comparaciones entre los valores reales y predichos se muestran sobre una ventana de <strong>200 muestras consecutivas</strong>. Las métricas y los histogramas de error se calcularon utilizando la totalidad del conjunto de validación.</p>
+
+<figure class="half">
+  <img src="http://localhost:4000/assets/images/week104/steer_real_vs_pred.png" alt="Comparación entre steer real y predicho por FastViT-SA12" style="width:90%" />
+  <figcaption>Comparación entre los valores reales y predichos de steer para una ventana de 200 muestras.</figcaption>
+</figure>
+
+<p>En la comparación del <code class="language-plaintext highlighter-rouge">steer</code> se observa que FastViT-SA12 reproduce adecuadamente la tendencia general de la dirección y el signo de muchas de las correcciones. Sin embargo, el modelo tiende a suavizar algunos valores extremos, especialmente cuando se requieren giros de mayor magnitud. Este comportamiento es consistente con las pruebas online, donde la mayor parte del recorrido se completa correctamente, pero algunas curvas requieren una corrección más intensa de la que el modelo genera.</p>
+
+<figure class="half">
+  <img src="http://localhost:4000/assets/images/week104/steer_error_hist.png" alt="Distribución del error de steer de FastViT-SA12" style="width:70%" />
+  <figcaption>Distribución del error de steer, calculado como predicción menos valor real.</figcaption>
+</figure>
+
+<p>La distribución del error de <code class="language-plaintext highlighter-rouge">steer</code> se encuentra fuertemente concentrada alrededor de cero, indicando que la mayoría de las predicciones presentan errores pequeños. No obstante, aparecen colas hacia ambos extremos, asociadas principalmente a muestras con mayores valores de dirección. El MAE global obtenido fue aproximadamente <strong>0.054</strong>, aunque el análisis por intensidad de giro mostró que el error aumenta considerablemente en curvas fuertes.</p>
+
+<figure class="half">
+  <img src="http://localhost:4000/assets/images/week104/throttle_real_vs_pred.png" alt="Comparación entre throttle real y predicho por FastViT-SA12" style="width:90%" />
+  <figcaption>Comparación entre los valores reales y predichos de throttle para una ventana de 200 muestras.</figcaption>
+</figure>
+
+<p>La predicción del <code class="language-plaintext highlighter-rouge">throttle</code> presenta un comportamiento menos satisfactorio. Mientras los valores reales varían ampliamente entre aceleraciones bajas y altas, las predicciones del modelo se concentran principalmente en valores intermedios. FastViT-SA12 no reproduce adecuadamente las variaciones rápidas del acelerador y tiende a suavizar tanto los valores bajos como los altos.</p>
+
+<figure class="half">
+  <img src="http://localhost:4000/assets/images/week104/throttle_error_hist.png" alt="Distribución del error de throttle de FastViT-SA12" style="width:70%" />
+  <figcaption>Distribución del error de throttle, calculado como predicción menos valor real.</figcaption>
+</figure>
+
+<p>El histograma del <code class="language-plaintext highlighter-rouge">throttle</code> presenta una dispersión considerablemente mayor que el correspondiente al <code class="language-plaintext highlighter-rouge">steer</code>, confirmando la dificultad del modelo para estimar esta variable. El MAE obtenido fue aproximadamente <strong>0.25</strong>, por lo que durante las pruebas online fue necesario restringir la salida del acelerador, utilizando valores máximos del orden de <strong>0.5–0.6</strong>, para evitar aceleraciones excesivas y evaluar de manera más controlada el comportamiento de la dirección.</p>
+
+<h3 id="observaciones-de-la-prueba-online">Observaciones de la prueba online</h3>
+
+<p>En las pruebas realizadas en CARLA, el vehículo logra navegar correctamente la mayor parte del circuito. Sin embargo, todavía se presentan fallos puntuales, principalmente durante algunas curvas y en la salida de estas. En determinadas situaciones la corrección de <code class="language-plaintext highlighter-rouge">steer</code> resulta insuficiente y el vehículo puede abandonar la trayectoria e impactar contra elementos del entorno, como postes.</p>
+
+<p>Estos resultados muestran que el modelo entrenado únicamente con el dataset <strong>Burbuja</strong> proporciona una conducción nominal aceptable, pero todavía presenta limitaciones ante situaciones que requieren correcciones de dirección de mayor magnitud. Este comportamiento se utilizará como línea base para determinar posteriormente si las estrategias de enriquecimiento y mezcla de datasets mejoran la robustez de la conducción.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/tags/#burbuja" class="page__taxonomy-item p-category" rel="tag">Burbuja</a><span class="sep">, </span>
+    
+      <a href="/tags/#carla-simulator" class="page__taxonomy-item p-category" rel="tag">CARLA Simulator</a><span class="sep">, </span>
+    
+      <a href="/tags/#dagger" class="page__taxonomy-item p-category" rel="tag">DAgger</a><span class="sep">, </span>
+    
+      <a href="/tags/#noise-injection" class="page__taxonomy-item p-category" rel="tag">Noise Injection</a><span class="sep">, </span>
+    
+      <a href="/tags/#robustez" class="page__taxonomy-item p-category" rel="tag">Robustez</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#weekly-log" class="page__taxonomy-item p-category" rel="tag">Weekly Log</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2026-08-30T00:00:00-05:00">August 30, 2026</time></p>
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Week+104+-+Entrenamiento+FastViT%20http%3A%2F%2Flocalhost%3A4000%2Fweekly%2520log%2Fweeek104%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fweekly%2520log%2Fweeek104%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fweekly%2520log%2Fweeek104%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/weekly%20log/week103/" class="pagination--pager" title="Week 103 - Prueba rápida del Test 1 en Town11
+">Previous</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h2 class="page__related-title">You may also enjoy</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/weekly%20log/week103/" rel="permalink">Week 103 - Prueba rápida del Test 1 en Town11
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          16 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">
+  Se actualizó Week 102 con nuevas métricas y cambios en el orden de las tablas.
+
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/weekly%20log/week102/" rel="permalink">Week 102 - Evaluación de robustez en distintos escenarios de conducción
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          21 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Diseño experimental
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/weekly%20log/week101/" rel="permalink">Week 101 - Análisis de robustez - Resultados parciales
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          9 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Actualmente se continúa ampliando la cantidad de muestras utilizadas en los experimentos de robustez. Las métricas presentadas en esta actualización se calcu...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/weekly%20log/week100/" rel="permalink">Week 100 - Análisis de robustez - Resultados parciales
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          3 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Actualmente se está ampliando la cantidad de muestras utilizadas en los Test de Robustez 1 y 4.
+En el Test 1 se realizan 15 ejecuciones por cada una de las 1...</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2026 Carlos Andrés Velásquez Ospina. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+  </body>
+</html>
