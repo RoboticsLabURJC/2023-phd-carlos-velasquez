@@ -622,4 +622,10 @@ var store = [{
         "tags": ["Robustez","Burbuja","Noise Injection","DAgger","CARLA Simulator"],
         "url": "/weekly%20log/weeek104/",
         "teaser": null
+      },{
+        "title": "Week 105 - Resumen de métricas",
+        "excerpt":"Ver convenciones y definiciones en Week 102. Test 0 - Caso canónico Town02 Modelo Successful Runs Collisions Lane Invasions Speed (km/h) Dev Mean (m) $D^{A}$ 98.7% (222/225) 0.000 7.090 55.33 0.233 $D_{0.15}^{B}$ 99.1% (223/225) 0.099 6.493 61.09 0.397 $D_{0.30}^{B}$ 96.9% (218/225) 1.000 8.798 55.64 0.348 $D_{0.50}^{B}$ 99.1% (223/225) 0.000 8.076...","categories": ["Weekly Log"],
+        "tags": ["Robustez","Burbuja","Noise Injection","DAgger","CARLA Simulator"],
+        "url": "/weekly%20log/week105/",
+        "teaser": null
       }]
