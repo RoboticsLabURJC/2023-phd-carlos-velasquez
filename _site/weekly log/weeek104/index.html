@@ -306,7 +306,7 @@
       <span class="page__meta-readtime">
         <i class="far fa-clock" aria-hidden="true"></i>
         
-          7 minute read
+          9 minute read
         
       </span>
     
@@ -633,6 +633,124 @@
 
 <p>Estos resultados muestran que el modelo entrenado únicamente con el dataset <strong>Burbuja</strong> proporciona una conducción nominal aceptable, pero todavía presenta limitaciones ante situaciones que requieren correcciones de dirección de mayor magnitud. Este comportamiento se utilizará como línea base para determinar posteriormente si las estrategias de enriquecimiento y mezcla de datasets mejoran la robustez de la conducción.</p>
 
+<h2 id="comparación-de-resultados-pilotnet-vs-fastvit">Comparación de resultados: PilotNet vs. FastViT</h2>
+
+<p>La siguiente tabla resume los resultados obtenidos con los modelos PilotNet y FastViT entrenados con el conjunto de datos $D^{A}$ (Burbuja) en las cinco pruebas de robustez.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Test</th>
+      <th>Modelo</th>
+      <th>Successful Runs</th>
+      <th>Collisions</th>
+      <th>Lane Invasions</th>
+      <th>Speed (km/h)</th>
+      <th>Dev Mean (m)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>T0</strong></td>
+      <td>PilotNet</td>
+      <td><strong>98.7% (222/225)</strong></td>
+      <td>0.000</td>
+      <td>7.090</td>
+      <td>55.33</td>
+      <td>0.233</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>FastViT</td>
+      <td><strong>80.6% (25/31)</strong></td>
+      <td>0.240</td>
+      <td>11.440</td>
+      <td>38.62</td>
+      <td>0.289</td>
+    </tr>
+    <tr>
+      <td><strong>T1</strong></td>
+      <td>PilotNet</td>
+      <td><strong>100.0% (225/225)</strong></td>
+      <td>0.000</td>
+      <td>8.707</td>
+      <td>54.71</td>
+      <td>0.262</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>FastViT</td>
+      <td><strong>70.0% (21/30)</strong></td>
+      <td>0.143</td>
+      <td>14.143</td>
+      <td>37.94</td>
+      <td>0.329</td>
+    </tr>
+    <tr>
+      <td><strong>T2</strong></td>
+      <td>PilotNet</td>
+      <td><strong>80.0% (96/120)</strong></td>
+      <td>0.000</td>
+      <td>7.750</td>
+      <td>55.61</td>
+      <td>0.259</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>FastViT</td>
+      <td><strong>85.0% (17/20)</strong></td>
+      <td>0.176</td>
+      <td>14.471</td>
+      <td>39.50</td>
+      <td>0.317</td>
+    </tr>
+    <tr>
+      <td><strong>T3</strong></td>
+      <td>PilotNet</td>
+      <td><strong>98.6% (218/221)</strong></td>
+      <td>0.000</td>
+      <td>7.110</td>
+      <td>59.71</td>
+      <td>0.236</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>FastViT</td>
+      <td><strong>39.3% (11/28)</strong></td>
+      <td>1.182</td>
+      <td>14.727</td>
+      <td>43.74</td>
+      <td>0.319</td>
+    </tr>
+    <tr>
+      <td><strong>T4</strong></td>
+      <td>PilotNet</td>
+      <td><strong>88.0% (198/225)</strong></td>
+      <td>0.025</td>
+      <td>8.020</td>
+      <td>54.34</td>
+      <td>0.232</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>FastViT</td>
+      <td><strong>0.0% (0/30)</strong></td>
+      <td>—</td>
+      <td>—</td>
+      <td>—</td>
+      <td>—</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="problemas-observados">Problemas observados</h3>
+
+<p>Los resultados muestran que FastViT todavía no supera a PilotNet en la mayoría de las pruebas. La diferencia es especialmente marcada en T3 y T4, donde se observa una pérdida importante de robustez ante condiciones de mayor exigencia. Una posible causa es el uso de una máscara binaria de carretera como entrada, ya que esta representación elimina gran parte de la información visual disponible y limita la capacidad de FastViT para aprovechar características espaciales y semánticas más complejas.</p>
+
+<h3 id="cambios-en-el-entrenamiento">Cambios en el entrenamiento</h3>
+
+<p>Como siguiente paso se propone entrenar FastViT directamente con imágenes RGB, manteniendo un enfoque completamente end-to-end y evitando depender de segmentación semántica. Esto permitiría aprovechar mejor la capacidad del modelo y facilitar su futura implementación en un vehículo real. Además, se revisará la composición del conjunto de entrenamiento para incluir mayor diversidad de curvas, velocidades, perturbaciones y situaciones de recuperación.</p>
+
         
       </section>
 
@@ -748,7 +866,7 @@
       <span class="page__meta-readtime">
         <i class="far fa-clock" aria-hidden="true"></i>
         
-          16 minute read
+          17 minute read
         
       </span>
     

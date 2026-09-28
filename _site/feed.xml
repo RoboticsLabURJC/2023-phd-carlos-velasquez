@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2026-09-06T20:16:02-05:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Robotics Lab URJC</title><subtitle>Autonomous Driving</subtitle><author><name>Carlos Velásquez</name><email>canveo@gmail.com</email></author><entry><title type="html">Week 105 - Resumen de métricas</title><link href="http://localhost:4000/weekly%20log/week105/" rel="alternate" type="text/html" title="Week 105 - Resumen de métricas" /><published>2026-09-06T00:00:00-05:00</published><updated>2026-09-06T00:00:00-05:00</updated><id>http://localhost:4000/weekly%20log/week105</id><content type="html" xml:base="http://localhost:4000/weekly%20log/week105/"><![CDATA[<blockquote>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2026-09-28T14:51:32-05:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Robotics Lab URJC</title><subtitle>Autonomous Driving</subtitle><author><name>Carlos Velásquez</name><email>canveo@gmail.com</email></author><entry><title type="html">Week 105 - Resumen de métricas</title><link href="http://localhost:4000/weekly%20log/week105/" rel="alternate" type="text/html" title="Week 105 - Resumen de métricas" /><published>2026-09-06T00:00:00-05:00</published><updated>2026-09-06T00:00:00-05:00</updated><id>http://localhost:4000/weekly%20log/week105</id><content type="html" xml:base="http://localhost:4000/weekly%20log/week105/"><![CDATA[<blockquote>
   <p>Ver convenciones y definiciones en <a href="/weekly%20log/week102/">Week 102</a>.</p>
 </blockquote>
 
@@ -90,6 +90,14 @@
       <td style="text-align: right">54.53</td>
       <td style="text-align: right">0.390</td>
     </tr>
+    <tr>
+      <td>$D^{M}_{30/30/40}$</td>
+      <td style="text-align: right">65.8% (148/225)</td>
+      <td style="text-align: right">0.000</td>
+      <td style="text-align: right">6.946</td>
+      <td style="text-align: right">64.86</td>
+      <td style="text-align: right">0.257</td>
+    </tr>
   </tbody>
 </table>
 
@@ -178,6 +186,14 @@
       <td style="text-align: right">15.400</td>
       <td style="text-align: right">54.12</td>
       <td style="text-align: right">0.277</td>
+    </tr>
+    <tr>
+      <td>$D^{M}_{30/30/40}$</td>
+      <td style="text-align: right">100.0% (30/30)</td>
+      <td style="text-align: right">0.000</td>
+      <td style="text-align: right">9.667</td>
+      <td style="text-align: right">56.35</td>
+      <td style="text-align: right">0.311</td>
     </tr>
   </tbody>
 </table>
@@ -381,6 +397,14 @@
       <td style="text-align: right">53.51</td>
       <td style="text-align: right">0.392</td>
     </tr>
+    <tr>
+      <td>$D^{M}_{30/30/40}$</td>
+      <td style="text-align: right">81.8% (184/225)</td>
+      <td style="text-align: right">0.000</td>
+      <td style="text-align: right">8.457</td>
+      <td style="text-align: right">57.87</td>
+      <td style="text-align: right">0.294</td>
+    </tr>
   </tbody>
 </table>
 
@@ -473,6 +497,14 @@
       <td style="text-align: right">15.481</td>
       <td style="text-align: right">55.66</td>
       <td style="text-align: right">0.299</td>
+    </tr>
+    <tr>
+      <td>$D^{M}_{30/30/40}$</td>
+      <td style="text-align: right">86.7% (26/30)</td>
+      <td style="text-align: right">0.000</td>
+      <td style="text-align: right">11.308</td>
+      <td style="text-align: right">57.62</td>
+      <td style="text-align: right">0.345</td>
     </tr>
   </tbody>
 </table>
@@ -576,7 +608,7 @@
 
 <hr />
 
-<h2 id="test-2--diferentes-puntos-de-inicio">Test 2 – Diferentes puntos de inicio</h2>
+<h2 id="test-2--condiciones-iniciales-aleatorias">Test 2 – Condiciones iniciales aleatorias</h2>
 
 <h3 id="town02-2">Town02</h3>
 
@@ -594,9 +626,9 @@
   <tbody>
     <tr>
       <td>$D^{A}$</td>
-      <td style="text-align: right">57.1% (97/170)</td>
+      <td style="text-align: right">80.0% (96/120)</td>
       <td style="text-align: right">0.000</td>
-      <td style="text-align: right">7.742</td>
+      <td style="text-align: right">7.750</td>
       <td style="text-align: right">55.61</td>
       <td style="text-align: right">0.259</td>
     </tr>
@@ -753,6 +785,14 @@
       <td style="text-align: right">54.78</td>
       <td style="text-align: right">0.261</td>
     </tr>
+    <tr>
+      <td>$D^{M}_{30/30/40}$</td>
+      <td style="text-align: right">66.7% (20/30)</td>
+      <td style="text-align: right">0.000</td>
+      <td style="text-align: right">5.550</td>
+      <td style="text-align: right">56.30</td>
+      <td style="text-align: right">0.495</td>
+    </tr>
   </tbody>
 </table>
 
@@ -841,6 +881,14 @@
       <td style="text-align: right">29.556</td>
       <td style="text-align: right">39.15</td>
       <td style="text-align: right">0.361</td>
+    </tr>
+    <tr>
+      <td>$D^{M}_{30/30/40}$</td>
+      <td style="text-align: right">26.7% (8/30)</td>
+      <td style="text-align: right">0.000</td>
+      <td style="text-align: right">35.875</td>
+      <td style="text-align: right">39.02</td>
+      <td style="text-align: right">0.403</td>
     </tr>
   </tbody>
 </table>
@@ -1113,6 +1161,14 @@
       <td style="text-align: right">41.15</td>
       <td style="text-align: right">0.378</td>
     </tr>
+    <tr>
+      <td>$D^{M}_{30/30/40}$</td>
+      <td style="text-align: right">88.5% (23/26)</td>
+      <td style="text-align: right">0.000</td>
+      <td style="text-align: right">31.696</td>
+      <td style="text-align: right">39.80</td>
+      <td style="text-align: right">0.441</td>
+    </tr>
   </tbody>
 </table>
 
@@ -1311,6 +1367,14 @@
       <td style="text-align: right">50.94</td>
       <td style="text-align: right">0.285</td>
     </tr>
+    <tr>
+      <td>$D^{M}_{30/30/40}$</td>
+      <td style="text-align: right">100.0% (29/29)</td>
+      <td style="text-align: right">0.000</td>
+      <td style="text-align: right">13.379</td>
+      <td style="text-align: right">53.61</td>
+      <td style="text-align: right">0.468</td>
+    </tr>
   </tbody>
 </table>
 
@@ -1332,6 +1396,14 @@
     </tr>
   </thead>
   <tbody>
+    <tr>
+      <td>$D^{A}$</td>
+      <td style="text-align: right">23.3% (7/30)</td>
+      <td style="text-align: right">0.000</td>
+      <td style="text-align: right">27.857</td>
+      <td style="text-align: right">54.34</td>
+      <td style="text-align: right">0.515</td>
+    </tr>
     <tr>
       <td>$D_{0.15}^{B}$</td>
       <td style="text-align: right">65.5% (19/29)</td>
@@ -1357,6 +1429,14 @@
       <td style="text-align: right">0.395</td>
     </tr>
     <tr>
+      <td>$D_{0.75}^{B}$</td>
+      <td style="text-align: right">3.3% (1/30)</td>
+      <td style="text-align: right">0.000</td>
+      <td style="text-align: right">20.000</td>
+      <td style="text-align: right">35.28</td>
+      <td style="text-align: right">0.441</td>
+    </tr>
+    <tr>
       <td>$D_{0.15}^{C}$</td>
       <td style="text-align: right">33.3% (10/30)</td>
       <td style="text-align: right">0.000</td>
@@ -1380,6 +1460,22 @@
       <td style="text-align: right">40.32</td>
       <td style="text-align: right">0.421</td>
     </tr>
+    <tr>
+      <td>$D_{0.75}^{C}$</td>
+      <td style="text-align: right">0.0% (0/30)</td>
+      <td style="text-align: right">—</td>
+      <td style="text-align: right">—</td>
+      <td style="text-align: right">—</td>
+      <td style="text-align: right">—</td>
+    </tr>
+    <tr>
+      <td>$D^{M}_{30/30/40}$</td>
+      <td style="text-align: right">0.0% (0/30)</td>
+      <td style="text-align: right">—</td>
+      <td style="text-align: right">—</td>
+      <td style="text-align: right">—</td>
+      <td style="text-align: right">—</td>
+    </tr>
   </tbody>
 </table>
 
@@ -1387,10 +1483,10 @@
 
 <ul>
   <li>
-    <p>Burbuja ofrece buenos resultados en Town02, pero su robustez depende de la condición inicial. Obtiene 98.7 %, 100 % y 98.6 % de éxito en los Tests 0, 1 y 3, con desviaciones medias entre 0.233 y 0.262 m. Sin embargo, en el Test 2 completa solo 97/170 recorridos —57.1 %—. Esta diferencia indica que tolerar desplazamientos iniciales o cambios de velocidad no garantiza completar el circuito al comenzar desde otros sectores.</p>
+    <p>Burbuja ofrece buenos resultados en Town02, pero su robustez depende de la condición inicial. Obtiene 98.7 %, 100 % y 98.6 % de éxito en los Tests 0, 1 y 3, con desviaciones medias entre 0.233 y 0.262 m. En el Test 2, con condiciones iniciales aleatorias, completa 96/120 recorridos —80.0 %—, entre 18.6 y 20 puntos porcentuales menos que en esas pruebas. La tasa de éxito disminuye, aunque la desviación media de los recorridos exitosos se mantiene en 0.259 m.</p>
   </li>
   <li>
-    <p>En el Test 2 de Town02, DAgger al 50 % y Noise al 15 % destacan con distintos compromisos de conducción. DAgger al 50 % alcanza 99.1 % de éxito —223/225—, con cero colisiones en los recorridos exitosos, 2.327 invasiones de carril y 0.380 m de desviación media. Noise al 15 % completa 221/225 —98.2 %— y presenta menos invasiones —2.000— y menor desviación —0.255 m—, aunque registra 0.032 colisiones por recorrido exitoso. Frente a Burbuja, las diferencias de éxito son de aproximadamente 42 y 41 puntos porcentuales. Ambas mezclas circulan a menor velocidad media: 45.19 y 43.51 km/h, frente a 55.61 km/h. Las mejoras observadas coinciden, por tanto, con cambios en la velocidad de conducción.</p>
+    <p>En el Test 2 de Town02, DAgger al 50 % y Noise al 15 % destacan con distintos compromisos de conducción. DAgger al 50 % alcanza 99.1 % de éxito —223/225—, con cero colisiones en los recorridos exitosos, 2.327 invasiones de carril y 0.380 m de desviación media. Noise al 15 % completa 221/225 —98.2 %— y presenta menos invasiones —2.000— y menor desviación —0.255 m—, aunque registra 0.032 colisiones por recorrido exitoso. Frente al 80.0 % de Burbuja, las diferencias de éxito son de 19.1 y 18.2 puntos porcentuales, respectivamente. Ambas configuraciones reducen las invasiones respecto a las 7.750 de Burbuja y circulan a menor velocidad media: 45.19 y 43.51 km/h, frente a 55.61 km/h. Las mejoras observadas coinciden, por tanto, con cambios en la velocidad de conducción. La comparación se basa en 120 recorridos para Burbuja y 225 para cada una de estas configuraciones.</p>
   </li>
   <li>
     <p>Una proporción mayor de datos adicionales no garantiza mejores resultados. En el Test 2 de Town02, Noise alcanza 98.2 % con el 15 %, pero desciende a 72.0 %, 36.0 % y 34.7 % con el 30 %, 50 % y 75 %. DAgger mejora hasta el 50 %, pero cae al 32.9 % con el 75 %, acompañado de 1.230 colisiones y 13.338 invasiones por recorrido exitoso. En el Test 1 de este mismo mapa, DAgger al 100 % no completa ninguno de los 225 recorridos. Sin embargo, DAgger al 75 % alcanza 100 % en el Test 2 de Town11: el efecto de la proporción cambia según el escenario.</p>
@@ -1402,7 +1498,7 @@
     <p>Noise al 50 % alcanza la mayor tasa de éxito bajo perturbación estándar en Town02 y Town11. En Town02 completa 205/225 recorridos —91.1 %— frente a 198/225 —88.0 %— de Burbuja. Esa mejora coincide con mayor desviación —0.290 frente a 0.232 m— y más colisiones —0.054 frente a 0.025— entre los recorridos exitosos. En Town11 completa 30/30, mientras que Burbuja y Noise al 15 % no completan ninguno. Frente a DAgger al 50 %, que completa 29/30, Noise al 50 % también reduce las invasiones de 31.069 a 19.167 y la desviación de 0.426 a 0.228 m.</p>
   </li>
   <li>
-    <p>En Csonthomisi, las configuraciones destacadas cambian entre pruebas. Noise al 75 % alcanza 95.8 %, 96.3 % y 95.8 % en los Tests 0, 1 y 3, frente a 0 %, 7.7 % y 16.7 % de Burbuja. Sin embargo, en el Test 2 obtiene solo 32.1 %; el mejor resultado disponible corresponde a Noise al 50 %, con 53.3 % —16/30—. Esta última configuración supera en 20 puntos porcentuales a Burbuja, aunque todavía falla en 14 de los 30 recorridos. Cambiar el sector de inicio sigue siendo una dificultad para todas las configuraciones evaluadas en este mapa.</p>
+    <p>En Csonthomisi, las configuraciones destacadas cambian entre pruebas. Noise al 75 % alcanza 95.8 %, 96.3 % y 95.8 % en los Tests 0, 1 y 3, frente a 0 %, 7.7 % y 16.7 % de Burbuja. Sin embargo, en el Test 2 obtiene solo 32.1 %; el mejor resultado disponible corresponde a Noise al 50 %, con 53.3 % —16/30—. Esta última configuración supera en 20 puntos porcentuales a Burbuja, aunque todavía falla en 14 de los 30 recorridos. Las condiciones iniciales aleatorias siguen siendo una dificultad para todas las configuraciones evaluadas en este mapa.</p>
   </li>
   <li>
     <p>DAgger al 50 % destaca bajo perturbación estándar en Csonthomisi. Completa 28/29 recorridos —96.6 %—, frente a 23/29 —79.3 %— de Noise al 50 %. También registra menos invasiones —37.500 frente a 39.435— y menor desviación —0.395 frente a 0.421 m—, a una velocidad media inferior: 37.49 frente a 40.32 km/h. DAgger supera a Noise en finalización en las tres proporciones comparables de este test: 15 %, 30 % y 50 %. Este resultado limita cualquier conclusión general sobre una superioridad de Noise ante perturbaciones.</p>
@@ -1723,7 +1819,125 @@
 
 <p>En las pruebas realizadas en CARLA, el vehículo logra navegar correctamente la mayor parte del circuito. Sin embargo, todavía se presentan fallos puntuales, principalmente durante algunas curvas y en la salida de estas. En determinadas situaciones la corrección de <code class="language-plaintext highlighter-rouge">steer</code> resulta insuficiente y el vehículo puede abandonar la trayectoria e impactar contra elementos del entorno, como postes.</p>
 
-<p>Estos resultados muestran que el modelo entrenado únicamente con el dataset <strong>Burbuja</strong> proporciona una conducción nominal aceptable, pero todavía presenta limitaciones ante situaciones que requieren correcciones de dirección de mayor magnitud. Este comportamiento se utilizará como línea base para determinar posteriormente si las estrategias de enriquecimiento y mezcla de datasets mejoran la robustez de la conducción.</p>]]></content><author><name>Carlos Velásquez</name><email>canveo@gmail.com</email></author><category term="Weekly Log" /><category term="Robustez" /><category term="Burbuja" /><category term="Noise Injection" /><category term="DAgger" /><category term="CARLA Simulator" /><summary type="html"><![CDATA[Modelo y configuración del entrenamiento]]></summary></entry><entry><title type="html">Week 103 - Prueba rápida del Test 1 en Town11</title><link href="http://localhost:4000/weekly%20log/week103/" rel="alternate" type="text/html" title="Week 103 - Prueba rápida del Test 1 en Town11" /><published>2026-07-02T00:00:00-05:00</published><updated>2026-07-02T00:00:00-05:00</updated><id>http://localhost:4000/weekly%20log/week103</id><content type="html" xml:base="http://localhost:4000/weekly%20log/week103/"><![CDATA[<blockquote>
+<p>Estos resultados muestran que el modelo entrenado únicamente con el dataset <strong>Burbuja</strong> proporciona una conducción nominal aceptable, pero todavía presenta limitaciones ante situaciones que requieren correcciones de dirección de mayor magnitud. Este comportamiento se utilizará como línea base para determinar posteriormente si las estrategias de enriquecimiento y mezcla de datasets mejoran la robustez de la conducción.</p>
+
+<h2 id="comparación-de-resultados-pilotnet-vs-fastvit">Comparación de resultados: PilotNet vs. FastViT</h2>
+
+<p>La siguiente tabla resume los resultados obtenidos con los modelos PilotNet y FastViT entrenados con el conjunto de datos $D^{A}$ (Burbuja) en las cinco pruebas de robustez.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Test</th>
+      <th>Modelo</th>
+      <th>Successful Runs</th>
+      <th>Collisions</th>
+      <th>Lane Invasions</th>
+      <th>Speed (km/h)</th>
+      <th>Dev Mean (m)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>T0</strong></td>
+      <td>PilotNet</td>
+      <td><strong>98.7% (222/225)</strong></td>
+      <td>0.000</td>
+      <td>7.090</td>
+      <td>55.33</td>
+      <td>0.233</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>FastViT</td>
+      <td><strong>80.6% (25/31)</strong></td>
+      <td>0.240</td>
+      <td>11.440</td>
+      <td>38.62</td>
+      <td>0.289</td>
+    </tr>
+    <tr>
+      <td><strong>T1</strong></td>
+      <td>PilotNet</td>
+      <td><strong>100.0% (225/225)</strong></td>
+      <td>0.000</td>
+      <td>8.707</td>
+      <td>54.71</td>
+      <td>0.262</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>FastViT</td>
+      <td><strong>70.0% (21/30)</strong></td>
+      <td>0.143</td>
+      <td>14.143</td>
+      <td>37.94</td>
+      <td>0.329</td>
+    </tr>
+    <tr>
+      <td><strong>T2</strong></td>
+      <td>PilotNet</td>
+      <td><strong>80.0% (96/120)</strong></td>
+      <td>0.000</td>
+      <td>7.750</td>
+      <td>55.61</td>
+      <td>0.259</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>FastViT</td>
+      <td><strong>85.0% (17/20)</strong></td>
+      <td>0.176</td>
+      <td>14.471</td>
+      <td>39.50</td>
+      <td>0.317</td>
+    </tr>
+    <tr>
+      <td><strong>T3</strong></td>
+      <td>PilotNet</td>
+      <td><strong>98.6% (218/221)</strong></td>
+      <td>0.000</td>
+      <td>7.110</td>
+      <td>59.71</td>
+      <td>0.236</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>FastViT</td>
+      <td><strong>39.3% (11/28)</strong></td>
+      <td>1.182</td>
+      <td>14.727</td>
+      <td>43.74</td>
+      <td>0.319</td>
+    </tr>
+    <tr>
+      <td><strong>T4</strong></td>
+      <td>PilotNet</td>
+      <td><strong>88.0% (198/225)</strong></td>
+      <td>0.025</td>
+      <td>8.020</td>
+      <td>54.34</td>
+      <td>0.232</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>FastViT</td>
+      <td><strong>0.0% (0/30)</strong></td>
+      <td>—</td>
+      <td>—</td>
+      <td>—</td>
+      <td>—</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="problemas-observados">Problemas observados</h3>
+
+<p>Los resultados muestran que FastViT todavía no supera a PilotNet en la mayoría de las pruebas. La diferencia es especialmente marcada en T3 y T4, donde se observa una pérdida importante de robustez ante condiciones de mayor exigencia. Una posible causa es el uso de una máscara binaria de carretera como entrada, ya que esta representación elimina gran parte de la información visual disponible y limita la capacidad de FastViT para aprovechar características espaciales y semánticas más complejas.</p>
+
+<h3 id="cambios-en-el-entrenamiento">Cambios en el entrenamiento</h3>
+
+<p>Como siguiente paso se propone entrenar FastViT directamente con imágenes RGB, manteniendo un enfoque completamente end-to-end y evitando depender de segmentación semántica. Esto permitiría aprovechar mejor la capacidad del modelo y facilitar su futura implementación en un vehículo real. Además, se revisará la composición del conjunto de entrenamiento para incluir mayor diversidad de curvas, velocidades, perturbaciones y situaciones de recuperación.</p>]]></content><author><name>Carlos Velásquez</name><email>canveo@gmail.com</email></author><category term="Weekly Log" /><category term="Robustez" /><category term="Burbuja" /><category term="Noise Injection" /><category term="DAgger" /><category term="CARLA Simulator" /><summary type="html"><![CDATA[Modelo y configuración del entrenamiento]]></summary></entry><entry><title type="html">Week 103 - Prueba rápida del Test 1 en Town11</title><link href="http://localhost:4000/weekly%20log/week103/" rel="alternate" type="text/html" title="Week 103 - Prueba rápida del Test 1 en Town11" /><published>2026-07-02T00:00:00-05:00</published><updated>2026-07-02T00:00:00-05:00</updated><id>http://localhost:4000/weekly%20log/week103</id><content type="html" xml:base="http://localhost:4000/weekly%20log/week103/"><![CDATA[<blockquote>
   <p>Se actualizó <a href="/weekly%20log/week102/">Week 102</a> con nuevas métricas y cambios en el orden de las tablas.</p>
 </blockquote>
 
