@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2026-10-26T09:13:59-05:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Robotics Lab URJC</title><subtitle>Autonomous Driving</subtitle><author><name>Carlos Velásquez</name><email>canveo@gmail.com</email></author><entry><title type="html">Week 106 - Reentrenamiento FastViT para conducción nominal</title><link href="http://localhost:4000/weekly%20log/week106/" rel="alternate" type="text/html" title="Week 106 - Reentrenamiento FastViT para conducción nominal" /><published>2026-10-13T00:00:00-05:00</published><updated>2026-10-13T00:00:00-05:00</updated><id>http://localhost:4000/weekly%20log/week106</id><content type="html" xml:base="http://localhost:4000/weekly%20log/week106/"><![CDATA[<p>E5 se entrenó con FastViT-SA12 preentrenado, usando imágenes RGB de 800×600. Se recortaron los primeros 140 píxeles de la parte superior, luego la imagen se llevó a 256×256 y se escaló dividiendo entre 255.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2026-10-26T10:24:57-05:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Robotics Lab URJC</title><subtitle>Autonomous Driving</subtitle><author><name>Carlos Velásquez</name><email>canveo@gmail.com</email></author><entry><title type="html">Week 106 - Reentrenamiento FastViT para conducción nominal</title><link href="http://localhost:4000/weekly%20log/week106/" rel="alternate" type="text/html" title="Week 106 - Reentrenamiento FastViT para conducción nominal" /><published>2026-10-13T00:00:00-05:00</published><updated>2026-10-13T00:00:00-05:00</updated><id>http://localhost:4000/weekly%20log/week106</id><content type="html" xml:base="http://localhost:4000/weekly%20log/week106/"><![CDATA[<p>E5 se entrenó con FastViT-SA12 preentrenado, usando imágenes RGB de 800×600. Se recortaron los primeros 140 píxeles de la parte superior, luego la imagen se llevó a 256×256 y se escaló dividiendo entre 255.</p>
 
 <p>El modelo solo predice steer. El throttle no entra al modelo ni se predice; únicamente se usó para balancear mejor los datos durante el entrenamiento con 20 combinaciones de steer y throttle.</p>
 
@@ -119,7 +119,203 @@
 
 <p align="center">
   <img src="http://localhost:4000/assets/images/week106/20261026-084345_lane_invasion.png" alt="Resultados de invasiones de carril" style="width:100%" />
-</p>]]></content><author><name>Carlos Velásquez</name><email>canveo@gmail.com</email></author><category term="weekly Log" /><category term="Robustez" /><category term="Behavior Cloning" /><category term="Noise Injection" /><category term="DAgger" /><category term="CARLA Simulator" /><category term="Behavior Metrics" /><summary type="html"><![CDATA[E5 se entrenó con FastViT-SA12 preentrenado, usando imágenes RGB de 800×600. Se recortaron los primeros 140 píxeles de la parte superior, luego la imagen se llevó a 256×256 y se escaló dividiendo entre 255.]]></summary></entry><entry><title type="html">Week 105 - Resumen de métricas</title><link href="http://localhost:4000/weekly%20log/week105/" rel="alternate" type="text/html" title="Week 105 - Resumen de métricas" /><published>2026-09-06T00:00:00-05:00</published><updated>2026-09-06T00:00:00-05:00</updated><id>http://localhost:4000/weekly%20log/week105</id><content type="html" xml:base="http://localhost:4000/weekly%20log/week105/"><![CDATA[<blockquote>
+</p>
+
+<h1 id="experimentos-con-pilotnet">Experimentos con PilotNet</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Métrica</th>
+      <th style="text-align: right">Valor</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Tiempo real</td>
+      <td style="text-align: right">90.14 s</td>
+    </tr>
+    <tr>
+      <td>Tiempo simulado</td>
+      <td style="text-align: right">90.02 s</td>
+    </tr>
+    <tr>
+      <td>Distancia recorrida</td>
+      <td style="text-align: right">734.42 m</td>
+    </tr>
+    <tr>
+      <td>Distancia efectiva</td>
+      <td style="text-align: right">305.50 m</td>
+    </tr>
+    <tr>
+      <td>Porcentaje completado</td>
+      <td style="text-align: right">0.00 %</td>
+    </tr>
+    <tr>
+      <td>Vueltas completadas</td>
+      <td style="text-align: right">0</td>
+    </tr>
+    <tr>
+      <td>Velocidad promedio</td>
+      <td style="text-align: right">29.33 km/h</td>
+    </tr>
+    <tr>
+      <td>Velocidad máxima</td>
+      <td style="text-align: right">41.37 km/h</td>
+    </tr>
+    <tr>
+      <td>Velocidad mínima</td>
+      <td style="text-align: right">0.00 km/h</td>
+    </tr>
+    <tr>
+      <td>Desviación media de posición</td>
+      <td style="text-align: right">1.476 m</td>
+    </tr>
+    <tr>
+      <td>Error total de posición</td>
+      <td style="text-align: right">3775.61</td>
+    </tr>
+    <tr>
+      <td>Desviación media por km</td>
+      <td style="text-align: right">4.831 m/km</td>
+    </tr>
+    <tr>
+      <td>Colisiones</td>
+      <td style="text-align: right">508</td>
+    </tr>
+    <tr>
+      <td>Colisiones por km</td>
+      <td style="text-align: right">1662.85</td>
+    </tr>
+    <tr>
+      <td>Invasiones de carril</td>
+      <td style="text-align: right">56</td>
+    </tr>
+    <tr>
+      <td>Invasiones por km</td>
+      <td style="text-align: right">183.31</td>
+    </tr>
+    <tr>
+      <td>Suddenness total</td>
+      <td style="text-align: right">0.00375</td>
+    </tr>
+    <tr>
+      <td>Suddenness throttle</td>
+      <td style="text-align: right">0.00108</td>
+    </tr>
+    <tr>
+      <td>Suddenness steer</td>
+      <td style="text-align: right">0.00299</td>
+    </tr>
+    <tr>
+      <td>Suddenness brake</td>
+      <td style="text-align: right">0.000</td>
+    </tr>
+    <tr>
+      <td>Suddenness control por km</td>
+      <td style="text-align: right">0.00511</td>
+    </tr>
+    <tr>
+      <td>Suddenness throttle por km</td>
+      <td style="text-align: right">0.00355</td>
+    </tr>
+    <tr>
+      <td>Suddenness steer por km</td>
+      <td style="text-align: right">0.00980</td>
+    </tr>
+    <tr>
+      <td>Suddenness brake por km</td>
+      <td style="text-align: right">0.000</td>
+    </tr>
+  </tbody>
+</table>
+
+<p align="center">
+  <img src="http://localhost:4000/assets/images/week106/20261026-101300.png" alt="Resultados de la evaluación de PilotNet" style="width:100%" />
+</p>
+
+<p align="center">
+  <img src="http://localhost:4000/assets/images/week106/20261026-101300_collisions.png" alt="Resultados de colisiones de PilotNet" style="width:100%" />
+</p>
+
+<p align="center">
+  <img src="http://localhost:4000/assets/images/week106/20261026-101300_lane_invasion.png" alt="Resultados de invasiones de carril de PilotNet" style="width:100%" />
+</p>
+
+<h1 id="fastvit-vs-pilotnet">FastViT vs PilotNet</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Métrica</th>
+      <th style="text-align: right">FastViT E5</th>
+      <th style="text-align: right">PilotNet</th>
+      <th>Diferencia principal</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Distancia recorrida</td>
+      <td style="text-align: right"><strong>910.51 m</strong></td>
+      <td style="text-align: right">734.42 m</td>
+      <td>FastViT +24 %</td>
+    </tr>
+    <tr>
+      <td>Distancia efectiva</td>
+      <td style="text-align: right"><strong>633.00 m</strong></td>
+      <td style="text-align: right">305.50 m</td>
+      <td>FastViT +107 %</td>
+    </tr>
+    <tr>
+      <td>Velocidad promedio</td>
+      <td style="text-align: right"><strong>36.77 km/h</strong></td>
+      <td style="text-align: right">29.33 km/h</td>
+      <td>FastViT +25 %</td>
+    </tr>
+    <tr>
+      <td>Desviación media</td>
+      <td style="text-align: right"><strong>0.799 m</strong></td>
+      <td style="text-align: right">1.476 m</td>
+      <td>FastViT reduce ~46 %</td>
+    </tr>
+    <tr>
+      <td>Desviación por km</td>
+      <td style="text-align: right"><strong>1.262 m/km</strong></td>
+      <td style="text-align: right">4.831 m/km</td>
+      <td>FastViT reduce ~74 %</td>
+    </tr>
+    <tr>
+      <td>Colisiones</td>
+      <td style="text-align: right"><strong>0</strong></td>
+      <td style="text-align: right">508</td>
+      <td>Clara ventaja FastViT</td>
+    </tr>
+    <tr>
+      <td>Invasiones de carril</td>
+      <td style="text-align: right">80</td>
+      <td style="text-align: right"><strong>56</strong></td>
+      <td>PilotNet registra menos en valor absoluto</td>
+    </tr>
+    <tr>
+      <td>Invasiones por km</td>
+      <td style="text-align: right"><strong>126.38</strong></td>
+      <td style="text-align: right">183.31</td>
+      <td>FastViT reduce ~31 %</td>
+    </tr>
+    <tr>
+      <td>Suddenness steer</td>
+      <td style="text-align: right">0.00765</td>
+      <td style="text-align: right"><strong>0.00299</strong></td>
+      <td>PilotNet es más suave</td>
+    </tr>
+    <tr>
+      <td>Suddenness steer/km</td>
+      <td style="text-align: right">0.01209</td>
+      <td style="text-align: right"><strong>0.00980</strong></td>
+      <td>PilotNet ~23 % más suave</td>
+    </tr>
+  </tbody>
+</table>]]></content><author><name>Carlos Velásquez</name><email>canveo@gmail.com</email></author><category term="weekly Log" /><category term="Robustez" /><category term="Behavior Cloning" /><category term="Noise Injection" /><category term="DAgger" /><category term="CARLA Simulator" /><category term="Behavior Metrics" /><summary type="html"><![CDATA[E5 se entrenó con FastViT-SA12 preentrenado, usando imágenes RGB de 800×600. Se recortaron los primeros 140 píxeles de la parte superior, luego la imagen se llevó a 256×256 y se escaló dividiendo entre 255.]]></summary></entry><entry><title type="html">Week 105 - Resumen de métricas</title><link href="http://localhost:4000/weekly%20log/week105/" rel="alternate" type="text/html" title="Week 105 - Resumen de métricas" /><published>2026-09-06T00:00:00-05:00</published><updated>2026-09-06T00:00:00-05:00</updated><id>http://localhost:4000/weekly%20log/week105</id><content type="html" xml:base="http://localhost:4000/weekly%20log/week105/"><![CDATA[<blockquote>
   <p>Ver convenciones y definiciones en <a href="/weekly%20log/week102/">Week 102</a>.</p>
 </blockquote>
 
