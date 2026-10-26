@@ -420,6 +420,8 @@
 
 <p>Todos los experimentos se ejecutan sobre el <strong>mismo circuito</strong> (malla externa de Town02, carril derecho). Cada configuración experimental está compuesta por un <strong>total de 225 ejecuciones independientes</strong>, organizadas según el escenario de evaluación correspondiente.</p>
 
+<p>Las pruebas se identifican como <strong>T0–T4</strong>.</p>
+
 <table>
   <thead>
     <tr>
@@ -430,29 +432,29 @@
   </thead>
   <tbody>
     <tr>
-      <td style="text-align: left"><strong>Test 0</strong></td>
-      <td style="text-align: left">Caso canónico</td>
-      <td style="text-align: left"><strong>225 ejecuciones</strong> desde la posición nominal, sin perturbaciones iniciales.</td>
+      <td style="text-align: left"><strong>T0</strong></td>
+      <td style="text-align: left">Condición nominal</td>
+      <td style="text-align: left"><strong>225 ejecuciones</strong> desde la posición y orientación nominales, sin perturbaciones adicionales en la posición, orientación o velocidad del vehículo.</td>
     </tr>
     <tr>
-      <td style="text-align: left"><strong>Test 1</strong></td>
-      <td style="text-align: left">Diferentes posiciones de inicio</td>
-      <td style="text-align: left"><strong>15 posiciones de arranque</strong>, con <strong>15 ejecuciones</strong> por posición (<strong>225 ejecuciones</strong> en total).</td>
+      <td style="text-align: left"><strong>T1</strong></td>
+      <td style="text-align: left">Perturbación de posición y orientación</td>
+      <td style="text-align: left"><strong>15 configuraciones iniciales</strong>: cinco desplazamientos laterales entre −1.8 m y +1.8 m × tres orientaciones (−15°, 0° y +15°), con <strong>15 ejecuciones</strong> por configuración (<strong>225 ejecuciones</strong> en total).</td>
     </tr>
     <tr>
-      <td style="text-align: left"><strong>Test 2</strong></td>
-      <td style="text-align: left">Diferentes puntos de inicio</td>
-      <td style="text-align: left"><strong>3 posiciones iniciales diferentes</strong> (<code class="language-plaintext highlighter-rouge">random_1</code>, <code class="language-plaintext highlighter-rouge">random_2</code> y <code class="language-plaintext highlighter-rouge">random_3</code>), con <strong>75 ejecuciones por posición</strong> (<strong>225 ejecuciones</strong> en total). La trayectoria fue corregida para que todas las condiciones completen una vuelta del mismo circuito; únicamente cambia el punto de inicio. La meta se ubica aproximadamente 10–15 m antes del punto de partida, siguiendo el sentido de circulación.</td>
+      <td style="text-align: left"><strong>T2</strong></td>
+      <td style="text-align: left">Posiciones de arranque distribuidas en el circuito</td>
+      <td style="text-align: left"><strong>3 posiciones de inicio</strong> en distintos sectores del recorrido (<code class="language-plaintext highlighter-rouge">random_1</code>, <code class="language-plaintext highlighter-rouge">random_2</code> y <code class="language-plaintext highlighter-rouge">random_3</code>), con <strong>75 ejecuciones por posición</strong> (<strong>225 ejecuciones</strong> en total). Se conserva la posición lateral y la orientación nominal respecto a la vía. La trayectoria de referencia se reorganiza para mantener el mismo circuito y sentido de circulación; la meta se ubica aproximadamente 10–15 m antes del punto de partida.</td>
     </tr>
     <tr>
-      <td style="text-align: left"><strong>Test 3</strong></td>
+      <td style="text-align: left"><strong>T3</strong></td>
       <td style="text-align: left">Diferentes velocidades iniciales</td>
-      <td style="text-align: left"><strong>4 velocidades iniciales</strong> (30, 60, 80 y 100 km/h), distribuyendo las ejecuciones para completar un <strong>total de 225 episodios</strong> por configuración.</td>
+      <td style="text-align: left"><strong>4 velocidades iniciales</strong> (30, 60, 80 y 100 km/h), alcanzadas manualmente antes de entregar el control al modelo. Las ejecuciones se distribuyen para completar un <strong>total de 225 episodios</strong> por configuración.</td>
     </tr>
     <tr>
-      <td style="text-align: left"><strong>Test 4</strong></td>
-      <td style="text-align: left">Perturbación online durante la inferencia</td>
-      <td style="text-align: left"><strong>225 ejecuciones</strong> por modelo, aplicando periódicamente una política de perturbación durante la inferencia. Se evalúan dos configuraciones: <strong>perturbación estándar</strong> y <strong>perturbación intensificada</strong>.</td>
+      <td style="text-align: left"><strong>T4</strong></td>
+      <td style="text-align: left">Perturbación DAgger durante la inferencia</td>
+      <td style="text-align: left"><strong>225 ejecuciones</strong> por modelo. Se introduce una perturbación similar a la utilizada para generar el dataset DAgger (B’) cada <strong>8 s</strong>, durante <strong>4 ticks de control</strong>, seguida de <strong>10 ticks de recuperación</strong>. En esta actualización se comparan las configuraciones <strong>estándar</strong> e <strong>intensificada</strong>.</td>
     </tr>
   </tbody>
 </table>
@@ -469,29 +471,29 @@
   </thead>
   <tbody>
     <tr>
-      <td style="text-align: left">Test 0</td>
-      <td style="text-align: left">Caso canónico</td>
-      <td style="text-align: left">Recorrido estándar desde la posición nominal, sin perturbaciones iniciales.</td>
+      <td style="text-align: left">T0</td>
+      <td style="text-align: left">Condición nominal</td>
+      <td style="text-align: left">Recorrido estándar desde la posición y orientación nominales, sin perturbaciones en la posición, orientación o velocidad del vehículo.</td>
     </tr>
     <tr>
-      <td style="text-align: left">Test 1</td>
-      <td style="text-align: left">Posiciones de arranque 1–15</td>
-      <td style="text-align: left">15 configuraciones combinando 5 posiciones laterales (−1.8 m a +1.8 m) × 3 orientaciones (−15°, 0°, +15°).</td>
+      <td style="text-align: left">T1</td>
+      <td style="text-align: left">Perturbación de posición y orientación</td>
+      <td style="text-align: left">15 configuraciones iniciales combinando cinco desplazamientos laterales entre −1.8 m y +1.8 m con tres orientaciones iniciales (−15°, 0° y +15°).</td>
     </tr>
     <tr>
-      <td style="text-align: left">Test 2</td>
-      <td style="text-align: left">Posiciones de inicio random</td>
-      <td style="text-align: left">3 posiciones de inicio seleccionadas en sectores distintos del circuito. La trayectoria ideal se reorganiza circularmente para cada posición, de modo que las tres condiciones completan el mismo circuito y solo cambia el punto de inicio. La meta se sitúa aproximadamente 10–15 m antes del punto de partida, siguiendo el sentido de circulación.</td>
+      <td style="text-align: left">T2</td>
+      <td style="text-align: left">Posiciones de arranque distribuidas en el circuito</td>
+      <td style="text-align: left">Tres posiciones de inicio en distintos sectores del recorrido, manteniendo la posición lateral y la orientación nominal respecto a la vía. Para cada posición, la trayectoria de referencia se reorganiza conservando el mismo circuito y sentido de circulación. La meta se sitúa aproximadamente 10–15 m antes del punto de partida.</td>
     </tr>
     <tr>
-      <td style="text-align: left">Test 3</td>
-      <td style="text-align: left">Velocidades de inicio</td>
-      <td style="text-align: left">Velocidad inicial impuesta manualmente: 30, 60, 80 y 100 km/h. El modelo toma el control al alcanzarla.</td>
+      <td style="text-align: left">T3</td>
+      <td style="text-align: left">Diferentes velocidades iniciales</td>
+      <td style="text-align: left">El vehículo se lleva manualmente a 30, 60, 80 y 100 km/h. Una vez alcanzada la velocidad definida, el modelo toma el control.</td>
     </tr>
     <tr>
-      <td style="text-align: left">Test 4</td>
-      <td style="text-align: left">Perturbación B’ en inferencia</td>
-      <td style="text-align: left">Política B’ aplicada periódicamente durante la inferencia (cada 8 s, 4 ticks de acción, 10 ticks de recuperación).</td>
+      <td style="text-align: left">T4</td>
+      <td style="text-align: left">Perturbación DAgger durante la inferencia</td>
+      <td style="text-align: left">Perturbación sobre las acciones de control, similar a la utilizada para generar el dataset DAgger (B’), aplicada cada 8 s durante 4 ticks de control, seguida de un periodo de recuperación de 10 ticks.</td>
     </tr>
   </tbody>
 </table>
@@ -520,7 +522,7 @@
 
 <p>Perturbación para generación del dataset DAgger. Durante la construcción del conjunto de entrenamiento se aplican acciones de control destinadas a provocar desviaciones apreciables de la trayectoria, permitiendo que el conductor experto genere ejemplos de recuperación. Estas acciones presentan amplitudes de dirección de hasta ±0.40 y aceleraciones moderadas, produciendo estados alejados de la trayectoria nominal que enriquecen el dataset con maniobras correctivas.</p>
 
-<p>Perturbación estándar (evaluación online). Para evaluar la robustez durante la inferencia se utiliza un conjunto de acciones de menor magnitud que las empleadas durante la generación del dataset. El objetivo es introducir perturbaciones locales que alteren temporalmente la trayectoria del vehículo sin producir desviaciones excesivas, permitiendo analizar la capacidad de recuperación de la política durante la conducción. Este escenario corresponde al Test 4 de perturbación online.</p>
+<p>Perturbación estándar (evaluación online). Para evaluar la robustez durante la inferencia se utiliza un conjunto de acciones de menor magnitud que las empleadas durante la generación del dataset. El objetivo es introducir perturbaciones locales que alteren temporalmente la trayectoria del vehículo sin producir desviaciones excesivas, permitiendo analizar la capacidad de recuperación de la política durante la conducción. Este escenario corresponde al Test 4 — Perturbación DAgger durante la inferencia, definido con una perturbación cada 8 s durante 4 ticks de control y un periodo de recuperación de 10 ticks.</p>
 
 <p>Perturbación intensificada. Esta configuración utiliza exactamente el mismo conjunto de acciones empleado durante la generación del dataset DAgger, incrementando así la magnitud de las perturbaciones respecto al escenario estándar. Su objetivo es evaluar el comportamiento de las políticas frente a desviaciones más severas y analizar los límites de robustez alcanzados por cada estrategia de entrenamiento.</p>
 
@@ -532,7 +534,7 @@
   <p><strong>Nota metodológica.</strong> Salvo el porcentaje de ejecuciones exitosas (<em>Successful Runs</em>), todas las métricas reportadas en las tablas corresponden al promedio obtenido únicamente sobre los episodios exitosos (<code class="language-plaintext highlighter-rouge">goal_reached = 1</code>). Este criterio permite comparar el comportamiento de las políticas bajo condiciones equivalentes y evita introducir sesgos debidos a recorridos incompletos.</p>
 </blockquote>
 
-<h2 id="test-0--caso-canónico">Test 0 – Caso canónico</h2>
+<h2 id="test-0--condición-nominal">Test 0 – Condición nominal</h2>
 
 <table>
   <thead>
@@ -621,7 +623,7 @@
   </tbody>
 </table>
 
-<h2 id="test-1--diferentes-posiciones-de-inicio">Test 1 – Diferentes posiciones de inicio</h2>
+<h2 id="test-1--perturbación-de-posición-y-orientación">Test 1 – Perturbación de posición y orientación</h2>
 
 <table>
   <thead>
@@ -718,7 +720,7 @@
   </tbody>
 </table>
 
-<h2 id="test-2--diferentes-puntos-de-inicio">Test 2 – Diferentes puntos de inicio</h2>
+<h2 id="test-2--posiciones-de-arranque-distribuidas-en-el-circuito">Test 2 – Posiciones de arranque distribuidas en el circuito</h2>
 
 <table>
   <thead>
@@ -888,7 +890,7 @@
   </tbody>
 </table>
 
-<h2 id="test-4--perturbación-online-durante-la-inferencia">Test 4 – Perturbación online durante la inferencia</h2>
+<h2 id="test-4--perturbación-dagger-durante-la-inferencia">Test 4 – Perturbación DAgger durante la inferencia</h2>
 
 <h3 id="perturbación-estándar">Perturbación estándar</h3>
 
@@ -1051,19 +1053,19 @@
 
 <h2 id="análisis-preliminar-de-resultados">Análisis preliminar de resultados</h2>
 
-<h3 id="test-0--caso-canónico-1">Test 0 – Caso canónico</h3>
+<h3 id="test-0--condición-nominal-1">Test 0 – Condición nominal</h3>
 
 <p>El Test 0 evalúa el comportamiento nominal de las políticas desde una condición inicial controlada. En este escenario, las tres configuraciones comparadas alcanzan tasas de éxito superiores al 96 %, lo que indica que todas las políticas son capaces de completar el recorrido cuando no se introducen perturbaciones iniciales severas.</p>
 
 <p>El modelo base $D^{A}$ alcanza un 98.7 % de ejecuciones exitosas (222/225), sin colisiones y con una desviación media de 0.468 m. La configuración $D_{0.30}^{C}$ obtiene un desempeño similar, con 97.3 % de éxito (219/225), cero colisiones y la mayor velocidad media del grupo (59.42 km/h). Por su parte, $D_{0.30}^{B}$ mantiene una tasa de éxito alta (96.9 %), pero presenta un incremento en colisiones (1.000) y en desviación media (0.558 m).</p>
 
-<p>En conjunto, el caso canónico confirma que las políticas evaluadas conservan capacidad de navegación nominal. Sin embargo, las diferencias en colisiones y desviación sugieren que, incluso bajo condiciones favorables, la incorporación de muestras DAgger puede introducir comportamientos de recuperación menos suaves que los observados en Burbuja y Noise Injection.</p>
+<p>En conjunto, la condición nominal confirma que las políticas evaluadas conservan capacidad de navegación nominal. Sin embargo, las diferencias en colisiones y desviación sugieren que, incluso bajo condiciones favorables, la incorporación de muestras DAgger puede introducir comportamientos de recuperación menos suaves que los observados en Burbuja y Noise Injection.</p>
 
 <hr />
 
-<h3 id="test-1--diferentes-posiciones-de-inicio-1">Test 1 – Diferentes posiciones de inicio</h3>
+<h3 id="test-1--perturbación-de-posición-y-orientación-1">Test 1 – Perturbación de posición y orientación</h3>
 
-<p>El Test 1 evalúa la robustez frente a variaciones controladas en la posición y orientación inicial del vehículo. El modelo base $D^{A}$ obtiene el mejor comportamiento nominal, con 100.0 % de ejecuciones exitosas (225/225), cero colisiones y una desviación media de 0.767 m. Este resultado indica que el dataset Burbuja conserva suficiente cobertura para resolver las 15 condiciones iniciales evaluadas.</p>
+<p>El Test 1 evalúa la robustez frente a variaciones controladas en la posición y orientación inicial del vehículo. El modelo base $D^{A}$ obtiene la mejor tasa de finalización desde las condiciones iniciales perturbadas, con 100.0 % de ejecuciones exitosas (225/225), cero colisiones y una desviación media de 0.767 m. Este resultado indica que el dataset Burbuja conserva suficiente cobertura para resolver las 15 condiciones iniciales evaluadas.</p>
 
 <p>Las mezclas con proporciones moderadas de datos DAgger mantienen un desempeño competitivo. $D_{0.50}^{B}$ alcanza 97.3 % de éxito (219/225) y cero colisiones, aunque con una desviación ligeramente superior a la de Burbuja (0.826 m). En cambio, $D_{0.75}^{B}$ presenta una degradación marcada: el porcentaje de éxito cae a 40.4 % (91/225), las colisiones aumentan a 1.044 y las invasiones de carril alcanzan 18.055. Esto sugiere que una proporción elevada de muestras DAgger desplaza excesivamente la distribución de entrenamiento hacia maniobras de recuperación, reduciendo la estabilidad bajo condiciones iniciales variadas.</p>
 
@@ -1073,9 +1075,9 @@
 
 <hr />
 
-<h3 id="test-2--diferentes-puntos-de-inicio-1">Test 2 – Diferentes puntos de inicio</h3>
+<h3 id="test-2--posiciones-de-arranque-distribuidas-en-el-circuito-1">Test 2 – Posiciones de arranque distribuidas en el circuito</h3>
 
-<p>El Test 2 fue corregido para que las tres condiciones de evaluación completen el mismo circuito, modificando únicamente el punto de inicio del vehículo. En la implementación actual se utilizan tres posiciones de arranque diferentes (<code class="language-plaintext highlighter-rouge">random_1</code>, <code class="language-plaintext highlighter-rouge">random_2</code> y <code class="language-plaintext highlighter-rouge">random_3</code>). Para cada una, la trayectoria ideal se reorganiza circularmente a partir del punto seleccionado, de manera que el vehículo recorre una vuelta completa antes de alcanzar la meta.</p>
+<p>El Test 2 fue corregido para que las tres condiciones de evaluación completen el mismo circuito, modificando únicamente el punto de inicio del vehículo y manteniendo la posición lateral y la orientación nominal respecto a la vía. En la implementación actual se utilizan tres posiciones de arranque en sectores distintos del recorrido (<code class="language-plaintext highlighter-rouge">random_1</code>, <code class="language-plaintext highlighter-rouge">random_2</code> y <code class="language-plaintext highlighter-rouge">random_3</code>). Para cada una, la trayectoria ideal se reorganiza circularmente a partir del punto seleccionado, manteniendo el sentido de circulación. La meta se ubica aproximadamente 10–15 m antes del punto de partida.</p>
 
 <p>En la versión inicial del test, las distintas posiciones de inicio producían recorridos de diferente longitud y, por tanto, condiciones de evaluación no equivalentes. La corrección elimina esta diferencia: ahora todas las configuraciones cubren la misma trayectoria completa y se distinguen exclusivamente por el sector del circuito desde el cual comienza la conducción. Por esta razón, los resultados obtenidos con la metodología anterior no son directamente comparables con la campaña actual.</p>
 
@@ -1103,7 +1105,7 @@
 
 <hr />
 
-<h3 id="test-4--perturbación-online-durante-la-inferencia-1">Test 4 – Perturbación online durante la inferencia</h3>
+<h3 id="test-4--perturbación-dagger-durante-la-inferencia-1">Test 4 – Perturbación DAgger durante la inferencia</h3>
 
 <p>El Test 4 evalúa la robustez frente a perturbaciones aplicadas durante la inferencia. A diferencia del Test 1 y Test 2, aquí el vehículo no solo debe recuperarse de una condición inicial desfavorable, sino mantener la estabilidad ante desviaciones inducidas de manera periódica durante el recorrido.</p>
 
@@ -1141,7 +1143,7 @@
 
 <h3 id="comparación-general-entre-escenarios">Comparación general entre escenarios</h3>
 
-<p>Los resultados preliminares muestran que cada estrategia de generación de datos fortalece propiedades diferentes de la política de conducción. Burbuja ($D^{A}$) mantiene un desempeño sólido bajo condiciones nominales y diferentes posiciones iniciales, destacándose en Test 1 con 100 % de éxito y cero colisiones. DAgger mejora la capacidad de completar recorridos desde posiciones aleatorias, como se observa en Test 2 con tasas superiores al 98 % para varias configuraciones. Noise Injection, en cambio, muestra su mayor aporte bajo perturbaciones online, especialmente en $D_{0.50}^{C}$, que alcanza el mejor desempeño del Test 4.</p>
+<p>Los resultados preliminares muestran que cada estrategia de generación de datos fortalece propiedades diferentes de la política de conducción. Burbuja ($D^{A}$) mantiene un desempeño sólido bajo condiciones nominales y diferentes posiciones iniciales, destacándose en Test 1 con 100 % de éxito y cero colisiones. DAgger mejora la capacidad de completar recorridos desde posiciones de arranque distribuidas en el circuito, como se observa en Test 2 con tasas superiores al 98 % para varias configuraciones. Noise Injection, en cambio, muestra su mayor aporte bajo perturbaciones DAgger durante la inferencia, especialmente en $D_{0.50}^{C}$, que alcanza el mejor desempeño del Test 4.</p>
 
 <p>De forma preliminar, los resultados sugieren que no existe una única configuración óptima para todos los escenarios. Las mezclas DAgger son útiles para recuperación desde estados iniciales no nominales, mientras que Noise Injection favorece la estabilidad local frente a perturbaciones continuas durante la inferencia. La selección del dataset debe, por tanto, depender del tipo de robustez que se desea priorizar: recuperación inicial, seguimiento nominal o estabilidad ante perturbaciones recurrentes.</p>
 
@@ -1270,6 +1272,45 @@
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
+        <a href="/weekly%20log/week106/" rel="permalink">Week 106 - Reentrenamiento FastViT para conducción nominal
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          1 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">E5 se entrenó con FastViT-SA12 preentrenado, usando imágenes RGB de 800×600. Se recortaron los primeros 140 píxeles de la parte superior, luego la imagen se ...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
         <a href="/weekly%20log/week105/" rel="permalink">Week 105 - Resumen de métricas
 </a>
       
@@ -1370,7 +1411,7 @@
       <span class="page__meta-readtime">
         <i class="far fa-clock" aria-hidden="true"></i>
         
-          21 minute read
+          22 minute read
         
       </span>
     
@@ -1381,45 +1422,6 @@
   Se actualizó Week 102 con nuevas métricas y cambios en el orden de las tablas.
 
 </p>
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/weekly%20log/week101/" rel="permalink">Week 101 - Análisis de robustez - Resultados parciales
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-
-    
-
-    
-      
-      
-
-      <span class="page__meta-readtime">
-        <i class="far fa-clock" aria-hidden="true"></i>
-        
-          9 minute read
-        
-      </span>
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">Actualmente se continúa ampliando la cantidad de muestras utilizadas en los experimentos de robustez. Las métricas presentadas en esta actualización se calcu...</p>
   </article>
 </div>
 

@@ -306,7 +306,7 @@
       <span class="page__meta-readtime">
         <i class="far fa-clock" aria-hidden="true"></i>
         
-          9 minute read
+          10 minute read
         
       </span>
     
@@ -322,17 +322,17 @@
 
 <h2 id="configuración-experimental">Configuración experimental</h2>
 
-<h3 id="test-1--robustez-bajo-condiciones-iniciales">Test 1 – Robustez bajo condiciones iniciales</h3>
+<h3 id="test-1--perturbación-de-posición-y-orientación">Test 1 – Perturbación de posición y orientación</h3>
 
-<p>Se evalúan 15 condiciones iniciales diferentes. Cada condición se ejecuta 15 veces para un total de:</p>
+<p>El Test 1 (T1) evalúa la recuperación de la trayectoria desde 15 condiciones iniciales, combinando cinco desplazamientos laterales entre −1.8 m y +1.8 m con tres orientaciones iniciales (−15°, 0° y +15°). Cada condición se ejecuta 15 veces para un total de:</p>
 
 \[15 \times 15 = 225\]
 
 <p>ejecuciones por configuración experimental.</p>
 
-<h3 id="test-4--perturbación-online-durante-inferencia">Test 4 – Perturbación online durante inferencia</h3>
+<h3 id="test-4--perturbación-dagger-durante-la-inferencia">Test 4 – Perturbación DAgger durante la inferencia</h3>
 
-<p>Se realizan igualmente 225 ejecuciones por configuración experimental. Durante la ejecución del vehículo se introducen perturbaciones online que modifican temporalmente la observación utilizada por la política de conducción.</p>
+<p>Se realizan igualmente 225 ejecuciones por configuración experimental. El Test 4 (T4) introduce una perturbación sobre las acciones de control, similar a la utilizada para generar el dataset DAgger (B’), con el objetivo de desplazar temporalmente el vehículo de su trayectoria nominal. Se aplica cada 8 s durante 4 ticks de control, seguida de un periodo de recuperación de 10 ticks.</p>
 
 <hr />
 
@@ -401,7 +401,7 @@
 
 <hr />
 
-<h1 id="test-1--robustez-bajo-condiciones-iniciales-1">Test 1 – Robustez bajo condiciones iniciales</h1>
+<h1 id="test-1--perturbación-de-posición-y-orientación-1">Test 1 – Perturbación de posición y orientación</h1>
 
 <h2 id="burbuja">Burbuja</h2>
 
@@ -577,7 +577,7 @@
 
 <h2 id="análisis-del-test-1">Análisis del Test 1</h2>
 
-<p>Los resultados actualizados muestran que las configuraciones más cercanas al dataset original continúan obteniendo el mejor desempeño bajo condiciones nominales. Sin embargo, la incorporación de nuevas mezclas permite observar con mayor claridad el efecto de la proporción de muestras augmentadas sobre el comportamiento de la política.</p>
+<p>Los resultados actualizados muestran que las configuraciones más cercanas al dataset original continúan obteniendo el mejor desempeño bajo perturbaciones de posición y orientación iniciales. Sin embargo, la incorporación de nuevas mezclas permite observar con mayor claridad el efecto de la proporción de muestras augmentadas sobre el comportamiento de la política.</p>
 
 <p>El modelo base $D^{A}$ alcanza un <strong>100% de successful runs (225/225)</strong>, sin colisiones y con la menor desviación lateral media observada. Estos resultados confirman que el dataset Burbuja contiene suficiente diversidad para resolver correctamente las condiciones iniciales consideradas en este conjunto de pruebas.</p>
 
@@ -591,7 +591,7 @@
 
 <hr />
 
-<h1 id="test-4--perturbación-online-durante-inferencia-1">Test 4 – Perturbación online durante inferencia</h1>
+<h1 id="test-4--perturbación-dagger-durante-la-inferencia-1">Test 4 – Perturbación DAgger durante la inferencia</h1>
 
 <h2 id="dagger-1">DAgger</h2>
 
@@ -733,7 +733,7 @@
 
 <p>Los resultados muestran que las distintas estrategias de generación de datos fortalecen propiedades diferentes de la política de conducción.</p>
 
-<p>En el Test 1, las mejores configuraciones corresponden a <strong>Burbuja ($D^{A}$)</strong> y <strong>DAgger 30% ($D_{0.30}^{B}$)</strong>, ambas con un <strong>100% de successful runs</strong>, lo que indica un excelente desempeño bajo condiciones nominales y estados iniciales conocidos. También destacan <strong>DAgger 50%</strong> y <strong>Noise 30%</strong>, confirmando que proporciones moderadas de muestras augmentadas pueden mejorar la robustez sin alterar significativamente la distribución original del dataset.</p>
+<p>En el Test 1, las mejores configuraciones corresponden a <strong>Burbuja ($D^{A}$)</strong> y <strong>DAgger 30% ($D_{0.30}^{B}$)</strong>, ambas con un <strong>100% de successful runs</strong>, lo que indica un excelente desempeño desde las condiciones iniciales de posición y orientación evaluadas. También destacan <strong>DAgger 50%</strong> y <strong>Noise 30%</strong>, confirmando que proporciones moderadas de muestras augmentadas pueden mejorar la robustez sin alterar significativamente la distribución original del dataset.</p>
 
 <p>Por el contrario, en el Test 4 las configuraciones basadas en <strong>Noise Injection</strong> obtienen los mejores resultados frente a perturbaciones online. La mejor política observada corresponde a <strong>$D_{0.50}^{C}$</strong>, con un <strong>91.1% de successful runs</strong>, seguida muy de cerca por <strong>Magic Mix ($D^{M}$)</strong> con un <strong>88.9%</strong>.</p>
 
@@ -754,36 +754,36 @@
 
 <p>Al revisar en detalle la configuración utilizada para generar el dataset DAgger y la configuración empleada posteriormente durante el Test 4, se observó que ambas no son equivalentes.</p>
 
-<p>La siguiente tabla resume las principales diferencias:</p>
+<p>La siguiente tabla presenta los parámetros temporales del protocolo de referencia. La amplitud de steering de T4 corresponde a la configuración estándar analizada en esta actualización:</p>
 
 <table>
   <thead>
     <tr>
-      <th>Parámetro</th>
-      <th style="text-align: right">Dataset DAgger</th>
-      <th style="text-align: right">Test 4</th>
+      <th style="text-align: left">Parámetro</th>
+      <th style="text-align: left">Dataset DAgger</th>
+      <th style="text-align: left">T4 – Perturbación DAgger durante la inferencia</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>Frecuencia de perturbación</td>
-      <td style="text-align: right">12 s</td>
-      <td style="text-align: right">6 s</td>
+      <td style="text-align: left">Programación de las perturbaciones</td>
+      <td style="text-align: left">Nueva intervención tras 8 s de control humano</td>
+      <td style="text-align: left">Cada 8 s</td>
     </tr>
     <tr>
-      <td>Duración de la perturbación (hold)</td>
-      <td style="text-align: right">0.40 s</td>
-      <td style="text-align: right">0.30 s</td>
+      <td style="text-align: left">Duración de la perturbación</td>
+      <td style="text-align: left">0.50 s (10 ticks a 20 Hz)</td>
+      <td style="text-align: left">4 ticks de control</td>
     </tr>
     <tr>
-      <td>Duración del recovery</td>
-      <td style="text-align: right">0.50 s</td>
-      <td style="text-align: right">0.60 s</td>
+      <td style="text-align: left">Periodo de recuperación</td>
+      <td style="text-align: left">8 s de control humano antes de la siguiente intervención</td>
+      <td style="text-align: left">10 ticks</td>
     </tr>
     <tr>
-      <td>Steer máximo aplicado</td>
-      <td style="text-align: right">±0.40</td>
-      <td style="text-align: right">±0.18</td>
+      <td style="text-align: left">Steer máximo aplicado</td>
+      <td style="text-align: left">±0.40</td>
+      <td style="text-align: left">±0.18 (configuración estándar)</td>
     </tr>
   </tbody>
 </table>
@@ -796,9 +796,9 @@
 
 \[steer = \pm 0.18\]
 
-<p>Sin embargo, las perturbaciones del Test 4 se aplican con una frecuencia aproximadamente dos veces mayor, pasando de una perturbación cada 12 segundos a una perturbación cada 6 segundos.</p>
+<p>La duración de las perturbaciones y los tiempos de recuperación también son diferentes: durante la generación del dataset, cada intervención dura 0.50 s y después se devuelve el control al conductor humano durante 8 s. En T4 se introduce una perturbación cada 8 s durante 4 ticks de control y se permite un periodo de recuperación de 10 ticks.</p>
 
-<p>Desde una perspectiva conceptual, el dataset DAgger fue generado mediante episodios de recuperación relativamente severos y poco frecuentes:</p>
+<p>Desde una perspectiva conceptual, el dataset DAgger fue generado mediante perturbaciones de mayor amplitud seguidas de recuperación humana:</p>
 
 <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Perturbación fuerte
 ↓
@@ -809,13 +809,13 @@ Conducción normal durante varios segundos
 Nueva perturbación
 </code></pre></div></div>
 
-<p>Por el contrario, el Test 4 introduce perturbaciones más suaves pero mucho más frecuentes:</p>
+<p>En la configuración estándar del Test 4 se introducen perturbaciones de menor amplitud seguidas de recuperación por la política:</p>
 
 <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Perturbación suave
 ↓
 Recuperación
 ↓
-Pocos segundos de conducción
+Conducción hasta la siguiente intervención
 ↓
 Nueva perturbación
 </code></pre></div></div>
@@ -827,7 +827,6 @@ Nueva perturbación
 <p>Por tanto, una posible explicación de la superioridad observada de $D_{0.50}^{C}$ en el Test 4 es que el escenario de evaluación se asemeja más al proceso utilizado para generar el dataset Noise Injection que al procedimiento empleado para construir el dataset DAgger.</p>
 
 <p>Como trabajo futuro se plantea repetir el Test 4 utilizando exactamente las mismas perturbaciones empleadas durante la generación del dataset DAgger. Esto permitirá determinar si las ventajas teóricas de DAgger aparecen con mayor claridad cuando las condiciones de evaluación coinciden con las condiciones bajo las cuales fueron recolectadas las muestras de recuperación.</p>
-
 
         
       </section>
@@ -916,6 +915,45 @@ Nueva perturbación
     <div class="page__related">
       <h2 class="page__related-title">You may also enjoy</h2>
       <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/weekly%20log/week106/" rel="permalink">Week 106 - Reentrenamiento FastViT para conducción nominal
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          1 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">E5 se entrenó con FastViT-SA12 preentrenado, usando imágenes RGB de 800×600. Se recortaron los primeros 140 píxeles de la parte superior, luego la imagen se ...</p>
+  </article>
+</div>
+
         
           
 
@@ -1026,7 +1064,7 @@ Nueva perturbación
       <span class="page__meta-readtime">
         <i class="far fa-clock" aria-hidden="true"></i>
         
-          21 minute read
+          22 minute read
         
       </span>
     
@@ -1036,46 +1074,6 @@ Nueva perturbación
     <p class="archive__item-excerpt" itemprop="description">
   Se actualizó Week 102 con nuevas métricas y cambios en el orden de las tablas.
 
-</p>
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/weekly%20log/week102/" rel="permalink">Week 102 - Evaluación de robustez en distintos escenarios de conducción
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-
-    
-
-    
-      
-      
-
-      <span class="page__meta-readtime">
-        <i class="far fa-clock" aria-hidden="true"></i>
-        
-          24 minute read
-        
-      </span>
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">Diseño experimental
 </p>
   </article>
 </div>

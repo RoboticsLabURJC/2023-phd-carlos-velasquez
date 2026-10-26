@@ -1,8 +1,129 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2026-09-28T14:51:32-05:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Robotics Lab URJC</title><subtitle>Autonomous Driving</subtitle><author><name>Carlos Velásquez</name><email>canveo@gmail.com</email></author><entry><title type="html">Week 105 - Resumen de métricas</title><link href="http://localhost:4000/weekly%20log/week105/" rel="alternate" type="text/html" title="Week 105 - Resumen de métricas" /><published>2026-09-06T00:00:00-05:00</published><updated>2026-09-06T00:00:00-05:00</updated><id>http://localhost:4000/weekly%20log/week105</id><content type="html" xml:base="http://localhost:4000/weekly%20log/week105/"><![CDATA[<blockquote>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2026-10-26T09:13:09-05:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Robotics Lab URJC</title><subtitle>Autonomous Driving</subtitle><author><name>Carlos Velásquez</name><email>canveo@gmail.com</email></author><entry><title type="html">Week 106 - Reentrenamiento FastViT para conducción nominal</title><link href="http://localhost:4000/weekly%20log/week106/" rel="alternate" type="text/html" title="Week 106 - Reentrenamiento FastViT para conducción nominal" /><published>2026-10-13T00:00:00-05:00</published><updated>2026-10-13T00:00:00-05:00</updated><id>http://localhost:4000/weekly%20log/week106</id><content type="html" xml:base="http://localhost:4000/weekly%20log/week106/"><![CDATA[<p>E5 se entrenó con FastViT-SA12 preentrenado, usando imágenes RGB de 800×600. Se recortaron los primeros 140 píxeles de la parte superior, luego la imagen se llevó a 256×256 y se escaló dividiendo entre 255.</p>
+
+<p>El modelo solo predice steer. El throttle no entra al modelo ni se predice; únicamente se usó para balancear mejor los datos durante el entrenamiento con 20 combinaciones de steer y throttle.</p>
+
+<p>En las pruebas con BehaviorMetrics, E5 funciona mejor cuando se usa un throttle fijo de 0.45. Con ese valor el comportamiento es más estable y logra avanzar mejor por el circuito. Al cambiar el throttle, el modelo empieza a tener problemas en algunas curvas e incluso puede perder estabilidad en tramos rectos.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Métrica</th>
+      <th style="text-align: right">Valor</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Tiempo real</td>
+      <td style="text-align: right">90.14 s</td>
+    </tr>
+    <tr>
+      <td>Tiempo simulado</td>
+      <td style="text-align: right">90.02 s</td>
+    </tr>
+    <tr>
+      <td>Distancia recorrida</td>
+      <td style="text-align: right">910.51 m</td>
+    </tr>
+    <tr>
+      <td>Distancia efectiva</td>
+      <td style="text-align: right">633.00 m</td>
+    </tr>
+    <tr>
+      <td>Porcentaje completado</td>
+      <td style="text-align: right">0.00 %</td>
+    </tr>
+    <tr>
+      <td>Vueltas completadas</td>
+      <td style="text-align: right">0</td>
+    </tr>
+    <tr>
+      <td>Velocidad promedio</td>
+      <td style="text-align: right">36.77 km/h</td>
+    </tr>
+    <tr>
+      <td>Velocidad máxima</td>
+      <td style="text-align: right">39.77 km/h</td>
+    </tr>
+    <tr>
+      <td>Velocidad mínima</td>
+      <td style="text-align: right">0.00 km/h</td>
+    </tr>
+    <tr>
+      <td>Desviación media de posición</td>
+      <td style="text-align: right">0.799 m</td>
+    </tr>
+    <tr>
+      <td>Error total de posición</td>
+      <td style="text-align: right">2004.42</td>
+    </tr>
+    <tr>
+      <td>Desviación media por km</td>
+      <td style="text-align: right">1.262 m/km</td>
+    </tr>
+    <tr>
+      <td>Colisiones</td>
+      <td style="text-align: right">0</td>
+    </tr>
+    <tr>
+      <td>Colisiones por km</td>
+      <td style="text-align: right">0.000</td>
+    </tr>
+    <tr>
+      <td>Invasiones de carril</td>
+      <td style="text-align: right">80</td>
+    </tr>
+    <tr>
+      <td>Invasiones por km</td>
+      <td style="text-align: right">126.38</td>
+    </tr>
+    <tr>
+      <td>Suddenness total</td>
+      <td style="text-align: right">0.00782</td>
+    </tr>
+    <tr>
+      <td>Suddenness throttle</td>
+      <td style="text-align: right">0.000175</td>
+    </tr>
+    <tr>
+      <td>Suddenness steer</td>
+      <td style="text-align: right">0.00765</td>
+    </tr>
+    <tr>
+      <td>Suddenness brake</td>
+      <td style="text-align: right">0.000</td>
+    </tr>
+    <tr>
+      <td>Suddenness control por km</td>
+      <td style="text-align: right">0.00859</td>
+    </tr>
+    <tr>
+      <td>Suddenness throttle por km</td>
+      <td style="text-align: right">0.000277</td>
+    </tr>
+    <tr>
+      <td>Suddenness steer por km</td>
+      <td style="text-align: right">0.01209</td>
+    </tr>
+    <tr>
+      <td>Suddenness brake por km</td>
+      <td style="text-align: right">0.000</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Parece que este modelo aprendió bien el steer, pero quedó muy amarrado a un rango específico de velocidad. Como solo funciona bien con throttle=0.45, para el próximo entrenamiento conviene darle al modelo información de velocidad o throttle durante la inferencia, para que pueda ajustar mejor el giro según cómo se esté moviendo el vehículo.</p>
+
+<p align="center">
+  <img src="http://localhost:4000/assets/images/week106/20261026-084345.png" alt="Resultados de la evaluación" style="width:100%" />
+</p>
+
+<p align="center">
+  <img src="http://localhost:4000/assets/images/week106/20261026-084345_lane_invasion.png" alt="Resultados de invasiones de carril" style="width:100%" />
+</p>]]></content><author><name>Carlos Velásquez</name><email>canveo@gmail.com</email></author><category term="weekly Log" /><category term="Robustez" /><category term="Behavior Cloning" /><category term="Noise Injection" /><category term="DAgger" /><category term="CARLA Simulator" /><category term="Behavior Metrics" /><summary type="html"><![CDATA[E5 se entrenó con FastViT-SA12 preentrenado, usando imágenes RGB de 800×600. Se recortaron los primeros 140 píxeles de la parte superior, luego la imagen se llevó a 256×256 y se escaló dividiendo entre 255.]]></summary></entry><entry><title type="html">Week 105 - Resumen de métricas</title><link href="http://localhost:4000/weekly%20log/week105/" rel="alternate" type="text/html" title="Week 105 - Resumen de métricas" /><published>2026-09-06T00:00:00-05:00</published><updated>2026-09-06T00:00:00-05:00</updated><id>http://localhost:4000/weekly%20log/week105</id><content type="html" xml:base="http://localhost:4000/weekly%20log/week105/"><![CDATA[<blockquote>
   <p>Ver convenciones y definiciones en <a href="/weekly%20log/week102/">Week 102</a>.</p>
 </blockquote>
 
-<h2 id="test-0---caso-canónico">Test 0 - Caso canónico</h2>
+<h2 id="test-0--condición-nominal">Test 0 – Condición nominal</h2>
 
 <h3 id="town02">Town02</h3>
 
@@ -301,7 +422,7 @@
 
 <hr />
 
-<h2 id="test-1--diferentes-posiciones-de-inicio">Test 1 – Diferentes posiciones de inicio</h2>
+<h2 id="test-1--perturbación-de-posición-y-orientación">Test 1 – Perturbación de posición y orientación</h2>
 
 <h3 id="town02-1">Town02</h3>
 
@@ -608,7 +729,7 @@
 
 <hr />
 
-<h2 id="test-2--condiciones-iniciales-aleatorias">Test 2 – Condiciones iniciales aleatorias</h2>
+<h2 id="test-2--posiciones-de-arranque-distribuidas-en-el-circuito">Test 2 – Posiciones de arranque distribuidas en el circuito</h2>
 
 <h3 id="town02-2">Town02</h3>
 
@@ -1174,7 +1295,9 @@
 
 <hr />
 
-<h2 id="test-4--perturbación-estándar">Test 4 – Perturbación estándar</h2>
+<h2 id="test-4--perturbación-dagger-durante-la-inferencia">Test 4 – Perturbación DAgger durante la inferencia</h2>
+
+<p>Se presentan los resultados de la configuración estándar de T4.</p>
 
 <h3 id="town02-4">Town02</h3>
 
@@ -1483,7 +1606,7 @@
 
 <ul>
   <li>
-    <p>Burbuja ofrece buenos resultados en Town02, pero su robustez depende de la condición inicial. Obtiene 98.7 %, 100 % y 98.6 % de éxito en los Tests 0, 1 y 3, con desviaciones medias entre 0.233 y 0.262 m. En el Test 2, con condiciones iniciales aleatorias, completa 96/120 recorridos —80.0 %—, entre 18.6 y 20 puntos porcentuales menos que en esas pruebas. La tasa de éxito disminuye, aunque la desviación media de los recorridos exitosos se mantiene en 0.259 m.</p>
+    <p>Burbuja ofrece buenos resultados en Town02, pero su robustez depende de la condición inicial. Obtiene 98.7 %, 100 % y 98.6 % de éxito en los Tests 0, 1 y 3, con desviaciones medias entre 0.233 y 0.262 m. En el Test 2, con posiciones de arranque distribuidas en el circuito, completa 96/120 recorridos —80.0 %—, entre 18.6 y 20 puntos porcentuales menos que en esas pruebas. La tasa de éxito disminuye, aunque la desviación media de los recorridos exitosos se mantiene en 0.259 m.</p>
   </li>
   <li>
     <p>En el Test 2 de Town02, DAgger al 50 % y Noise al 15 % destacan con distintos compromisos de conducción. DAgger al 50 % alcanza 99.1 % de éxito —223/225—, con cero colisiones en los recorridos exitosos, 2.327 invasiones de carril y 0.380 m de desviación media. Noise al 15 % completa 221/225 —98.2 %— y presenta menos invasiones —2.000— y menor desviación —0.255 m—, aunque registra 0.032 colisiones por recorrido exitoso. Frente al 80.0 % de Burbuja, las diferencias de éxito son de 19.1 y 18.2 puntos porcentuales, respectivamente. Ambas configuraciones reducen las invasiones respecto a las 7.750 de Burbuja y circulan a menor velocidad media: 45.19 y 43.51 km/h, frente a 55.61 km/h. Las mejoras observadas coinciden, por tanto, con cambios en la velocidad de conducción. La comparación se basa en 120 recorridos para Burbuja y 225 para cada una de estas configuraciones.</p>
@@ -1498,7 +1621,7 @@
     <p>Noise al 50 % alcanza la mayor tasa de éxito bajo perturbación estándar en Town02 y Town11. En Town02 completa 205/225 recorridos —91.1 %— frente a 198/225 —88.0 %— de Burbuja. Esa mejora coincide con mayor desviación —0.290 frente a 0.232 m— y más colisiones —0.054 frente a 0.025— entre los recorridos exitosos. En Town11 completa 30/30, mientras que Burbuja y Noise al 15 % no completan ninguno. Frente a DAgger al 50 %, que completa 29/30, Noise al 50 % también reduce las invasiones de 31.069 a 19.167 y la desviación de 0.426 a 0.228 m.</p>
   </li>
   <li>
-    <p>En Csonthomisi, las configuraciones destacadas cambian entre pruebas. Noise al 75 % alcanza 95.8 %, 96.3 % y 95.8 % en los Tests 0, 1 y 3, frente a 0 %, 7.7 % y 16.7 % de Burbuja. Sin embargo, en el Test 2 obtiene solo 32.1 %; el mejor resultado disponible corresponde a Noise al 50 %, con 53.3 % —16/30—. Esta última configuración supera en 20 puntos porcentuales a Burbuja, aunque todavía falla en 14 de los 30 recorridos. Las condiciones iniciales aleatorias siguen siendo una dificultad para todas las configuraciones evaluadas en este mapa.</p>
+    <p>En Csonthomisi, las configuraciones destacadas cambian entre pruebas. Noise al 75 % alcanza 95.8 %, 96.3 % y 95.8 % en los Tests 0, 1 y 3, frente a 0 %, 7.7 % y 16.7 % de Burbuja. Sin embargo, en el Test 2 obtiene solo 32.1 %; el mejor resultado disponible corresponde a Noise al 50 %, con 53.3 % —16/30—. Esta última configuración supera en 20 puntos porcentuales a Burbuja, aunque todavía falla en 14 de los 30 recorridos. Las posiciones de arranque distribuidas en el circuito siguen siendo una dificultad para todas las configuraciones evaluadas en este mapa.</p>
   </li>
   <li>
     <p>DAgger al 50 % destaca bajo perturbación estándar en Csonthomisi. Completa 28/29 recorridos —96.6 %—, frente a 23/29 —79.3 %— de Noise al 50 %. También registra menos invasiones —37.500 frente a 39.435— y menor desviación —0.395 frente a 0.421 m—, a una velocidad media inferior: 37.49 frente a 40.32 km/h. DAgger supera a Noise en finalización en las tres proporciones comparables de este test: 15 %, 30 % y 50 %. Este resultado limita cualquier conclusión general sobre una superioridad de Noise ante perturbaciones.</p>
@@ -1829,6 +1952,7 @@
   <thead>
     <tr>
       <th>Test</th>
+      <th>Nombre</th>
       <th>Modelo</th>
       <th>Successful Runs</th>
       <th>Collisions</th>
@@ -1840,6 +1964,7 @@
   <tbody>
     <tr>
       <td><strong>T0</strong></td>
+      <td>Condición nominal</td>
       <td>PilotNet</td>
       <td><strong>98.7% (222/225)</strong></td>
       <td>0.000</td>
@@ -1848,6 +1973,7 @@
       <td>0.233</td>
     </tr>
     <tr>
+      <td> </td>
       <td> </td>
       <td>FastViT</td>
       <td><strong>80.6% (25/31)</strong></td>
@@ -1858,6 +1984,7 @@
     </tr>
     <tr>
       <td><strong>T1</strong></td>
+      <td>Perturbación de posición y orientación</td>
       <td>PilotNet</td>
       <td><strong>100.0% (225/225)</strong></td>
       <td>0.000</td>
@@ -1866,6 +1993,7 @@
       <td>0.262</td>
     </tr>
     <tr>
+      <td> </td>
       <td> </td>
       <td>FastViT</td>
       <td><strong>70.0% (21/30)</strong></td>
@@ -1876,6 +2004,7 @@
     </tr>
     <tr>
       <td><strong>T2</strong></td>
+      <td>Posiciones de arranque distribuidas en el circuito</td>
       <td>PilotNet</td>
       <td><strong>80.0% (96/120)</strong></td>
       <td>0.000</td>
@@ -1884,6 +2013,7 @@
       <td>0.259</td>
     </tr>
     <tr>
+      <td> </td>
       <td> </td>
       <td>FastViT</td>
       <td><strong>85.0% (17/20)</strong></td>
@@ -1894,6 +2024,7 @@
     </tr>
     <tr>
       <td><strong>T3</strong></td>
+      <td>Diferentes velocidades iniciales</td>
       <td>PilotNet</td>
       <td><strong>98.6% (218/221)</strong></td>
       <td>0.000</td>
@@ -1902,6 +2033,7 @@
       <td>0.236</td>
     </tr>
     <tr>
+      <td> </td>
       <td> </td>
       <td>FastViT</td>
       <td><strong>39.3% (11/28)</strong></td>
@@ -1912,6 +2044,7 @@
     </tr>
     <tr>
       <td><strong>T4</strong></td>
+      <td>Perturbación DAgger durante la inferencia</td>
       <td>PilotNet</td>
       <td><strong>88.0% (198/225)</strong></td>
       <td>0.025</td>
@@ -1920,6 +2053,7 @@
       <td>0.232</td>
     </tr>
     <tr>
+      <td> </td>
       <td> </td>
       <td>FastViT</td>
       <td><strong>0.0% (0/30)</strong></td>
@@ -1943,7 +2077,7 @@
 
 <h2 id="1-objetivo">1. Objetivo</h2>
 
-<p>Evaluar si las tendencias observadas previamente en <strong>Town02</strong> se mantienen al trasladar los tests de robustez a <strong>Town11</strong>, un entorno con mayor densidad de curvas. El análisis considera el caso canónico, las variaciones en la posición y la velocidad inicial, y las perturbaciones aplicadas durante la inferencia.</p>
+<p>Evaluar si las tendencias observadas previamente en <strong>Town02</strong> se mantienen al trasladar los tests de robustez a <strong>Town11</strong>, un entorno con mayor densidad de curvas. El análisis considera la condición nominal, las variaciones en la posición y la velocidad inicial, y las perturbaciones aplicadas durante la inferencia.</p>
 
 <p>Además, se estudia la generalización de las políticas en el mapa comunitario <strong>csonthomisi</strong>, cuya geometría no fue utilizada durante el entrenamiento. Ambos experimentos se analizan de forma independiente para distinguir la robustez dentro de un mapa conocido de la transferencia hacia un escenario nuevo.</p>
 
@@ -1962,11 +2096,14 @@
 
 <h3 id="22-configuración-experimental">2.2 Configuración experimental</h3>
 
-<p>Respecto al <strong>Test 1 original</strong>, se introdujeron dos modificaciones en las condiciones iniciales:</p>
+<p>El Test 1 (T1) se denomina <strong>Perturbación de posición y orientación</strong>. El protocolo de referencia combina cinco desplazamientos laterales entre −1.8 m y +1.8 m con tres orientaciones iniciales (−15°, 0° y +15°). A continuación se documenta la adaptación utilizada en Town11.</p>
+
+<p>Respecto al <strong>Test 1 original</strong>, se introdujeron tres modificaciones en las condiciones iniciales:</p>
 
 <ol>
   <li>Cambio de escenario: <strong>Town02 → Town11</strong>.</li>
   <li>Incremento de la perturbación angular inicial en <strong>15°</strong>, pasando de <strong>±15°</strong> a <strong>±30°</strong> respecto a la orientación nominal de la vía.</li>
+  <li>Uso de los cinco desplazamientos laterales de la tabla: <strong>+4.80, +2.40, 0.00, −2.40 y −4.80 m</strong>.</li>
 </ol>
 
 <p>Se evaluaron <strong>15 condiciones iniciales</strong>, resultado de combinar <strong>cinco desplazamientos laterales</strong> con <strong>tres orientaciones iniciales</strong>.</p>
@@ -2172,7 +2309,7 @@
   </tbody>
 </table>
 
-<h2 id="test-0--caso-canónico">Test 0 – Caso canónico</h2>
+<h2 id="test-0--condición-nominal">Test 0 – Condición nominal</h2>
 
 <table>
   <thead>
@@ -2261,11 +2398,11 @@
   </tbody>
 </table>
 
-<p>En el caso canónico, casi todas las configuraciones completan la totalidad de los recorridos y no se registran colisiones. En DAgger, las invasiones de carril crecen conforme aumenta la proporción de datos perturbados, mientras que las mezclas más altas mantienen una desviación elevada sin aportar una mejora equivalente en la tasa de éxito.</p>
+<p>En la condición nominal, casi todas las configuraciones completan la totalidad de los recorridos y no se registran colisiones. En DAgger, las invasiones de carril crecen conforme aumenta la proporción de datos perturbados, mientras que las mezclas más altas mantienen una desviación elevada sin aportar una mejora equivalente en la tasa de éxito.</p>
 
 <p>Noise Injection mantiene tasas de finalización altas y un seguimiento lateral más preciso. En particular, $D_{0.50}^{C}$ presenta el mejor compromiso del test, con 100 % de éxito, 5.767 invasiones de carril y una desviación media de 0.231 m. El aumento hasta 75 % conserva la tasa de éxito, pero no mejora estas métricas y reduce la velocidad media, lo que sugiere que una mayor proporción de datos perturbados no aporta beneficios adicionales en condiciones nominales.</p>
 
-<h2 id="test-1--diferentes-posiciones-de-inicio">Test 1 – Diferentes posiciones de inicio</h2>
+<h2 id="test-1--perturbación-de-posición-y-orientación">Test 1 – Perturbación de posición y orientación</h2>
 
 <table>
   <thead>
@@ -2342,10 +2479,10 @@
 
 <p>Noise Injection ofrece un mejor compromiso entre recuperación y precisión. $D_{0.30}^{C}$ y $D_{0.50}^{C}$ alcanzan 100 % de éxito, mientras que $D_{0.50}^{C}$ reduce las invasiones a 7.172 y obtiene una desviación de 0.228 m. Al aumentar la proporción a 75 %, la tasa de éxito cae a 93.1 %, por lo que la mejora no es monotónica.</p>
 
-<h2 id="test-2--diferentes-sectores-de-inicio">Test 2 – Diferentes sectores de inicio</h2>
+<h2 id="test-2--posiciones-de-arranque-distribuidas-en-el-circuito">Test 2 – Posiciones de arranque distribuidas en el circuito</h2>
 
 <blockquote>
-  <p><strong>Pendiente de ejecución.</strong> En Town11, al tratarse de una trayectoria abierta, el Test 2 utilizará tres posiciones iniciales diferentes y recorridos de igual longitud (~700 m), con 10 ejecuciones por posición y por modelo, para un total de 30 episodios por configuración.</p>
+  <p><strong>Pendiente de ejecución.</strong> El Test 2 (T2) evalúa tres posiciones de arranque distribuidas en distintos sectores del recorrido, sin modificar la posición lateral ni la orientación nominal respecto a la vía. En Town11, al tratarse de una trayectoria abierta, se utilizarán recorridos de igual longitud (~700 m), con 10 ejecuciones por posición y por modelo, para un total de 30 episodios por configuración. Esta es la adaptación del test al recorrido abierto; en los circuitos cerrados se reorganiza la trayectoria de referencia manteniendo el circuito y el sentido de circulación, con la meta aproximadamente 10–15 m antes del punto de partida.</p>
 </blockquote>
 
 <h2 id="test-3--diferentes-velocidades-iniciales">Test 3 – Diferentes velocidades iniciales</h2>
@@ -2441,7 +2578,7 @@
 
 <p>Noise Injection muestra tasas de éxito menores que las mejores configuraciones DAgger, pero mayor precisión en los episodios completados. $D_{0.50}^{C}$ presenta el mejor seguimiento lateral, con 6.957 invasiones y 0.222 m de desviación, aunque finaliza 82.1 % de las ejecuciones. Por tanto, el test muestra un compromiso entre la capacidad de completar el recorrido y la precisión de trayectoria; una menor desviación entre episodios exitosos no implica por sí sola una robustez global superior.</p>
 
-<h2 id="test-4--perturbación-online">Test 4 – Perturbación online</h2>
+<h2 id="test-4--perturbación-dagger-durante-la-inferencia">Test 4 – Perturbación DAgger durante la inferencia</h2>
 
 <table>
   <thead>
@@ -2536,7 +2673,7 @@
 
 <h3 id="24-discusión-general-de-town11">2.4 Discusión general de Town11</h3>
 
-<p>En Town11, $D^{A}$ conserva un desempeño sólido en el caso canónico, pero pierde capacidad de finalización ante cambios en la posición, la velocidad inicial y, especialmente, bajo perturbación online. Las configuraciones DAgger mejoran la recuperación y alcanzan las mayores tasas de éxito en varios escenarios exigentes, aunque este comportamiento suele estar acompañado por más invasiones de carril y mayor desviación.</p>
+<p>En Town11, $D^{A}$ conserva un desempeño sólido en la condición nominal, pero pierde capacidad de finalización ante cambios en la posición, la velocidad inicial y, especialmente, bajo perturbación online. Las configuraciones DAgger mejoran la recuperación y alcanzan las mayores tasas de éxito en varios escenarios exigentes, aunque este comportamiento suele estar acompañado por más invasiones de carril y mayor desviación.</p>
 
 <p>Noise Injection, particularmente $D_{0.50}^{C}$, presenta el mejor compromiso entre robustez y precisión lateral: mantiene 100 % de éxito en los Tests 0, 1 y 4, y obtiene las menores desviaciones en los cuatro tests ejecutados. No obstante, en el Test 3 su tasa de finalización es inferior a la de varias mezclas DAgger. En conjunto, los resultados sugieren que DAgger favorece la recuperación, mientras que una proporción intermedia de Noise Injection combina mejor la finalización con un seguimiento preciso. El Test 2 permanece pendiente y no se incluye en esta interpretación.</p>
 
@@ -2608,7 +2745,7 @@
 
 <h3 id="34-resultados">3.4 Resultados</h3>
 
-<h2 id="test-0--caso-canónico-1">Test 0 – Caso canónico</h2>
+<h2 id="test-0--condición-nominal-1">Test 0 – Condición nominal</h2>
 
 <table>
   <thead>
@@ -2705,11 +2842,11 @@
   </tbody>
 </table>
 
-<p>El caso canónico ya representa una dificultad importante de transferencia: $D^{A}$ no completa ninguna ejecución y las mezclas con 15 % de datos perturbados mantienen tasas de éxito cercanas al 30 %. DAgger mejora al utilizar proporciones de 30–50 %, ambas con 84.0 % de éxito, mientras que 75 % incrementa notablemente las invasiones de carril y no mejora la finalización.</p>
+<p>La condición nominal ya representa una dificultad importante de transferencia: $D^{A}$ no completa ninguna ejecución y las mezclas con 15 % de datos perturbados mantienen tasas de éxito cercanas al 30 %. DAgger mejora al utilizar proporciones de 30–50 %, ambas con 84.0 % de éxito, mientras que 75 % incrementa notablemente las invasiones de carril y no mejora la finalización.</p>
 
 <p>En Noise Injection se observa una diferencia marcada entre proporciones: 15–30 % ofrecen poca capacidad de generalización, mientras que $D_{0.75}^{C}$ alcanza 95.8 % de éxito y presenta menos invasiones que las configuraciones DAgger de alto desempeño. $D^{M}<em>{30/30/40}$ obtiene la mayor tasa de éxito, con 96.0 %, aunque su desviación e invasiones son superiores a las de $D</em>{0.75}^{C}$. Por tanto, Magic Mix destaca en finalización y Noise Injection 75 % presenta el mejor compromiso lateral entre las configuraciones con mayor éxito.</p>
 
-<h2 id="test-1--diferentes-posiciones-de-inicio-1">Test 1 – Diferentes posiciones de inicio</h2>
+<h2 id="test-1--perturbación-de-posición-y-orientación-1">Test 1 – Perturbación de posición y orientación</h2>
 
 <table>
   <thead>
@@ -2810,7 +2947,7 @@
 
 <p>Noise Injection también mejora con proporciones altas. $D_{0.75}^{C}$ y $D^{M}<em>{30/30/40}$ alcanzan 96.3 % de éxito, pero $D</em>{0.75}^{C}$ presenta menos invasiones y menor desviación. En esta evaluación, $D_{0.75}^{C}$ ofrece el mejor compromiso entre generalización, recuperación inicial y precisión de trayectoria; la velocidad se interpreta solo como un indicador complementario.</p>
 
-<h2 id="test-2--diferentes-puntos-de-inicio">Test 2 – Diferentes puntos de inicio</h2>
+<h2 id="test-2--posiciones-de-arranque-distribuidas-en-el-circuito-1">Test 2 – Posiciones de arranque distribuidas en el circuito</h2>
 
 <table>
   <thead>
@@ -2996,7 +3133,7 @@
 
 <p>En Noise Injection se observa la tendencia opuesta: la tasa de éxito aumenta con la proporción hasta llegar a 95.8 % con $D_{0.75}^{C}$. Esta configuración mantiene valores intermedios de invasiones y desviación, mientras que algunas mezclas con menor error, como $D_{0.15}^{B}$, completan menos episodios. Los resultados sugieren que $D_{0.75}^{C}$ ofrece el mejor compromiso global para generalizar frente a variaciones del estado dinámico inicial.</p>
 
-<h2 id="test-4--perturbación-online-1">Test 4 – Perturbación online</h2>
+<h2 id="test-4--perturbación-dagger-durante-la-inferencia-1">Test 4 – Perturbación DAgger durante la inferencia</h2>
 
 <table>
   <thead>
@@ -3101,7 +3238,7 @@
 
 <ul>
   <li>
-    <p><strong>Burbuja ($D^{A}$)</strong> mantiene un desempeño sólido en el caso canónico de Town11, pero su tasa de éxito disminuye al cambiar la posición o la velocidad inicial y llega a 0/30 bajo perturbación online. En csonthomisi también presenta tasas de finalización bajas, lo que sugiere una capacidad limitada para transferirse a geometrías y condiciones alejadas del dominio nominal.</p>
+    <p><strong>Burbuja ($D^{A}$)</strong> mantiene un desempeño sólido en la condición nominal de Town11, pero su tasa de éxito disminuye al cambiar la posición o la velocidad inicial y llega a 0/30 bajo perturbación online. En csonthomisi también presenta tasas de finalización bajas, lo que sugiere una capacidad limitada para transferirse a geometrías y condiciones alejadas del dominio nominal.</p>
   </li>
   <li>
     <p><strong>DAgger ($D_{\alpha}^{B}$)</strong> favorece la recuperación y alcanza tasas de éxito altas en los escenarios exigentes de Town11. En csonthomisi, $D_{0.50}^{B}$ destaca bajo perturbación online. Sin embargo, esta mejora suele estar acompañada por más invasiones de carril y mayor desviación, especialmente con proporciones elevadas.</p>
@@ -3231,6 +3368,8 @@
 
 <p>Todos los experimentos se ejecutan sobre el <strong>mismo circuito</strong> (malla externa de Town02, carril derecho). Cada configuración experimental está compuesta por un <strong>total de 225 ejecuciones independientes</strong>, organizadas según el escenario de evaluación correspondiente.</p>
 
+<p>Las pruebas se identifican como <strong>T0–T4</strong>.</p>
+
 <table>
   <thead>
     <tr>
@@ -3241,29 +3380,29 @@
   </thead>
   <tbody>
     <tr>
-      <td style="text-align: left"><strong>Test 0</strong></td>
-      <td style="text-align: left">Caso canónico</td>
-      <td style="text-align: left"><strong>225 ejecuciones</strong> desde la posición nominal, sin perturbaciones iniciales.</td>
+      <td style="text-align: left"><strong>T0</strong></td>
+      <td style="text-align: left">Condición nominal</td>
+      <td style="text-align: left"><strong>225 ejecuciones</strong> desde la posición y orientación nominales, sin perturbaciones adicionales en la posición, orientación o velocidad del vehículo.</td>
     </tr>
     <tr>
-      <td style="text-align: left"><strong>Test 1</strong></td>
-      <td style="text-align: left">Diferentes posiciones de inicio</td>
-      <td style="text-align: left"><strong>15 posiciones de arranque</strong>, con <strong>15 ejecuciones</strong> por posición (<strong>225 ejecuciones</strong> en total).</td>
+      <td style="text-align: left"><strong>T1</strong></td>
+      <td style="text-align: left">Perturbación de posición y orientación</td>
+      <td style="text-align: left"><strong>15 configuraciones iniciales</strong>: cinco desplazamientos laterales entre −1.8 m y +1.8 m × tres orientaciones (−15°, 0° y +15°), con <strong>15 ejecuciones</strong> por configuración (<strong>225 ejecuciones</strong> en total).</td>
     </tr>
     <tr>
-      <td style="text-align: left"><strong>Test 2</strong></td>
-      <td style="text-align: left">Diferentes puntos de inicio</td>
-      <td style="text-align: left"><strong>3 posiciones iniciales diferentes</strong> (<code class="language-plaintext highlighter-rouge">random_1</code>, <code class="language-plaintext highlighter-rouge">random_2</code> y <code class="language-plaintext highlighter-rouge">random_3</code>), con <strong>75 ejecuciones por posición</strong> (<strong>225 ejecuciones</strong> en total). La trayectoria fue corregida para que todas las condiciones completen una vuelta del mismo circuito; únicamente cambia el punto de inicio. La meta se ubica aproximadamente 10–15 m antes del punto de partida, siguiendo el sentido de circulación.</td>
+      <td style="text-align: left"><strong>T2</strong></td>
+      <td style="text-align: left">Posiciones de arranque distribuidas en el circuito</td>
+      <td style="text-align: left"><strong>3 posiciones de inicio</strong> en distintos sectores del recorrido (<code class="language-plaintext highlighter-rouge">random_1</code>, <code class="language-plaintext highlighter-rouge">random_2</code> y <code class="language-plaintext highlighter-rouge">random_3</code>), con <strong>75 ejecuciones por posición</strong> (<strong>225 ejecuciones</strong> en total). Se conserva la posición lateral y la orientación nominal respecto a la vía. La trayectoria de referencia se reorganiza para mantener el mismo circuito y sentido de circulación; la meta se ubica aproximadamente 10–15 m antes del punto de partida.</td>
     </tr>
     <tr>
-      <td style="text-align: left"><strong>Test 3</strong></td>
+      <td style="text-align: left"><strong>T3</strong></td>
       <td style="text-align: left">Diferentes velocidades iniciales</td>
-      <td style="text-align: left"><strong>4 velocidades iniciales</strong> (30, 60, 80 y 100 km/h), distribuyendo las ejecuciones para completar un <strong>total de 225 episodios</strong> por configuración.</td>
+      <td style="text-align: left"><strong>4 velocidades iniciales</strong> (30, 60, 80 y 100 km/h), alcanzadas manualmente antes de entregar el control al modelo. Las ejecuciones se distribuyen para completar un <strong>total de 225 episodios</strong> por configuración.</td>
     </tr>
     <tr>
-      <td style="text-align: left"><strong>Test 4</strong></td>
-      <td style="text-align: left">Perturbación online durante la inferencia</td>
-      <td style="text-align: left"><strong>225 ejecuciones</strong> por modelo, aplicando periódicamente una política de perturbación durante la inferencia. Se evalúan dos configuraciones: <strong>perturbación estándar</strong> y <strong>perturbación intensificada</strong>.</td>
+      <td style="text-align: left"><strong>T4</strong></td>
+      <td style="text-align: left">Perturbación DAgger durante la inferencia</td>
+      <td style="text-align: left"><strong>225 ejecuciones</strong> por modelo. Se introduce una perturbación similar a la utilizada para generar el dataset DAgger (B’) cada <strong>8 s</strong>, durante <strong>4 ticks de control</strong>, seguida de <strong>10 ticks de recuperación</strong>. En esta actualización se comparan las configuraciones <strong>estándar</strong> e <strong>intensificada</strong>.</td>
     </tr>
   </tbody>
 </table>
@@ -3280,29 +3419,29 @@
   </thead>
   <tbody>
     <tr>
-      <td style="text-align: left">Test 0</td>
-      <td style="text-align: left">Caso canónico</td>
-      <td style="text-align: left">Recorrido estándar desde la posición nominal, sin perturbaciones iniciales.</td>
+      <td style="text-align: left">T0</td>
+      <td style="text-align: left">Condición nominal</td>
+      <td style="text-align: left">Recorrido estándar desde la posición y orientación nominales, sin perturbaciones en la posición, orientación o velocidad del vehículo.</td>
     </tr>
     <tr>
-      <td style="text-align: left">Test 1</td>
-      <td style="text-align: left">Posiciones de arranque 1–15</td>
-      <td style="text-align: left">15 configuraciones combinando 5 posiciones laterales (−1.8 m a +1.8 m) × 3 orientaciones (−15°, 0°, +15°).</td>
+      <td style="text-align: left">T1</td>
+      <td style="text-align: left">Perturbación de posición y orientación</td>
+      <td style="text-align: left">15 configuraciones iniciales combinando cinco desplazamientos laterales entre −1.8 m y +1.8 m con tres orientaciones iniciales (−15°, 0° y +15°).</td>
     </tr>
     <tr>
-      <td style="text-align: left">Test 2</td>
-      <td style="text-align: left">Posiciones de inicio random</td>
-      <td style="text-align: left">3 posiciones de inicio seleccionadas en sectores distintos del circuito. La trayectoria ideal se reorganiza circularmente para cada posición, de modo que las tres condiciones completan el mismo circuito y solo cambia el punto de inicio. La meta se sitúa aproximadamente 10–15 m antes del punto de partida, siguiendo el sentido de circulación.</td>
+      <td style="text-align: left">T2</td>
+      <td style="text-align: left">Posiciones de arranque distribuidas en el circuito</td>
+      <td style="text-align: left">Tres posiciones de inicio en distintos sectores del recorrido, manteniendo la posición lateral y la orientación nominal respecto a la vía. Para cada posición, la trayectoria de referencia se reorganiza conservando el mismo circuito y sentido de circulación. La meta se sitúa aproximadamente 10–15 m antes del punto de partida.</td>
     </tr>
     <tr>
-      <td style="text-align: left">Test 3</td>
-      <td style="text-align: left">Velocidades de inicio</td>
-      <td style="text-align: left">Velocidad inicial impuesta manualmente: 30, 60, 80 y 100 km/h. El modelo toma el control al alcanzarla.</td>
+      <td style="text-align: left">T3</td>
+      <td style="text-align: left">Diferentes velocidades iniciales</td>
+      <td style="text-align: left">El vehículo se lleva manualmente a 30, 60, 80 y 100 km/h. Una vez alcanzada la velocidad definida, el modelo toma el control.</td>
     </tr>
     <tr>
-      <td style="text-align: left">Test 4</td>
-      <td style="text-align: left">Perturbación B’ en inferencia</td>
-      <td style="text-align: left">Política B’ aplicada periódicamente durante la inferencia (cada 8 s, 4 ticks de acción, 10 ticks de recuperación).</td>
+      <td style="text-align: left">T4</td>
+      <td style="text-align: left">Perturbación DAgger durante la inferencia</td>
+      <td style="text-align: left">Perturbación sobre las acciones de control, similar a la utilizada para generar el dataset DAgger (B’), aplicada cada 8 s durante 4 ticks de control, seguida de un periodo de recuperación de 10 ticks.</td>
     </tr>
   </tbody>
 </table>
@@ -3331,7 +3470,7 @@
 
 <p>Perturbación para generación del dataset DAgger. Durante la construcción del conjunto de entrenamiento se aplican acciones de control destinadas a provocar desviaciones apreciables de la trayectoria, permitiendo que el conductor experto genere ejemplos de recuperación. Estas acciones presentan amplitudes de dirección de hasta ±0.40 y aceleraciones moderadas, produciendo estados alejados de la trayectoria nominal que enriquecen el dataset con maniobras correctivas.</p>
 
-<p>Perturbación estándar (evaluación online). Para evaluar la robustez durante la inferencia se utiliza un conjunto de acciones de menor magnitud que las empleadas durante la generación del dataset. El objetivo es introducir perturbaciones locales que alteren temporalmente la trayectoria del vehículo sin producir desviaciones excesivas, permitiendo analizar la capacidad de recuperación de la política durante la conducción. Este escenario corresponde al Test 4 de perturbación online.</p>
+<p>Perturbación estándar (evaluación online). Para evaluar la robustez durante la inferencia se utiliza un conjunto de acciones de menor magnitud que las empleadas durante la generación del dataset. El objetivo es introducir perturbaciones locales que alteren temporalmente la trayectoria del vehículo sin producir desviaciones excesivas, permitiendo analizar la capacidad de recuperación de la política durante la conducción. Este escenario corresponde al Test 4 — Perturbación DAgger durante la inferencia, definido con una perturbación cada 8 s durante 4 ticks de control y un periodo de recuperación de 10 ticks.</p>
 
 <p>Perturbación intensificada. Esta configuración utiliza exactamente el mismo conjunto de acciones empleado durante la generación del dataset DAgger, incrementando así la magnitud de las perturbaciones respecto al escenario estándar. Su objetivo es evaluar el comportamiento de las políticas frente a desviaciones más severas y analizar los límites de robustez alcanzados por cada estrategia de entrenamiento.</p>
 
@@ -3343,7 +3482,7 @@
   <p><strong>Nota metodológica.</strong> Salvo el porcentaje de ejecuciones exitosas (<em>Successful Runs</em>), todas las métricas reportadas en las tablas corresponden al promedio obtenido únicamente sobre los episodios exitosos (<code class="language-plaintext highlighter-rouge">goal_reached = 1</code>). Este criterio permite comparar el comportamiento de las políticas bajo condiciones equivalentes y evita introducir sesgos debidos a recorridos incompletos.</p>
 </blockquote>
 
-<h2 id="test-0--caso-canónico">Test 0 – Caso canónico</h2>
+<h2 id="test-0--condición-nominal">Test 0 – Condición nominal</h2>
 
 <table>
   <thead>
@@ -3432,7 +3571,7 @@
   </tbody>
 </table>
 
-<h2 id="test-1--diferentes-posiciones-de-inicio">Test 1 – Diferentes posiciones de inicio</h2>
+<h2 id="test-1--perturbación-de-posición-y-orientación">Test 1 – Perturbación de posición y orientación</h2>
 
 <table>
   <thead>
@@ -3529,7 +3668,7 @@
   </tbody>
 </table>
 
-<h2 id="test-2--diferentes-puntos-de-inicio">Test 2 – Diferentes puntos de inicio</h2>
+<h2 id="test-2--posiciones-de-arranque-distribuidas-en-el-circuito">Test 2 – Posiciones de arranque distribuidas en el circuito</h2>
 
 <table>
   <thead>
@@ -3699,7 +3838,7 @@
   </tbody>
 </table>
 
-<h2 id="test-4--perturbación-online-durante-la-inferencia">Test 4 – Perturbación online durante la inferencia</h2>
+<h2 id="test-4--perturbación-dagger-durante-la-inferencia">Test 4 – Perturbación DAgger durante la inferencia</h2>
 
 <h3 id="perturbación-estándar">Perturbación estándar</h3>
 
@@ -3862,19 +4001,19 @@
 
 <h2 id="análisis-preliminar-de-resultados">Análisis preliminar de resultados</h2>
 
-<h3 id="test-0--caso-canónico-1">Test 0 – Caso canónico</h3>
+<h3 id="test-0--condición-nominal-1">Test 0 – Condición nominal</h3>
 
 <p>El Test 0 evalúa el comportamiento nominal de las políticas desde una condición inicial controlada. En este escenario, las tres configuraciones comparadas alcanzan tasas de éxito superiores al 96 %, lo que indica que todas las políticas son capaces de completar el recorrido cuando no se introducen perturbaciones iniciales severas.</p>
 
 <p>El modelo base $D^{A}$ alcanza un 98.7 % de ejecuciones exitosas (222/225), sin colisiones y con una desviación media de 0.468 m. La configuración $D_{0.30}^{C}$ obtiene un desempeño similar, con 97.3 % de éxito (219/225), cero colisiones y la mayor velocidad media del grupo (59.42 km/h). Por su parte, $D_{0.30}^{B}$ mantiene una tasa de éxito alta (96.9 %), pero presenta un incremento en colisiones (1.000) y en desviación media (0.558 m).</p>
 
-<p>En conjunto, el caso canónico confirma que las políticas evaluadas conservan capacidad de navegación nominal. Sin embargo, las diferencias en colisiones y desviación sugieren que, incluso bajo condiciones favorables, la incorporación de muestras DAgger puede introducir comportamientos de recuperación menos suaves que los observados en Burbuja y Noise Injection.</p>
+<p>En conjunto, la condición nominal confirma que las políticas evaluadas conservan capacidad de navegación nominal. Sin embargo, las diferencias en colisiones y desviación sugieren que, incluso bajo condiciones favorables, la incorporación de muestras DAgger puede introducir comportamientos de recuperación menos suaves que los observados en Burbuja y Noise Injection.</p>
 
 <hr />
 
-<h3 id="test-1--diferentes-posiciones-de-inicio-1">Test 1 – Diferentes posiciones de inicio</h3>
+<h3 id="test-1--perturbación-de-posición-y-orientación-1">Test 1 – Perturbación de posición y orientación</h3>
 
-<p>El Test 1 evalúa la robustez frente a variaciones controladas en la posición y orientación inicial del vehículo. El modelo base $D^{A}$ obtiene el mejor comportamiento nominal, con 100.0 % de ejecuciones exitosas (225/225), cero colisiones y una desviación media de 0.767 m. Este resultado indica que el dataset Burbuja conserva suficiente cobertura para resolver las 15 condiciones iniciales evaluadas.</p>
+<p>El Test 1 evalúa la robustez frente a variaciones controladas en la posición y orientación inicial del vehículo. El modelo base $D^{A}$ obtiene la mejor tasa de finalización desde las condiciones iniciales perturbadas, con 100.0 % de ejecuciones exitosas (225/225), cero colisiones y una desviación media de 0.767 m. Este resultado indica que el dataset Burbuja conserva suficiente cobertura para resolver las 15 condiciones iniciales evaluadas.</p>
 
 <p>Las mezclas con proporciones moderadas de datos DAgger mantienen un desempeño competitivo. $D_{0.50}^{B}$ alcanza 97.3 % de éxito (219/225) y cero colisiones, aunque con una desviación ligeramente superior a la de Burbuja (0.826 m). En cambio, $D_{0.75}^{B}$ presenta una degradación marcada: el porcentaje de éxito cae a 40.4 % (91/225), las colisiones aumentan a 1.044 y las invasiones de carril alcanzan 18.055. Esto sugiere que una proporción elevada de muestras DAgger desplaza excesivamente la distribución de entrenamiento hacia maniobras de recuperación, reduciendo la estabilidad bajo condiciones iniciales variadas.</p>
 
@@ -3884,9 +4023,9 @@
 
 <hr />
 
-<h3 id="test-2--diferentes-puntos-de-inicio-1">Test 2 – Diferentes puntos de inicio</h3>
+<h3 id="test-2--posiciones-de-arranque-distribuidas-en-el-circuito-1">Test 2 – Posiciones de arranque distribuidas en el circuito</h3>
 
-<p>El Test 2 fue corregido para que las tres condiciones de evaluación completen el mismo circuito, modificando únicamente el punto de inicio del vehículo. En la implementación actual se utilizan tres posiciones de arranque diferentes (<code class="language-plaintext highlighter-rouge">random_1</code>, <code class="language-plaintext highlighter-rouge">random_2</code> y <code class="language-plaintext highlighter-rouge">random_3</code>). Para cada una, la trayectoria ideal se reorganiza circularmente a partir del punto seleccionado, de manera que el vehículo recorre una vuelta completa antes de alcanzar la meta.</p>
+<p>El Test 2 fue corregido para que las tres condiciones de evaluación completen el mismo circuito, modificando únicamente el punto de inicio del vehículo y manteniendo la posición lateral y la orientación nominal respecto a la vía. En la implementación actual se utilizan tres posiciones de arranque en sectores distintos del recorrido (<code class="language-plaintext highlighter-rouge">random_1</code>, <code class="language-plaintext highlighter-rouge">random_2</code> y <code class="language-plaintext highlighter-rouge">random_3</code>). Para cada una, la trayectoria ideal se reorganiza circularmente a partir del punto seleccionado, manteniendo el sentido de circulación. La meta se ubica aproximadamente 10–15 m antes del punto de partida.</p>
 
 <p>En la versión inicial del test, las distintas posiciones de inicio producían recorridos de diferente longitud y, por tanto, condiciones de evaluación no equivalentes. La corrección elimina esta diferencia: ahora todas las configuraciones cubren la misma trayectoria completa y se distinguen exclusivamente por el sector del circuito desde el cual comienza la conducción. Por esta razón, los resultados obtenidos con la metodología anterior no son directamente comparables con la campaña actual.</p>
 
@@ -3914,7 +4053,7 @@
 
 <hr />
 
-<h3 id="test-4--perturbación-online-durante-la-inferencia-1">Test 4 – Perturbación online durante la inferencia</h3>
+<h3 id="test-4--perturbación-dagger-durante-la-inferencia-1">Test 4 – Perturbación DAgger durante la inferencia</h3>
 
 <p>El Test 4 evalúa la robustez frente a perturbaciones aplicadas durante la inferencia. A diferencia del Test 1 y Test 2, aquí el vehículo no solo debe recuperarse de una condición inicial desfavorable, sino mantener la estabilidad ante desviaciones inducidas de manera periódica durante el recorrido.</p>
 
@@ -3952,7 +4091,7 @@
 
 <h3 id="comparación-general-entre-escenarios">Comparación general entre escenarios</h3>
 
-<p>Los resultados preliminares muestran que cada estrategia de generación de datos fortalece propiedades diferentes de la política de conducción. Burbuja ($D^{A}$) mantiene un desempeño sólido bajo condiciones nominales y diferentes posiciones iniciales, destacándose en Test 1 con 100 % de éxito y cero colisiones. DAgger mejora la capacidad de completar recorridos desde posiciones aleatorias, como se observa en Test 2 con tasas superiores al 98 % para varias configuraciones. Noise Injection, en cambio, muestra su mayor aporte bajo perturbaciones online, especialmente en $D_{0.50}^{C}$, que alcanza el mejor desempeño del Test 4.</p>
+<p>Los resultados preliminares muestran que cada estrategia de generación de datos fortalece propiedades diferentes de la política de conducción. Burbuja ($D^{A}$) mantiene un desempeño sólido bajo condiciones nominales y diferentes posiciones iniciales, destacándose en Test 1 con 100 % de éxito y cero colisiones. DAgger mejora la capacidad de completar recorridos desde posiciones de arranque distribuidas en el circuito, como se observa en Test 2 con tasas superiores al 98 % para varias configuraciones. Noise Injection, en cambio, muestra su mayor aporte bajo perturbaciones DAgger durante la inferencia, especialmente en $D_{0.50}^{C}$, que alcanza el mejor desempeño del Test 4.</p>
 
 <p>De forma preliminar, los resultados sugieren que no existe una única configuración óptima para todos los escenarios. Las mezclas DAgger son útiles para recuperación desde estados iniciales no nominales, mientras que Noise Injection favorece la estabilidad local frente a perturbaciones continuas durante la inferencia. La selección del dataset debe, por tanto, depender del tipo de robustez que se desea priorizar: recuperación inicial, seguimiento nominal o estabilidad ante perturbaciones recurrentes.</p>
 
@@ -3986,17 +4125,17 @@
 
 <h2 id="configuración-experimental">Configuración experimental</h2>
 
-<h3 id="test-1--robustez-bajo-condiciones-iniciales">Test 1 – Robustez bajo condiciones iniciales</h3>
+<h3 id="test-1--perturbación-de-posición-y-orientación">Test 1 – Perturbación de posición y orientación</h3>
 
-<p>Se evalúan 15 condiciones iniciales diferentes. Cada condición se ejecuta 15 veces para un total de:</p>
+<p>El Test 1 (T1) evalúa la recuperación de la trayectoria desde 15 condiciones iniciales, combinando cinco desplazamientos laterales entre −1.8 m y +1.8 m con tres orientaciones iniciales (−15°, 0° y +15°). Cada condición se ejecuta 15 veces para un total de:</p>
 
 \[15 \times 15 = 225\]
 
 <p>ejecuciones por configuración experimental.</p>
 
-<h3 id="test-4--perturbación-online-durante-inferencia">Test 4 – Perturbación online durante inferencia</h3>
+<h3 id="test-4--perturbación-dagger-durante-la-inferencia">Test 4 – Perturbación DAgger durante la inferencia</h3>
 
-<p>Se realizan igualmente 225 ejecuciones por configuración experimental. Durante la ejecución del vehículo se introducen perturbaciones online que modifican temporalmente la observación utilizada por la política de conducción.</p>
+<p>Se realizan igualmente 225 ejecuciones por configuración experimental. El Test 4 (T4) introduce una perturbación sobre las acciones de control, similar a la utilizada para generar el dataset DAgger (B’), con el objetivo de desplazar temporalmente el vehículo de su trayectoria nominal. Se aplica cada 8 s durante 4 ticks de control, seguida de un periodo de recuperación de 10 ticks.</p>
 
 <hr />
 
@@ -4065,7 +4204,7 @@
 
 <hr />
 
-<h1 id="test-1--robustez-bajo-condiciones-iniciales-1">Test 1 – Robustez bajo condiciones iniciales</h1>
+<h1 id="test-1--perturbación-de-posición-y-orientación-1">Test 1 – Perturbación de posición y orientación</h1>
 
 <h2 id="burbuja">Burbuja</h2>
 
@@ -4241,7 +4380,7 @@
 
 <h2 id="análisis-del-test-1">Análisis del Test 1</h2>
 
-<p>Los resultados actualizados muestran que las configuraciones más cercanas al dataset original continúan obteniendo el mejor desempeño bajo condiciones nominales. Sin embargo, la incorporación de nuevas mezclas permite observar con mayor claridad el efecto de la proporción de muestras augmentadas sobre el comportamiento de la política.</p>
+<p>Los resultados actualizados muestran que las configuraciones más cercanas al dataset original continúan obteniendo el mejor desempeño bajo perturbaciones de posición y orientación iniciales. Sin embargo, la incorporación de nuevas mezclas permite observar con mayor claridad el efecto de la proporción de muestras augmentadas sobre el comportamiento de la política.</p>
 
 <p>El modelo base $D^{A}$ alcanza un <strong>100% de successful runs (225/225)</strong>, sin colisiones y con la menor desviación lateral media observada. Estos resultados confirman que el dataset Burbuja contiene suficiente diversidad para resolver correctamente las condiciones iniciales consideradas en este conjunto de pruebas.</p>
 
@@ -4255,7 +4394,7 @@
 
 <hr />
 
-<h1 id="test-4--perturbación-online-durante-inferencia-1">Test 4 – Perturbación online durante inferencia</h1>
+<h1 id="test-4--perturbación-dagger-durante-la-inferencia-1">Test 4 – Perturbación DAgger durante la inferencia</h1>
 
 <h2 id="dagger-1">DAgger</h2>
 
@@ -4397,7 +4536,7 @@
 
 <p>Los resultados muestran que las distintas estrategias de generación de datos fortalecen propiedades diferentes de la política de conducción.</p>
 
-<p>En el Test 1, las mejores configuraciones corresponden a <strong>Burbuja ($D^{A}$)</strong> y <strong>DAgger 30% ($D_{0.30}^{B}$)</strong>, ambas con un <strong>100% de successful runs</strong>, lo que indica un excelente desempeño bajo condiciones nominales y estados iniciales conocidos. También destacan <strong>DAgger 50%</strong> y <strong>Noise 30%</strong>, confirmando que proporciones moderadas de muestras augmentadas pueden mejorar la robustez sin alterar significativamente la distribución original del dataset.</p>
+<p>En el Test 1, las mejores configuraciones corresponden a <strong>Burbuja ($D^{A}$)</strong> y <strong>DAgger 30% ($D_{0.30}^{B}$)</strong>, ambas con un <strong>100% de successful runs</strong>, lo que indica un excelente desempeño desde las condiciones iniciales de posición y orientación evaluadas. También destacan <strong>DAgger 50%</strong> y <strong>Noise 30%</strong>, confirmando que proporciones moderadas de muestras augmentadas pueden mejorar la robustez sin alterar significativamente la distribución original del dataset.</p>
 
 <p>Por el contrario, en el Test 4 las configuraciones basadas en <strong>Noise Injection</strong> obtienen los mejores resultados frente a perturbaciones online. La mejor política observada corresponde a <strong>$D_{0.50}^{C}$</strong>, con un <strong>91.1% de successful runs</strong>, seguida muy de cerca por <strong>Magic Mix ($D^{M}$)</strong> con un <strong>88.9%</strong>.</p>
 
@@ -4418,36 +4557,36 @@
 
 <p>Al revisar en detalle la configuración utilizada para generar el dataset DAgger y la configuración empleada posteriormente durante el Test 4, se observó que ambas no son equivalentes.</p>
 
-<p>La siguiente tabla resume las principales diferencias:</p>
+<p>La siguiente tabla presenta los parámetros temporales del protocolo de referencia. La amplitud de steering de T4 corresponde a la configuración estándar analizada en esta actualización:</p>
 
 <table>
   <thead>
     <tr>
-      <th>Parámetro</th>
-      <th style="text-align: right">Dataset DAgger</th>
-      <th style="text-align: right">Test 4</th>
+      <th style="text-align: left">Parámetro</th>
+      <th style="text-align: left">Dataset DAgger</th>
+      <th style="text-align: left">T4 – Perturbación DAgger durante la inferencia</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>Frecuencia de perturbación</td>
-      <td style="text-align: right">12 s</td>
-      <td style="text-align: right">6 s</td>
+      <td style="text-align: left">Programación de las perturbaciones</td>
+      <td style="text-align: left">Nueva intervención tras 8 s de control humano</td>
+      <td style="text-align: left">Cada 8 s</td>
     </tr>
     <tr>
-      <td>Duración de la perturbación (hold)</td>
-      <td style="text-align: right">0.40 s</td>
-      <td style="text-align: right">0.30 s</td>
+      <td style="text-align: left">Duración de la perturbación</td>
+      <td style="text-align: left">0.50 s (10 ticks a 20 Hz)</td>
+      <td style="text-align: left">4 ticks de control</td>
     </tr>
     <tr>
-      <td>Duración del recovery</td>
-      <td style="text-align: right">0.50 s</td>
-      <td style="text-align: right">0.60 s</td>
+      <td style="text-align: left">Periodo de recuperación</td>
+      <td style="text-align: left">8 s de control humano antes de la siguiente intervención</td>
+      <td style="text-align: left">10 ticks</td>
     </tr>
     <tr>
-      <td>Steer máximo aplicado</td>
-      <td style="text-align: right">±0.40</td>
-      <td style="text-align: right">±0.18</td>
+      <td style="text-align: left">Steer máximo aplicado</td>
+      <td style="text-align: left">±0.40</td>
+      <td style="text-align: left">±0.18 (configuración estándar)</td>
     </tr>
   </tbody>
 </table>
@@ -4460,9 +4599,9 @@
 
 \[steer = \pm 0.18\]
 
-<p>Sin embargo, las perturbaciones del Test 4 se aplican con una frecuencia aproximadamente dos veces mayor, pasando de una perturbación cada 12 segundos a una perturbación cada 6 segundos.</p>
+<p>La duración de las perturbaciones y los tiempos de recuperación también son diferentes: durante la generación del dataset, cada intervención dura 0.50 s y después se devuelve el control al conductor humano durante 8 s. En T4 se introduce una perturbación cada 8 s durante 4 ticks de control y se permite un periodo de recuperación de 10 ticks.</p>
 
-<p>Desde una perspectiva conceptual, el dataset DAgger fue generado mediante episodios de recuperación relativamente severos y poco frecuentes:</p>
+<p>Desde una perspectiva conceptual, el dataset DAgger fue generado mediante perturbaciones de mayor amplitud seguidas de recuperación humana:</p>
 
 <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Perturbación fuerte
 ↓
@@ -4473,13 +4612,13 @@ Conducción normal durante varios segundos
 Nueva perturbación
 </code></pre></div></div>
 
-<p>Por el contrario, el Test 4 introduce perturbaciones más suaves pero mucho más frecuentes:</p>
+<p>En la configuración estándar del Test 4 se introducen perturbaciones de menor amplitud seguidas de recuperación por la política:</p>
 
 <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Perturbación suave
 ↓
 Recuperación
 ↓
-Pocos segundos de conducción
+Conducción hasta la siguiente intervención
 ↓
 Nueva perturbación
 </code></pre></div></div>
@@ -6198,841 +6337,4 @@ A’+15%B’ – A’+30%B’ representa la región de operación más consisten
   <li>Existe un punto óptimo intermedio (~15–30% DAgger)</li>
 </ul>
 
-<p>Este análisis continuará ampliándose con evaluaciones más completas en próximas iteraciones.</p>]]></content><author><name>Carlos Velásquez</name><email>canveo@gmail.com</email></author><category term="weekly Log" /><category term="Robustez" /><category term="Burbuja" /><category term="Noise Injection" /><category term="DAgger" /><category term="CARLA Simulator" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Week 96 - Robustez del piloto, Caso Canónico, 15 Casos y Pruebas de Velocidad</title><link href="http://localhost:4000/weekly%20log/week96/" rel="alternate" type="text/html" title="Week 96 - Robustez del piloto, Caso Canónico, 15 Casos y Pruebas de Velocidad" /><published>2026-04-18T00:00:00-05:00</published><updated>2026-04-18T00:00:00-05:00</updated><id>http://localhost:4000/weekly%20log/week96</id><content type="html" xml:base="http://localhost:4000/weekly%20log/week96/"><![CDATA[<p>En esta entrada reporto los resultados de robustez en <strong>CARLA Town02</strong> comparando tres variantes del mismo dataset base bajo el mismo circuito de prueba, con <strong>6 repeticiones por condición</strong> (valores reportados como promedio de las repeticiones).</p>
-
-<h2 id="circuito-base">Circuito base</h2>
-
-<ul>
-  <li><strong>Caso canónico:</strong> recorrido siguiendo la <strong>malla externa</strong> (outer loop) de <strong>Town02</strong>, manteniéndose en el carril derecho.</li>
-  <li><strong>Casos 1–15:</strong> se ejecuta <strong>el mismo circuito</strong>, pero cambiando las condiciones iniciales (posición y orientación) para evaluar recuperación.</li>
-  <li><strong>Pruebas de velocidad (30/60/80 km/h):</strong> mismo circuito. Se impone manualmente una <strong>velocidad inicial</strong>; cuando el vehículo alcanza la velocidad objetivo, <strong>inicia la inferencia</strong> del modelo.</li>
-  <li><strong>Casos aleatorios:</strong> se seleccionan tres posiciones aleatorias de inicio dentro de la <strong>malla externa</strong>, manteniendo el mismo punto final.</li>
-</ul>
-
-<h2 id="datasets--políticas-evaluadas">Datasets / políticas evaluadas</h2>
-
-<p>El dataset original (~95k imágenes) estaba dominado por conducción recta y aceleración constante, por lo que se aplicó una estratificación 5×4 (steer × throttle), generando 20 clases balanceadas y reduciendo el dataset a 50k muestras equilibradas, denominado <strong>Burbuja</strong>. En esta semana se evalúan tres variantes construidas todas sobre la misma base Burbuja, con una proporción fija del 15% de datos adicionales en los casos augmentados.</p>
-
-<p>Como entrada, se utilizó la imagen segmentada procesada: se extrajo únicamente la calzada para generar una máscara binaria, se recortó la región superior, se redimensionó a 66×200, y se normalizó tipo ImageNet.</p>
-
-<h4 id="políticas-evaluadas">Políticas evaluadas</h4>
-
-<ul>
-  <li><strong>Burbuja (Baseline):</strong> dataset de <strong>50k</strong> muestras de conducción humana natural balanceada. Sin augmentación.</li>
-  <li><strong>Burbuja + 15% Noise:</strong> Burbuja con un 15% adicional de muestras con perturbaciones gaussianas en steering. El label sigue siendo humano; se generan pequeños offsets laterales controlados.</li>
-  <li><strong>Burbuja + 15% DAgger:</strong> Burbuja con un 15% adicional de muestras DAgger con intervención estructural de recuperación. Introduce estados fuera del manifold y correcciones activas.</li>
-</ul>
-
-<blockquote>
-  <p><strong>Nota respecto a Week 89:</strong> en la semana anterior se compararon datasets de distinto origen y tamaño (Burbuja 50k vs variantes con 66–78k muestras y distintas frecuencias de muestreo). En esta semana el diseño experimental está controlado: los tres modelos parten del mismo dataset base y reciben exactamente la misma proporción de augmentación (15%), lo que permite aislar el efecto de la estrategia de augmentación.</p>
-</blockquote>
-
-<h4 id="en-las-tablas-se-usan-estos-nombres">En las tablas se usan estos nombres</h4>
-
-<ul>
-  <li><strong>Burbuja:</strong> dataset base de 50k muestras, sin augmentación.</li>
-  <li><strong>Noise:</strong> Burbuja + 15% muestras con Noise Injection.</li>
-  <li><strong>DAgger:</strong> Burbuja + 15% muestras DAgger.</li>
-</ul>
-
-<hr />
-
-<h2 id="métricas-y-unidades">Métricas y unidades</h2>
-
-<ul>
-  <li><strong>Route completed (%):</strong> <code class="language-plaintext highlighter-rouge">percentage_completed_ideal_mean</code> — más alto es mejor.</li>
-  <li><strong>Average speed (km/h):</strong> <code class="language-plaintext highlighter-rouge">average_speed_mean</code> — más alto es mejor.</li>
-  <li><strong>Dev mean (m):</strong> <code class="language-plaintext highlighter-rouge">position_deviation_mean_mean</code> — más bajo es mejor.</li>
-  <li><strong>Lane invasions (eventos):</strong> número de invasiones de carril — más bajo es mejor.</li>
-  <li><strong>Collisions (eventos):</strong> total de eventos de colisión registrados por CARLA — más bajo es mejor.</li>
-  <li><strong>Suddenness throttle (1/s):</strong> <code class="language-plaintext highlighter-rouge">suddenness_distance_throttle_mean</code> — más bajo es mejor.</li>
-  <li><strong>Suddenness steer (1/s):</strong> <code class="language-plaintext highlighter-rouge">suddenness_distance_steer_mean</code> — más bajo es mejor.</li>
-</ul>
-
-<blockquote>
-  <p><strong>Nota sobre colisiones y completado:</strong> <code class="language-plaintext highlighter-rouge">collisions_mean</code> incluye todo evento de colisión detectado por el simulador — tanto roces y golpes menores durante el recorrido como impactos que contribuyen a detener el vehículo. No toda colisión registrada implica que el vehículo no pueda continuar, y no todo caso incompleto (route &lt; 100%) tiene una colisión registrada: en algunos casos el vehículo se detiene por pérdida de control o salida de vía sin que CARLA registre un evento de colisión. Un valor de <strong>0.000 con route = 100%</strong> indica recorrido completado sin ningún evento de colisión de ningún tipo.</p>
-</blockquote>
-
-<blockquote>
-  <p>Nota sobre <em>suddenness (1/s)</em>: throttle/steer son comandos normalizados (adimensionales). Al expresarse “por segundo”, la unidad queda como <strong>1/s</strong>.</p>
-</blockquote>
-
-<hr />
-
-<h2 id="caso-canónico">Caso Canónico</h2>
-
-<p><strong>Descripción:</strong> recorrido estándar en la <strong>malla externa de Town02</strong>, pensado como “trayecto nominal” para comparar desempeño sin perturbaciones iniciales.</p>
-
-<h3 id="tabla-resumen-caso-canónico">Tabla resumen (Caso Canónico)</h3>
-
-<table>
-  <thead>
-    <tr>
-      <th style="text-align: left">Métrica</th>
-      <th style="text-align: right">Burbuja</th>
-      <th style="text-align: right">Noise</th>
-      <th style="text-align: right">DAgger</th>
-      <th style="text-align: left">Mejor</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align: left">Route completed (%)</td>
-      <td style="text-align: right"><strong>100.000</strong></td>
-      <td style="text-align: right"><strong>100.000</strong></td>
-      <td style="text-align: right"><strong>100.000</strong></td>
-      <td style="text-align: left">Empate</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">Average speed (km/h)</td>
-      <td style="text-align: right">55.108</td>
-      <td style="text-align: right">53.195</td>
-      <td style="text-align: right"><strong>60.784</strong></td>
-      <td style="text-align: left">DAgger</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">Dev mean (m)</td>
-      <td style="text-align: right"><strong>0.478</strong></td>
-      <td style="text-align: right">0.493</td>
-      <td style="text-align: right">0.514</td>
-      <td style="text-align: left">Burbuja</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">Lane invasions (eventos)</td>
-      <td style="text-align: right">7.167</td>
-      <td style="text-align: right">7.500</td>
-      <td style="text-align: right"><strong>6.833</strong></td>
-      <td style="text-align: left">DAgger</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">Collisions (eventos)</td>
-      <td style="text-align: right"><strong>0.000</strong></td>
-      <td style="text-align: right">0.667</td>
-      <td style="text-align: right">0.167</td>
-      <td style="text-align: left">Burbuja</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">Suddenness throttle (1/s)</td>
-      <td style="text-align: right">0.0175</td>
-      <td style="text-align: right"><strong>0.0155</strong></td>
-      <td style="text-align: right">0.0159</td>
-      <td style="text-align: left">Noise</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">Suddenness steer (1/s)</td>
-      <td style="text-align: right"><strong>0.0051</strong></td>
-      <td style="text-align: right">0.0053</td>
-      <td style="text-align: right">0.0064</td>
-      <td style="text-align: left">Burbuja</td>
-    </tr>
-  </tbody>
-</table>
-
-<p>Los tres modelos completan la ruta al 100%. Burbuja es el único que lo hace sin ningún evento de colisión (0.000), lo que indica el seguimiento más limpio en condiciones nominales. Noise registra 0.667 eventos de colisión por repetición —el valor más alto del experimento en esta condición—, todos ocurridos durante el recorrido completo, lo que refleja roces o impactos menores que no impiden llegar al destino pero evidencian menor margen de seguridad lateral. DAgger también registra colisiones (0.167) completando la ruta, mientras opera con mayor velocidad media (+10.3%) y menos invasiones de carril (6.8 vs 7.2 de Burbuja).</p>
-
-<hr />
-
-<h2 id="casos-115-robustez-por-condición-inicial">Casos 1–15 (robustez por condición inicial)</h2>
-
-<p><strong>Descripción:</strong> se definieron <strong>15 posiciones iniciales</strong> para evaluar la robustez del modelo en Town02. Las configuraciones combinan:</p>
-
-<h3 id="5-posiciones-laterales-dentro-del-carril--4-m-de-ancho">5 posiciones laterales dentro del carril (≈ 4 m de ancho)</h3>
-<ul>
-  <li><strong>Duro izquierda:</strong> −1.8 m</li>
-  <li><strong>Suave izquierda:</strong> −0.9 m</li>
-  <li><strong>Centrado:</strong> 0 m</li>
-  <li><strong>Suave derecha:</strong> +0.9 m</li>
-  <li><strong>Duro derecha:</strong> +1.8 m</li>
-</ul>
-
-<h3 id="3-orientaciones-respecto-al-carril">3 orientaciones respecto al carril</h3>
-<ul>
-  <li><strong>−15°:</strong> desviado a la izquierda</li>
-  <li><strong>0°:</strong> alineado al carril</li>
-  <li><strong>+15°:</strong> desviado a la derecha</li>
-</ul>
-
-<p>En total:</p>
-
-\[5\;\text{posiciones laterales} \times 3\;\text{orientaciones} = 15\;\text{configuraciones}\]
-
-<p>Por cada caso se realizan 6 repeticiones para un total de 90 experimentos.</p>
-
-<p>Estas posiciones permiten evaluar:</p>
-<ul>
-  <li><strong>Corrección lateral</strong> (volver al centro del carril),</li>
-  <li><strong>Corrección angular</strong> (alinear yaw),</li>
-  <li>y <strong>errores combinados</strong> (offset + yaw).</li>
-</ul>
-
-<h3 id="tabla-resumen-casos-115">Tabla resumen (Casos 1–15)</h3>
-
-<table>
-  <thead>
-    <tr>
-      <th style="text-align: left">Métrica</th>
-      <th style="text-align: right">Burbuja</th>
-      <th style="text-align: right">Noise</th>
-      <th style="text-align: right">DAgger</th>
-      <th style="text-align: left">Mejor</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align: left">Route completed (%)</td>
-      <td style="text-align: right">97.822</td>
-      <td style="text-align: right">96.904</td>
-      <td style="text-align: right"><strong>98.897</strong></td>
-      <td style="text-align: left">DAgger</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">Average speed (km/h)</td>
-      <td style="text-align: right">53.525</td>
-      <td style="text-align: right">53.476</td>
-      <td style="text-align: right"><strong>59.947</strong></td>
-      <td style="text-align: left">DAgger</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">Dev mean (m)</td>
-      <td style="text-align: right">0.840</td>
-      <td style="text-align: right">0.832</td>
-      <td style="text-align: right"><strong>0.811</strong></td>
-      <td style="text-align: left">DAgger</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">Lane invasions (eventos)</td>
-      <td style="text-align: right">8.489</td>
-      <td style="text-align: right">8.900</td>
-      <td style="text-align: right"><strong>8.089</strong></td>
-      <td style="text-align: left">DAgger</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">Collisions (eventos)</td>
-      <td style="text-align: right"><strong>0.022</strong></td>
-      <td style="text-align: right">0.111</td>
-      <td style="text-align: right">0.111</td>
-      <td style="text-align: left">Burbuja</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">Suddenness throttle (1/s)</td>
-      <td style="text-align: right">0.0171</td>
-      <td style="text-align: right">0.0162</td>
-      <td style="text-align: right"><strong>0.0157</strong></td>
-      <td style="text-align: left">DAgger</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">Suddenness steer (1/s)</td>
-      <td style="text-align: right"><strong>0.0052</strong></td>
-      <td style="text-align: right">0.0057</td>
-      <td style="text-align: right">0.0065</td>
-      <td style="text-align: left">Burbuja</td>
-    </tr>
-  </tbody>
-</table>
-
-<blockquote>
-  <p><strong>Casos incompletos (route &lt; 100%):</strong> Burbuja no completa caso_2 (83.5%) y caso_3 (83.8%), ambos con colisión registrada. Noise no completa caso_1 (79.8%, con colisión), caso_2 (87.1%), caso_3 (92.3%), caso_4 (98.6%) y caso_5 (95.7%) — los cuatro últimos sin colisión registrada, lo que indica pérdida de control o salida de vía. DAgger no completa caso_13 (83.5%, con colisión).</p>
-</blockquote>
-
-<p>DAgger lidera en completado (98.9%), desviación media (0.811 m) e invasiones de carril (8.1), indicando que la exposición estructural a estados fuera del manifold durante el entrenamiento mejora la recuperación ante condiciones iniciales adversas. El resultado más significativo es que Noise no solo no mejora a Burbuja en robustez sino que es el modelo con más casos incompletos (5 vs 2 de Burbuja y 1 de DAgger), incluyendo cuatro casos donde el vehículo se detiene sin colisión registrada —señal de pérdida de control más que de impacto directo. Burbuja mantiene la menor tasa de colisiones totales (0.022) y los comandos de steer más suaves.</p>
-
-<hr />
-
-<h2 id="pruebas-de-velocidad-30-60-80-kmh">Pruebas de velocidad (30, 60, 80 km/h)</h2>
-
-<p><strong>Descripción:</strong> se aplica manualmente una velocidad inicial de <strong>30, 60 y 80 km/h</strong>. Cuando el vehículo alcanza la velocidad objetivo, el modelo inicia la inferencia y el control. Para cada velocidad se realizan 6 repeticiones.</p>
-
-<h3 id="tabla-resumen-velocidades-30-60-80-kmh">Tabla resumen (Velocidades 30, 60, 80 km/h)</h3>
-
-<table>
-  <thead>
-    <tr>
-      <th style="text-align: left">Métrica</th>
-      <th style="text-align: right">Burbuja</th>
-      <th style="text-align: right">Noise</th>
-      <th style="text-align: right">DAgger</th>
-      <th style="text-align: left">Mejor</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align: left">Route completed (%)</td>
-      <td style="text-align: right"><strong>100.000</strong></td>
-      <td style="text-align: right"><strong>100.000</strong></td>
-      <td style="text-align: right"><strong>100.000</strong></td>
-      <td style="text-align: left">Empate</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">Average speed (km/h)</td>
-      <td style="text-align: right">58.595</td>
-      <td style="text-align: right">57.705</td>
-      <td style="text-align: right"><strong>63.738</strong></td>
-      <td style="text-align: left">DAgger</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">Dev mean (m)</td>
-      <td style="text-align: right"><strong>0.471</strong></td>
-      <td style="text-align: right">0.486</td>
-      <td style="text-align: right">0.515</td>
-      <td style="text-align: left">Burbuja</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">Lane invasions (eventos)</td>
-      <td style="text-align: right">7.222</td>
-      <td style="text-align: right">7.389</td>
-      <td style="text-align: right"><strong>6.500</strong></td>
-      <td style="text-align: left">DAgger</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">Collisions (eventos)</td>
-      <td style="text-align: right"><strong>0.000</strong></td>
-      <td style="text-align: right">0.056</td>
-      <td style="text-align: right">0.167</td>
-      <td style="text-align: left">Burbuja</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">Suddenness throttle (1/s)</td>
-      <td style="text-align: right">0.0176</td>
-      <td style="text-align: right"><strong>0.0152</strong></td>
-      <td style="text-align: right">0.0159</td>
-      <td style="text-align: left">Noise</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">Suddenness steer (1/s)</td>
-      <td style="text-align: right"><strong>0.0052</strong></td>
-      <td style="text-align: right">0.0055</td>
-      <td style="text-align: right">0.0066</td>
-      <td style="text-align: left">Burbuja</td>
-    </tr>
-  </tbody>
-</table>
-
-<h3 id="detalle-por-velocidad">Detalle por velocidad</h3>
-
-<table>
-  <thead>
-    <tr>
-      <th style="text-align: left">Velocidad</th>
-      <th style="text-align: left">Modelo</th>
-      <th style="text-align: right">Route (%)</th>
-      <th style="text-align: right">Speed (km/h)</th>
-      <th style="text-align: right">Dev mean (m)</th>
-      <th style="text-align: right">Lane inv.</th>
-      <th style="text-align: right">Collisions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align: left">30 km/h</td>
-      <td style="text-align: left">Burbuja</td>
-      <td style="text-align: right">100.000</td>
-      <td style="text-align: right">56.502</td>
-      <td style="text-align: right">0.474</td>
-      <td style="text-align: right">7.500</td>
-      <td style="text-align: right">0.000</td>
-    </tr>
-    <tr>
-      <td style="text-align: left"> </td>
-      <td style="text-align: left">Noise</td>
-      <td style="text-align: right">100.000</td>
-      <td style="text-align: right">55.724</td>
-      <td style="text-align: right">0.489</td>
-      <td style="text-align: right">7.167</td>
-      <td style="text-align: right">0.000</td>
-    </tr>
-    <tr>
-      <td style="text-align: left"> </td>
-      <td style="text-align: left">DAgger</td>
-      <td style="text-align: right">100.000</td>
-      <td style="text-align: right">62.690</td>
-      <td style="text-align: right">0.500</td>
-      <td style="text-align: right">6.667</td>
-      <td style="text-align: right">0.000</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">60 km/h</td>
-      <td style="text-align: left">Burbuja</td>
-      <td style="text-align: right">100.000</td>
-      <td style="text-align: right">58.335</td>
-      <td style="text-align: right">0.488</td>
-      <td style="text-align: right">7.000</td>
-      <td style="text-align: right">0.000</td>
-    </tr>
-    <tr>
-      <td style="text-align: left"> </td>
-      <td style="text-align: left">Noise</td>
-      <td style="text-align: right">100.000</td>
-      <td style="text-align: right">57.816</td>
-      <td style="text-align: right">0.487</td>
-      <td style="text-align: right">7.833</td>
-      <td style="text-align: right">0.000</td>
-    </tr>
-    <tr>
-      <td style="text-align: left"> </td>
-      <td style="text-align: left">DAgger</td>
-      <td style="text-align: right">100.000</td>
-      <td style="text-align: right">63.636</td>
-      <td style="text-align: right">0.517</td>
-      <td style="text-align: right">6.500</td>
-      <td style="text-align: right">0.333</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">80 km/h</td>
-      <td style="text-align: left">Burbuja</td>
-      <td style="text-align: right">100.000</td>
-      <td style="text-align: right">60.947</td>
-      <td style="text-align: right">0.452</td>
-      <td style="text-align: right">7.167</td>
-      <td style="text-align: right">0.000</td>
-    </tr>
-    <tr>
-      <td style="text-align: left"> </td>
-      <td style="text-align: left">Noise</td>
-      <td style="text-align: right">100.000</td>
-      <td style="text-align: right">59.576</td>
-      <td style="text-align: right">0.484</td>
-      <td style="text-align: right">7.167</td>
-      <td style="text-align: right">0.167</td>
-    </tr>
-    <tr>
-      <td style="text-align: left"> </td>
-      <td style="text-align: left">DAgger</td>
-      <td style="text-align: right">100.000</td>
-      <td style="text-align: right">64.888</td>
-      <td style="text-align: right">0.527</td>
-      <td style="text-align: right">6.333</td>
-      <td style="text-align: right">0.167</td>
-    </tr>
-  </tbody>
-</table>
-
-<p>Los tres modelos completan el 100% de la ruta en todas las velocidades. A 30 km/h los tres lo hacen sin ningún evento de colisión. A partir de 60 km/h DAgger comienza a registrar colisiones (0.333 a 60 km/h, 0.167 a 80 km/h) completando la ruta, lo que indica roces o impactos menores a mayor velocidad. Noise registra 0.167 a 80 km/h. Burbuja mantiene cero eventos de colisión en todos los tramos y la menor desviación lateral, con su valor más bajo a 80 km/h (0.452 m). DAgger opera con la mayor velocidad media en todos los tramos (62.7–64.9 km/h, +8.8% sobre Burbuja) y con menos invasiones de carril, operando de forma más dinámica pero con menor margen de seguridad a velocidades altas.</p>
-
-<hr />
-
-<h2 id="casos-aleatorios">Casos Aleatorios</h2>
-
-<p><strong>Descripción:</strong> tres posiciones de inicio seleccionadas aleatoriamente dentro de la malla externa de Town02, manteniendo el mismo punto final. Se realizan 6 repeticiones por caso.</p>
-
-<h3 id="tabla-resumen-casos-aleatorios">Tabla resumen (Casos Aleatorios)</h3>
-
-<table>
-  <thead>
-    <tr>
-      <th style="text-align: left">Métrica</th>
-      <th style="text-align: right">Burbuja</th>
-      <th style="text-align: right">Noise</th>
-      <th style="text-align: right">DAgger</th>
-      <th style="text-align: left">Mejor</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align: left">Route completed (%)</td>
-      <td style="text-align: right">97.238</td>
-      <td style="text-align: right"><strong>100.000</strong></td>
-      <td style="text-align: right"><strong>100.000</strong></td>
-      <td style="text-align: left">Empate</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">Average speed (km/h)</td>
-      <td style="text-align: right">45.010</td>
-      <td style="text-align: right">43.484</td>
-      <td style="text-align: right"><strong>46.800</strong></td>
-      <td style="text-align: left">DAgger</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">Dev mean (m)</td>
-      <td style="text-align: right"><strong>0.498</strong></td>
-      <td style="text-align: right">0.573</td>
-      <td style="text-align: right">0.592</td>
-      <td style="text-align: left">Burbuja</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">Lane invasions (eventos)</td>
-      <td style="text-align: right"><strong>1.944</strong></td>
-      <td style="text-align: right">2.000</td>
-      <td style="text-align: right">2.167</td>
-      <td style="text-align: left">Burbuja</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">Collisions (eventos)</td>
-      <td style="text-align: right"><strong>0.056</strong></td>
-      <td style="text-align: right">0.111</td>
-      <td style="text-align: right">0.111</td>
-      <td style="text-align: left">Burbuja</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">Suddenness throttle (1/s)</td>
-      <td style="text-align: right">0.0164</td>
-      <td style="text-align: right">0.0148</td>
-      <td style="text-align: right"><strong>0.0134</strong></td>
-      <td style="text-align: left">DAgger</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">Suddenness steer (1/s)</td>
-      <td style="text-align: right"><strong>0.0051</strong></td>
-      <td style="text-align: right">0.0052</td>
-      <td style="text-align: right">0.0054</td>
-      <td style="text-align: left">Burbuja</td>
-    </tr>
-  </tbody>
-</table>
-
-<blockquote>
-  <p><strong>Casos incompletos:</strong> Burbuja no completa random_2 (91.7%, con colisión registrada). Noise y DAgger completan los tres casos aleatorios al 100%, pero registran colisiones en random_1 (0.333 Noise, 0.333 DAgger) — eventos que ocurren durante el recorrido sin impedir llegar al destino.</p>
-</blockquote>
-
-<p>Tanto Noise como DAgger completan el 100% de los casos aleatorios, mientras Burbuja no logra completar random_2. Esto confirma que cualquier augmentación al 15% mejora la generalización en inicios arbitrarios. Sin embargo, Noise y DAgger registran el doble de eventos de colisión que Burbuja (0.111 vs 0.056), indicando mayor frecuencia de roces e impactos menores en trayectorias desconocidas. Burbuja mantiene la menor desviación lateral (0.498 m) y el menor número de invasiones en los recorridos que completa.</p>
-
-<hr />
-
-<h2 id="evaluación-bajo-perturbación-dagger-en-el-brain">Evaluación bajo Perturbación DAgger (en el <code class="language-plaintext highlighter-rouge">brain</code>)</h2>
-
-<h3 id="descripción">Descripción</h3>
-
-<p>Además de la comparación entre datasets (<strong>Burbuja, Noise y DAgger</strong>), se introdujo una política de perturbación tipo <strong>DAgger en evaluación</strong>, integrada directamente en el <code class="language-plaintext highlighter-rouge">brain</code>, con el objetivo de medir la <strong>robustez real del piloto ante desviaciones inducidas durante la inferencia</strong>.</p>
-
-<p>A diferencia del dataset DAgger —que modifica la distribución de entrenamiento—, esta estrategia:</p>
-
-<ul>
-  <li><strong>no modifica el modelo</strong>,</li>
-  <li><strong>perturba el control en tiempo real</strong>,</li>
-  <li>y permite evaluar directamente la <strong>capacidad de recuperación online</strong>.</li>
-</ul>
-
-<p>En otras palabras, esta prueba no mide únicamente seguimiento nominal de trayectoria, sino también la capacidad del controlador para <strong>volver al manifold</strong> después de ser desplazado artificialmente.</p>
-
-<h3 id="configuración-de-la-perturbación">Configuración de la perturbación</h3>
-
-<p>La política de perturbación se configuró de la siguiente forma:</p>
-
-<ul>
-  <li><strong>Frecuencia:</strong> cada <strong>8 segundos</strong></li>
-  <li><strong>Simulación:</strong> <strong>20 Hz</strong></li>
-  <li><strong>Duración de la perturbación:</strong> <strong>4 ticks</strong> ((\approx 0.2) s)</li>
-  <li><strong>Ventana de recuperación:</strong> <strong>10 ticks</strong> ((\approx 0.5) s)</li>
-</ul>
-
-<p>La activación temporal queda dada por:</p>
-
-\[8 \times 20 = 160 \text{ ticks}\]
-
-<p>Es decir, aproximadamente cada <strong>160 ticks</strong> el vehículo recibe una perturbación breve, tras la cual se observa su capacidad de corrección y estabilización.</p>
-
-<h3 id="acciones-aplicadas">Acciones aplicadas</h3>
-
-<p>Las acciones utilizadas fueron perturbaciones suaves y moderadas sobre steering y throttle:</p>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span>
-    <span class="p">(</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.10</span><span class="p">),</span>
-    <span class="p">(</span><span class="mf">0.12</span><span class="p">,</span> <span class="mf">0.22</span><span class="p">),</span>
-    <span class="p">(</span><span class="o">-</span><span class="mf">0.12</span><span class="p">,</span> <span class="mf">0.22</span><span class="p">),</span>
-    <span class="p">(</span><span class="mf">0.18</span><span class="p">,</span> <span class="mf">0.28</span><span class="p">),</span>
-    <span class="p">(</span><span class="o">-</span><span class="mf">0.18</span><span class="p">,</span> <span class="mf">0.28</span><span class="p">),</span>
-    <span class="p">(</span><span class="mf">0.08</span><span class="p">,</span> <span class="mf">0.35</span><span class="p">),</span>
-    <span class="p">(</span><span class="o">-</span><span class="mf">0.08</span><span class="p">,</span> <span class="mf">0.35</span><span class="p">),</span>
-<span class="p">]</span>
-</code></pre></div></div>
-
-<p>Estas acciones generan desviaciones leves pero suficientes para sacar temporalmente al vehículo del estado estable y observar si el modelo logra <strong>recuperar la trayectoria sin perder el control</strong>.</p>
-
-<h3 id="tabla-resumen--robustez-bajo-perturbación-dagger">Tabla resumen – Robustez bajo perturbación DAgger</h3>
-
-<table>
-  <thead>
-    <tr>
-      <th style="text-align: left">Métrica</th>
-      <th style="text-align: right">Burbuja</th>
-      <th style="text-align: right">Noise</th>
-      <th style="text-align: right">DAgger</th>
-      <th style="text-align: left">Mejor</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align: left">Route completed (%)</td>
-      <td style="text-align: right">97.700</td>
-      <td style="text-align: right">96.900</td>
-      <td style="text-align: right"><strong>99.000</strong></td>
-      <td style="text-align: left">DAgger</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">Average speed (km/h)</td>
-      <td style="text-align: right">55.000</td>
-      <td style="text-align: right">54.000</td>
-      <td style="text-align: right"><strong>62.000</strong></td>
-      <td style="text-align: left">DAgger</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">Dev mean (m)</td>
-      <td style="text-align: right"><strong>0.620</strong></td>
-      <td style="text-align: right">0.660</td>
-      <td style="text-align: right">0.640</td>
-      <td style="text-align: left">Burbuja</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">Lane invasions (eventos)</td>
-      <td style="text-align: right">7.500</td>
-      <td style="text-align: right">8.200</td>
-      <td style="text-align: right"><strong>7.000</strong></td>
-      <td style="text-align: left">DAgger</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">Collisions (eventos)</td>
-      <td style="text-align: right"><strong>0.000</strong></td>
-      <td style="text-align: right">0.120</td>
-      <td style="text-align: right">0.150</td>
-      <td style="text-align: left">Burbuja</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">Suddenness throttle (1/s)</td>
-      <td style="text-align: right">0.0168</td>
-      <td style="text-align: right">0.0155</td>
-      <td style="text-align: right"><strong>0.0145</strong></td>
-      <td style="text-align: left">DAgger</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">Suddenness steer (1/s)</td>
-      <td style="text-align: right"><strong>0.0052</strong></td>
-      <td style="text-align: right">0.0056</td>
-      <td style="text-align: right">0.0065</td>
-      <td style="text-align: left">Burbuja</td>
-    </tr>
-  </tbody>
-</table>
-
-<h3 id="análisis">Análisis</h3>
-
-<h4 id="1-qué-está-midiendo-realmente-esta-prueba">1. Qué está midiendo realmente esta prueba</h4>
-
-<p>Esta configuración cambia de forma importante la interpretación del experimento. En esta sección ya no se evalúa únicamente conducción autónoma nominal, sino <strong>conducción más recuperación forzada</strong>. Cada ~8 segundos el vehículo es desplazado artificialmente de su estado estable, por lo que el foco deja de ser solamente la precisión de seguimiento y pasa a ser la <strong>capacidad de corrección</strong>.</p>
-
-<p>Dicho de otro modo, un modelo robusto en esta prueba no es simplemente el que sigue mejor una trayectoria limpia, sino el que logra <strong>recuperarse mejor y más consistentemente</strong> tras múltiples perturbaciones inducidas.</p>
-
-<h4 id="2-comportamiento-de-los-modelos">2. Comportamiento de los modelos</h4>
-
-<h5 id="dagger-dataset"><strong>DAgger (dataset)</strong></h5>
-
-<p>DAgger presenta el mejor desempeño global bajo perturbación:</p>
-
-<ul>
-  <li>mayor tasa de completado,</li>
-  <li>menor invasión de carril en escenarios complejos,</li>
-  <li>y mejor capacidad de mantener el control después de múltiples eventos de perturbación.</li>
-</ul>
-
-<p>Esto sugiere que el modelo entrenado con DAgger no solo aprende a imitar conducción nominal, sino que incorpora experiencia explícita de <strong>corrección y recuperación</strong>, lo cual se refleja directamente en esta evaluación. En términos prácticos, DAgger aprende mejor a <strong>volver al manifold</strong> una vez que se ha salido de él.</p>
-
-<h5 id="burbuja"><strong>Burbuja</strong></h5>
-
-<p>Burbuja mantiene sus fortalezas ya observadas en el resto del documento:</p>
-
-<ul>
-  <li>menor desviación lateral en escenarios limpios,</li>
-  <li>menos colisiones,</li>
-  <li>y comandos de dirección más suaves.</li>
-</ul>
-
-<p>Sin embargo, cuando la evaluación fuerza desviaciones periódicas, su desempeño relativo cae frente a DAgger. Esto sugiere que Burbuja conserva un excelente seguimiento en condiciones nominales, pero tiene una <strong>capacidad de recuperación más limitada</strong> cuando el vehículo es llevado repetidamente fuera del estado estable.</p>
-
-<p>En síntesis, Burbuja sigue siendo la mejor política <strong>nominal</strong>, pero no la mejor política <strong>robusta</strong> ante perturbaciones activas.</p>
-
-<h5 id="noise"><strong>Noise</strong></h5>
-
-<p>Noise no muestra mejora clara en recuperación. Su comportamiento bajo perturbación confirma el patrón ya visto en casos 1–15:</p>
-
-<ul>
-  <li>más casos incompletos,</li>
-  <li>mayor frecuencia de colisiones,</li>
-  <li>y menor consistencia global frente a perturbaciones repetidas.</li>
-</ul>
-
-<p>Esto refuerza la idea de que Noise Injection añade variabilidad al dataset, pero <strong>no enseña explícitamente cómo corregir errores</strong>. A esta proporción (15%), el ruido no aporta una cobertura suficiente del espacio perturbado como para traducirse en mejor recuperación online.</p>
-
-<h4 id="3-insight-clave">3. Insight clave</h4>
-
-<p>Noise dispersa la distribución de entrenamiento, pero DAgger introduce experiencias concretas de corrección. Por eso, aunque ambos agregan datos “fuera de lo nominal”, solo DAgger mejora de manera consistente la respuesta del controlador cuando las perturbaciones aparecen durante la inferencia.</p>
-
-<h4 id="4-resultado-más-importante-del-experimento">4. Resultado más importante del experimento</h4>
-
-<p>El resultado más fuerte de esta semana es que, cuando se introducen perturbaciones activas durante la inferencia, <strong>DAgger es el único modelo que mejora consistentemente la recuperación</strong>.</p>
-
-<p>Más aún, los resultados sugieren que:</p>
-
-<ul>
-  <li><strong>un 15% de DAgger sí es suficiente</strong> para producir una mejora real de robustez,</li>
-  <li>mientras que</li>
-  <li><strong>un 15% de Noise no lo es</strong>.</li>
-</ul>
-
-<p>Esto refuerza la idea de que la mejora no depende solo de “más variedad” en los datos, sino del tipo de experiencia adicional incorporada durante el entrenamiento.</p>
-
-<h3 id="conclusión-de-la-perturbación-dagger">Conclusión de la perturbación DAgger</h3>
-
-<p>La evaluación con perturbaciones controladas demuestra una separación clara entre los tres enfoques:</p>
-
-<ul>
-  <li><strong>Burbuja</strong> → mejor política <strong>nominal</strong></li>
-  <li><strong>DAgger</strong> → mejor política <strong>robusta</strong></li>
-  <li><strong>Noise</strong> → insuficiente a esta proporción</li>
-</ul>
-
-<p>En conjunto, esta prueba confirma que la robustez del sistema no depende únicamente de la estabilidad en seguimiento limpio, sino de la exposición explícita a maniobras de recuperación durante el entrenamiento.</p>
-
-<blockquote>
-  <p>La introducción de perturbaciones periódicas durante la inferencia revela que la robustez del sistema no depende únicamente de la variabilidad del dataset, sino de la exposición explícita a estados de recuperación. En este contexto, DAgger demuestra ser la única estrategia capaz de mejorar consistentemente la estabilidad del controlador frente a desviaciones inducidas.</p>
-</blockquote>
-
-<h3 id="implicación-para-trabajo-futuro">Implicación para trabajo futuro</h3>
-
-<p>A partir de estos resultados, el siguiente paso lógico es:</p>
-
-<ul>
-  <li>aumentar la proporción de <strong>DAgger</strong> hacia un rango de <strong>20–30%</strong>,</li>
-  <li>mantener <strong>Burbuja</strong> como base nominal,</li>
-  <li>y evitar <strong>Noise</strong> como estrategia principal, o en su defecto usarlo en menor proporción y como complemento, no como mecanismo central de robustez.</li>
-</ul>
-
-<hr />
-
-<h1 id="interpretación-de-resultados-robustez-control-y-recuperación">Interpretación de Resultados: Robustez, Control y Recuperación</h1>
-
-<p>Con un diseño experimental controlado (mismo dataset base, 15% de augmentación), estos resultados miden el efecto marginal de cada estrategia de augmentación. Además, la incorporación de una política de perturbación tipo DAgger en evaluación permite observar no solo seguimiento nominal, sino también capacidad de recuperación ante desviaciones inducidas durante la inferencia.</p>
-
-<hr />
-
-<h2 id="1-robustez-global">1. Robustez Global</h2>
-
-<p>El patrón de completado es más uniforme que en Week 89, con diferencias menores y sin colapsos dramáticos:</p>
-
-<ul>
-  <li><strong>Caso canónico:</strong> los tres modelos completan al 100%. Solo Burbuja lo hace sin ningún evento de colisión.</li>
-  <li><strong>Casos 1–15:</strong> DAgger lidera (98.9%), Burbuja en segundo (97.8%), Noise por debajo del baseline (96.9%). Noise presenta 5 casos incompletos, de los cuales 4 ocurren sin colisión registrada, indicando pérdida de control.</li>
-  <li><strong>Velocidades 30–80 km/h:</strong> los tres modelos completan al 100% en todas las velocidades. Burbuja es el único sin eventos de colisión en ningún tramo.</li>
-  <li><strong>Casos aleatorios:</strong> Noise y DAgger completan el 100%; Burbuja falla en random_2.</li>
-  <li><strong>Perturbación DAgger en evaluación:</strong> cuando se introducen desviaciones periódicas durante la inferencia, DAgger vuelve a ser el mejor en recuperación global, mientras Burbuja conserva el comportamiento más limpio y Noise no muestra beneficio claro.</li>
-</ul>
-
-<p>La desaparición del colapso de DAgger a alta velocidad es el cambio más relevante respecto a Week 89, consistente con la hipótesis de que en aquella semana la diferencia de frecuencia de muestreo (10 Hz DAgger vs 20 Hz Burbuja) contribuía al problema. Con la misma base de datos, DAgger no solo completa la ruta sino que opera más rápido en todas las condiciones.</p>
-
-<hr />
-
-<h2 id="2-colisiones-qué-mide-la-métrica-y-cómo-interpretarla">2. Colisiones: qué mide la métrica y cómo interpretarla</h2>
-
-<p><code class="language-plaintext highlighter-rouge">collisions_mean</code> agrega todos los eventos de colisión detectados por CARLA, independientemente de su severidad: incluye roces leves, impactos menores y cualquier contacto con objetos del entorno. No hay distinción entre un roce que no afecta la trayectoria y un impacto que contribuye a detener el vehículo.</p>
-
-<p>Adicionalmente, route &lt; 100% no implica necesariamente colisión: en los casos 1–15 de Noise, cuatro de los cinco casos incompletos no tienen colisión registrada, lo que sugiere que el vehículo perdió el control o salió de la vía sin impactar ningún objeto detectable por el simulador.</p>
-
-<p>En consecuencia, la métrica de colisiones debe leerse como un indicador de <strong>frecuencia de contacto con el entorno</strong>, no de severidad. Un valor de 0.000 con route = 100% es la única combinación que garantiza un recorrido completamente limpio.</p>
-
-<p>En la prueba con perturbación DAgger esto es especialmente importante: al introducir desviaciones activas durante la inferencia, la aparición de colisiones refleja no solo calidad de seguimiento, sino también el margen de seguridad disponible durante la recuperación.</p>
-
-<hr />
-
-<h2 id="3-control-lateral">3. Control Lateral</h2>
-
-<p>La jerarquía en desviación media es consistente: <strong>Burbuja ≤ Noise &lt; DAgger</strong> en la mayoría de escenarios, con márgenes reducidos respecto a Week 89.</p>
-
-<ul>
-  <li>Burbuja presenta la menor desviación en canónico (0.478 m), velocidades (0.471 m) y aleatorios (0.498 m).</li>
-  <li>En los casos 1–15, DAgger alcanza la menor desviación (0.811 m vs 0.840 m de Burbuja), el único escenario donde la augmentación mejora el control lateral.</li>
-  <li>En la prueba de perturbación DAgger, Burbuja mantiene el mejor rango inferior de desviación, pero DAgger muestra mejor comportamiento global de recuperación, lo que indica que el control lateral nominal y la corrección ante errores no son exactamente la misma propiedad.</li>
-</ul>
-
-<p>Las diferencias absolutas son pequeñas (0.03–0.09 m entre modelos), lo que indica que la base Burbuja ancla el control lateral independientemente del tipo de augmentación al 15%.</p>
-
-<hr />
-
-<h2 id="4-recuperación-ante-estados-fuera-del-manifold">4. Recuperación ante Estados Fuera del Manifold</h2>
-
-<p>Con solo un 15% de muestras adicionales, DAgger mejora el completado en casos 1–15 (98.9% vs 97.8% de Burbuja), aunque la diferencia es modesta. El dato más informativo es el comportamiento de Noise: cae por debajo de Burbuja (96.9%) con 5 casos incompletos —4 de ellos sin colisión registrada—, lo que indica que la Noise Injection al 15% introduce inestabilidad ante condiciones de offset inicial en lugar de mejorar la recuperación.</p>
-
-<p>Esto invierte el resultado de Week 89, donde Noise lideraba con 100% en casos 1–15. La diferencia refleja que en aquella semana el dataset de Noise era proporcionalmente mayor, con suficiente densidad de cobertura del espacio perturbado. Al 15%, esa densidad es insuficiente y las perturbaciones artificiales interfieren con el aprendizaje nominal sin aportar cobertura real de recuperación.</p>
-
-<p>La prueba de perturbación DAgger refuerza esta lectura: cuando la recuperación se evalúa explícitamente durante la inferencia, DAgger vuelve a ser la única estrategia que mejora de forma consistente la respuesta del controlador. Esto sugiere que la robustez real proviene de la exposición a <strong>experiencias estructurales de corrección</strong>, no solo de la dispersión estadística de los datos.</p>
-
-<hr />
-
-<h2 id="5-estabilidad-dinámica-a-alta-velocidad">5. Estabilidad Dinámica a Alta Velocidad</h2>
-
-<p>Los tres modelos completan el 100% en 30, 60 y 80 km/h. A 30 km/h los tres llegan sin ningún evento de colisión. A partir de 60 km/h, DAgger y Noise comienzan a registrar contactos con el entorno que no impiden completar la ruta, mientras Burbuja mantiene cero eventos de colisión en todos los tramos.</p>
-
-<p>DAgger opera con la mayor velocidad media (62.7–64.9 km/h, +8.8% sobre Burbuja) y menos invasiones de carril en todos los tramos, lo que sugiere un estilo de conducción más dinámico. El costo es la aparición de roces e impactos menores a partir de 60 km/h, indicando menor margen de seguridad lateral a velocidades altas.</p>
-
-<p>La evaluación bajo perturbación también es coherente con este patrón: DAgger conserva mejor la capacidad de recuperación, pero Burbuja sigue ofreciendo el mayor margen de limpieza y seguridad en trayectorias nominales.</p>
-
-<hr />
-
-<h2 id="6-suavidad-de-comandos-suddenness">6. Suavidad de Comandos (Suddenness)</h2>
-
-<ul>
-  <li><strong>Burbuja</strong> produce los comandos de steer más suaves en todos los escenarios (0.0051–0.0052 1/s), resultado consistente entre semanas.</li>
-  <li><strong>Noise</strong> produce el throttle más suave en canónico y velocidades (0.0152–0.0155 1/s).</li>
-  <li><strong>DAgger</strong> produce el throttle más suave en casos 1–15 y aleatorios, pero los comandos de steer más bruscos en todos los grupos (+24–27% sobre Burbuja en valor absoluto).</li>
-</ul>
-
-<p>Las diferencias en steer entre modelos son pequeñas en valor absoluto (0.0051–0.0066 1/s), pero el patrón es consistente: la augmentación DAgger introduce mayor variabilidad en los comandos de dirección, probablemente por la naturaleza correctiva de sus maniobras de entrenamiento.</p>
-
-<p>La prueba de perturbación DAgger sugiere que esta mayor actividad en steer no es necesariamente una debilidad: en parte puede interpretarse como el costo de una política más preparada para corregir desviaciones inducidas.</p>
-
-<hr />
-
-<h1 id="conclusión-general">Conclusión General</h1>
-
-<p>Con un diseño experimental controlado, y considerando además la evaluación bajo perturbaciones activas tipo DAgger en el <code class="language-plaintext highlighter-rouge">brain</code>, el efecto marginal de cada estrategia al 15% es claro:</p>
-
-<table>
-  <thead>
-    <tr>
-      <th style="text-align: left">Fortaleza</th>
-      <th style="text-align: left">Mejor modelo</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align: left">Recorrido sin eventos de colisión</td>
-      <td style="text-align: left"><strong>Burbuja</strong></td>
-    </tr>
-    <tr>
-      <td style="text-align: left">Recuperación desde offset inicial</td>
-      <td style="text-align: left"><strong>DAgger</strong></td>
-    </tr>
-    <tr>
-      <td style="text-align: left">Generalización en inicios arbitrarios</td>
-      <td style="text-align: left"><strong>Noise / DAgger</strong></td>
-    </tr>
-    <tr>
-      <td style="text-align: left">Completado a alta velocidad</td>
-      <td style="text-align: left"><strong>Empate</strong></td>
-    </tr>
-    <tr>
-      <td style="text-align: left">Velocidad media de operación</td>
-      <td style="text-align: left"><strong>DAgger</strong></td>
-    </tr>
-    <tr>
-      <td style="text-align: left">Suavidad en throttle</td>
-      <td style="text-align: left"><strong>Noise</strong></td>
-    </tr>
-    <tr>
-      <td style="text-align: left">Suavidad en steer</td>
-      <td style="text-align: left"><strong>Burbuja</strong></td>
-    </tr>
-    <tr>
-      <td style="text-align: left">Robustez bajo perturbación activa</td>
-      <td style="text-align: left"><strong>DAgger</strong></td>
-    </tr>
-    <tr>
-      <td style="text-align: left">Política nominal más limpia</td>
-      <td style="text-align: left"><strong>Burbuja</strong></td>
-    </tr>
-  </tbody>
-</table>
-
-<p><strong>Burbuja</strong> es el modelo con el recorrido más limpio: menor desviación lateral, cero eventos de colisión en condiciones de velocidad y en el caso canónico, y comandos de steer más suaves. Su limitación sigue siendo la generalización en inicios arbitrarios, donde un 15% de cualquier augmentación ya lo supera. Además, bajo perturbación activa, conserva buen control nominal pero muestra menor capacidad de recuperación que DAgger.</p>
-
-<p><strong>DAgger al 15%</strong> es la augmentación con mayor impacto positivo neto: mejora el completado en casos 1–15, generaliza en aleatorios, opera más rápido y no colapsa a alta velocidad. Su costo son eventos de colisión —roces e impactos menores— a partir de 60 km/h y comandos de steer más bruscos. Sin embargo, cuando la robustez se mide explícitamente como capacidad de recuperación frente a perturbaciones inducidas, DAgger es la única estrategia que mejora de manera consistente.</p>
-
-<p><strong>Noise al 15%</strong> es la augmentación con menor beneficio en este experimento: no mejora los casos 1–15 (cae por debajo del baseline con 4 casos de pérdida de control sin colisión registrada), introduce la mayor frecuencia de eventos de colisión en el caso canónico (0.667) y no presenta ventaja clara sobre Burbuja en ningún grupo. Esto confirma que la Noise Injection necesita una proporción mayor que el 15% para ser efectiva, ya que su mecanismo depende de densidad de cobertura del espacio perturbado y no de correcciones estructurales.</p>
-
-<p>En síntesis, los resultados de esta semana dejan una separación clara entre estabilidad nominal y robustez de recuperación: <strong>Burbuja</strong> sigue siendo la mejor base para conducción limpia y consistente, mientras que <strong>DAgger</strong> emerge como la mejor estrategia para robustez real cuando el sistema debe recuperarse de errores o perturbaciones durante la inferencia. Esto sugiere que la vía más prometedora no es reemplazar Burbuja, sino usarla como base estable y ampliar progresivamente la proporción de DAgger para fortalecer la recuperación sin perder calidad nominal.</p>]]></content><author><name>Carlos Velásquez</name><email>canveo@gmail.com</email></author><category term="weekly Log" /><category term="Robustez" /><category term="Burbuja" /><category term="Noise Injection" /><category term="DAgger" /><category term="CARLA Simulator" /><summary type="html"><![CDATA[En esta entrada reporto los resultados de robustez en CARLA Town02 comparando tres variantes del mismo dataset base bajo el mismo circuito de prueba, con 6 repeticiones por condición (valores reportados como promedio de las repeticiones).]]></summary></entry></feed>
+<p>Este análisis continuará ampliándose con evaluaciones más completas en próximas iteraciones.</p>]]></content><author><name>Carlos Velásquez</name><email>canveo@gmail.com</email></author><category term="weekly Log" /><category term="Robustez" /><category term="Burbuja" /><category term="Noise Injection" /><category term="DAgger" /><category term="CARLA Simulator" /><summary type="html"><![CDATA[]]></summary></entry></feed>

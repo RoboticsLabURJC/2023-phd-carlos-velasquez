@@ -306,7 +306,7 @@
       <span class="page__meta-readtime">
         <i class="far fa-clock" aria-hidden="true"></i>
         
-          16 minute read
+          17 minute read
         
       </span>
     
@@ -324,7 +324,7 @@
 
 <h2 id="1-objetivo">1. Objetivo</h2>
 
-<p>Evaluar si las tendencias observadas previamente en <strong>Town02</strong> se mantienen al trasladar los tests de robustez a <strong>Town11</strong>, un entorno con mayor densidad de curvas. El análisis considera el caso canónico, las variaciones en la posición y la velocidad inicial, y las perturbaciones aplicadas durante la inferencia.</p>
+<p>Evaluar si las tendencias observadas previamente en <strong>Town02</strong> se mantienen al trasladar los tests de robustez a <strong>Town11</strong>, un entorno con mayor densidad de curvas. El análisis considera la condición nominal, las variaciones en la posición y la velocidad inicial, y las perturbaciones aplicadas durante la inferencia.</p>
 
 <p>Además, se estudia la generalización de las políticas en el mapa comunitario <strong>csonthomisi</strong>, cuya geometría no fue utilizada durante el entrenamiento. Ambos experimentos se analizan de forma independiente para distinguir la robustez dentro de un mapa conocido de la transferencia hacia un escenario nuevo.</p>
 
@@ -343,11 +343,14 @@
 
 <h3 id="22-configuración-experimental">2.2 Configuración experimental</h3>
 
-<p>Respecto al <strong>Test 1 original</strong>, se introdujeron dos modificaciones en las condiciones iniciales:</p>
+<p>El Test 1 (T1) se denomina <strong>Perturbación de posición y orientación</strong>. El protocolo de referencia combina cinco desplazamientos laterales entre −1.8 m y +1.8 m con tres orientaciones iniciales (−15°, 0° y +15°). A continuación se documenta la adaptación utilizada en Town11.</p>
+
+<p>Respecto al <strong>Test 1 original</strong>, se introdujeron tres modificaciones en las condiciones iniciales:</p>
 
 <ol>
   <li>Cambio de escenario: <strong>Town02 → Town11</strong>.</li>
   <li>Incremento de la perturbación angular inicial en <strong>15°</strong>, pasando de <strong>±15°</strong> a <strong>±30°</strong> respecto a la orientación nominal de la vía.</li>
+  <li>Uso de los cinco desplazamientos laterales de la tabla: <strong>+4.80, +2.40, 0.00, −2.40 y −4.80 m</strong>.</li>
 </ol>
 
 <p>Se evaluaron <strong>15 condiciones iniciales</strong>, resultado de combinar <strong>cinco desplazamientos laterales</strong> con <strong>tres orientaciones iniciales</strong>.</p>
@@ -553,7 +556,7 @@
   </tbody>
 </table>
 
-<h2 id="test-0--caso-canónico">Test 0 – Caso canónico</h2>
+<h2 id="test-0--condición-nominal">Test 0 – Condición nominal</h2>
 
 <table>
   <thead>
@@ -642,11 +645,11 @@
   </tbody>
 </table>
 
-<p>En el caso canónico, casi todas las configuraciones completan la totalidad de los recorridos y no se registran colisiones. En DAgger, las invasiones de carril crecen conforme aumenta la proporción de datos perturbados, mientras que las mezclas más altas mantienen una desviación elevada sin aportar una mejora equivalente en la tasa de éxito.</p>
+<p>En la condición nominal, casi todas las configuraciones completan la totalidad de los recorridos y no se registran colisiones. En DAgger, las invasiones de carril crecen conforme aumenta la proporción de datos perturbados, mientras que las mezclas más altas mantienen una desviación elevada sin aportar una mejora equivalente en la tasa de éxito.</p>
 
 <p>Noise Injection mantiene tasas de finalización altas y un seguimiento lateral más preciso. En particular, $D_{0.50}^{C}$ presenta el mejor compromiso del test, con 100 % de éxito, 5.767 invasiones de carril y una desviación media de 0.231 m. El aumento hasta 75 % conserva la tasa de éxito, pero no mejora estas métricas y reduce la velocidad media, lo que sugiere que una mayor proporción de datos perturbados no aporta beneficios adicionales en condiciones nominales.</p>
 
-<h2 id="test-1--diferentes-posiciones-de-inicio">Test 1 – Diferentes posiciones de inicio</h2>
+<h2 id="test-1--perturbación-de-posición-y-orientación">Test 1 – Perturbación de posición y orientación</h2>
 
 <table>
   <thead>
@@ -723,10 +726,10 @@
 
 <p>Noise Injection ofrece un mejor compromiso entre recuperación y precisión. $D_{0.30}^{C}$ y $D_{0.50}^{C}$ alcanzan 100 % de éxito, mientras que $D_{0.50}^{C}$ reduce las invasiones a 7.172 y obtiene una desviación de 0.228 m. Al aumentar la proporción a 75 %, la tasa de éxito cae a 93.1 %, por lo que la mejora no es monotónica.</p>
 
-<h2 id="test-2--diferentes-sectores-de-inicio">Test 2 – Diferentes sectores de inicio</h2>
+<h2 id="test-2--posiciones-de-arranque-distribuidas-en-el-circuito">Test 2 – Posiciones de arranque distribuidas en el circuito</h2>
 
 <blockquote>
-  <p><strong>Pendiente de ejecución.</strong> En Town11, al tratarse de una trayectoria abierta, el Test 2 utilizará tres posiciones iniciales diferentes y recorridos de igual longitud (~700 m), con 10 ejecuciones por posición y por modelo, para un total de 30 episodios por configuración.</p>
+  <p><strong>Pendiente de ejecución.</strong> El Test 2 (T2) evalúa tres posiciones de arranque distribuidas en distintos sectores del recorrido, sin modificar la posición lateral ni la orientación nominal respecto a la vía. En Town11, al tratarse de una trayectoria abierta, se utilizarán recorridos de igual longitud (~700 m), con 10 ejecuciones por posición y por modelo, para un total de 30 episodios por configuración. Esta es la adaptación del test al recorrido abierto; en los circuitos cerrados se reorganiza la trayectoria de referencia manteniendo el circuito y el sentido de circulación, con la meta aproximadamente 10–15 m antes del punto de partida.</p>
 </blockquote>
 
 <h2 id="test-3--diferentes-velocidades-iniciales">Test 3 – Diferentes velocidades iniciales</h2>
@@ -822,7 +825,7 @@
 
 <p>Noise Injection muestra tasas de éxito menores que las mejores configuraciones DAgger, pero mayor precisión en los episodios completados. $D_{0.50}^{C}$ presenta el mejor seguimiento lateral, con 6.957 invasiones y 0.222 m de desviación, aunque finaliza 82.1 % de las ejecuciones. Por tanto, el test muestra un compromiso entre la capacidad de completar el recorrido y la precisión de trayectoria; una menor desviación entre episodios exitosos no implica por sí sola una robustez global superior.</p>
 
-<h2 id="test-4--perturbación-online">Test 4 – Perturbación online</h2>
+<h2 id="test-4--perturbación-dagger-durante-la-inferencia">Test 4 – Perturbación DAgger durante la inferencia</h2>
 
 <table>
   <thead>
@@ -917,7 +920,7 @@
 
 <h3 id="24-discusión-general-de-town11">2.4 Discusión general de Town11</h3>
 
-<p>En Town11, $D^{A}$ conserva un desempeño sólido en el caso canónico, pero pierde capacidad de finalización ante cambios en la posición, la velocidad inicial y, especialmente, bajo perturbación online. Las configuraciones DAgger mejoran la recuperación y alcanzan las mayores tasas de éxito en varios escenarios exigentes, aunque este comportamiento suele estar acompañado por más invasiones de carril y mayor desviación.</p>
+<p>En Town11, $D^{A}$ conserva un desempeño sólido en la condición nominal, pero pierde capacidad de finalización ante cambios en la posición, la velocidad inicial y, especialmente, bajo perturbación online. Las configuraciones DAgger mejoran la recuperación y alcanzan las mayores tasas de éxito en varios escenarios exigentes, aunque este comportamiento suele estar acompañado por más invasiones de carril y mayor desviación.</p>
 
 <p>Noise Injection, particularmente $D_{0.50}^{C}$, presenta el mejor compromiso entre robustez y precisión lateral: mantiene 100 % de éxito en los Tests 0, 1 y 4, y obtiene las menores desviaciones en los cuatro tests ejecutados. No obstante, en el Test 3 su tasa de finalización es inferior a la de varias mezclas DAgger. En conjunto, los resultados sugieren que DAgger favorece la recuperación, mientras que una proporción intermedia de Noise Injection combina mejor la finalización con un seguimiento preciso. El Test 2 permanece pendiente y no se incluye en esta interpretación.</p>
 
@@ -989,7 +992,7 @@
 
 <h3 id="34-resultados">3.4 Resultados</h3>
 
-<h2 id="test-0--caso-canónico-1">Test 0 – Caso canónico</h2>
+<h2 id="test-0--condición-nominal-1">Test 0 – Condición nominal</h2>
 
 <table>
   <thead>
@@ -1086,11 +1089,11 @@
   </tbody>
 </table>
 
-<p>El caso canónico ya representa una dificultad importante de transferencia: $D^{A}$ no completa ninguna ejecución y las mezclas con 15 % de datos perturbados mantienen tasas de éxito cercanas al 30 %. DAgger mejora al utilizar proporciones de 30–50 %, ambas con 84.0 % de éxito, mientras que 75 % incrementa notablemente las invasiones de carril y no mejora la finalización.</p>
+<p>La condición nominal ya representa una dificultad importante de transferencia: $D^{A}$ no completa ninguna ejecución y las mezclas con 15 % de datos perturbados mantienen tasas de éxito cercanas al 30 %. DAgger mejora al utilizar proporciones de 30–50 %, ambas con 84.0 % de éxito, mientras que 75 % incrementa notablemente las invasiones de carril y no mejora la finalización.</p>
 
 <p>En Noise Injection se observa una diferencia marcada entre proporciones: 15–30 % ofrecen poca capacidad de generalización, mientras que $D_{0.75}^{C}$ alcanza 95.8 % de éxito y presenta menos invasiones que las configuraciones DAgger de alto desempeño. $D^{M}<em>{30/30/40}$ obtiene la mayor tasa de éxito, con 96.0 %, aunque su desviación e invasiones son superiores a las de $D</em>{0.75}^{C}$. Por tanto, Magic Mix destaca en finalización y Noise Injection 75 % presenta el mejor compromiso lateral entre las configuraciones con mayor éxito.</p>
 
-<h2 id="test-1--diferentes-posiciones-de-inicio-1">Test 1 – Diferentes posiciones de inicio</h2>
+<h2 id="test-1--perturbación-de-posición-y-orientación-1">Test 1 – Perturbación de posición y orientación</h2>
 
 <table>
   <thead>
@@ -1191,7 +1194,7 @@
 
 <p>Noise Injection también mejora con proporciones altas. $D_{0.75}^{C}$ y $D^{M}<em>{30/30/40}$ alcanzan 96.3 % de éxito, pero $D</em>{0.75}^{C}$ presenta menos invasiones y menor desviación. En esta evaluación, $D_{0.75}^{C}$ ofrece el mejor compromiso entre generalización, recuperación inicial y precisión de trayectoria; la velocidad se interpreta solo como un indicador complementario.</p>
 
-<h2 id="test-2--diferentes-puntos-de-inicio">Test 2 – Diferentes puntos de inicio</h2>
+<h2 id="test-2--posiciones-de-arranque-distribuidas-en-el-circuito-1">Test 2 – Posiciones de arranque distribuidas en el circuito</h2>
 
 <table>
   <thead>
@@ -1377,7 +1380,7 @@
 
 <p>En Noise Injection se observa la tendencia opuesta: la tasa de éxito aumenta con la proporción hasta llegar a 95.8 % con $D_{0.75}^{C}$. Esta configuración mantiene valores intermedios de invasiones y desviación, mientras que algunas mezclas con menor error, como $D_{0.15}^{B}$, completan menos episodios. Los resultados sugieren que $D_{0.75}^{C}$ ofrece el mejor compromiso global para generalizar frente a variaciones del estado dinámico inicial.</p>
 
-<h2 id="test-4--perturbación-online-1">Test 4 – Perturbación online</h2>
+<h2 id="test-4--perturbación-dagger-durante-la-inferencia-1">Test 4 – Perturbación DAgger durante la inferencia</h2>
 
 <table>
   <thead>
@@ -1482,7 +1485,7 @@
 
 <ul>
   <li>
-    <p><strong>Burbuja ($D^{A}$)</strong> mantiene un desempeño sólido en el caso canónico de Town11, pero su tasa de éxito disminuye al cambiar la posición o la velocidad inicial y llega a 0/30 bajo perturbación online. En csonthomisi también presenta tasas de finalización bajas, lo que sugiere una capacidad limitada para transferirse a geometrías y condiciones alejadas del dominio nominal.</p>
+    <p><strong>Burbuja ($D^{A}$)</strong> mantiene un desempeño sólido en la condición nominal de Town11, pero su tasa de éxito disminuye al cambiar la posición o la velocidad inicial y llega a 0/30 bajo perturbación online. En csonthomisi también presenta tasas de finalización bajas, lo que sugiere una capacidad limitada para transferirse a geometrías y condiciones alejadas del dominio nominal.</p>
   </li>
   <li>
     <p><strong>DAgger ($D_{\alpha}^{B}$)</strong> favorece la recuperación y alcanza tasas de éxito altas en los escenarios exigentes de Town11. En csonthomisi, $D_{0.50}^{B}$ destaca bajo perturbación online. Sin embargo, esta mejora suele estar acompañada por más invasiones de carril y mayor desviación, especialmente con proporciones elevadas.</p>
@@ -1609,6 +1612,45 @@
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
+        <a href="/weekly%20log/week106/" rel="permalink">Week 106 - Reentrenamiento FastViT para conducción nominal
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          1 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">E5 se entrenó con FastViT-SA12 preentrenado, usando imágenes RGB de 800×600. Se recortaron los primeros 140 píxeles de la parte superior, luego la imagen se ...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
         <a href="/weekly%20log/week105/" rel="permalink">Week 105 - Resumen de métricas
 </a>
       
@@ -1718,45 +1760,6 @@
 
     <p class="archive__item-excerpt" itemprop="description">Diseño experimental
 </p>
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/weekly%20log/week101/" rel="permalink">Week 101 - Análisis de robustez - Resultados parciales
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-
-    
-
-    
-      
-      
-
-      <span class="page__meta-readtime">
-        <i class="far fa-clock" aria-hidden="true"></i>
-        
-          9 minute read
-        
-      </span>
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">Actualmente se continúa ampliando la cantidad de muestras utilizadas en los experimentos de robustez. Las métricas presentadas en esta actualización se calcu...</p>
   </article>
 </div>
 

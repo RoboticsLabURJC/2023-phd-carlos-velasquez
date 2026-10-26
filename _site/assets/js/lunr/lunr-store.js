@@ -600,7 +600,7 @@ var store = [{
         "teaser": null
       },{
         "title": "Week 101 - Análisis de robustez - Resultados parciales",
-        "excerpt":"Actualmente se continúa ampliando la cantidad de muestras utilizadas en los experimentos de robustez. Las métricas presentadas en esta actualización se calculan únicamente sobre las ejecuciones exitosas, es decir, aquellas en las que el vehículo alcanza correctamente la meta. Configuración experimental Test 1 – Robustez bajo condiciones iniciales Se evalúan...","categories": ["weekly Log"],
+        "excerpt":"Actualmente se continúa ampliando la cantidad de muestras utilizadas en los experimentos de robustez. Las métricas presentadas en esta actualización se calculan únicamente sobre las ejecuciones exitosas, es decir, aquellas en las que el vehículo alcanza correctamente la meta. Configuración experimental Test 1 – Perturbación de posición y orientación El...","categories": ["weekly Log"],
         "tags": ["Dataset","CARLA","Data Collection","PilotNet","Augmentations"],
         "url": "/weekly%20log/week101/",
         "teaser": null
@@ -612,7 +612,7 @@ var store = [{
         "teaser": null
       },{
         "title": "Week 103 - Prueba rápida del Test 1 en Town11",
-        "excerpt":"Se actualizó Week 102 con nuevas métricas y cambios en el orden de las tablas. 1. Objetivo Evaluar si las tendencias observadas previamente en Town02 se mantienen al trasladar los tests de robustez a Town11, un entorno con mayor densidad de curvas. El análisis considera el caso canónico, las variaciones...","categories": ["Weekly Log"],
+        "excerpt":"Se actualizó Week 102 con nuevas métricas y cambios en el orden de las tablas. 1. Objetivo Evaluar si las tendencias observadas previamente en Town02 se mantienen al trasladar los tests de robustez a Town11, un entorno con mayor densidad de curvas. El análisis considera la condición nominal, las variaciones...","categories": ["Weekly Log"],
         "tags": ["Robustez","Burbuja","Noise Injection","DAgger","CARLA Simulator"],
         "url": "/weekly%20log/week103/",
         "teaser": null
@@ -624,8 +624,14 @@ var store = [{
         "teaser": null
       },{
         "title": "Week 105 - Resumen de métricas",
-        "excerpt":"Ver convenciones y definiciones en Week 102. Test 0 - Caso canónico Town02 Modelo Successful Runs Collisions Lane Invasions Speed (km/h) Dev Mean (m) $D^{A}$ 98.7% (222/225) 0.000 7.090 55.33 0.233 $D_{0.15}^{B}$ 99.1% (223/225) 0.099 6.493 61.09 0.397 $D_{0.30}^{B}$ 96.9% (218/225) 1.000 8.798 55.64 0.348 $D_{0.50}^{B}$ 99.1% (223/225) 0.000 8.076...","categories": ["Weekly Log"],
+        "excerpt":"Ver convenciones y definiciones en Week 102. Test 0 – Condición nominal Town02 Modelo Successful Runs Collisions Lane Invasions Speed (km/h) Dev Mean (m) $D^{A}$ 98.7% (222/225) 0.000 7.090 55.33 0.233 $D_{0.15}^{B}$ 99.1% (223/225) 0.099 6.493 61.09 0.397 $D_{0.30}^{B}$ 96.9% (218/225) 1.000 8.798 55.64 0.348 $D_{0.50}^{B}$ 99.1% (223/225) 0.000 8.076...","categories": ["Weekly Log"],
         "tags": ["Robustez","Burbuja","Noise Injection","DAgger","CARLA Simulator"],
         "url": "/weekly%20log/week105/",
+        "teaser": null
+      },{
+        "title": "Week 106 - Reentrenamiento FastViT para conducción nominal",
+        "excerpt":"E5 se entrenó con FastViT-SA12 preentrenado, usando imágenes RGB de 800×600. Se recortaron los primeros 140 píxeles de la parte superior, luego la imagen se llevó a 256×256 y se escaló dividiendo entre 255. El modelo solo predice steer. El throttle no entra al modelo ni se predice; únicamente se...","categories": ["weekly Log"],
+        "tags": ["Robustez","Behavior Cloning","Noise Injection","DAgger","CARLA Simulator","Behavior Metrics"],
+        "url": "/weekly%20log/week106/",
         "teaser": null
       }]

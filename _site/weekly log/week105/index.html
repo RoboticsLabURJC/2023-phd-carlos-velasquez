@@ -322,7 +322,7 @@
   <p>Ver convenciones y definiciones en <a href="/weekly%20log/week102/">Week 102</a>.</p>
 </blockquote>
 
-<h2 id="test-0---caso-canónico">Test 0 - Caso canónico</h2>
+<h2 id="test-0--condición-nominal">Test 0 – Condición nominal</h2>
 
 <h3 id="town02">Town02</h3>
 
@@ -621,7 +621,7 @@
 
 <hr />
 
-<h2 id="test-1--diferentes-posiciones-de-inicio">Test 1 – Diferentes posiciones de inicio</h2>
+<h2 id="test-1--perturbación-de-posición-y-orientación">Test 1 – Perturbación de posición y orientación</h2>
 
 <h3 id="town02-1">Town02</h3>
 
@@ -928,7 +928,7 @@
 
 <hr />
 
-<h2 id="test-2--condiciones-iniciales-aleatorias">Test 2 – Condiciones iniciales aleatorias</h2>
+<h2 id="test-2--posiciones-de-arranque-distribuidas-en-el-circuito">Test 2 – Posiciones de arranque distribuidas en el circuito</h2>
 
 <h3 id="town02-2">Town02</h3>
 
@@ -1494,7 +1494,9 @@
 
 <hr />
 
-<h2 id="test-4--perturbación-estándar">Test 4 – Perturbación estándar</h2>
+<h2 id="test-4--perturbación-dagger-durante-la-inferencia">Test 4 – Perturbación DAgger durante la inferencia</h2>
+
+<p>Se presentan los resultados de la configuración estándar de T4.</p>
 
 <h3 id="town02-4">Town02</h3>
 
@@ -1803,7 +1805,7 @@
 
 <ul>
   <li>
-    <p>Burbuja ofrece buenos resultados en Town02, pero su robustez depende de la condición inicial. Obtiene 98.7 %, 100 % y 98.6 % de éxito en los Tests 0, 1 y 3, con desviaciones medias entre 0.233 y 0.262 m. En el Test 2, con condiciones iniciales aleatorias, completa 96/120 recorridos —80.0 %—, entre 18.6 y 20 puntos porcentuales menos que en esas pruebas. La tasa de éxito disminuye, aunque la desviación media de los recorridos exitosos se mantiene en 0.259 m.</p>
+    <p>Burbuja ofrece buenos resultados en Town02, pero su robustez depende de la condición inicial. Obtiene 98.7 %, 100 % y 98.6 % de éxito en los Tests 0, 1 y 3, con desviaciones medias entre 0.233 y 0.262 m. En el Test 2, con posiciones de arranque distribuidas en el circuito, completa 96/120 recorridos —80.0 %—, entre 18.6 y 20 puntos porcentuales menos que en esas pruebas. La tasa de éxito disminuye, aunque la desviación media de los recorridos exitosos se mantiene en 0.259 m.</p>
   </li>
   <li>
     <p>En el Test 2 de Town02, DAgger al 50 % y Noise al 15 % destacan con distintos compromisos de conducción. DAgger al 50 % alcanza 99.1 % de éxito —223/225—, con cero colisiones en los recorridos exitosos, 2.327 invasiones de carril y 0.380 m de desviación media. Noise al 15 % completa 221/225 —98.2 %— y presenta menos invasiones —2.000— y menor desviación —0.255 m—, aunque registra 0.032 colisiones por recorrido exitoso. Frente al 80.0 % de Burbuja, las diferencias de éxito son de 19.1 y 18.2 puntos porcentuales, respectivamente. Ambas configuraciones reducen las invasiones respecto a las 7.750 de Burbuja y circulan a menor velocidad media: 45.19 y 43.51 km/h, frente a 55.61 km/h. Las mejoras observadas coinciden, por tanto, con cambios en la velocidad de conducción. La comparación se basa en 120 recorridos para Burbuja y 225 para cada una de estas configuraciones.</p>
@@ -1818,7 +1820,7 @@
     <p>Noise al 50 % alcanza la mayor tasa de éxito bajo perturbación estándar en Town02 y Town11. En Town02 completa 205/225 recorridos —91.1 %— frente a 198/225 —88.0 %— de Burbuja. Esa mejora coincide con mayor desviación —0.290 frente a 0.232 m— y más colisiones —0.054 frente a 0.025— entre los recorridos exitosos. En Town11 completa 30/30, mientras que Burbuja y Noise al 15 % no completan ninguno. Frente a DAgger al 50 %, que completa 29/30, Noise al 50 % también reduce las invasiones de 31.069 a 19.167 y la desviación de 0.426 a 0.228 m.</p>
   </li>
   <li>
-    <p>En Csonthomisi, las configuraciones destacadas cambian entre pruebas. Noise al 75 % alcanza 95.8 %, 96.3 % y 95.8 % en los Tests 0, 1 y 3, frente a 0 %, 7.7 % y 16.7 % de Burbuja. Sin embargo, en el Test 2 obtiene solo 32.1 %; el mejor resultado disponible corresponde a Noise al 50 %, con 53.3 % —16/30—. Esta última configuración supera en 20 puntos porcentuales a Burbuja, aunque todavía falla en 14 de los 30 recorridos. Las condiciones iniciales aleatorias siguen siendo una dificultad para todas las configuraciones evaluadas en este mapa.</p>
+    <p>En Csonthomisi, las configuraciones destacadas cambian entre pruebas. Noise al 75 % alcanza 95.8 %, 96.3 % y 95.8 % en los Tests 0, 1 y 3, frente a 0 %, 7.7 % y 16.7 % de Burbuja. Sin embargo, en el Test 2 obtiene solo 32.1 %; el mejor resultado disponible corresponde a Noise al 50 %, con 53.3 % —16/30—. Esta última configuración supera en 20 puntos porcentuales a Burbuja, aunque todavía falla en 14 de los 30 recorridos. Las posiciones de arranque distribuidas en el circuito siguen siendo una dificultad para todas las configuraciones evaluadas en este mapa.</p>
   </li>
   <li>
     <p>DAgger al 50 % destaca bajo perturbación estándar en Csonthomisi. Completa 28/29 recorridos —96.6 %—, frente a 23/29 —79.3 %— de Noise al 50 %. También registra menos invasiones —37.500 frente a 39.435— y menor desviación —0.395 frente a 0.421 m—, a una velocidad media inferior: 37.49 frente a 40.32 km/h. DAgger supera a Noise en finalización en las tres proporciones comparables de este test: 15 %, 30 % y 50 %. Este resultado limita cualquier conclusión general sobre una superioridad de Noise ante perturbaciones.</p>
@@ -1900,7 +1902,8 @@
 ">Previous</a>
     
     
-      <a href="#" class="pagination--pager disabled">Next</a>
+      <a href="/weekly%20log/week106/" class="pagination--pager" title="Week 106 - Reentrenamiento FastViT para conducción nominal
+">Next</a>
     
   </nav>
 
@@ -1914,6 +1917,45 @@
     <div class="page__related">
       <h2 class="page__related-title">You may also enjoy</h2>
       <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/weekly%20log/week106/" rel="permalink">Week 106 - Reentrenamiento FastViT para conducción nominal
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          1 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">E5 se entrenó con FastViT-SA12 preentrenado, usando imágenes RGB de 800×600. Se recortaron los primeros 140 píxeles de la parte superior, luego la imagen se ...</p>
+  </article>
+</div>
+
         
           
 
@@ -1982,7 +2024,7 @@
       <span class="page__meta-readtime">
         <i class="far fa-clock" aria-hidden="true"></i>
         
-          16 minute read
+          17 minute read
         
       </span>
     
@@ -2033,45 +2075,6 @@
 
     <p class="archive__item-excerpt" itemprop="description">Diseño experimental
 </p>
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/weekly%20log/week101/" rel="permalink">Week 101 - Análisis de robustez - Resultados parciales
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-
-    
-
-    
-      
-      
-
-      <span class="page__meta-readtime">
-        <i class="far fa-clock" aria-hidden="true"></i>
-        
-          9 minute read
-        
-      </span>
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">Actualmente se continúa ampliando la cantidad de muestras utilizadas en los experimentos de robustez. Las métricas presentadas en esta actualización se calcu...</p>
   </article>
 </div>
 
