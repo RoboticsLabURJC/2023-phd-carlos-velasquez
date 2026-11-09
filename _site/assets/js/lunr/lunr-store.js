@@ -634,4 +634,10 @@ var store = [{
         "tags": ["Robustez","Behavior Cloning","Noise Injection","DAgger","CARLA Simulator","Behavior Metrics"],
         "url": "/weekly%20log/week106/",
         "teaser": null
+      },{
+        "title": "Week 107: Nuevo dataset RGB",
+        "excerpt":"Nuevo dataset RGB El nuevo dataset amplía el conjunto anterior de 60.000 muestras a 120.367 imágenes RGB válidas, recolectadas en Town01, Town03, Town04, Town05, Town06 y Town07. Se mejoró principalmente el etiquetado y la trazabilidad de las muestras. Cada imagen puede identificarse por Town, run y tipo de segmento, diferenciando...","categories": ["Weekly Log"],
+        "tags": ["PilotNet","FastViT","RGB","Dataset","Robustez","Burbuja","Noise Injection","DAgger","CARLA Simulator"],
+        "url": "/weekly%20log/week107/",
+        "teaser": null
       }]
