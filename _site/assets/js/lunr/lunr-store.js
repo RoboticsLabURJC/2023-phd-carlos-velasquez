@@ -640,4 +640,10 @@ var store = [{
         "tags": ["PilotNet","FastViT","RGB","Dataset","Robustez","Burbuja","Noise Injection","DAgger","CARLA Simulator"],
         "url": "/weekly%20log/week107/",
         "teaser": null
+      },{
+        "title": "Week 108: Revisión del dataset y nuevo enfoque de predicción de waypoints con FastViT",
+        "excerpt":"Revisión del dataset y reentrenamiento Se revisó el dataset anterior y se ajustó la altura de la cámara para mejorar la visibilidad de la carretera y sus características geométricas, especialmente las curvas y las marcas del carril. También se revisó la sincronización entre imágenes y etiquetas de conducción. Se ajustó...","categories": ["Weekly Log"],
+        "tags": ["FastViT","PilotNet","Waypoint Prediction","Bird's Eye View","Inverse Perspective Mapping","Trajectory Prediction","Imitation Learning","CARLA Simulator","Dataset","Path Tracking","Robustez"],
+        "url": "/weekly%20log/wee108/",
+        "teaser": null
       }]
